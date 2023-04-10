@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id         Int          @id @default(autoincrement())
+  nome       String
+  email      String       @unique
+  senha      String       @unique
+  nascimento DateTime
+  cep        String
+  Encontro   Encontro[]
+  Equipe     Equipe[]
+  Campeonato Campeonato[]
+}
+
+model Local {
+  id                 Int                  @id @default(autoincrement())
+  nome               String
+  capacidade         Int
+  cep                String
+  Encontro           Encontro[]
+  Partida_campeonato Partida_campeonato[]
+}
+
+model Encontro {
+  id        Int      @id @default(autoincrement())
+  descricao String
+  data      DateTime
+  titulo    String
+  id_local  Int
+  id_user   Int
+  local     Local    @relation(fields: [id_local], references: [id])
+  usuario   Usuario  @relation(fields: [id_user], references: [id])
+}
+
+model Equipe {
+  id                 Int                  @id @default(autoincrement())
+  nome               String
+  id_user            Int
+  usuario            Usuario              @relation(fields: [id_user], references: [id])
+  Partida_campeonato Partida_campeonato[]
+}
+
+model Campeonato {
+  id                 Int                  @id @default(autoincrement())
+  esporte            String
+  premio             Float
+  valor_entrada      Float
+  descricao          String
+  id_criador         Int
+  usuario            Usuario              @relation(fields: [id_criador], references: [id])
+  Partida_campeonato Partida_campeonato[]
+}
+
+model Partida_campeonato {
+  id         Int        @id @default(autoincrement())
+  pontuacao  Int
+  id_local   Int
+  id_camp    Int
+  id_equipe  Int
+  local      Local      @relation(fields: [id_local], references: [id])
+  campeonato Campeonato @relation(fields: [id_camp], references: [id])
+  equipe     Equipe     @relation(fields: [id_equipe], references: [id])
+}
