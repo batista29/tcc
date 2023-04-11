@@ -20,4 +20,12 @@ router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)
 router.put('/editarEncontro/:id', middleware.autorizacao, encontro.update)
 
+const local = require('../controllers/controllerLocal')
+
+router.post('/criarLocal', local.create)
+router.get('/listarLocais', local.readAll)
+router.delete('/apagarLocal/:id', local.del)
+router.put('/editarLocal/:id', local.update)
+
+
 module.exports = router
