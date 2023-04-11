@@ -22,14 +22,14 @@ model Usuario {
   Campeonato      Campeonato[]
 }
 
-// model Local {
-//   id                 Int                  @id @default(autoincrement())
-//   nome               String
-//   capacidade         Int
-//   cep                String
-//   Encontro           Encontro[]
-//   Partida_campeonato Partida_campeonato[]
-// }
+model Local {
+  id                 Int                  @id @default(autoincrement())
+  nome               String
+  capacidade         Int
+  cep                String
+  Encontro           Encontro[]
+  Partida_campeonato Partida_campeonato[]
+}
 
 //Encontro normal, sem premiação
 model Encontro {
@@ -37,8 +37,8 @@ model Encontro {
   descricao       String
   data            DateTime
   titulo          String
-  // id_local        Int
-  // local           Local             @relation(fields: [id_local], references: [id])
+  id_local        Int
+  local           Local             @relation(fields: [id_local], references: [id])
   EncontroUsuario EncontroUsuario[]
 }
 
@@ -92,4 +92,6 @@ model Partida_campeonato {
   // local             Local               @relation(fields: [id_local], references: [id])
   campeonato        Campeonato          @relation(fields: [id_camp], references: [id])
   EquipePartidaCamp EquipePartidaCamp[]
+  Local             Local?              @relation(fields: [localId], references: [id])
+  localId           Int?
 }
