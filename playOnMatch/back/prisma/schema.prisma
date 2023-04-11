@@ -16,9 +16,8 @@ model Usuario {
   email           String            @unique
   senha           String            @unique
   nascimento      DateTime
-  cep             String
+  cep             String?
   EncontroUsuario EncontroUsuario[]
-  Equipe          Equipe[]
   UsuarioEquipe   UsuarioEquipe[]
   Campeonato      Campeonato[]
 }
@@ -51,13 +50,10 @@ model EncontroUsuario {
 }
 
 model Equipe {
-  id                 Int                  @id @default(autoincrement())
-  nome               String
-  id_user            Int
-  usuario            Usuario              @relation(fields: [id_user], references: [id])
-  UsuarioEquipe      UsuarioEquipe[]
-  EquipePartida      EquipePartida[]
-  Partida_campeonato Partida_campeonato[]
+  id                Int                 @id @default(autoincrement())
+  nome              String
+  UsuarioEquipe     UsuarioEquipe[]
+  EquipePartidaCamp EquipePartidaCamp[]
 }
 
 model UsuarioEquipe {
@@ -79,7 +75,7 @@ model Campeonato {
   Partida_campeonato Partida_campeonato[]
 }
 
-model EquipePartida {
+model EquipePartidaCamp {
   id             Int                @id @default(autoincrement())
   id_equipe      Int
   id_partidaCamp Int
@@ -88,13 +84,11 @@ model EquipePartida {
 }
 
 model Partida_campeonato {
-  id         Int        @id @default(autoincrement())
-  pontuacao  Int
-  id_local   Int
-  id_camp    Int
-  id_equipe  Int
-  local      Local      @relation(fields: [id_local], references: [id])
-  campeonato Campeonato @relation(fields: [id_camp], references: [id])
-  equipe     Equipe     @relation(fields: [id_equipe], references: [id])
-  EquipePartida EquipePartida[]
+  id                Int                 @id @default(autoincrement())
+  pontuacao         Int
+  id_local          Int
+  id_camp           Int
+  local             Local               @relation(fields: [id_local], references: [id])
+  campeonato        Campeonato          @relation(fields: [id_camp], references: [id])
+  EquipePartidaCamp EquipePartidaCamp[]
 }
