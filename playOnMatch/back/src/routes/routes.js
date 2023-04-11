@@ -10,4 +10,12 @@ router.get('/encontrarUsuario', usuario.readOne)
 router.put('/atualizarUsuario/:id', usuario.update)
 router.delete('/excluirUsuario/:id', usuario.eliminate)
 
+const encontro = require('../controllers/controllerEncontro')
+
+router.post('/criarEncontro', encontro.create)
+router.get('/listarEncontros', encontro.readAll)
+router.get('/listarEncontro/:id', encontro.readOne)
+router.delete('/apagarEncontro/:id', encontro.del)
+router.put('/editarEncontro/:id', encontro.update)
+
 module.exports = router
