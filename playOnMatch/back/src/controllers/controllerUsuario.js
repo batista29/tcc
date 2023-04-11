@@ -40,6 +40,40 @@ const readOne = async (req, res) => {
     }
 }
 
+const readPerfil = async (req, res) => {
+    try {
+        let usuario = await prisma.usuario.findUnique({
+            where: {
+                id: Number(req.params.id)
+            },
+            select: {
+                id: true,
+                nascimento: true,
+                nome: true,
+                EncontroUsuario: {
+                    select: {
+                        encontro: {
+                            select: {
+                                data: true,
+                                descricao: true,
+                                local: {
+                                    select: {
+                                        nome: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        res.status(200).json(usuario).end()
+    } catch (error) {
+        res.status(400).send({ error })
+    }
+}
+
+
 const update = async (req, res) => {
     try {
         let usuario = await prisma.usuario.update({
@@ -69,6 +103,7 @@ const eliminate = async (req, res) => {
     }
 }
 
+
 const login = async (req, res) => {
 
     let usuario = await prisma.usuario.findUnique({
@@ -93,11 +128,14 @@ const login = async (req, res) => {
 }
 
 
+
+
 module.exports = {
     create,
     read,
     update,
     eliminate,
     readOne,
-    login
+    login,
+    readPerfil
 }

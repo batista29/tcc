@@ -16,6 +16,17 @@ const autorizacao = (req, res, next) => {
     })
 }
 
+// const autVerPerfil = (req, res, next) => {
+//     const token = req.headers.authorization
+//     jwt.verify(token, process.env.KEY, (err, data) => {
+//         if (err != null) {
+//             res.status(404).json(err).end()
+//         }else{
+//             console.log(data)
+//         }
+//     })
+// }
+
 module.exports = {
     autorizacao
 }

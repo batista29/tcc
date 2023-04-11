@@ -1,0 +1,84 @@
+:root {
+    --backgroundHome: #012340;
+    --backgroundLogin: #025959;
+    --textoHome: #04D939;
+    --textoHome2: #00f63e;
+    --cor4: #027333;
+    --cor5: #03A63C;
+
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--backgroundLogin);
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.apresentacao {
+    width: 40%;
+}
+
+.titulo {
+    color:var(--textoHome2) ;
+}
+
+.descricao {
+    margin-top: 5%;
+    text-align: justify;
+}
+
+.btn{
+    background-color:transparent;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 2px solid white;
+    color:var(--textoHome) ;
+    cursor: pointer;
+    font-size: 25px;
+    margin-right: 5%;
+    margin-bottom: 5%;
+}
+
+.btn:hover{
+    color: white;
+}
+
+.form1 {
+    display: flex;
+    flex-direction: column;
+}
+.formulario>form>input {
+    height: 30px;
+    background-color: transparent;
+    border: transparent;
+    color: white;
+}
+
+.formulario>form>input::placeholder {
+   color:#fff;
+}
+
+.btns {
+    background-color:transparent;
+    border: transparent;
+    height: 40px;
+    background-color:var(--backgroundHome);
+    color:white;
+    border-radius: 30px;
+}   
+
+.btns:hover{
+    cursor: pointer;
+}

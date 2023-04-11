@@ -8,6 +8,7 @@ router.post('/criarUsuario', usuario.create)
 router.post('/login', usuario.login)
 router.get('/listarUsuarios', usuario.read)
 router.get('/encontrarUsuario', usuario.readOne)
+router.get('/perfilUsuario/:id', usuario.readPerfil)
 router.put('/atualizarUsuario/:id', middleware.autorizacao, usuario.update)
 router.delete('/excluirUsuario/:id', usuario.eliminate)
 
