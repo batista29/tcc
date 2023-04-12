@@ -14,21 +14,12 @@ model Usuario {
   id              Int               @id @default(autoincrement())
   nome            String
   email           String            @unique
-  senha           String            
+  senha           String
   nascimento      DateTime
   cep             String?
   EncontroUsuario EncontroUsuario[]
   UsuarioEquipe   UsuarioEquipe[]
   Campeonato      Campeonato[]
-}
-
-model Local {
-  id                 Int                  @id @default(autoincrement())
-  nome               String
-  capacidade         Int
-  cep                String
-  Encontro           Encontro[]
-  Partida_campeonato Partida_campeonato[]
 }
 
 //Encontro normal, sem premiação
@@ -40,6 +31,15 @@ model Encontro {
   id_local        Int
   local           Local             @relation(fields: [id_local], references: [id])
   EncontroUsuario EncontroUsuario[]
+}
+
+model Local {
+  id                 Int                  @id @default(autoincrement())
+  nome               String
+  capacidade         Int
+  cep                String
+  Encontro           Encontro[]
+  Partida_campeonato Partida_campeonato[]
 }
 
 model EncontroUsuario {

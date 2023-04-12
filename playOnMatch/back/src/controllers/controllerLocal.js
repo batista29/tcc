@@ -20,19 +20,19 @@ const readAll = async (req, res) => {
     res.status(200).json(local).end()
 }
 
-// const readOne = async (req, res) => {
-//     let encontro = await prisma.encontro.findUnique({
-//         where: {
-//             id: Number(req.params.id)
-//         }
-//     })
+const readOne = async (req, res) => {
+    let local = await prisma.local.findUnique({
+        where: {
+            id: Number(req.params.id)
+        }
+    })
 
-//     if (encontro != null) {
-//         res.status(200).json(encontro).end()
-//     } else {
-//         res.status(200).send({ menssagem: "erro" }).end()
-//     }
-// }
+    if (local != null) {
+        res.status(200).json(local).end()
+    } else {
+        res.status(200).send({ menssagem: "erro" }).end()
+    }
+}
 
 const update = async (req, res) => {
     try {
@@ -66,7 +66,7 @@ const del = async (req, res) => {
 module.exports = {
     create,
     readAll,
-    // readOne,
+    readOne,
     del,
     update
 }

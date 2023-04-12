@@ -16,7 +16,22 @@ const create = async (req, res) => {
 }
 
 const readAll = async (req, res) => {
-    let encontro = await prisma.encontro.findMany()
+    let encontro = await prisma.encontro.findMany({
+        select: {
+            id: true,
+            descricao: true,
+            data: true,
+            titulo: true,
+            id_local: true,
+            local: {
+                select: {
+                    nome: true,
+                    capacidade: true,
+                    cep: true
+                }
+            }
+        }
+    })
     res.status(200).json(encontro).end()
 }
 

@@ -24,6 +24,7 @@ const local = require('../controllers/controllerLocal')
 
 router.post('/criarLocal', local.create)
 router.get('/listarLocais', local.readAll)
+router.get('/listarLocal/:id', local.readOne)
 router.delete('/apagarLocal/:id', local.del)
 router.put('/editarLocal/:id', local.update)
 
