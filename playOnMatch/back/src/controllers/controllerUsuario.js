@@ -9,13 +9,21 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
     try {
+
+        var info = req.body
+        info.senha = await bcrypt.hash(req.body.senha, 10)
+
         let usuario = await prisma.usuario.create({
-            data: req.body
+            data: info
         })
         res.status(201).json(usuario).end()
 
     } catch (error) {
-        res.status(200).send(error).end()
+        if (error.meta.target === 'Usuario_email_key') {
+            res.status(400).send({ erro: 'Email já existente' }).end()
+        } if (error.meta.target === "Usuario_senha_key") {
+            res.status(400).send({ erro: '' }).end()
+        }
     }
 
 }
@@ -113,17 +121,20 @@ const login = async (req, res) => {
     })
 
     if (usuario) {
-        jwt.sign(usuario, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
-            console.log(err)
-            if (err == null) {
-                usuario["token"] = token
-                res.status(200).json(usuario).end()
-            } else {
-                res.status(404).json(err).end()
-            }
-        })
+        if (await bcrypt.compare(req.body.senha, usuario.senha)) {
+            jwt.sign(usuario, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
+                if (err == null) {
+                    usuario["token"] = token
+                    res.status(200).send({menssagem:"Seu login foi bem-sucedido"}).end()
+                } else {
+                    res.status(404).json(err).end()
+                }
+            })
+        } else {
+            res.status(404).send({ menssagem: "senha incorreta" }).end()
+        }
     } else {
-        res.status(404).json({ "result": "usuario não encontrado" }).end()
+        res.status(404).send({ menssagem: "usuario não encontrado" }).end()
     }
 }
 

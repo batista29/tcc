@@ -5,7 +5,6 @@
     --textoHome2: #00f63e;
     --cor4: #027333;
     --cor5: #03A63C;
-
 }
 
 * {
@@ -26,16 +25,24 @@ body {
 }
 
 .apresentacao {
+    height: 60vh;
     width: 40%;
 }
 
 .titulo {
+    font-size:35px;
     color:var(--textoHome2) ;
 }
 
 .descricao {
     margin-top: 5%;
     text-align: justify;
+    font-size: 20px;
+}
+
+.buttons {
+    display: flex;
+    margin-bottom:30px ;
 }
 
 .btn{
@@ -43,16 +50,34 @@ body {
     border-top: none;
     border-right: none;
     border-left: none;
-    border-bottom: 2px solid white;
-    color:var(--textoHome) ;
+    border-bottom: 1px solid white;
     cursor: pointer;
-    font-size: 25px;
-    margin-right: 5%;
-    margin-bottom: 5%;
+    font-size: 20px;
+    padding: 5% 5% 5% 0;
+    margin-right: 10px;
+    transition: 0.5s ease;
 }
 
-.btn:hover{
+.btn.login{
+    color:var(--textoHome);
+}
+
+.btn.cadastro{
     color: white;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.btn.cadastro:hover{
+    color:var(--textoHome);
+    opacity: 200;
+    filter: none;
+}
+
+.buttons:hover .btn:not(:hover){
+    color: white;
+    opacity: 0.3;
+    filter: blur(1px);
 }
 
 .form1 {
@@ -64,6 +89,9 @@ body {
     background-color: transparent;
     border: transparent;
     color: white;
+    border-radius:20px ;
+    padding: 10px;
+    margin-bottom: 5%;
 }
 
 .formulario>form>input::placeholder {
@@ -77,8 +105,23 @@ body {
     background-color:var(--backgroundHome);
     color:white;
     border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.165,0.84,0.44,1);
+    margin: 10px;
 }   
 
 .btns:hover{
     cursor: pointer;
+    background-color: #5ac400;
+    box-shadow: 0px 0px 5px #5ac400,
+    0px 0px 25px #5ac400, 0px 0px 50px #5ac400,
+    0px 0x 200px #5ac400;
+}
+
+.formulario.cadastro {
+    display: none;
+}
+
+.error {
+    font-weight: bold;
+    text-align: center;
 }

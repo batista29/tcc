@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,30 +8,41 @@
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="forms">
-       <button class="btn login">Login</button>
-       <button class="btn cadastro">Cadastro</button>
-        <div class="formulario cadastro">
-            <form class="form1" action="">
-                <input placeholder="nome" type="text">
-                <input placeholder="email" type="email">
-                <input placeholder="senha" type="password">
-                <input placeholder="data de nascimento" type="date">
-                <button class="btns Cadastro">Cadastrar</button>
-            </form>
+        <div class="buttons">
+            <button class="btn login">Login</button>
+            <button class="btn cadastro">Cadastro</button>
         </div>
         <div class="formulario login">
             <form class="form1" action="">
-                <input placeholder="Email" type="text">
-                <input placeholder="Senha" type="text">
-                <button class="btns Login">Entrar</button>
+                <input class="inpEmail" placeholder="Email" type="email">
+                <input class="inpSenha" placeholder="Senha" type="password">
+                <button onclick="loginUsuario()" class="btns Login">Entrar</button>
+                <div class="error login"></div>
+            </form>
+        </div>
+        <div class="formulario cadastro">
+            <form class="form1" action="">
+                <input id="inpNome" placeholder="nome" type="text">
+                <input id="inpEmail" placeholder="email" type="email">
+                <input id="inpSenha" placeholder="senha" type="password">
+                <input id="inpData" placeholder="data de nascimento" type="date">
+                <input id="inpCep" placeholder="cep" type="number">
+                <button onclick="cadastrarUsuario()" class="btns Cadastro">Cadastrar</button>
+                <div class="error cadastro"></div>
             </form>
         </div>
     </div>
     <div class="apresentacao">
         <h1 class="titulo">PlayOnMatch</h1>
-        <h2 class="descricao">O PlayOnMatch é a plataforma ideal para quem busca organizar e participar de atividades esportivas de forma simples, prática e divertida. Junte-se à comunidade de jogadores e fique por dentro dos eventos esportivos que estão acontecendo em sua região.</h2>
+        <p class="descricao">O PlayOnMatch é a plataforma ideal para quem busca organizar e participar de atividades
+            esportivas de forma simples, prática e divertida. Junte-se à comunidade de jogadores e fique por dentro dos
+            eventos esportivos que estão acontecendo em sua região.</p>
     </div>
 </body>
+
+<script src="script.js"></script>
+
 </html>
