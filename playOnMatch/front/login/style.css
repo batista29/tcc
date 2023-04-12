@@ -21,60 +21,63 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 
-.apresentacao {
-    height: 60vh;
-    width: 40%;
+.main {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .titulo {
-    font-size:35px;
-    color:var(--textoHome2) ;
+    font-size: 35px;
+    color: var(--textoHome2);
 }
 
 .descricao {
     margin-top: 5%;
     text-align: justify;
-    font-size: 20px;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .buttons {
     display: flex;
-    margin-bottom:30px ;
+    margin-bottom: 30px;
 }
 
-.btn{
-    background-color:transparent;
+.btn {
+    background-color: transparent;
     border-top: none;
     border-right: none;
     border-left: none;
     border-bottom: 1px solid white;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 35px;
     padding: 5% 5% 5% 0;
     margin-right: 10px;
     transition: 0.5s ease;
 }
 
-.btn.login{
-    color:var(--textoHome);
+.btn.login {
+    color: var(--textoHome);
 }
 
-.btn.cadastro{
+.btn.cadastro {
     color: white;
     opacity: 0.3;
     filter: blur(1px);
 }
 
-.btn.cadastro:hover{
-    color:var(--textoHome);
+.btn.cadastro:hover {
+    color: var(--textoHome);
     opacity: 200;
     filter: none;
 }
 
-.buttons:hover .btn:not(:hover){
+.buttons:hover .btn:not(:hover) {
     color: white;
     opacity: 0.3;
     filter: blur(1px);
@@ -84,37 +87,41 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 .formulario>form>input {
-    height: 30px;
+    height: 40px;
+    width: 350px;
     background-color: transparent;
     border: transparent;
     color: white;
-    border-radius:20px ;
+    border-radius: 20px;
     padding: 10px;
     margin-bottom: 5%;
 }
 
+.formulario>form>button {
+    height: 40px;
+    width: 300px;
+}
+
 .formulario>form>input::placeholder {
-   color:#fff;
+    color: #fff;
 }
 
 .btns {
-    background-color:transparent;
+    background-color: transparent;
     border: transparent;
     height: 40px;
-    background-color:var(--backgroundHome);
-    color:white;
+    background-color: var(--backgroundHome);
+    color: white;
     border-radius: 30px;
-    transition: all 0.3s cubic-bezier(0.165,0.84,0.44,1);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     margin: 10px;
-}   
+}
 
-.btns:hover{
+.btns:hover {
     cursor: pointer;
     background-color: #5ac400;
-    box-shadow: 0px 0px 5px #5ac400,
-    0px 0px 25px #5ac400, 0px 0px 50px #5ac400,
-    0px 0x 200px #5ac400;
 }
 
 .formulario.cadastro {
@@ -122,6 +129,41 @@ body {
 }
 
 .error {
+    font-size: 35px;
     font-weight: bold;
     text-align: center;
+}
+
+.img {
+    height: 170px;
+    width: 170px;
+}
+
+.teste {
+    height: 100vh;
+    width: 50%;
+    display: flex;
+    background-image: url('https://s2.glbimg.com/K8R490sQpVFgF3IHpCIxpOPSsxc=/0x0:1024x683/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2020/y/n/OOS44wQvO5HObWCRAK9A/gettyimages-1198051481.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    -webkit-filter: blur(15px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+    z-index: -1;
+    position: absolute;
+    top: -0;
+    right: 0;
+}
+
+.apresentacao {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

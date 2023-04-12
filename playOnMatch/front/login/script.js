@@ -72,7 +72,7 @@ function cadastrarUsuario() {
     let inpCep = document.getElementById('inpCep').value
 
     if (inpNome.length == 0 || inpEmail.length == 0 || inpSenha.length == 0 || inpData.length == 0) {
-        erroC.style.color = "red"
+        erroC.style.color = "black"
         erroC.innerHTML = "Campo Vazio"
     } else {
         let date = new Date(inpData);
@@ -103,7 +103,7 @@ function cadastrarUsuario() {
             })
             .then(res => {
                 if (res.erro === "Email já existente") {
-                    erroC.style.color = "red"
+                    erroC.style.color = "black"
                     erroC.innerHTML = "Email ja Cadastrado"
                 }
                 console.log(res)
@@ -131,7 +131,7 @@ function loginUsuario() {
     };
 
     if (inpEmail.length == 0 || inpSenha == 0) {
-        erroL.style.color = "red"
+        erroL.style.color = "black"
         erroL.innerHTML = "Campo Vazio"
     } else {
         fetch('http://localhost:3000/login', options)
@@ -142,11 +142,11 @@ function loginUsuario() {
             .then(res => {
                 console.log(res)
                 if (res.menssagem === 'usuario não encontrado') {
-                    erroL.style.color = "red"
+                    erroL.style.color = "black"
                     erroL.innerHTML = res.menssagem
                 }
                 if (res.menssagem === 'senha incorreta') {
-                    erroL.style.color = "red"
+                    erroL.style.color = "black"
                     erroL.innerHTML = res.menssagem
                 }
                 if (res.menssagem === 'Seu login foi bem-sucedido') {
