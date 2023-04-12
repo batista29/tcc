@@ -36,3 +36,8 @@ main {
     width: 85%;
     height: 75%;
 }
+
+.model {
+    display: none;
+    visibility: hidden;
+}
