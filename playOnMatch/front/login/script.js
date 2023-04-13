@@ -18,31 +18,18 @@ function estilizarBotoes() {
     let formularioCadastro = document.querySelector('.formulario.cadastro')
     let formularioLogin = document.querySelector('.formulario.login')
 
-    // btnLogin.addEventListener('mouseenter', function () {
-    //     btnLogin.style.color = '#04D939'
-    //     btnLogin.style.opacity = '';
-    //     btnLogin.style.filter = '';
-    // });
-
-    // btnCadastro.addEventListener('mouseenter', function () {
-    //     btnCadastro.style.color = '#04D939'
-    //     btnCadastro.style.opacity = '';
-    //     btnCadastro.style.filter = '';
-    // });
-
 
     btnLogin.addEventListener('click', function () {
 
         formularioCadastro.style.display = "none"
-        formularioLogin.style.display = "flex"
+        formularioLogin.style.display = ""
 
         btnLogin.style.color = '#04D939'
-        btnLogin.style.opacity = '';
-        btnLogin.style.filter = '';
+        btnLogin.style.opacity = '200';
+        btnLogin.style.filter = 'none';
 
         btnCadastro.style.color = 'white';
         btnCadastro.style.opacity = 0.3;
-        btnCadastro.style.filter = blur('1px');
     })
 
     btnCadastro.addEventListener('click', function () {
@@ -57,7 +44,6 @@ function estilizarBotoes() {
 
         btnLogin.style.color = 'white';
         btnLogin.style.opacity = 0.3;
-        btnLogin.style.filter = blur('1px');
     })
 }
 
@@ -155,26 +141,30 @@ function loginUsuario() {
                     setTimeout(function () {
                         window.location.href = './teste.html'
                     }, 3000);
-
                 }
             })
     }
-
-
 }
 
-// function validarEmail(email) {
-//     const re = /\S+@\S+\.\S+/;
-//     return re.test(email);
-// }
+
+let slideIndex = 0;
 
 
-// const email = "exemplo@dominio.com";
-// if (validarEmail(email)) {
-//     console.log("O email é válido.");
-// } else {
-//     console.log("O email é inválido.");
-// }
-
-
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("imgCarrosel");
+    let dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+    setTimeout(showSlides, 4000);
+}
 estilizarBotoes()
+showSlides()
