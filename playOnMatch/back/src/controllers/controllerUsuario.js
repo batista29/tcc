@@ -49,6 +49,7 @@ const readOne = async (req, res) => {
 }
 
 const readPerfil = async (req, res) => {
+
     try {
         let usuario = await prisma.usuario.findUnique({
             where: {
@@ -75,12 +76,11 @@ const readPerfil = async (req, res) => {
                 }
             }
         })
-        res.status(200).json(usuario).end()
+        res.status(200).send({ menssagem: "acesso permitido", usuario }).end()
     } catch (error) {
         res.status(400).send({ error })
     }
 }
-
 
 const update = async (req, res) => {
     try {
@@ -90,7 +90,6 @@ const update = async (req, res) => {
             },
             data: req.body
         })
-
         res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi atualizado com sucesso` }).end()
     } catch (error) {
         res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
@@ -111,7 +110,6 @@ const eliminate = async (req, res) => {
     }
 }
 
-
 const login = async (req, res) => {
 
     let usuario = await prisma.usuario.findUnique({
@@ -125,7 +123,7 @@ const login = async (req, res) => {
             jwt.sign(usuario, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
                 if (err == null) {
                     usuario["token"] = token
-                    res.status(200).send({menssagem:"Seu login foi bem-sucedido"}).end()
+                    res.status(200).send({ menssagem: "Seu login foi bem-sucedido", usuario }).end()
                 } else {
                     res.status(404).json(err).end()
                 }
@@ -138,6 +136,63 @@ const login = async (req, res) => {
     }
 }
 
+const readListaAmigo = async (req, res) => {
+    let usuario = await prisma.lista_amigos.findUnique({
+        where: {
+            id: Number(req.params.id)
+        }
+    })
+    if (usuario != null) {
+        res.status(200).json(usuario).end()
+    } else {
+        res.status(200).send({ menssagem: "sem amigos" }).end()
+
+    }
+}
+
+const createListaAmigo = async (req, res) => {
+    let usuario = await prisma.lista_amigos.create({
+        data: req.body
+    })
+    res.status(200).json(usuario).end()
+}
+
+
+
+const verificarAmigo = async (id,req, res) => {
+
+
+    //recebendo id de quem ta logado 
+    // comparar o id de quem ta logado
+    // com os amigos de quem ele quer ver o perfil
+    // se quem estiver logado estiver na lista de amigos
+    // permitir acesso ao perfil
+
+
+
+
+
+
+    // console.log(id)
+
+    // let listaAmigo = await prisma.lista_amigos.findUnique({
+    //     where: {
+    //         id: id
+    //     }
+    // })
+
+    // if (listaAmigo != null) {
+    //     if (listaAmigo.idAmigo == Number(req.body.idAmigo)) {
+
+    //         res.status(200).send({ menssagem: 'Amigo',listaAmigo}).end()
+    //     } else {
+    //         res.status(400).json({ menssagem: 'não é amigo' }).end()
+    //     }
+    // } else {
+    //     res.status(400).send({ menssagem: "sem amigos" }).end()
+    // }
+
+}
 
 
 
@@ -148,5 +203,8 @@ module.exports = {
     eliminate,
     readOne,
     login,
-    readPerfil
+    readPerfil,
+    verificarAmigo,
+    readListaAmigo,
+    createListaAmigo
 }

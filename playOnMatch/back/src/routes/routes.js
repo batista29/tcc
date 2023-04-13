@@ -6,11 +6,17 @@ const middleware = require('../middleware/middleware')
 
 router.post('/criarUsuario', usuario.create)
 router.post('/login', usuario.login)
+router.post('/createLista', usuario.createListaAmigo)
 router.get('/listarUsuarios', usuario.read)
 router.get('/encontrarUsuario', usuario.readOne)
 router.get('/perfilUsuario/:id', usuario.readPerfil)
+router.get('/verificar/:id', usuario.verificarAmigo)
+router.get('/lista/:id', usuario.readListaAmigo)
 router.put('/atualizarUsuario/:id', middleware.autorizacao, usuario.update)
 router.delete('/excluirUsuario/:id', usuario.eliminate)
+
+router.get('/teste', middleware.autVerPerfil)
+
 
 const encontro = require('../controllers/controllerEncontro')
 

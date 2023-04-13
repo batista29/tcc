@@ -139,7 +139,7 @@ function loginUsuario() {
                     erroL.style.color = "#00f63e"
                     erroL.innerHTML = 'Seja bem-vindo!'
                     setTimeout(function () {
-                        window.location.href = './teste.html'
+                        window.location.href = '../principal/index.html'
                     }, 3000);
                 }
             })
