@@ -26,7 +26,6 @@ model Usuario {
 
 model Lista_amigos {
   id        Int     @id @default(autoincrement())
-  nomeAmigo String?
   idAmigo   Int
   idDono    Int
   amigo     Usuario @relation("amigo", fields: [idAmigo], references: [id])

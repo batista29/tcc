@@ -18,15 +18,21 @@ const autorizacao = (req, res, next) => {
     })
 }
 
-const autVerPerfil = (req, res, next) => {
+const autVerPerfil = async (req, res, next) => {
+    const idLogado = req.params.idLogado;
+    const idUsuario = req.params.idUsuario;
+    const resultado = await verificarAmigo.verificarAmigo(idLogado,idUsuario)
+
     const token = req.headers.authorization
     jwt.verify(token, process.env.KEY, (err, data) => {
         if (err != null) {
             res.status(404).json(err).end()
         } else {
-            verificarAmigo.verificarAmigo(Number(data.id))
-
-            // )
+            if(resultado.menssagem === 'amigos' || data.id === Number(idLogado)){
+                next()
+            }else{
+                res.status(403).send({ mensagem: 'Acesso não autorizado' });
+            }
         }
     })
 }
