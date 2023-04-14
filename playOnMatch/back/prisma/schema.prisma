@@ -26,10 +26,10 @@ model Usuario {
 
 model Lista_amigos {
   id      Int      @id @default(autoincrement())
-  idAmigo Int
+  idAmigo Int?
   idDono  Int
   amigo   Usuario? @relation("amigo", fields: [idAmigo], references: [id])
-  dono    Usuario? @relation("dono", fields: [idDono], references: [id])
+  dono    Usuario  @relation("dono", fields: [idDono], references: [id])
 }
 
 //Encontro normal, sem premiação

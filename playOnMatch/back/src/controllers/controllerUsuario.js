@@ -164,7 +164,13 @@ const createListaAmigo = async (req, res) => {
 
     // const { idDono } = req.body;
     let lista = await prisma.lista_amigos.create({
-        data: req.body
+        data: {
+            idDono: {
+                create:{
+                    id: Number(req.body.idDono)
+                }
+            }
+        }
     })
 
     // let lista2 = await prisma.lista_amigos.create({
