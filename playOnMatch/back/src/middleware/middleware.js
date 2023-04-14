@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const verificarAmigo = require('../controllers/controllerUsuario')
+const respostaAmizade = require('../controllers/controllerUsuario')
 
 const autorizacao = (req, res, next) => {
     const token = req.headers.authorization
@@ -28,7 +29,7 @@ const autVerPerfil = async (req, res, next) => {
         if (err != null) {
             res.status(404).json(err).end()
         } else {
-            if (resultado.menssagem === 'amigos' || data.id === Number(idLogado)) {
+            if (resultado.menssagem === 'amigos' || data.id === Number(idUsuario)) {
                 next()
             } else {
                 res.status(403).send({ mensagem: 'Acesso não autorizado' });
@@ -37,14 +38,17 @@ const autVerPerfil = async (req, res, next) => {
     })
 }
 
-const solicitacaoAmizade = (req, res, next) => {
+const solicitacaoAmizade = async (req, res, next) => {
+    const idEnviado = req.params.idEnviado;
+    const idUsuario = req.params.idRecebido;
+    const resultado = await respostaAmizade.respostaAmizade(idEnviado, idUsuario)
+
     const token = req.headers.authorization
     jwt.verify(token, process.env.KEY, (err, data) => {
         if (err != null) {
             res.status(404).json(err).end()
         } else {
             
-
         }
     })
 }
@@ -54,5 +58,6 @@ const solicitacaoAmizade = (req, res, next) => {
 
 module.exports = {
     autorizacao,
-    autVerPerfil
+    autVerPerfil,
+    solicitacaoAmizade
 }
