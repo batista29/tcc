@@ -25,11 +25,11 @@ model Usuario {
 }
 
 model Lista_amigos {
-  id        Int     @id @default(autoincrement())
-  idAmigo   Int
-  idDono    Int
-  amigo     Usuario @relation("amigo", fields: [idAmigo], references: [id])
-  dono      Usuario @relation("dono", fields: [idDono], references: [id])
+  id      Int      @id @default(autoincrement())
+  idAmigo Int
+  idDono  Int
+  amigo   Usuario? @relation("amigo", fields: [idAmigo], references: [id])
+  dono    Usuario? @relation("dono", fields: [idDono], references: [id])
 }
 
 //Encontro normal, sem premiação
@@ -44,11 +44,11 @@ model Encontro {
 }
 
 model Local {
-  id                 Int                  @id @default(autoincrement())
-  nome               String
-  capacidade         Int
-  cep                String
-  Encontro           Encontro[]
+  id         Int        @id @default(autoincrement())
+  nome       String
+  capacidade Int
+  cep        String
+  Encontro   Encontro[]
   // Partida_campeonato Partida_campeonato[]
 }
 
