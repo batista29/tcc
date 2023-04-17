@@ -127,7 +127,7 @@ const login = async (req, res) => {
                     usuario["token"] = token
                     res.status(200).send({ menssagem: "Seu login foi bem-sucedido", usuario }).end()
                 } else {
-                    res.status(404).json(err).end()
+                    res.status(404).json(err.message).end()
                 }
             })
         } else {
@@ -194,15 +194,7 @@ const verificarAmigo = async (idLogado, idUsuario) => {
     }
 }
 
-// const enviarSolicitacao = async (req,res) => {
-//     let amigo = await prisma.usuario.findUnique({
-//         where:{
-//             id:Number(req.body.id)
-//         },
-//         select:{
-//             Lista_amigos:true   
-//         }
-//     })  
+
 
 const updateListaAmigo = async (req, res) => {
 
@@ -246,16 +238,20 @@ const updateListaAmigo = async (req, res) => {
 }
 
 
-const respostaAmizade = async (idEnviado,idUsuario)=> {
+const respostaAmizade = (req, res) => {
 
-    console.log(idEnviado)
-    console.log(idUsuario)
+    const { RespUsuario } = req.body
 
-    let usuario = await prisma.usuario.findUnique({
-        where:{
-            id:idEnviado
+
+    if (RespUsuario === true) {
+        return {
+            mensagem: "solicitação de amizade aceita"
         }
-    })
+    } else if (RespUsuario === false) {
+        return {
+            mensagem: "solicitação de amizade rejeitada"
+        }
+    }
 }
 
 module.exports = {

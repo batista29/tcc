@@ -39,16 +39,18 @@ const autVerPerfil = async (req, res, next) => {
 }
 
 const solicitacaoAmizade = async (req, res, next) => {
-    const idEnviado = req.params.idEnviado;
-    const idUsuario = req.params.idRecebido;
-    const resultado = await respostaAmizade.respostaAmizade(idEnviado, idUsuario)
+    const resultado = await respostaAmizade.respostaAmizade(req)
 
     const token = req.headers.authorization
     jwt.verify(token, process.env.KEY, (err, data) => {
         if (err != null) {
             res.status(404).json(err).end()
         } else {
-            
+            if (resultado.mensagem == "solicitação de amizade aceita") {
+                next()
+            } else {
+                res.status(403).send({ mensagem: 'solicitação de amizade rejeitada' });
+            }
         }
     })
 }
