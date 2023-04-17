@@ -12,6 +12,7 @@
 <body onload="carregar()">
     <header></header>
     <main>
+        <button onclick="abrirModal()" class="abrirModal1">+</button>
         <div class="read">
             <div class="readInfo model">
                 <div class="readLocal">
@@ -25,6 +26,18 @@
             </div>
         </div>
     </main>
+    <div class="readInferior">
+        <div class="modal">
+            <div class="inputsCadastro">
+                <button class="sair" onclick="fecharModal()">X</button>
+                <input type="text" id="descricaoSubmit" placeholder="digite a descricao...">
+                <input type="date" id="dataSubmit" placeholder="digite a data...">
+                <input type="text" id="tituloSubmit" placeholder="digite o titulo...">
+                <input type="number" id="id_localSubmit" placeholder="digite o id do local">
+                <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="script.js"></script>
 
