@@ -6,6 +6,7 @@
     --cor4: #027333;
     --cor5: #03A63C;
     --cor6: #00bdec;
+    --header: cadetblue;
 }
 
 * {
@@ -15,9 +16,16 @@
 }
 
 header {
-    background-color: #00bdec;
+    display: flex;
+    background-color: var(--header);
     height: 10vh;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: #012340;
 }
 
 body {
@@ -55,7 +63,7 @@ main {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     color: white;
     width: 80%;
-    height: auto;
+    height: 20vh;
     margin-left: 3vh;
     gap: 10px;
     padding: 30px;
@@ -63,11 +71,13 @@ main {
 }
 
 .friends {
+    text-align: center;
     top: 0;
     right: 0;
-    position: absolute;
-    background-color: #00f63e;
-    height: 90%;
+    position: fixed;
+    background-color: var(--header);
+    min-height: 100%;
+    max-height: auto;
     width: 18%;
 }
 
@@ -112,6 +122,7 @@ main {
 .modal {
     display: flex;
     position: fixed;
+    top: 0;
     height: 110vh;
     width: 100%;
     background-color: #0123405b;
@@ -152,4 +163,14 @@ main {
     color: white;
     border-color: var(--textoHome2);
     border-top: none;
+}
+
+.perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 10vh;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+
 }

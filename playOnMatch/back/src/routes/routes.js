@@ -26,7 +26,7 @@ router.post('/criarEncontro', encontro.create)
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)
-router.put('/editarEncontro/:id', middleware.autorizacao, encontro.update)
+router.put('/editarEncontro/:id/:idUsuario', middleware.autorizacao, encontro.update)
 
 const local = require('../controllers/controllerLocal')
 

@@ -26,7 +26,7 @@ function carregar() {
                 tabela.querySelector('.titulo').innerHTML = 'titulo: ' + dados.titulo
                 tabela.querySelector('.nomeLocal').innerHTML = 'nomeLocal: ' + dados.local.nome
                 tabela.querySelector('.capacidadeLocal').innerHTML = 'capacidadeLocal: ' + dados.local.capacidade
-                tabela.querySelector('.cepLocal').innerHTML = 'cepLocal: ' + dados.local.cep
+                tabela.querySelector('.cepLocal').innerHTML = 'endereço: ' + dados.local.endereco
                 read.appendChild(tabela)
             });
 

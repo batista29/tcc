@@ -39,6 +39,7 @@ model Encontro {
   data            DateTime
   titulo          String
   id_local        Int
+  esporte         String
   local           Local             @relation(fields: [id_local], references: [id])
   EncontroUsuario EncontroUsuario[]
 }
@@ -47,7 +48,8 @@ model Local {
   id         Int        @id @default(autoincrement())
   nome       String
   capacidade Int
-  cep        String
+  endereco   String
+  referencia String?
   Encontro   Encontro[]
   // Partida_campeonato Partida_campeonato[]
 }
