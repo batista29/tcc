@@ -63,6 +63,7 @@ const update = async (req, res) => {
     }
 }
 
+<<<<<<< HEAD
 const eliminate = async (req, res) => {
     try {
         let usuario = await prisma.usuario.delete({
@@ -78,6 +79,8 @@ const eliminate = async (req, res) => {
 
 const readPerfil = async (req, res) => {
 
+=======
+>>>>>>> 5903fbd90afbe1ed38a992fbb48cef2f3d0d4fe6
     try {
         let usuario = await prisma.usuario.findUnique({
             where: {

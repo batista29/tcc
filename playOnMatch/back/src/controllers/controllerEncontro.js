@@ -27,7 +27,7 @@ const readAll = async (req, res) => {
                 select: {
                     nome: true,
                     capacidade: true,
-                    cep: true
+                    endereco: true
                 }
             }
         }
@@ -51,6 +51,7 @@ const readOne = async (req, res) => {
 
 const update = async (req, res) => {
     try {
+
         let encontro = await prisma.encontro.update({
             where: {
                 id: Number(req.params.id)
