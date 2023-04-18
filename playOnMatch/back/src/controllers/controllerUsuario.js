@@ -49,9 +49,34 @@ const readOne = async (req, res) => {
     }
 }
 
-const readPerfil = async (req, res) => {
+const update = async (req, res) => {
+    try {
+        let usuario = await prisma.usuario.update({
+            where: {
+                id: Number(req.params.id)
+            },
+            data: req.body
+        })
+        res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi atualizado com sucesso` }).end()
+    } catch (error) {
+        res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
+    }
+}
 
-    console.log(req.params)
+const eliminate = async (req, res) => {
+    try {
+        let usuario = await prisma.usuario.delete({
+            where: {
+                id: Number(req.params.id)
+            }
+        })
+        res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi excluido com sucesso` }).end()
+    } catch (error) {
+        res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
+    }
+}
+
+const readPerfil = async (req, res) => {
 
     try {
         let usuario = await prisma.usuario.findUnique({
@@ -82,33 +107,6 @@ const readPerfil = async (req, res) => {
         res.status(200).send(usuario).end()
     } catch (error) {
         res.status(400).send({ error })
-    }
-}
-
-const update = async (req, res) => {
-    try {
-        let usuario = await prisma.usuario.update({
-            where: {
-                id: Number(req.params.id)
-            },
-            data: req.body
-        })
-        res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi atualizado com sucesso` }).end()
-    } catch (error) {
-        res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
-    }
-}
-
-const eliminate = async (req, res) => {
-    try {
-        let usuario = await prisma.usuario.delete({
-            where: {
-                id: Number(req.params.id)
-            }
-        })
-        res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi excluido com sucesso` }).end()
-    } catch (error) {
-        res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
     }
 }
 
