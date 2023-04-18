@@ -51,8 +51,6 @@ const readOne = async (req, res) => {
 
 const readPerfil = async (req, res) => {
 
-    console.log(req.params)
-
     try {
         let usuario = await prisma.usuario.findUnique({
             where: {
