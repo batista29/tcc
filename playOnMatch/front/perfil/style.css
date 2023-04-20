@@ -1,0 +1,48 @@
+:root {
+    --backgroundHome: #012340;
+    --backgroundLogin: #025959;
+    --textoHome: #04D939;
+    --textoHome2: #00f63e;
+    --cor4: #027333;
+    --cor5: #03A63C;
+    --cor6: #00bdec;
+    --header: cadetblue;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    background-color: var(--header);
+    height: 10vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--backgroundHome);
+    height: 100vh;
+}
+
+.infoUser {
+    height: 100px;
+    width: 70%;
+    margin-top: 5%;
+    background-color: blue;
+    margin-bottom: 10%;
+}
+
+.historico {
+    height: 200px;
+    width: 85%;
+    /* margin-top:15%; */
+    background-color: #00bdec;
+}

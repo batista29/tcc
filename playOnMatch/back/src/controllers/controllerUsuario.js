@@ -6,7 +6,6 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-
 const create = async (req, res) => {
     try {
         var info = req.body
@@ -26,7 +25,6 @@ const create = async (req, res) => {
             res.status(400).send({ erro: '' }).end()
         }
     }
-
 }
 
 const read = async (req, res) => {
@@ -35,7 +33,6 @@ const read = async (req, res) => {
 }
 
 const readOne = async (req, res) => {
-
     let usuario = await prisma.usuario.findUnique({
         where: {
             id: Number(req.body.id)
@@ -63,7 +60,6 @@ const update = async (req, res) => {
     }
 }
 
-<<<<<<< HEAD
 const eliminate = async (req, res) => {
     try {
         let usuario = await prisma.usuario.delete({
@@ -79,8 +75,6 @@ const eliminate = async (req, res) => {
 
 const readPerfil = async (req, res) => {
 
-=======
->>>>>>> 5903fbd90afbe1ed38a992fbb48cef2f3d0d4fe6
     try {
         let usuario = await prisma.usuario.findUnique({
             where: {
