@@ -29,20 +29,218 @@ header {
     flex-direction: column;
     align-items: center;
     background-color: var(--backgroundHome);
-    height: 100vh;
 }
 
 .infoUser {
-    height: 100px;
-    width: 70%;
+    height: 35vh;
+    width: 60%;
     margin-top: 5%;
-    background-color: blue;
+    background-color:#025959;
     margin-bottom: 10%;
+    display: grid;
+    justify-items:center;   
+    align-items: center;
 }
 
+.nomeUsuario{
+    grid-area: nomeUsuario;
+}
+.partidasJogadas{
+    grid-area: partidasJogadas;
+}
+.dataNascimento{
+    grid-area: dataNascimento;
+}
+.amigos{
+    grid-area: amigos;
+}
+.esporteFavorito{
+    grid-area: esporteFavorito;
+}
+.relacionamento{
+    grid-area: relacionamento;
+}
+.btnHistorico{
+    grid-area: btnHistorico;
+    background-color: blue;
+}
+.btnSobre{
+    grid-area: btnSobre;
+}
+.btnAmigos{
+    grid-area: btnAmigos;
+}
+.cidade{
+    grid-area: cidade;
+}
+.btnEditarPerfil{
+    grid-area: btnEditarPerfil;
+}
+
+.buttons{
+    grid-area: buttons;
+}
+
+.dados{
+        /* height: 50px;
+        width: 200px; */
+    font-size: 17px;
+}
+
+.btn{
+    height:30px;
+    width: 60px;
+    background-color: #00f63e;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: blue;
+}
+
+.grid-template-areas-5 {
+	grid-template-areas:
+		"nomeUsuario  amigos .  dataNascimento"
+		"partidasJogadas esporteFavorito cidade relacionamento"
+		"buttons . . btnEditarPerfil";
+}
+
+
 .historico {
-    height: 200px;
+    height: 90vh;
     width: 85%;
-    /* margin-top:15%; */
+    margin-bottom: 5%;
+    background-color:var(--backgroundLogin);
+    display: flex;
+}
+
+.graficos{
+    height: 100%;
+    width: 40%;
+    /* background-color: #00f63e; */
+}
+
+.partidas{
+    height: 100%;
+    width: 60%;
+    /* background-color: #ffffff; */
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.infoPartida {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* background-color: #00bdec; */
+    font-size:20px ;
+}
+
+.infoPartida:hover{
     background-color: #00bdec;
+    cursor: pointer;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.btnHistorico{
+    background-color: blue;
+}
+
+.sobre {
+    height: 100vh;
+}
+
+.modal{
+    background-color: #0123405b;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+}
+
+.itensModal {
+    height: 50%;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.btnFecharModal{
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.btnFecharModal:hover{
+    background-color: #025959;
+    color: white;
+    cursor: pointer;
+}
+
+.ModalAtualizarPerfil{
+    background-color: #0123405b;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    display: none;
+}
+
+.atualizarPerfil{
+    height: 50%;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    position: relative; 
+}
+
+.btnFechaModalAtualizarPerfil{
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.btnFechaModalAtualizarPerfil:hover{
+    background-color: #025959;
+    color: white;
+    cursor: pointer;
+}
+
+.btnAtualizarPerfil{
+    height: 35px;
+    width: 60px;
+    margin: 10px;
+    border-radius: 30px;
+}
+
+.btnAtualizarPerfil:hover{
+    background-color: #012340;
+    color: white;
+    cursor: pointer;
 }
