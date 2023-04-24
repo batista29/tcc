@@ -36,6 +36,7 @@ function carregar() {
 
 function adicionarEncontro() {
 
+    // criar encontro
     let descricaoSubmit = document.querySelector("#descricaoSubmit").value
     let dataSubmit = document.querySelector("#dataSubmit").value
     let tituloSubmit = document.querySelector("#tituloSubmit").value
@@ -64,6 +65,15 @@ function adicionarEncontro() {
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
+
+
+        // criar encontro usuario
+
+        // const options2 ={
+        //     idEncontro:
+        //     idCriador:
+        //     idParticipante:
+        // }
 }
 
 

@@ -1,4 +1,3 @@
-
 const btnC = document.querySelector(".Cadastro");
 
 btnC.addEventListener("click", function (event) {
@@ -74,7 +73,9 @@ function cadastrarUsuario() {
 
         const options = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dados)
         };
 
@@ -112,7 +113,9 @@ function loginUsuario() {
 
     const options = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(dados)
     };
 
@@ -138,17 +141,16 @@ function loginUsuario() {
                 if (res.menssagem === 'Seu login foi bem-sucedido') {
                     erroL.style.color = "#00f63e"
                     erroL.innerHTML = 'Seja bem-vindo!'
+                    localStorage.setItem("usuario",JSON.stringify({'id': res.usuario.id, 'token': res.usuario.token}))
                     setTimeout(function () {
                         window.location.href = '../principal/index.html'
-                    }, 3000);
+                    }, 500);
                 }
             })
     }
 }
 
-
 let slideIndex = 0;
-
 
 function showSlides() {
     let i;
@@ -158,7 +160,9 @@ function showSlides() {
         slides[i].style.display = "none";
     }
     slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1 }
+    if (slideIndex > slides.length) {
+        slideIndex = 1
+    }
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }

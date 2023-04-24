@@ -11,17 +11,17 @@ datasource db {
 }
 
 model Usuario {
-  id              Int               @id @default(autoincrement())
-  nome            String
-  email           String            @unique
-  senha           String
-  nascimento      DateTime
-  cep             String?
-  EncontroUsuario EncontroUsuario[]
-  // UsuarioEquipe   UsuarioEquipe[]
-  // Campeonato      Campeonato[]
-  Amigo           Lista_amigos[]    @relation("amigo")
-  Lista_amigos    Lista_amigos[]    @relation("dono")
+  id             Int               @id @default(autoincrement())
+  nome           String
+  email          String            @unique
+  senha          String
+  nascimento     DateTime
+  cep            String?
+  CriadorPartida EncontroUsuario[] @relation("criadorPartida")
+  Participante   EncontroUsuario[] @relation("participantePartida")
+  Amigo          Lista_amigos[]    @relation("amigo")
+  Lista_amigos   Lista_amigos[]    @relation("dono")
+  Amigos         Amigos[]
 }
 
 model Lista_amigos {
@@ -30,6 +30,15 @@ model Lista_amigos {
   idDono  Int
   amigo   Usuario? @relation("amigo", fields: [idAmigo], references: [id])
   dono    Usuario  @relation("dono", fields: [idDono], references: [id])
+  Amigos         Amigos[]
+}
+
+model Amigos {
+  id       Int     @id @default(autoincrement())
+  id_user  Int
+  id_lista Int
+  Usuario  Usuario @relation(fields: [id_user], references: [id])
+  Lista_amigos  Lista_amigos @relation(fields: [id_lista], references: [id])
 }
 
 //Encontro normal, sem premiação
@@ -51,59 +60,14 @@ model Local {
   endereco   String
   referencia String?
   Encontro   Encontro[]
-  // Partida_campeonato Partida_campeonato[]
 }
 
 model EncontroUsuario {
-  id          Int      @id @default(autoincrement())
-  id_encontro Int
-  id_usuario  Int
-  usuario     Usuario  @relation(fields: [id_usuario], references: [id])
-  encontro    Encontro @relation(fields: [id_encontro], references: [id])
+  id                    Int      @id @default(autoincrement())
+  id_encontro           Int
+  idCriadorPartida      Int
+  idParticipantePartida Int?
+  idCriador             Usuario  @relation("criadorPartida", fields: [idCriadorPartida], references: [id])
+  idParticipante        Usuario? @relation("participantePartida", fields: [idParticipantePartida], references: [id])
+  encontro              Encontro @relation(fields: [id_encontro], references: [id])
 }
-
-// model Equipe {
-//   id                Int                 @id @default(autoincrement())
-//   nome              String
-//   UsuarioEquipe     UsuarioEquipe[]
-//   EquipePartidaCamp EquipePartidaCamp[]
-// }
-
-// model UsuarioEquipe {
-//   id         Int     @id @default(autoincrement())
-//   id_usuario Int
-//   id_equipe  Int
-//   usuario    Usuario @relation(fields: [id_usuario], references: [id])
-//   equipe     Equipe  @relation(fields: [id_equipe], references: [id])
-// }
-
-// model Campeonato {
-//   id                 Int                  @id @default(autoincrement())
-//   esporte            String
-//   premio             Float
-//   valor_entrada      Float
-//   descricao          String
-//   id_criador         Int
-//   usuario            Usuario              @relation(fields: [id_criador], references: [id])
-//   Partida_campeonato Partida_campeonato[]
-// }
-
-// model EquipePartidaCamp {
-//   id             Int                @id @default(autoincrement())
-//   id_equipe      Int
-//   id_partidaCamp Int
-//   equipe         Equipe             @relation(fields: [id_equipe], references: [id])
-//   partidaCamp    Partida_campeonato @relation(fields: [id_partidaCamp], references: [id])
-// }
-
-// model Partida_campeonato {
-//   id                Int                 @id @default(autoincrement())
-//   pontuacao         Int
-//   id_local          Int
-//   id_camp           Int
-//   local             Local               @relation(fields: [id_local], references: [id])
-//   campeonato        Campeonato          @relation(fields: [id_camp], references: [id])
-//   EquipePartidaCamp EquipePartidaCamp[]
-//   Local             Local?              @relation(fields: [localId], references: [id])
-//   localId           Int?
-// }

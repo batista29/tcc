@@ -45,7 +45,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: var(--cor6);
+    background-color: white;
     /* color of the scroll thumb */
     border-radius: 20px;
     /* roundness of the scroll thumb */
