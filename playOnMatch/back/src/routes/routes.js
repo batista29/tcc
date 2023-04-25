@@ -13,7 +13,7 @@ router.get('/perfilUsuario/:idLogado/:idUsuario', middleware.autVerPerfil,usuari
 router.get('/lista/:idUsuario',usuario.listarAmigos)
 router.put('/atualizarUsuario/:id', middleware.autorizacao, usuario.update)
 router.delete('/excluirUsuario/:id', usuario.eliminate)
-router.get('/excluirAmigo/:idLogado/:idAmigo', usuario.eliminateAmigo)
+router.delete('/excluirAmigo/:idLogado/:idAmigo', usuario.eliminateAmigo)
 
 const encontro = require('../controllers/controllerEncontro')
 

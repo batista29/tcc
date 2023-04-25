@@ -249,26 +249,36 @@ const listarAmigos = async (req, res) => {
 
 const eliminateAmigo = async (req, res) => {
 
-    const logado = await prisma.usuario.findUnique({
-        where: {
-            id: Number(req.params.idLogado)
-        },
-        select: {
-            criadorListaAmigo: true
-        }
-    })
+    try {
+        const logado = await prisma.usuario.findUnique({
+            where: {
+                id: Number(req.params.idLogado)
+            },
+            select: {
+                criadorListaAmigo: true
+            }
+        })
 
-    logado.criadorListaAmigo.forEach((e) => {
-        if (e.idAmigo === Number(req.params.idAmigo)) {
-            let amigo = prisma.Lista_amigos.delete({
-                where: {
-                    id: e.id
-                },
+        if (logado && logado.criadorListaAmigo) {
+            logado.criadorListaAmigo.forEach((e) => {
+                if (e.idAmigo === Number(req.params.idAmigo)) {
+                    let amigo = prisma.Lista_amigos.delete({
+                        where: {
+                            id: e.id
+                        },
+                    })
+                    res.status(200).send({ menssagem: 'amigo deletado com sucesso' })
+                } else {
+                    res.status(404).send({ mensagem: "amigo não encontrado" })
+                }
             })
-
-            res.status(200).send({ menssagem: 'te amo' })
+        } else {
+            res.status(404).send({ mensagem: "Usuario não encontrado ou lista de amigos vazia" })
         }
-    })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ mensagem: "ocorreu um erro ao deletar o amigo" })
+    }
 }
 
 module.exports = {
