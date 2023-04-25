@@ -15,7 +15,6 @@ const create = async (req, res) => {
             data: info
         })
 
-        createListaAmigo(usuario.id)
         res.status(201).json(usuario).end()
 
     } catch (error) {
@@ -75,6 +74,7 @@ const eliminate = async (req, res) => {
 
 const readPerfil = async (req, res) => {
 
+    console.log()
     try {
         let usuario = await prisma.usuario.findUnique({
             where: {
@@ -83,22 +83,22 @@ const readPerfil = async (req, res) => {
             select: {
                 id: true,
                 nascimento: true,
-                nome: true,
-                EncontroUsuario: {
-                    select: {
-                        encontro: {
-                            select: {
-                                data: true,
-                                descricao: true,
-                                local: {
-                                    select: {
-                                        nome: true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                nome: true
+                // EncontroUsuario: {
+                //     select: {
+                //         encontro: {
+                //             select: {
+                //                 data: true,
+                //                 descricao: true,
+                //                 local: {
+                //                     select: {
+                //                         nome: true
+                //                     }
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
             }
         })
         res.status(200).send(usuario).end()
@@ -147,15 +147,6 @@ const readListaAmigo = async (req, res) => {
     }
 }
 
-const createListaAmigo = async (id) => {
-
-    let lista = await prisma.lista_amigos.create({
-        data: {
-            idDono: Number(id)
-        }
-    })
-}
-
 const verificarAmigo = async (idLogado, idUsuario) => {
 
     //recebendo id de quem ta logado 
@@ -168,12 +159,19 @@ const verificarAmigo = async (idLogado, idUsuario) => {
             id: Number(idUsuario)
         },
         select: {
-            Lista_amigos: true
+            criadorListaAmigo: true
         }
     })
 
-    if (amigo.Lista_amigos[0].idAmigo != null) {
-        if (Number(idLogado) === Number(amigo.Lista_amigos[0].idAmigo)) {
+    let encontrado = false
+
+    if (amigo.criadorListaAmigo.length != 0) {
+        amigo.criadorListaAmigo.forEach((e) => {
+            if (Number(idLogado) === Number(e.idAmigo)) {
+                encontrado = true
+            }
+        })
+        if (encontrado) {
             return {
                 menssagem: 'amigos'
             }
@@ -189,45 +187,23 @@ const verificarAmigo = async (idLogado, idUsuario) => {
     }
 }
 
-
-
 const updateListaAmigo = async (req, res) => {
 
-    let usuarioEnviou = await prisma.usuario.findUnique({
-        where: {
-            id: Number(req.params.idEnviado)
-        },
-        select: {
-            Lista_amigos: true
-        }
-    })
-
-    let usuarioRecebeu = await prisma.usuario.findUnique({
-        where: {
-            id: Number(req.params.idRecebido)
-        },
-        select: {
-            Lista_amigos: true
-        }
-    })
-
-    let atualizarListaEnviou = await prisma.lista_amigos.update({
-        where: {
-            id: usuarioEnviou.Lista_amigos[0].id
-        },
+    const listaDeQuemRecebeu = await prisma.lista_amigos.create({
         data: {
-            idAmigo: usuarioRecebeu.Lista_amigos[0].idDono
+            criador: { connect: { id: Number(req.params.idCriadorLista) } },
+            amigo: { connect: { id: Number(req.params.idNovoAmigo) } }
         }
-    })
+    });
 
-    let atualizarListaRecebeu = await prisma.lista_amigos.update({
-        where: {
-            id: usuarioRecebeu.Lista_amigos[0].id
-        },
+    const listaDeQuemEnviou = await prisma.lista_amigos.create({
         data: {
-            idAmigo: usuarioEnviou.Lista_amigos[0].idDono
+            criador: { connect: { id: Number(req.params.idNovoAmigo) } },
+            amigo: { connect: { id: Number(req.params.idCriadorLista) } }
         }
-    })
+    });
+
+
 
     res.status(200).send('sucesso').end()
 }

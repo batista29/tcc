@@ -11,63 +11,51 @@ datasource db {
 }
 
 model Usuario {
-  id             Int               @id @default(autoincrement())
-  nome           String
-  email          String            @unique
-  senha          String
-  nascimento     DateTime
-  cep            String?
-  CriadorPartida EncontroUsuario[] @relation("criadorPartida")
-  Participante   EncontroUsuario[] @relation("participantePartida")
-  Amigo          Lista_amigos[]    @relation("amigo")
-  Lista_amigos   Lista_amigos[]    @relation("dono")
-  Amigos         Amigos[]
+  id                Int            @id @default(autoincrement())
+  nome              String
+  email             String         @unique
+  senha             String
+  nascimento        DateTime
+  cep               String?
+  amigo             Lista_amigos[] @relation("amigo")
+  criadorListaAmigo Lista_amigos[] @relation("criador")
 }
 
 model Lista_amigos {
-  id      Int      @id @default(autoincrement())
-  idAmigo Int?
-  idDono  Int
-  amigo   Usuario? @relation("amigo", fields: [idAmigo], references: [id])
-  dono    Usuario  @relation("dono", fields: [idDono], references: [id])
-  Amigos         Amigos[]
-}
-
-model Amigos {
-  id       Int     @id @default(autoincrement())
-  id_user  Int
-  id_lista Int
-  Usuario  Usuario @relation(fields: [id_user], references: [id])
-  Lista_amigos  Lista_amigos @relation(fields: [id_lista], references: [id])
+  id        Int      @id @default(autoincrement())
+  idAmigo   Int?
+  idCriador Int
+  amigo     Usuario? @relation("amigo", fields: [idAmigo], references: [id])
+  criador   Usuario  @relation("criador", fields: [idCriador], references: [id])
 }
 
 //Encontro normal, sem premiação
 model Encontro {
-  id              Int               @id @default(autoincrement())
-  descricao       String
-  data            DateTime
-  titulo          String
-  id_local        Int
-  esporte         String
-  local           Local             @relation(fields: [id_local], references: [id])
-  EncontroUsuario EncontroUsuario[]
+  id        Int      @id @default(autoincrement())
+  descricao String
+  data      DateTime
+  titulo    String
+  id_local  Int
+  esporte   String
+  // local           Local             @relation(fields: [id_local], references: [id])
+  // EncontroUsuario EncontroUsuario[]
 }
 
-model Local {
-  id         Int        @id @default(autoincrement())
-  nome       String
-  capacidade Int
-  endereco   String
-  referencia String?
-  Encontro   Encontro[]
-}
+// model Local {
+//   id         Int        @id @default(autoincrement())
+//   nome       String
+//   capacidade Int
+//   endereco   String
+//   referencia String?
+//   Encontro   Encontro[]
+// }
 
-model EncontroUsuario {
-  id                    Int      @id @default(autoincrement())
-  id_encontro           Int
-  idCriadorPartida      Int
-  idParticipantePartida Int?
-  idCriador             Usuario  @relation("criadorPartida", fields: [idCriadorPartida], references: [id])
-  idParticipante        Usuario? @relation("participantePartida", fields: [idParticipantePartida], references: [id])
-  encontro              Encontro @relation(fields: [id_encontro], references: [id])
-}
+// model EncontroUsuario {
+//   id                    Int      @id @default(autoincrement())
+//   id_encontro           Int
+//   idCriadorPartida      Int
+//   idParticipantePartida Int?
+//   idCriador             Usuario  @relation("criadorPartida", fields: [idCriadorPartida], references: [id])
+//   idParticipante        Usuario? @relation("participantePartida", fields: [idParticipantePartida], references: [id])
+//   encontro              Encontro @relation(fields: [id_encontro], references: [id])
+// }
