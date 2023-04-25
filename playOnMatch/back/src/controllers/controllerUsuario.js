@@ -154,6 +154,7 @@ const verificarAmigo = async (idLogado, idUsuario) => {
 
     // comparar o id de quem ta logado com os amigos de quem ele quer ver o perfil
 
+
     let amigo = await prisma.usuario.findUnique({
         where: {
             id: Number(idUsuario)
@@ -162,6 +163,12 @@ const verificarAmigo = async (idLogado, idUsuario) => {
             criadorListaAmigo: true
         }
     })
+
+    if (amigo == null) {
+        return {
+            mensagem: 'usuario não existe'
+        }
+    }
 
     let encontrado = false
 
@@ -203,8 +210,6 @@ const updateListaAmigo = async (req, res) => {
         }
     });
 
-
-
     res.status(200).send('sucesso').end()
 }
 
@@ -225,6 +230,47 @@ const respostaAmizade = (req, res) => {
     }
 }
 
+const listarAmigos = async (req, res) => {
+    const usuario = await prisma.usuario.findUnique({
+        where: {
+            id: Number(req.params.idUsuario)
+        },
+        select: {
+            criadorListaAmigo: true
+        }
+    })
+
+    if (usuario == null) {
+        res.status(400).send({ mensagem: "usuario não existe" })
+    } else {
+        res.status(200).send(usuario.criadorListaAmigo).end()
+    }
+}
+
+const eliminateAmigo = async (req, res) => {
+
+    const logado = await prisma.usuario.findUnique({
+        where: {
+            id: Number(req.params.idLogado)
+        },
+        select: {
+            criadorListaAmigo: true
+        }
+    })
+
+    logado.criadorListaAmigo.forEach((e) => {
+        if (e.idAmigo === Number(req.params.idAmigo)) {
+            let amigo = prisma.Lista_amigos.delete({
+                where: {
+                    id: e.id
+                },
+            })
+
+            res.status(200).send({ menssagem: 'te amo' })
+        }
+    })
+}
+
 module.exports = {
     create,
     read,
@@ -236,6 +282,7 @@ module.exports = {
     verificarAmigo,
     readListaAmigo,
     updateListaAmigo,
-    respostaAmizade
-    // enviarSolicitacao
+    respostaAmizade,
+    listarAmigos,
+    eliminateAmigo
 }

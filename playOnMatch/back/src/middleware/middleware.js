@@ -5,6 +5,7 @@ const verificarAmigo = require('../controllers/controllerUsuario')
 const respostaAmizade = require('../controllers/controllerUsuario')
 
 const autorizacao = (req, res, next) => {
+
     const token = req.headers.authorization
     jwt.verify(token, process.env.KEY, (err, data) => {
         if (err != null) {

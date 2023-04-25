@@ -37,25 +37,25 @@ model Encontro {
   titulo    String
   id_local  Int
   esporte   String
-  // local           Local             @relation(fields: [id_local], references: [id])
-  // EncontroUsuario EncontroUsuario[]
+  local           Local             @relation(fields: [id_local], references: [id])
+  EncontroUsuario EncontroUsuario[]
 }
 
-// model Local {
-//   id         Int        @id @default(autoincrement())
-//   nome       String
-//   capacidade Int
-//   endereco   String
-//   referencia String?
-//   Encontro   Encontro[]
-// }
+model Local {
+  id         Int        @id @default(autoincrement())
+  nome       String
+  capacidade Int
+  endereco   String
+  referencia String?
+  Encontro   Encontro[]
+}
 
-// model EncontroUsuario {
-//   id                    Int      @id @default(autoincrement())
-//   id_encontro           Int
-//   idCriadorPartida      Int
-//   idParticipantePartida Int?
-//   idCriador             Usuario  @relation("criadorPartida", fields: [idCriadorPartida], references: [id])
-//   idParticipante        Usuario? @relation("participantePartida", fields: [idParticipantePartida], references: [id])
-//   encontro              Encontro @relation(fields: [id_encontro], references: [id])
-// }
+model EncontroUsuario {
+  id                    Int      @id @default(autoincrement())
+  id_encontro           Int
+  idCriadorPartida      Int
+  idParticipantePartida Int?
+  // idCriador             Usuario  @relation("criadorPartida", fields: [idCriadorPartida], references: [id])
+  // idParticipante        Usuario? @relation("participantePartida", fields: [idParticipantePartida], references: [id])
+  encontro              Encontro @relation(fields: [id_encontro], references: [id])
+}
