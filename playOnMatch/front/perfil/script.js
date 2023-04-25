@@ -5,6 +5,8 @@ const btn3 = document.querySelector('.btnAmigos')
 const btnEditarPerfil = document.querySelector('.btnEditarPerfil')
 const btnAtualizarPerfil = document.querySelector('.btnAtualizarPerfil')
 const btnFechaModalAtualizarPerfil = document.querySelector('.btnFechaModalAtualizarPerfil')
+const btnFechaModalSobreMim = document.querySelector('.btnFechaModalSobreMim')
+const btnFechaModalAmigos = document.querySelector('.btnFechaModalAmigos')
 const partidas = document.querySelectorAll('.infoPartida')
 const btnFecharModal = document.querySelector('.btnFecharModal')
 
@@ -29,8 +31,6 @@ function mudarCorBotao() {
         btn2.style.background = '#00f63e'
     })
 }
-
-
 
 partidas.forEach((e) => {
     e.addEventListener('click', function () {
@@ -64,6 +64,30 @@ btnFecharModal.addEventListener('click', function (e) {
 
 btnAtualizarPerfil.addEventListener('click', function (e) {
     e.preventDefault();
+})
+
+btn2.addEventListener('click', function () {
+    let sobreMim = document.querySelector('.ModalSobreMim')
+
+    sobreMim.style.display = "flex"
+})
+
+btnFechaModalSobreMim.addEventListener('click', function (e) {
+    let sobreMim = document.querySelector('.ModalSobreMim')
+
+    sobreMim.style.display = "none"
+})
+
+btn3.addEventListener('click', function () {
+    let amigosModal = document.querySelector('.ModalAmigos')
+
+    amigosModal.style.display = "flex"
+})
+
+btnFechaModalAmigos.addEventListener('click', function (e) {
+    let amigosModal = document.querySelector('.ModalAmigos')
+
+    amigosModal.style.display = "none"
 })
 
 mudarCorBotao()
