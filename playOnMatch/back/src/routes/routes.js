@@ -17,7 +17,7 @@ router.delete('/excluirAmigo/:idLogado/:idAmigo', usuario.eliminateAmigo)
 
 const encontro = require('../controllers/controllerEncontro')
 
-router.post('/criarEncontro', encontro.create)
+router.post('/criarEncontro/:idCriadorPartida', encontro.create)
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)

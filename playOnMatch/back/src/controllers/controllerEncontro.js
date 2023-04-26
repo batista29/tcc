@@ -6,18 +6,29 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
     try {
+        const { idCriadorPartida } = req.params;
+        const { descricao, data, titulo, id_local, esporte } = req.body;
+
         let encontro = await prisma.encontro.create({
-            data: req.body
-        })
-        res.status(201).json(encontro).end()
-
+            data: {
+                descricao,
+                data,
+                titulo,
+                id_local: id_local,
+                esporte,
+                EncontroUsuario: {
+                    create: {
+                        idCriador: { connect: { id: Number(idCriadorPartida) } }
+                    }
+                }
+            }
+        });
+        res.status(200).send({ mensagem: encontro }).end()
     } catch (error) {
-        res.status(404).send({
-            menssagem: "erro"
-        }).end()
+        console.log(error);
+        res.status(404).send({ mensagem: error }).end();
     }
-
-}
+};
 
 const readAll = async (req, res) => {
     let encontro = await prisma.encontro.findMany({
@@ -90,8 +101,8 @@ const del = async (req, res) => {
 }
 
 
-const postEncontroUsuario = async (req, res) =>{
-    
+const postEncontroUsuario = async (req, res) => {
+
 }
 module.exports = {
     create,
