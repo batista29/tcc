@@ -30,7 +30,7 @@ const autVerPerfil = async (req, res, next) => {
         if (err != null) {
             res.status(404).json(err).end()
         } else {
-            if (resultado.menssagem === 'amigos' || data.id === Number(idUsuario)) {
+            if (resultado.mensagem === 'amigos' || data.id === Number(idUsuario)) {
                 next()
             } else {
                 res.status(403).send({ mensagem: 'Acesso não autorizado' });

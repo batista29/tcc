@@ -41,7 +41,7 @@ const readOne = async (req, res) => {
     if (usuario != null) {
         res.status(200).json(usuario).end()
     } else {
-        res.status(200).send({ menssagem: "usuario não encontrado" })
+        res.status(200).send({ mensagem: "usuario não encontrado" })
     }
 }
 
@@ -53,9 +53,9 @@ const update = async (req, res) => {
             },
             data: req.body
         })
-        res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi atualizado com sucesso` }).end()
+        res.status(200).send({ mensagem: `Usuario ${usuario.nome} foi atualizado com sucesso` }).end()
     } catch (error) {
-        res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
+        res.status(200).send({ mensagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
     }
 }
 
@@ -66,9 +66,9 @@ const eliminate = async (req, res) => {
                 id: Number(req.params.id)
             }
         })
-        res.status(200).send({ menssagem: `Usuario ${usuario.nome} foi excluido com sucesso` }).end()
+        res.status(200).send({ mensagem: `Usuario ${usuario.nome} foi excluido com sucesso` }).end()
     } catch (error) {
-        res.status(200).send({ menssagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
+        res.status(200).send({ mensagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
     }
 }
 
@@ -120,16 +120,16 @@ const login = async (req, res) => {
             jwt.sign(usuario, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
                 if (err == null) {
                     usuario["token"] = token
-                    res.status(200).send({ menssagem: "Seu login foi bem-sucedido", usuario }).end()
+                    res.status(200).send({ mensagem: "Seu login foi bem-sucedido", usuario }).end()
                 } else {
                     res.status(404).json(err.message).end()
                 }
             })
         } else {
-            res.status(404).send({ menssagem: "senha incorreta" }).end()
+            res.status(404).send({ mensagem: "senha incorreta" }).end()
         }
     } else {
-        res.status(404).send({ menssagem: "usuario não encontrado" }).end()
+        res.status(404).send({ mensagem: "usuario não encontrado" }).end()
     }
 }
 
@@ -142,7 +142,7 @@ const readListaAmigo = async (req, res) => {
     if (listaAmigos != null) {
         res.status(200).json(listaAmigos).end()
     } else {
-        res.status(200).send({ menssagem: "sem amigos" }).end()
+        res.status(200).send({ mensagem: "sem amigos" }).end()
 
     }
 }
@@ -180,16 +180,16 @@ const verificarAmigo = async (idLogado, idUsuario) => {
         })
         if (encontrado) {
             return {
-                menssagem: 'amigos'
+                mensagem: 'amigos'
             }
         } else {
             return {
-                menssagem: 'não são amigos'
+                mensagem: 'não são amigos'
             }
         }
     } else {
         return {
-            menssagem: 'ninguem na lista de amigos'
+            mensagem: 'ninguem na lista de amigos'
         }
     }
 }

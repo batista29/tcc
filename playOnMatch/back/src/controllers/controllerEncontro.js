@@ -26,30 +26,65 @@ const create = async (req, res) => {
     }
 };
 
-const novoParticipante = async (req, res) =>{
+const novoParticipante = async (req, res) => {
     const encontro = await prisma.encontro.findUnique({
-        where:{
+        where: {
             id: Number(req.params.idEncontro)
         },
-        select:{
-            id:true,
-            EncontroUsuario:{
-                select:{
-                    idCriadorPartida:true
+        select: {
+            id: true,
+            EncontroUsuario: {
+                select: {
+                    idCriadorPartida: true
                 }
             }
         }
     })
 
     const encontroUsuario = await prisma.encontroUsuario.create({
-        data:{
+        data: {
             id_encontro: Number(req.params.idEncontro),
-            idCriadorPartida:encontro.EncontroUsuario[0].idCriadorPartida,
+            idCriadorPartida: encontro.EncontroUsuario[0].idCriadorPartida,
             idParticipantePartida: Number(req.params.idNovoParticipante)
         }
     })
-    console.log()
     res.status(200).send(encontroUsuario).end()
+}
+
+const deletarParticipante = async (req, res) => {
+    try {
+        const encontro = await prisma.encontro.findUnique({
+            where: {
+                id: Number(req.params.idEncontro)
+            },
+            select: {
+                id: true,
+                EncontroUsuario: true
+            }
+        })
+        if (encontro) {
+            encontro.EncontroUsuario.forEach(async (e) => {
+                if (e.idParticipantePartida == req.params.idParticipante) {
+                    await prisma.encontroUsuario.delete({
+                        where: {
+                            id: e.id
+                        }
+                    })
+
+                    res.status(200).send(encontro).end()
+                } else {
+                    res.status(400).send({ mensagem: "vc não pode cancelar a ida de outro participante" }).end()
+                }
+            })
+        } else {
+            res.status(400).send({ mensagem: "encontro não existe" }).end()
+        }
+
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(error).end()
+    }
 }
 
 const readAll = async (req, res) => {
@@ -67,10 +102,10 @@ const readAll = async (req, res) => {
                     endereco: true
                 }
             },
-            EncontroUsuario:{
-                select:{
-                    idCriadorPartida:true,
-                    idParticipantePartida:true
+            EncontroUsuario: {
+                select: {
+                    idCriadorPartida: true,
+                    idParticipantePartida: true
                 }
             }
         }
@@ -88,7 +123,7 @@ const readOne = async (req, res) => {
         res.status(200).json(encontro).end()
     } else {
         res.status(200).send({
-            menssagem: "erro"
+            mensagem: "erro"
         }).end()
     }
 }
@@ -102,11 +137,12 @@ const update = async (req, res) => {
             data: req.body
         })
         res.status(200).send({
-            menssagem: `Encontro de id ${encontro.id} foi atualizado com sucesso`
+            mensagem: `Encontro de id ${encontro.id} foi atualizado com sucesso`
         }).end()
     } catch (error) {
+        console.log(error)
         res.status(200).send({
-            menssagem: `Erro ${error.code}, id do encontro não foi achado`
+            mensagem: `Erro ${error.code}, id do encontro não foi achado`
         }).end()
     }
 }
@@ -119,24 +155,25 @@ const del = async (req, res) => {
             }
         })
         res.status(200).send({
-            menssagem: `Encontro de id ${encontro.id} foi excluido com sucesso`
+            mensagem: `Encontro de id ${encontro.id} foi excluido com sucesso`
         }).end()
     } catch (err) {
         res.status(200).send({
-            menssagem: "erro"
+            mensagem: "erro"
         }).end()
     }
 }
 
 
-const postEncontroUsuario = async (req, res) => {
+// const postEncontroUsuario = async (req, res) => {
 
-}
+// }
 module.exports = {
     create,
     novoParticipante,
     readAll,
     readOne,
     del,
+    deletarParticipante,
     update
 }

@@ -19,6 +19,7 @@ const encontro = require('../controllers/controllerEncontro')
 
 router.post('/criarEncontro/:idCriadorPartida', encontro.create)
 router.post('/adicionarParticipante/:idEncontro/:idNovoParticipante', encontro.novoParticipante)
+router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.deletarParticipante)
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)

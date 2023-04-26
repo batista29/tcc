@@ -11,7 +11,7 @@ const create = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(404).send({ menssagem: error}).end()
+        res.status(404).send({ mensagem: error}).end()
     }
 
 }
@@ -31,7 +31,7 @@ const readOne = async (req, res) => {
     if (local != null) {
         res.status(200).json(local).end()
     } else {
-        res.status(200).send({ menssagem: "erro" }).end()
+        res.status(200).send({ mensagem: "erro" }).end()
     }
 }
 
@@ -44,9 +44,9 @@ const update = async (req, res) => {
             data: req.body
         })
 
-        res.status(200).send({ menssagem: `local de id ${local.id} foi atualizado com sucesso` }).end()
+        res.status(200).send({ mensagem: `local de id ${local.id} foi atualizado com sucesso` }).end()
     } catch (error) {
-        res.status(200).send({ menssagem: `Erro ${error.code}, id do local não foi achado` }).end()
+        res.status(200).send({ mensagem: `Erro ${error.code}, id do local não foi achado` }).end()
     }
 
 }
@@ -58,9 +58,9 @@ const del = async (req, res) => {
                 id: Number(req.params.id)
             }
         })
-        res.status(200).send({ menssagem: `local de id ${local.id} foi excluido com sucesso` }).end()
+        res.status(200).send({ mensagem: `local de id ${local.id} foi excluido com sucesso` }).end()
     } catch (err) {
-        res.status(200).send({ menssagem: "erro" }).end()
+        res.status(200).send({ mensagem: "erro" }).end()
     }
 }
 
