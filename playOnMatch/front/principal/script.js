@@ -11,27 +11,32 @@ function carregar() {
         .then(response => response.json())
         .then(res => {
             res.forEach(dados => {
+                console.log(dados.id)
+
+                dados.EncontroUsuario.forEach((e)=>{
+                })
 
                 let tabela = readInfo.cloneNode(true)
                 tabela.classList.remove("model")
-                tabela.querySelector('.descricao').innerHTML = 'descricao: ' + dados.descricao
 
                 var date = new Date(dados.data);
+
+                var horas = dados.data.split(' ')
+                console.log(horas)
                 let dataFormatada = date.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
                 });
 
+                tabela.querySelector('.idLocal').innerHTML = "#"+ dados.id
+                tabela.querySelector('.titulo').innerHTML = dados.titulo
 
-                tabela.querySelector('.data').innerHTML = 'data: ' + dataFormatada
-                tabela.querySelector('.titulo').innerHTML = 'titulo: ' + dados.titulo
-                tabela.querySelector('.nomeLocal').innerHTML = 'nomeLocal: ' + dados.local.nome
-                tabela.querySelector('.capacidadeLocal').innerHTML = 'capacidadeLocal: ' + dados.local.capacidade
-                tabela.querySelector('.cepLocal').innerHTML = 'endereço: ' + dados.local.endereco
+                tabela.querySelector('.data').innerHTML = dataFormatada + "-" 
+                tabela.querySelector('.endereco').innerHTML = dados.local.endereco
                 read.appendChild(tabela)
             });
 
         })
-        .catch(err => console.error(err));
+        // .catch(err => console.error(err));
 }
 
 function adicionarEncontro() {
