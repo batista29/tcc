@@ -6,29 +6,51 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
     try {
-        const { idCriadorPartida } = req.params;
-        const { descricao, data, titulo, id_local, esporte } = req.body;
 
-        let encontro = await prisma.encontro.create({
-            data: {
-                descricao,
-                data,
-                titulo,
-                id_local: id_local,
-                esporte,
-                EncontroUsuario: {
-                    create: {
-                        idCriador: { connect: { id: Number(idCriadorPartida) } }
-                    }
-                }
-            }
+        const encontro = await prisma.encontro.create({
+            data: req.body
         });
-        res.status(200).send({ mensagem: encontro }).end()
+
+        const encontroUsuario = await prisma.encontroUsuario.create({
+            data: {
+                id_encontro: encontro.id,
+                idCriadorPartida: Number(req.params.idCriadorPartida),
+                idParticipantePartida: Number(req.params.idCriadorPartida)
+            },
+        });
+
+        res.status(200).send({ mensagem: encontroUsuario }).end()
     } catch (error) {
         console.log(error);
-        res.status(404).send({ mensagem: error }).end();
+        res.status(500).send({ mensagem: error }).end();
     }
 };
+
+const novoParticipante = async (req, res) =>{
+    const encontro = await prisma.encontro.findUnique({
+        where:{
+            id: Number(req.params.idEncontro)
+        },
+        select:{
+            id:true,
+            EncontroUsuario:{
+                select:{
+                    idCriadorPartida:true
+                }
+            }
+        }
+    })
+
+    const encontroUsuario = await prisma.encontroUsuario.create({
+        data:{
+            id_encontro: Number(req.params.idEncontro),
+            idCriadorPartida:encontro.EncontroUsuario[0].idCriadorPartida,
+            idParticipantePartida: Number(req.params.idNovoParticipante)
+        }
+    })
+    console.log()
+    res.status(200).send(encontroUsuario).end()
+}
 
 const readAll = async (req, res) => {
     let encontro = await prisma.encontro.findMany({
@@ -43,6 +65,12 @@ const readAll = async (req, res) => {
                     nome: true,
                     capacidade: true,
                     endereco: true
+                }
+            },
+            EncontroUsuario:{
+                select:{
+                    idCriadorPartida:true,
+                    idParticipantePartida:true
                 }
             }
         }
@@ -106,6 +134,7 @@ const postEncontroUsuario = async (req, res) => {
 }
 module.exports = {
     create,
+    novoParticipante,
     readAll,
     readOne,
     del,

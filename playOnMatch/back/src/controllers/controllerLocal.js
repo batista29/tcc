@@ -10,7 +10,8 @@ const create = async (req, res) => {
         res.status(201).json(local).end()
 
     } catch (error) {
-        res.status(404).send({ menssagem: "erro" }).end()
+        console.log(error)
+        res.status(404).send({ menssagem: error}).end()
     }
 
 }
