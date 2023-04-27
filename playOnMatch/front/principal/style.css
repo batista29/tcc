@@ -52,14 +52,15 @@ body::-webkit-scrollbar-thumb {
 }
 
 .read {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     color: white;
     width: 80%;
     margin-left: 3vh;
-    gap: 10px;
+    gap: 20px;
     padding: 30px;
     margin-top: 5vh;
+    flex-wrap: wrap;
 }
 
 .friends {
@@ -86,7 +87,6 @@ body::-webkit-scrollbar-thumb {
 
 .readInfo {
     background-color: var(--backgroundLogin);
-    flex-wrap: wrap;
     border-radius: 25px;
     border: 2px solid rgb(130, 179, 212);
     height: 250px;

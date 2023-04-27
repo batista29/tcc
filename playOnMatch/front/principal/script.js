@@ -93,33 +93,36 @@ function fecharModal() {
     modalAparecer.classList.remove("modal")
 }
 
-
-
-
 filterPartida.addEventListener('input', filterCards)
 
 function filterCards() {
 
     setTimeout(() => {
         let partidas = document.querySelectorAll('.readInfo');
-        
-        partidas.forEach((e)=>{
-            if(!e.children[0].children[1].children[0].innerHTML.slice(1) == ''){
+
+        partidas.forEach((e) => {
+            if (!e.children[0].children[1].children[0].innerHTML.slice(1) == '') {
+
                 let id = e.children[0].children[1].children[0].innerHTML.slice(1)
+                let titulo = e.children[0].children[1].children[1].innerHTML
+
+                let dado = {
+                    id: id,
+                    titulo: titulo
+                }
+
+                titulo = titulo.toLowerCase()
+
                 let filter = filterPartida.value.toLowerCase()
-                if(!id.includes(filter)){
+
+                if (!dado.id.includes(filter) || !dado.titulo.includes(filter)) {
                     e.style.display = 'none'
-                }else{
+                } else {
                     e.style.display = "block"
                 }
-            }else{
+            } else {
                 e.style.display = 'none'
             }
-           
         })
-      }, 10);
-
-
-
-  
+    }, 10);
 }
