@@ -10,6 +10,7 @@ router.post('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo',middleware.solici
 router.get('/listarUsuarios', usuario.read)
 router.get('/encontrarUsuario', usuario.readOne)
 router.get('/perfilUsuario/:idLogado/:idUsuario', middleware.autVerPerfil,usuario.readPerfil)
+router.get('/perfil/:idUsuario',usuario.readPerfil)
 router.get('/lista/:idUsuario',usuario.listarAmigos)
 router.put('/atualizarUsuario/:id', middleware.autorizacao, usuario.update)
 router.delete('/excluirUsuario/:id', usuario.eliminate)

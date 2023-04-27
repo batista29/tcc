@@ -39,11 +39,18 @@ header {
 .infoUser {
     height: 35vh;
     width: 60%;
+    display: flex;
+    flex-direction: column;
     margin-top: 5%;
     margin-bottom: 10%;
+    position: relative;
+}
+
+.dadoss {
+    height: 85%;
+    width: 100%;
     display: grid;
-    justify-items: center;
-    align-items: center;
+    justify-items:center
 }
 
 .nomeUsuario {
@@ -70,35 +77,21 @@ header {
     grid-area: relacionamento;
 }
 
-.btnHistorico {
-    grid-area: btnHistorico;
-    background-color: blue;
-}
-
-.btnSobre {
-    grid-area: btnSobre;
-}
-
-.btnAmigos {
-    grid-area: btnAmigos;
-}
-
 .cidade {
     grid-area: cidade;
 }
 
+.buttons{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
 .btnEditarPerfil {
-    grid-area: btnEditarPerfil;
-}
-
-.buttons {
-    grid-area: buttons;
-}
-
-.dados {
-    /* height: 50px;
-        width: 200px; */
-    font-size: 17px;
+    position: absolute;
+    right: 0;
 }
 
 .btn {
@@ -115,9 +108,8 @@ header {
 
 .grid-template-areas-5 {
     grid-template-areas:
-        "nomeUsuario  amigos .  dataNascimento"
+        "nomeUsuario  amigos . dataNascimento"
         "partidasJogadas esporteFavorito cidade relacionamento"
-        "buttons . . btnEditarPerfil";
 }
 
 
@@ -270,4 +262,8 @@ img {
     background-color: #012340;
     color: white;
     cursor: pointer;
+}
+
+.model {
+    display: none;
 }

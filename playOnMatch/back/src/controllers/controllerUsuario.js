@@ -73,8 +73,6 @@ const eliminate = async (req, res) => {
 }
 
 const readPerfil = async (req, res) => {
-
-    console.log()
     try {
         let usuario = await prisma.usuario.findUnique({
             where: {
@@ -83,26 +81,18 @@ const readPerfil = async (req, res) => {
             select: {
                 id: true,
                 nascimento: true,
-                nome: true
-                // EncontroUsuario: {
-                //     select: {
-                //         encontro: {
-                //             select: {
-                //                 data: true,
-                //                 descricao: true,
-                //                 local: {
-                //                     select: {
-                //                         nome: true
-                //                     }
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
+                nome: true,
+                criadorListaAmigo: true,
+                participante: {
+                    select: {
+                        encontro: true,
+                    }
+                },
             }
         })
         res.status(200).send(usuario).end()
     } catch (error) {
+        console.log(error)
         res.status(400).send({ error })
     }
 }
@@ -249,52 +239,52 @@ const listarAmigos = async (req, res) => {
 
 const eliminateAmigo = async (req, res) => {
     try {
-      const logado = await prisma.usuario.findUnique({
-        where: {
-          id: Number(req.params.idLogado),
-        },
-        select: {
-          criadorListaAmigo: true,
-        },
-      })
-  
-      if (logado && logado.criadorListaAmigo) {
-        let amigoEncontrado = false;
-  
-        logado.criadorListaAmigo.forEach(async (e) => {
-          if (e.idAmigo === Number(req.params.idAmigo)) {
-            // Exclui o registro correspondente na sua tabela de Lista_amigos
-            await prisma.Lista_amigos.deleteMany({
-              where: {
-                id: e.id,
-              },
-            })
-  
-            // Exclui o registro correspondente na tabela de Lista_amigos do outro usuário
-            await prisma.Lista_amigos.deleteMany({
-              where: {
-                idAmigo: Number(req.params.idLogado),
-                idCriador: e.idAmigo,
-              },
-            })
-  
-            amigoEncontrado = true;
-          }
+        const logado = await prisma.usuario.findUnique({
+            where: {
+                id: Number(req.params.idLogado),
+            },
+            select: {
+                criadorListaAmigo: true,
+            },
         })
-  
-        if (amigoEncontrado) {
-          res.status(200).send({ mensagem: 'amigo deletado com sucesso' })
+
+        if (logado && logado.criadorListaAmigo) {
+            let amigoEncontrado = false;
+
+            logado.criadorListaAmigo.forEach(async (e) => {
+                if (e.idAmigo === Number(req.params.idAmigo)) {
+                    // Exclui o registro correspondente na sua tabela de Lista_amigos
+                    await prisma.Lista_amigos.deleteMany({
+                        where: {
+                            id: e.id,
+                        },
+                    })
+
+                    // Exclui o registro correspondente na tabela de Lista_amigos do outro usuário
+                    await prisma.Lista_amigos.deleteMany({
+                        where: {
+                            idAmigo: Number(req.params.idLogado),
+                            idCriador: e.idAmigo,
+                        },
+                    })
+
+                    amigoEncontrado = true;
+                }
+            })
+
+            if (amigoEncontrado) {
+                res.status(200).send({ mensagem: 'amigo deletado com sucesso' })
+            } else {
+                res.status(404).send({ mensagem: "amigo não encontrado" })
+            }
         } else {
-          res.status(404).send({ mensagem: "amigo não encontrado" })
+            res.status(404).send({ mensagem: "Usuario não encontrado ou lista de amigos vazia" })
         }
-      } else {
-        res.status(404).send({ mensagem: "Usuario não encontrado ou lista de amigos vazia" })
-      }
     } catch (error) {
-      console.log(error)
-      res.status(500).send({ mensagem: "ocorreu um erro ao deletar o amigo" })
+        console.log(error)
+        res.status(500).send({ mensagem: "ocorreu um erro ao deletar o amigo" })
     }
-  }  
+}
 
 module.exports = {
     create,
