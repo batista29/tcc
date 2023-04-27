@@ -51,19 +51,11 @@ body::-webkit-scrollbar-thumb {
     /* roundness of the scroll thumb */
 }
 
-main {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-
 .read {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     color: white;
     width: 80%;
-    height: 20vh;
     margin-left: 3vh;
     gap: 10px;
     padding: 30px;
@@ -97,17 +89,20 @@ main {
     flex-wrap: wrap;
     border-radius: 25px;
     border: 2px solid rgb(130, 179, 212);
-    height: 210px;
+    height: 250px;
     width: 350px;
     font-size: 20px;
+    transition: transform 1s;
 }
 
 .readLocal {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    text-align: center;
-    align-items: center; */
+}
+
+.readInfo:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .titulos {
@@ -115,17 +110,22 @@ main {
     text-align: center;
 }
 
-.idLocal{
+.idLocal {
     position: absolute;
     padding-left: 12px;
 }
 
-.titulo {
+.titulo {}
+
+.imgEsporte {
+    height: 50%;
+    margin-top: 10px;
+    text-align: center;
 }
 
-.imgEsporte{
-    margin-top: 30px;
-    text-align: center;
+.iconeEsporte {
+    height: 80px;
+    width: 80px;
 }
 
 .infoData {
@@ -203,7 +203,34 @@ main {
     border-left: 1px solid rgb(0, 0, 0);
 }
 
-.iconeEsporte{
-    height: 100px;
-    width: 100px;
+.filtro{
+    text-align: center;
+    width: 88%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:20px ;
+    border-radius: 25px;
+    padding-right:30px ;
+}
+
+.filtroPartidas{
+    background-color: transparent;
+    height: 40px;
+    width: 500px;
+    padding: 30px 60px 30px 30px;
+    border: none;
+    background-color: #025959;
+    border-radius:  30px;
+    color:white;
+    font-size: 22px;
+}
+
+.iconeBusca {
+    height: 35px;
+    width: 35px;
+}
+
+img.iconeBusca {
+    margin-left: -50px;
 }

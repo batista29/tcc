@@ -2,7 +2,10 @@ const read = document.querySelector('.read');
 const readInfo = document.querySelector('.readInfo');
 const readLocal = document.querySelector('.readLocal');
 
+const filterPartida = document.querySelector('.filtroPartidas')
+
 function carregar() {
+
     const options = {
         method: 'GET'
     };
@@ -11,33 +14,33 @@ function carregar() {
         .then(response => response.json())
         .then(res => {
             res.forEach(dados => {
-                console.log(dados.id)
-
-                dados.EncontroUsuario.forEach((e)=>{
-                })
 
                 let tabela = readInfo.cloneNode(true)
+
+                // tabela.classList.add("readInfo2")
                 tabela.classList.remove("model")
 
                 var date = new Date(dados.data);
 
-                var horas = dados.data.split(' ')
-                console.log(horas)
+                var horas = dados.data.split('T')[1].split('.')[0]
+
                 let dataFormatada = date.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
                 });
 
-                tabela.querySelector('.idLocal').innerHTML = "#"+ dados.id
+                tabela.querySelector('.idLocal').innerHTML = "#" + dados.id
                 tabela.querySelector('.titulo').innerHTML = dados.titulo
 
-                tabela.querySelector('.data').innerHTML = dataFormatada + "-" 
+                tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
                 tabela.querySelector('.endereco').innerHTML = dados.local.endereco
+
+
                 read.appendChild(tabela)
             });
-
         })
-        // .catch(err => console.error(err));
+        .catch(err => console.error(err));
 }
+
 
 function adicionarEncontro() {
 
@@ -56,8 +59,6 @@ function adicionarEncontro() {
         id_local: Number(id_localSubmit)
     }
 
-    console.log(dados)
-
     const options = {
         method: 'POST',
         headers: {
@@ -72,13 +73,13 @@ function adicionarEncontro() {
         .catch(err => console.error(err));
 
 
-        // criar encontro usuario
+    // criar encontro usuario
 
-        // const options2 ={
-        //     idEncontro:
-        //     idCriador:
-        //     idParticipante:
-        // }
+    // const options2 ={
+    //     idEncontro:
+    //     idCriador:
+    //     idParticipante:
+    // }
 }
 
 
@@ -90,4 +91,35 @@ function abrirModal() {
 function fecharModal() {
     let modalAparecer = document.querySelector(".readInferior");
     modalAparecer.classList.remove("modal")
+}
+
+
+
+
+filterPartida.addEventListener('input', filterCards)
+
+function filterCards() {
+
+    setTimeout(() => {
+        let partidas = document.querySelectorAll('.readInfo');
+        
+        partidas.forEach((e)=>{
+            if(!e.children[0].children[1].children[0].innerHTML.slice(1) == ''){
+                let id = e.children[0].children[1].children[0].innerHTML.slice(1)
+                let filter = filterPartida.value.toLowerCase()
+                if(!id.includes(filter)){
+                    e.style.display = 'none'
+                }else{
+                    e.style.display = "block"
+                }
+            }else{
+                e.style.display = 'none'
+            }
+           
+        })
+      }, 10);
+
+
+
+  
 }
