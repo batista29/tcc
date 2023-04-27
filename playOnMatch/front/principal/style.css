@@ -115,7 +115,7 @@ body::-webkit-scrollbar-thumb {
     padding-left: 12px;
 }
 
-.titulo {}
+/* .titulo {} */
 
 .imgEsporte {
     height: 50%;
@@ -209,16 +209,17 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top:20px ;
+    margin-top:20px;
     border-radius: 25px;
-    padding-right:30px ;
+    padding-right:30px;
 }
 
-.filtroPartidas{
+.filtroTituloPartidas, .filtroDatePartidas, .filtroHoraPartidas{
     background-color: transparent;
-    height: 40px;
-    width: 500px;
-    padding: 30px 60px 30px 30px;
+    height: 25px;
+    width: 350px;
+    margin: 0vh 0vh 0vh 3vh;
+    padding: 30px 60px 30px 60px;
     border: none;
     background-color: #025959;
     border-radius:  30px;

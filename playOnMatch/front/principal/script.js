@@ -2,7 +2,8 @@ const read = document.querySelector('.read');
 const readInfo = document.querySelector('.readInfo');
 const readLocal = document.querySelector('.readLocal');
 
-const filterPartida = document.querySelector('.filtroPartidas')
+const filtroTituloPartidas = document.querySelector('.filtroTituloPartidas')
+const filtroDatePartidas = document.querySelector('.filtroDatePartidas')
 
 function carregar() {
 
@@ -20,9 +21,9 @@ function carregar() {
                 // tabela.classList.add("readInfo2")
                 tabela.classList.remove("model")
 
-                var date = new Date(dados.data);
+                let date = new Date(dados.data);
 
-                var horas = dados.data.split('T')[1].split('.')[0]
+                let horas = dados.data.split('T')[1].split('.')[0]
 
                 let dataFormatada = date.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
@@ -93,9 +94,9 @@ function fecharModal() {
     modalAparecer.classList.remove("modal")
 }
 
-filterPartida.addEventListener('input', filterCards)
+filtroTituloPartidas.addEventListener('input', filterCardsTitulo)
 
-function filterCards() {
+function filterCardsTitulo() {
 
     setTimeout(() => {
         let partidas = document.querySelectorAll('.readInfo');
@@ -103,19 +104,12 @@ function filterCards() {
         partidas.forEach((e) => {
             if (!e.children[0].children[1].children[0].innerHTML.slice(1) == '') {
 
-                let id = e.children[0].children[1].children[0].innerHTML.slice(1)
                 let titulo = e.children[0].children[1].children[1].innerHTML
+                console.log(titulo)
 
-                let dado = {
-                    id: id,
-                    titulo: titulo
-                }
+                let filter = filtroTituloPartidas.value.toLowerCase()
 
-                titulo = titulo.toLowerCase()
-
-                let filter = filterPartida.value.toLowerCase()
-
-                if (!dado.id.includes(filter) || !dado.titulo.includes(filter)) {
+                if (!titulo.includes(filter)) {
                     e.style.display = 'none'
                 } else {
                     e.style.display = "block"
@@ -123,6 +117,48 @@ function filterCards() {
             } else {
                 e.style.display = 'none'
             }
+
+        })
+    }, 10);
+}
+
+filtroDatePartidas.addEventListener('input', filterCardsData)
+
+function filterCardsData() {
+
+    let data = filtroDatePartidas.value
+
+    let date = new Date(data)
+
+    let horas = data.split('T')[1].split('.')[0]+":00"
+
+
+    let dataFormatada = date.toLocaleDateString("pt-BR", {
+        timeZone: "UTC",
+    });
+
+    let dataHora = dataFormatada+"-"+horas
+
+    
+    console.log(dataHora)
+
+    setTimeout(() => {
+        let partidas = document.querySelectorAll('.readInfo');
+
+        partidas.forEach((e) => {
+            if (!e.children[0].children[2].children[1] == '') {
+
+                let filter = filtroDatePartidas.value.toLowerCase()
+
+                if (!dataHora.includes(filter)) {
+                    e.style.display = 'none'
+                } else {
+                    e.style.display = "block"
+                }
+            } else {
+                e.style.display = 'none'
+            }
+
         })
     }, 10);
 }
