@@ -10,6 +10,28 @@ const btnFechaModalAmigos = document.querySelector('.btnFechaModalAmigos')
 const partidas = document.querySelectorAll('.infoPartida')
 const btnFecharModal = document.querySelector('.btnFecharModal')
 
+const main = document.querySelector('.infoUser')
+const infoUser = document.querySelector('.dadoss')
+
+function listarPartidas() {
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/perfil/2', options)
+        .then(response => response.json())
+        .then(res => {
+            let usuario = infoUser.cloneNode(true)
+            console.log()
+
+            usuario.classList.remove("model")
+
+            usuario.querySelector('.nomeUsuario').innerHTML = res.nome
+            usuario.querySelector('.dataNascimento').innerHTML = res.nascimento.split('T')[0]
+
+            main.appendChild(usuario)
+        })
+}
+
 
 function mudarCorBotao() {
 
@@ -91,3 +113,4 @@ btnFechaModalAmigos.addEventListener('click', function (e) {
 })
 
 mudarCorBotao()
+listarPartidas()
