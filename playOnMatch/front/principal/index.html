@@ -19,7 +19,7 @@
         <div class="filtro">
             <input class="filtroTituloPartidas" type="text">
             <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
-            <input class="filtroDatePartidas" type="datetime-local">
+            <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)" pattern="\d{2}/\d{2}/\d{4}" placeholder="dd/mm/yyyy" maxlength="10">
         </div>
 
         <div class="read">

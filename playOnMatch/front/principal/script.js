@@ -122,35 +122,28 @@ function filterCardsTitulo() {
     }, 10);
 }
 
-filtroDatePartidas.addEventListener('input', filterCardsData)
+// filtroDatePartidas.addEventListener('input', filterCardsData)
 
-function filterCardsData() {
+function formatarData(campo) {
+    // Remove todos os caracteres não numéricos do campo de entrada
+    const valorSemMascara = campo.value.replace(/\D/g, '');
 
-    let data = filtroDatePartidas.value
+    // Adiciona a máscara de data ao campo de entrada
+    const valorFormatado = valorSemMascara.replace(/^(\d{2})(\d)/g, '$1/$2').replace(/^(\d{2}\/\d{2})(\d)/g, '$1/$2');
 
-    let date = new Date(data)
-
-    let horas = data.split('T')[1].split('.')[0]+":00"
-
-
-    let dataFormatada = date.toLocaleDateString("pt-BR", {
-        timeZone: "UTC",
-    });
-
-    let dataHora = dataFormatada+"-"+horas
-
-    
-    console.log(dataHora)
+    // Define o valor formatado do campo de entrada
+    campo.value = valorFormatado;
 
     setTimeout(() => {
         let partidas = document.querySelectorAll('.readInfo');
 
         partidas.forEach((e) => {
-            if (!e.children[0].children[2].children[1] == '') {
+            if (!e.children[0].children[1].children[0].innerHTML.slice(1) == '') {
 
-                let filter = filtroDatePartidas.value.toLowerCase()
+                let dataHTML = e.children[0].children[2].children[1].innerHTML
+                // let filter = dataHora
 
-                if (!dataHora.includes(filter)) {
+                if (!dataHTML.includes(campo.value)) {
                     e.style.display = 'none'
                 } else {
                     e.style.display = "block"
