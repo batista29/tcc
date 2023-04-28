@@ -69,8 +69,8 @@ header {
     grid-area: amigos;
 }
 
-.esporteFavorito {
-    grid-area: esporteFavorito;
+.esporte {
+    grid-area: esporte;
 }
 
 .relacionamento {
@@ -87,11 +87,13 @@ header {
     gap: 10px;
     position: absolute;
     bottom: 0;
+    margin: 0 10px 20px 10px;
 }
 
 .btnEditarPerfil {
     position: absolute;
     right: 0;
+    margin-right: 30px;
 }
 
 .btn {
@@ -109,7 +111,7 @@ header {
 .grid-template-areas-5 {
     grid-template-areas:
         "nomeUsuario  amigos . dataNascimento"
-        "partidasJogadas esporteFavorito cidade relacionamento"
+        "partidasJogadas esporte cidade relacionamento"
 }
 
 

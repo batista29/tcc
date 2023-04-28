@@ -21,12 +21,14 @@ function listarPartidas() {
         .then(response => response.json())
         .then(res => {
             let usuario = infoUser.cloneNode(true)
-            console.log()
 
             usuario.classList.remove("model")
 
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
             usuario.querySelector('.dataNascimento').innerHTML = res.nascimento.split('T')[0]
+            usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Paritdas Jogadas"
+            usuario.querySelector('.amigos').innerHTML = res.criadorListaAmigo.length + " Amigos"
+            console.log(res)
 
             main.appendChild(usuario)
         })
