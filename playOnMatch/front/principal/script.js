@@ -105,7 +105,7 @@ function filterCardsTitulo() {
             if (!e.children[0].children[1].children[0].innerHTML.slice(1) == '') {
 
                 let titulo = e.children[0].children[1].children[1].innerHTML
-                console.log(titulo)
+                titulo = titulo.toLowerCase()
 
                 let filter = filtroTituloPartidas.value.toLowerCase()
 

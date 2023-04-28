@@ -129,22 +129,22 @@ function loginUsuario() {
                 return response.json()
             })
             .then(res => {
-                console.log(res)
-                if (res.menssagem === 'usuario não encontrado') {
+                console.log(res.mensagem)
+                if (res.mensagem === 'usuario não encontrado') {
                     erroL.style.color = "black"
-                    erroL.innerHTML = res.menssagem
+                    erroL.innerHTML = res.mensagem
                 }
-                if (res.menssagem === 'senha incorreta') {
+                if (res.mensagem === 'senha incorreta') {
                     erroL.style.color = "black"
-                    erroL.innerHTML = res.menssagem
+                    erroL.innerHTML = res.mensagem
                 }
-                if (res.menssagem === 'Seu login foi bem-sucedido') {
+                if (res.mensagem === 'Seu login foi bem-sucedido') {
                     erroL.style.color = "#00f63e"
                     erroL.innerHTML = 'Seja bem-vindo!'
                     localStorage.setItem("usuario",JSON.stringify({'id': res.usuario.id, 'token': res.usuario.token}))
                     setTimeout(function () {
                         window.location.href = '../principal/index.html'
-                    }, 500);
+                    }, 700);
                 }
             })
     }

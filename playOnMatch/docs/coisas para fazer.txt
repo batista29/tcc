@@ -1,0 +1,26 @@
+tela home
+
+modal das partidas
+terminar cadastro
+friends 
+encaminhar para o perfil 
+puxar info user 
+seta para subir para cima
+poder encerrar encontro
+editar encontro
+convidar amigos para a partida
+poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse
+dps do login abrir modal para obter localização
+e fazer notificação de permissão para obter localização
+
+tela perfil
+
+terminar de puxar dados user
+editar perfil
+puxar dados partida
+modal para mais info sobre a partida
+colocar estatisticas do jogos
+modal para poder acessar perfil ou adicionar amigo pelos dados da partida
+
+mobile: tudo
+
