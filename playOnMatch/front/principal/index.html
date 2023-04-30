@@ -19,12 +19,14 @@
         <div class="filtro">
             <input class="filtroTituloPartidas" type="text">
             <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
-            <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)" pattern="\d{2}/\d{2}/\d{4}" placeholder="dd/mm/yyyy" maxlength="10">
+            <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)"
+                pattern="\d{2}/\d{2}/\d{4}" placeholder="dd/mm/yyyy" maxlength="10">
         </div>
 
         <div class="read">
-            <div class="readInfo model">
+            <div onclick="abrirModalPartida()" class="readInfo model">
                 <div class="readLocal">
+                    <button class="encerrarEncontro model">x</button>
                     <div class="imgEsporte">
                         <img class="iconeEsporte" src="../../docs/imgs/variante-de-bola-de-basquete.png" alt="">
                     </div>
@@ -38,27 +40,52 @@
                     </div>
                 </div>
             </div>
+            <button id="btnTopo" class="buttonTop">+++</button>
         </div>
         <div class="friends">
-            <div class="perfil">
-                <h2>Pronomes: Das/Paty</h2>
-                <h2>Idade: 17y</h2>
+            <div class="perfil model">
+                <p class="idUser">Id</p>
+                <p class="nomeUser">Nome:</p>
             </div>
-            <div>
+            <div class="allFriends">
                 <h2>FRIENDS</h2>
-                <div class="friends_info"></div>
+                <div class="friends_info model">
+                    <p class="idAmigo">id</p>
+                    <p class="nomeAmigo">nome</p>
+                </div>
             </div>
-
         </div>
     </main>
+    <div class="modalPartidas model">
+        <div class="infoPartida">
+            <button onclick="fecharModalPartida()">x</button>
+        </div>
+    </div>
     <div class="readInferior">
         <div class="modal">
             <div class="inputsCadastro">
                 <button class="sair" onclick="fecharModal()">X</button>
-                <input type="text" id="descricaoSubmit" placeholder="digite a descricao...">
-                <input type="date" id="dataSubmit" placeholder="digite a data...">
-                <input type="text" id="tituloSubmit" placeholder="digite o titulo...">
-                <input type="number" id="id_localSubmit" placeholder="digite o id do local">
+                <form class="formularioCadastroPartida" action="">
+                    <label for="">titulo</label>
+                    <input type="text">
+                    <label for="">descrição</label>
+                    <input type="text">
+                    <label for="">data</label>
+                    <input type="date">
+                    <label for="">hora</label>
+                    <input type="time">
+                    <label for="">esporte</label>
+                    <input type="text">
+                    <label for="">Endereço</label>
+                    <input type="text" id="consulta" name="consulta" list="opcoes">
+                    <datalist id="opcoes">
+                        <option value="SELECT * FROM tabela1"></option>
+                        <option value="SELECT * FROM tabela2"></option>
+                        <option value="SELECT * FROM tabela3"></option>
+                        <option value="SELECT * FROM tabela4"></option>
+                        <option value="SELECT * FROM tabela5"></option>
+                    </datalist>
+                </form>
                 <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
             </div>
         </div>

@@ -5,6 +5,9 @@ const readLocal = document.querySelector('.readLocal');
 const filtroTituloPartidas = document.querySelector('.filtroTituloPartidas')
 const filtroDatePartidas = document.querySelector('.filtroDatePartidas')
 
+const user = JSON.parse(localStorage.getItem('usuario'))
+
+
 function carregar() {
 
     const options = {
@@ -18,7 +21,6 @@ function carregar() {
 
                 let tabela = readInfo.cloneNode(true)
 
-                // tabela.classList.add("readInfo2")
                 tabela.classList.remove("model")
 
                 let date = new Date(dados.data);
@@ -35,7 +37,17 @@ function carregar() {
                 tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
                 tabela.querySelector('.endereco').innerHTML = dados.local.endereco
 
-
+                dados.EncontroUsuario.forEach((e) => {
+                    let { id } = user
+                    if (e.idCriadorPartida == id) {
+                        let encerrarEncontro = tabela.querySelector('.encerrarEncontro')
+                        encerrarEncontro.classList.remove("model")
+                    } else {
+                        let encerrarEncontro = tabela.querySelector('.encerrarEncontro')
+                        encerrarEncontro.classList.add("model")
+                    }
+                })
+                
                 read.appendChild(tabela)
             });
         })
@@ -62,13 +74,11 @@ function adicionarEncontro() {
 
     const options = {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
+        headers: { 'Content-Type': 'application/json' },
+        body: '{"descricao":"","data":"","titulo":"","id_local":,"esporte":""}'
     };
 
-    fetch('http://localhost:3000/criarEncontro', options)
+    fetch('http://localhost:3000/criarEncontro/3', options)
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
@@ -83,7 +93,6 @@ function adicionarEncontro() {
     // }
 }
 
-
 function abrirModal() {
     let modalAparecer = document.querySelector(".readInferior");
     modalAparecer.classList.add("modal")
@@ -92,6 +101,16 @@ function abrirModal() {
 function fecharModal() {
     let modalAparecer = document.querySelector(".readInferior");
     modalAparecer.classList.remove("modal")
+}
+
+function abrirModalPartida() {
+    let partida = document.querySelector('.modalPartidas')
+    partida.classList.remove("model")
+}
+
+function fecharModalPartida() {
+    let partida = document.querySelector('.modalPartidas')
+    partida.classList.add("model")
 }
 
 filtroTituloPartidas.addEventListener('input', filterCardsTitulo)
@@ -151,7 +170,66 @@ function formatarData(campo) {
             } else {
                 e.style.display = 'none'
             }
-
         })
     }, 10);
 }
+const perfil = document.querySelector('.perfil')
+
+perfil.addEventListener('click', function () {
+    window.location.href = "../perfil/index.html"
+})
+
+function usuario() {
+    let { id } = user
+
+    const options = { method: 'GET' };
+
+    fetch(`http://localhost:3000/listarUsuario/${id}`, options)
+        .then(response => response.json())
+        .then(res => {
+
+            perfil.classList.remove("model")
+
+            perfil.querySelector(".idUser").innerHTML = "#" + res.usuario.id
+            perfil.querySelector(".nomeUser").innerText = res.usuario.nome
+        })
+}
+
+function listaAmigos() {
+
+    setTimeout(() => {
+        const options = { method: 'GET' };
+
+        let { id } = user
+
+        fetch(`http://localhost:3000/lista/${id}`, options)
+            .then(response => response.json())
+            .then(res => {
+                let allFriends = document.querySelector('.allFriends')
+                let friendsInfo = document.querySelector('.friends_info')
+
+                res.forEach((e) => {
+
+                    let info = friendsInfo.cloneNode(true)
+
+                    info.classList.remove("model")
+
+                    info.querySelector('.idAmigo').innerHTML = e.amigo.id
+                    info.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
+
+                    allFriends.appendChild(info)
+                })
+            })
+    }, 100)
+}
+
+var btnTopo = document.getElementById("btnTopo");
+
+btnTopo.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+
+
+listaAmigos()
+usuario()

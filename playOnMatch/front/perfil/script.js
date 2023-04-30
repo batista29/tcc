@@ -7,17 +7,22 @@ const btnAtualizarPerfil = document.querySelector('.btnAtualizarPerfil')
 const btnFechaModalAtualizarPerfil = document.querySelector('.btnFechaModalAtualizarPerfil')
 const btnFechaModalSobreMim = document.querySelector('.btnFechaModalSobreMim')
 const btnFechaModalAmigos = document.querySelector('.btnFechaModalAmigos')
-const partidas = document.querySelectorAll('.infoPartida')
+
+
 const btnFecharModal = document.querySelector('.btnFecharModal')
 
 const main = document.querySelector('.infoUser')
 const infoUser = document.querySelector('.dadoss')
 
-function listarPartidas() {
+
+const partida = document.querySelector('.partidas')
+const infoPartida = document.querySelector('.infoPartida')
+
+function listar() {
 
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/perfil/2', options)
+    fetch('http://localhost:3000/perfil/3', options)
         .then(response => response.json())
         .then(res => {
             let usuario = infoUser.cloneNode(true)
@@ -28,9 +33,21 @@ function listarPartidas() {
             usuario.querySelector('.dataNascimento').innerHTML = res.nascimento.split('T')[0]
             usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Paritdas Jogadas"
             usuario.querySelector('.amigos').innerHTML = res.criadorListaAmigo.length + " Amigos"
-            console.log(res)
 
             main.appendChild(usuario)
+
+            res.participante.forEach((e) => {
+
+                let dadosPartida = infoPartida.cloneNode(true)
+                dadosPartida.classList.remove("model")
+
+                dadosPartida.querySelector('.tituloPartida').innerHTML = e.encontro.titulo
+                dadosPartida.querySelector('.enderecoPartida').innerHTML = e.encontro.local.endereco
+                dadosPartida.querySelector('.dataHora').innerHTML = e.encontro.data.split("T")[1].split(":")[0] + "h " + e.encontro.data.split("T")[0]
+                partida.appendChild(dadosPartida)
+
+            })
+
         })
 }
 
@@ -56,15 +73,16 @@ function mudarCorBotao() {
     })
 }
 
-partidas.forEach((e) => {
-    e.addEventListener('click', function () {
+setTimeout(() => {
+    let partidas = document.querySelectorAll('.infoPartida');
+    partidas.forEach((e) => {
+        e.addEventListener('click', function () {
+            let modal = document.querySelector('.modal');
+            modal.style.display = "flex";
+        });
+    });
+}, 100);
 
-        let modal = document.querySelector('.modal')
-        console.log(modal)
-
-        modal.style.display = "flex"
-    })
-})
 
 btnEditarPerfil.addEventListener('click', function () {
     let atualizarPerfil = document.querySelector('.ModalAtualizarPerfil')
@@ -115,4 +133,4 @@ btnFechaModalAmigos.addEventListener('click', function (e) {
 })
 
 mudarCorBotao()
-listarPartidas()
+listar()

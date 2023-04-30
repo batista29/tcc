@@ -31,6 +31,20 @@ const read = async (req, res) => {
     res.status(200).json(usuario).end()
 }
 
+const listaUsuario = async(req,res) => {
+    let usuario = await prisma.usuario.findUnique({
+        where:{
+            id:Number(req.params.id)
+        },
+        select:{
+            id:true,
+            nome:true,
+            criadorPartida:true
+        }
+    })
+    res.status(200).send({usuario}).end()
+}
+
 const readOne = async (req, res) => {
     let usuario = await prisma.usuario.findUnique({
         where: {
@@ -85,7 +99,19 @@ const readPerfil = async (req, res) => {
                 criadorListaAmigo: true,
                 participante: {
                     select: {
-                        encontro: true,
+                        encontro:{
+                            select:{
+                                data:true,
+                                descricao:true,
+                                esporte:true,
+                                titulo:true,
+                                local:{
+                                    select:{
+                                        endereco:true
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
             }
@@ -203,6 +229,9 @@ const updateListaAmigo = async (req, res) => {
     res.status(200).send('sucesso').end()
 }
 
+const enviarSolicitacao = (req, res) => {
+    
+}
 
 const respostaAmizade = (req, res) => {
 
@@ -226,7 +255,13 @@ const listarAmigos = async (req, res) => {
             id: Number(req.params.idUsuario)
         },
         select: {
-            criadorListaAmigo: true
+            criadorListaAmigo: {
+                select:{
+                    id:true,
+                    criador:true,
+                    amigo:true
+                }
+            }
         }
     })
 
@@ -299,5 +334,6 @@ module.exports = {
     updateListaAmigo,
     respostaAmizade,
     listarAmigos,
-    eliminateAmigo
+    eliminateAmigo,
+    listaUsuario
 }
