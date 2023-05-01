@@ -31,18 +31,18 @@ const read = async (req, res) => {
     res.status(200).json(usuario).end()
 }
 
-const listaUsuario = async(req,res) => {
+const listaUsuario = async (req, res) => {
     let usuario = await prisma.usuario.findUnique({
-        where:{
-            id:Number(req.params.id)
+        where: {
+            id: Number(req.params.id)
         },
-        select:{
-            id:true,
-            nome:true,
-            criadorPartida:true
+        select: {
+            id: true,
+            nome: true,
+            criadorPartida: true
         }
     })
-    res.status(200).send({usuario}).end()
+    res.status(200).send({ usuario }).end()
 }
 
 const readOne = async (req, res) => {
@@ -55,7 +55,7 @@ const readOne = async (req, res) => {
     if (usuario != null) {
         res.status(200).json(usuario).end()
     } else {
-        res.status(200).send({ mensagem: "usuario não encontrado" })
+        res.status(404).send({ mensagem: "usuario não encontrado" }).end()
     }
 }
 
@@ -99,15 +99,15 @@ const readPerfil = async (req, res) => {
                 criadorListaAmigo: true,
                 participante: {
                     select: {
-                        encontro:{
-                            select:{
-                                data:true,
-                                descricao:true,
-                                esporte:true,
-                                titulo:true,
-                                local:{
-                                    select:{
-                                        endereco:true
+                        encontro: {
+                            select: {
+                                data: true,
+                                descricao: true,
+                                esporte: true,
+                                titulo: true,
+                                local: {
+                                    select: {
+                                        endereco: true
                                     }
                                 }
                             }
@@ -125,28 +125,39 @@ const readPerfil = async (req, res) => {
 
 const login = async (req, res) => {
 
-    let usuario = await prisma.usuario.findUnique({
-        where: { email: req.body.email }
-    }).catch(err => {
-        console.log(err)
-    })
+    try {
+        const usuario = await prisma.usuario.findUnique({
+            where: { email: req.body.email }
+        }).catch(err => {
+            console.log(err)
+        })
 
-    if (usuario) {
-        if (await bcrypt.compare(req.body.senha, usuario.senha)) {
-            jwt.sign(usuario, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
-                if (err == null) {
-                    usuario["token"] = token
-                    res.status(200).send({ mensagem: "Seu login foi bem-sucedido", usuario }).end()
-                } else {
-                    res.status(404).json(err.message).end()
-                }
-            })
-        } else {
-            res.status(404).send({ mensagem: "senha incorreta" }).end()
+        if (!usuario) {
+            return res.status(401).send({ mensagem: "Usuário não encontrado" });
         }
-    } else {
-        res.status(404).send({ mensagem: "usuario não encontrado" }).end()
+
+        if (!(await bcrypt.compare(req.body.senha, usuario.senha))) {
+            return res.status(401).send({ mensagem: "Senha incorreta" });
+        }
+
+        const token = jwt.sign(usuario, process.env.KEY, { expiresIn: '10h' })
+
+        const sendLoginResponse = (res, usuario, token) => {
+            usuario["token"] = token;
+            res.status(200).send({ mensagem: "Seu login foi bem-sucedido", usuario }).end();
+        }
+        
+        sendLoginResponse(res, usuario, token);
+
+        
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ mensagem: "Erro interno do servidor" });
     }
+
+    
+
 }
 
 const readListaAmigo = async (req, res) => {
@@ -170,44 +181,52 @@ const verificarAmigo = async (idLogado, idUsuario) => {
 
     // comparar o id de quem ta logado com os amigos de quem ele quer ver o perfil
 
-
-    let amigo = await prisma.usuario.findUnique({
-        where: {
-            id: Number(idUsuario)
-        },
-        select: {
-            criadorListaAmigo: true
-        }
-    })
-
-    if (amigo == null) {
-        return {
-            mensagem: 'usuario não existe'
-        }
-    }
-
-    let encontrado = false
-
-    if (amigo.criadorListaAmigo.length != 0) {
-        amigo.criadorListaAmigo.forEach((e) => {
-            if (Number(idLogado) === Number(e.idAmigo)) {
-                encontrado = true
+    try {
+        const amigo = await prisma.usuario.findUnique({
+            where: {
+                id: Number(idUsuario)
+            },
+            select: {
+                criadorListaAmigo: true
             }
         })
-        if (encontrado) {
+
+        if (amigo == null) {
             return {
-                mensagem: 'amigos'
+                mensagem: 'usuario não existe'
+            }
+        }
+
+        let encontrado = false
+
+        if (amigo.criadorListaAmigo.length != 0) {
+            amigo.criadorListaAmigo.forEach((e) => {
+                if (Number(idLogado) === Number(e.idAmigo)) {
+                    encontrado = true
+                }
+            })
+            if (encontrado) {
+                return {
+                    mensagem: 'amigos'
+                }
+            } else {
+                return {
+                    mensagem: 'não são amigos'
+                }
             }
         } else {
             return {
-                mensagem: 'não são amigos'
+                mensagem: 'ninguem na lista de amigos'
             }
         }
-    } else {
+    } catch (error) {
+        console.log(error)
         return {
-            mensagem: 'ninguem na lista de amigos'
+            mensagem: 'Ocorreu um erro ao verificar amizade'
         }
     }
+
+
 }
 
 const updateListaAmigo = async (req, res) => {
@@ -227,10 +246,6 @@ const updateListaAmigo = async (req, res) => {
     });
 
     res.status(200).send('sucesso').end()
-}
-
-const enviarSolicitacao = (req, res) => {
-    
 }
 
 const respostaAmizade = (req, res) => {
@@ -256,10 +271,10 @@ const listarAmigos = async (req, res) => {
         },
         select: {
             criadorListaAmigo: {
-                select:{
-                    id:true,
-                    criador:true,
-                    amigo:true
+                select: {
+                    id: true,
+                    criador: true,
+                    amigo: true
                 }
             }
         }

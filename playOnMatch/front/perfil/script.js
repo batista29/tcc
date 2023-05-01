@@ -18,11 +18,14 @@ const infoUser = document.querySelector('.dadoss')
 const partida = document.querySelector('.partidas')
 const infoPartida = document.querySelector('.infoPartida')
 
+
 function listar() {
 
+    let id = JSON.parse(localStorage.getItem('perfil'))
+    console.log(id)
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/perfil/3', options)
+    fetch(`http://localhost:3000/perfil/${id}`, options)
         .then(response => response.json())
         .then(res => {
             let usuario = infoUser.cloneNode(true)

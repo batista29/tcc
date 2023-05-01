@@ -135,13 +135,6 @@ body::-webkit-scrollbar-thumb {
     margin: 10px 10px 0 10px;
 }
 
-
-
-.model {
-    display: none;
-    visibility: hidden;
-}
-
 /* MODAL cadastrar */
 
 .readInferior {
@@ -266,7 +259,7 @@ img.iconeBusca {
     display: flex;
     position: fixed;
     top: 0;
-    height: 110vh;
+    height: 100vh;
     width: 100%;
     background-color: #0123405b;
     align-items: center;
@@ -274,7 +267,7 @@ img.iconeBusca {
 }
 
 .infoPartida {
-    height: 50%;
+    height: 90%;
     width: 75%;
     display: flex;
     align-items: center;
@@ -282,6 +275,7 @@ img.iconeBusca {
     background-color: white;
     border-radius: 10px;
     position: relative;
+    flex-direction: column;
 }
 
 .buttonTop {
@@ -294,14 +288,101 @@ img.iconeBusca {
     margin-right: 40px;
 }
 
-.encerrarEncontro{
+/* botão para encerrar partida */
+
+.encerrarEncontro {
     height: 30px;
-    width: 30px;
+    width: 300px;
     border: none;
-    border-radius: 50%;
+    background-color: #ec0000;
+
 }
 
 .encerrarEncontro:hover {
     cursor: pointer;
+}
+
+.btnFavoritarPartida {
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.btnFavoritarPartida>img {
+    height: 50px;
+    width: 50px;
+}
+
+.partidasFavoritas {
+    height: 90vh;
+    width: 30vw;
     background-color: #00bdec;
+}
+
+.btnFechaModalPartidas {
+    height: 30px;
+    width: 30px;
+    border: none;
+    background-color: #00bdec;
+    border-radius: 50%;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btnFechaModalPartidas:hover {
+    background-color: #00f63e;
+    cursor: pointer;
+}
+
+.participantes {
+    height: 70%;
+    width: 80%;
+    background-color: #00bdec;
+}
+
+.infoParticipantes {
+    display: flex;
+    border: 1px solid black;
+    justify-content: space-around;
+}
+
+.buttonConfirmar {
+    height: 5%;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btnParticiparDoEvento {
+    width: 100px;
+    background-color: #00f63e;
+    border: none;
+    border-radius: 5px;
+}
+
+.btnParticiparDoEvento:hover {
+    background-color: #00f63e;
+    cursor: pointer;
+}
+
+.btnCancelarParticipacao {
+    width: 100px;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+}
+
+.btnCancelarParticipacao:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+.model {
+    display: none;
+    visibility: hidden;
 }

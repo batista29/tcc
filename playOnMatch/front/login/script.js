@@ -1,21 +1,21 @@
-const btnC = document.querySelector(".Cadastro");
+const btnC = document.querySelector(".btn-login-entrar");
 
 btnC.addEventListener("click", function (event) {
     event.preventDefault();
 });
 
-const btnL = document.querySelector(".Login");
+const btnL = document.querySelector(".btn-cadastro-cadastrar");
 
 btnL.addEventListener("click", function (event) {
     event.preventDefault();
 });
 
 function estilizarBotoes() {
-    let btnLogin = document.querySelector('.login')
-    let btnCadastro = document.querySelector('.cadastro')
+    let btnLogin = document.querySelector('.btn-login')
+    let btnCadastro = document.querySelector('.btn-cadastro')
 
-    let formularioCadastro = document.querySelector('.formulario.cadastro')
-    let formularioLogin = document.querySelector('.formulario.login')
+    let formularioCadastro = document.querySelector('.formulario-cadastro')
+    let formularioLogin = document.querySelector('.formulario-login')
 
 
     btnLogin.addEventListener('click', function () {
@@ -48,13 +48,13 @@ function estilizarBotoes() {
 
 function cadastrarUsuario() {
 
-    let erroC = document.querySelector('.error.cadastro')
+    let erroC = document.querySelector('.error-cadastro')
 
-    let inpNome = document.getElementById('inpNome').value
-    let inpEmail = document.getElementById('inpEmail').value
-    let inpSenha = document.getElementById('inpSenha').value
-    let inpData = document.getElementById('inpData').value
-    let inpCep = document.getElementById('inpCep').value
+    let inpNome = document.getElementById('nome').value
+    let inpEmail = document.getElementById('email').value
+    let inpSenha = document.getElementById('senha').value
+    let inpData = document.getElementById('data').value
+    let inpCep = document.getElementById('cep').value
 
     if (inpNome.length == 0 || inpEmail.length == 0 || inpSenha.length == 0 || inpData.length == 0) {
         erroC.style.color = "black"
@@ -100,7 +100,7 @@ function cadastrarUsuario() {
 
 function loginUsuario() {
 
-    let erroL = document.querySelector('.error.login')
+    let erroL = document.querySelector('.error-login')
 
 
     let inpEmail = document.querySelector('.inpEmail').value
@@ -154,7 +154,7 @@ let slideIndex = 0;
 
 function showSlides() {
     let i;
-    let slides = document.getElementsByClassName("imgCarrosel");
+    let slides = document.getElementsByClassName("img-carrosel");
     let dots = document.getElementsByClassName("dot");
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";

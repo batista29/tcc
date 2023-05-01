@@ -15,7 +15,9 @@
     </header>
     <main>
         <button onclick="abrirModal()" class="abrirModal1">+</button>
+        <div class="partidasFavoritas model">
 
+        </div>
         <div class="filtro">
             <input class="filtroTituloPartidas" type="text">
             <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
@@ -24,9 +26,11 @@
         </div>
 
         <div class="read">
-            <div onclick="abrirModalPartida()" class="readInfo model">
+            <div onclick="abrirModalPartida(this)" class="readInfo model">
                 <div class="readLocal">
-                    <button class="encerrarEncontro model">x</button>
+                    <button class="btnFavoritarPartida">
+                        <img class="imgEstrela" src="../../docs/imgs/estrela.png" alt="">
+                    </button>
                     <div class="imgEsporte">
                         <img class="iconeEsporte" src="../../docs/imgs/variante-de-bola-de-basquete.png" alt="">
                     </div>
@@ -43,13 +47,13 @@
             <button id="btnTopo" class="buttonTop">+++</button>
         </div>
         <div class="friends">
-            <div class="perfil model">
+            <div class="perfil model" onclick="acessarPerfil(this)">
                 <p class="idUser">Id</p>
                 <p class="nomeUser">Nome:</p>
             </div>
             <div class="allFriends">
                 <h2>FRIENDS</h2>
-                <div class="friends_info model">
+                <div class="friends_info model" onclick="acessarPerfilAmigo(this)">
                     <p class="idAmigo">id</p>
                     <p class="nomeAmigo">nome</p>
                 </div>
@@ -58,7 +62,18 @@
     </main>
     <div class="modalPartidas model">
         <div class="infoPartida">
-            <button onclick="fecharModalPartida()">x</button>
+            <button class="encerrarEncontro model">Finalizar Encontro?</button>
+            <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
+            <div class="participantes">
+                <div class="infoParticipantes model">
+                    <p class="idParticipante">id</p>
+                    <p class="nomeParticipante">nome</p>
+                </div>
+            </div>
+            <div class="buttonConfirmar">
+                <button onclick="adicionarParticipante()" class="btnParticiparDoEvento">Participar</button>
+                <button class="btnCancelarParticipacao">Cancelar</button>
+            </div>
         </div>
     </div>
     <div class="readInferior">

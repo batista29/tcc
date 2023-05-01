@@ -1,15 +1,15 @@
 const express = require('express')
-
 const cors = require('cors')
-
-const app = express()
 
 const router = require('./src/routes/routes')
 
-app.use(express.json())
-app.use(cors())
-app.use(router)
+const server = express()
 
-app.listen(3000, () => {
-    console.log("app rodando")
+
+server.use(express.json())
+server.use(cors())
+server.use(router)
+
+server.listen(3000, () => {
+    console.log("server rodando")
 })

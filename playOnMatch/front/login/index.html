@@ -10,59 +10,91 @@
 </head>
 
 <body>
-    <div class="main">
-        <div class="forms">
-            <div class="buttons">
-                <button class="btn login">Login</button>
-                <button class="btn cadastro">Cadastro</button>
+    <main>
+        <section class="login-cadastro">
+            <div class="botoes">
+                <button class="btn btn-login">Login</button>
+                <button class="btn btn-cadastro">Cadastro</button>
             </div>
-            <div class="formulario login">
-                <form class="form1" action="">
-                    <input class="inpEmail" placeholder="Email" type="email">
-                    <input class="inpSenha" placeholder="Senha" type="password">
-                    <button onclick="loginUsuario()" class="btns Login">Entrar</button>
-                    <div class="error login"></div>
+            <section class="formulario formulario-login">
+                <form>
+                    <input class="inpEmail" placeholder="Email" type="email" />
+                    <input class="inpSenha" placeholder="Senha" type="password" />
+                    <button onclick="loginUsuario()" class="btns btn-login-entrar">
+                        Entrar
+                    </button>
+                    <div class="error error-login"></div>
                 </form>
-            </div>
-            <div class="formulario cadastro">
-                <form class="form1" action="">
-                    <input id="inpNome" placeholder="nome" type="text">
-                    <input id="inpEmail" placeholder="email" type="email">
-                    <input id="inpSenha" placeholder="senha" type="password">
-                    <input id="inpData" placeholder="data de nascimento" type="date">
-                    <input id="inpCep" placeholder="cep" type="number">
-                    <button onclick="cadastrarUsuario()" class="btns Cadastro">Cadastrar</button>
-                    <div class="error cadastro"></div>
+            </section>
+            <section class="formulario formulario-cadastro">
+                <form>
+                    <input id="nome" placeholder="Nome" type="text" />
+                    <input id="email" placeholder="Email" type="email" />
+                    <input id="senha" placeholder="Senha" type="password" />
+                    <input id="data" placeholder="Data de Nascimento" type="date" />
+                    <input id="cep" placeholder="CEP" type="number" />
+                    <button onclick="cadastrarUsuario()" class="btns btn-cadastro-cadastrar">
+                        Cadastrar
+                    </button>
+                    <div class="error error-cadastro"></div>
                 </form>
+            </section>
+        </section>
+        <section class="carrosel">
+            <img class="img-carrosel"
+                src="https://veja.abril.com.br/wp-content/uploads/2022/11/000_32VX6WK.jpg?quality=70&strip=info&w=1280&h=720&crop=1"
+                alt="">
+            <img class="img-carrosel"
+                src="https://s2.glbimg.com/K8R490sQpVFgF3IHpCIxpOPSsxc=/0x0:1024x683/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2020/y/n/OOS44wQvO5HObWCRAK9A/gettyimages-1198051481.jpg"
+                alt="">
+            <img class="img-carrosel"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5tM5OsiaJflpIDshJ53tmLdCgmy1GtrwBQg&usqp=CAU"
+                alt="">
+            <div>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
+        </section>
+        <div class="apresentacao">
+            <h1 class="titulo">PlayOnMatch</h1>
+            <p class="descricao">O PlayOnMatch é a plataforma ideal para quem busca organizar e participar de atividades
+                esportivas de forma simples, prática e divertida. Junte-se à comunidade de jogadores e fique por dentro
+                dos
+                eventos esportivos que estão acontecendo em sua região.</p>
         </div>
-    </div>
-
-    <div class="teste">
-        <img class="imgCarrosel"
-            src="https://veja.abril.com.br/wp-content/uploads/2022/11/000_32VX6WK.jpg?quality=70&strip=info&w=1280&h=720&crop=1"
-            alt="">
-        <img class="imgCarrosel"
-            src="https://s2.glbimg.com/K8R490sQpVFgF3IHpCIxpOPSsxc=/0x0:1024x683/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2020/y/n/OOS44wQvO5HObWCRAK9A/gettyimages-1198051481.jpg"
-            alt="">
-        <img class="imgCarrosel"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5tM5OsiaJflpIDshJ53tmLdCgmy1GtrwBQg&usqp=CAU"
-            alt="">
-        <div>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </div>
-    <div class="apresentacao">
-        <h1 class="titulo">PlayOnMatch</h1>
-        <p class="descricao">O PlayOnMatch é a plataforma ideal para quem busca organizar e participar de atividades
-            esportivas de forma simples, prática e divertida. Junte-se à comunidade de jogadores e fique por dentro dos
-            eventos esportivos que estão acontecendo em sua região.</p>
-    </div>
+    </main>
 </body>
 
 <script src="script.js"></script>
 
 </html>
+
+<!-- <div class="main">
+            <div class="forms">
+                <div class="buttons">
+                    <button class="btn login">Login</button>
+                    <button class="btn cadastro">Cadastro</button>
+                </div>
+                <div class="formulario login">
+                    <form class="form1" action="">
+                        <input class="inpEmail" placeholder="Email" type="email">
+                        <input class="inpSenha" placeholder="Senha" type="password">
+                        <button onclick="loginUsuario()" class="btns Login">Entrar</button>
+                        <div class="error login"></div>
+                    </form>
+                </div>
+                <div class="formulario cadastro">
+                    <form class="form1" action="">
+                        <input id="inpNome" placeholder="nome" type="text">
+                        <input id="inpEmail" placeholder="email" type="email">
+                        <input id="inpSenha" placeholder="senha" type="password">
+                        <input id="inpData" placeholder="data de nascimento" type="date">
+                        <input id="inpCep" placeholder="cep" type="number">
+                        <button onclick="cadastrarUsuario()" class="btns Cadastro">Cadastrar</button>
+                        <div class="error cadastro"></div>
+                    </form>
+                </div>
+            </div>
+        </div> -->

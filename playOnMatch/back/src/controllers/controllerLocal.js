@@ -4,14 +4,24 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
     try {
-        let local = await prisma.local.create({
-            data: req.body
-        })
-        res.status(201).json(local).end()
+        const { descricao, data, titulo, id_local, esporte } = req.body;
+        if (!descricao || !data || !titulo || !id_local || !esporte) {
+            return res.status(400).send({ mensagem: 'Campos obrigatórios não preenchidos' });
+        }
 
+        let local = await prisma.local.create({
+            data: {
+                descricao,
+                data,
+                titulo,
+                id_local,
+                esporte
+            }
+        })
+        return res.status(201).json(local).end()
     } catch (error) {
         console.log(error)
-        res.status(404).send({ mensagem: error}).end()
+        res.status(500).send({ mensagem: error }).end()
     }
 
 }
@@ -22,16 +32,20 @@ const readAll = async (req, res) => {
 }
 
 const readOne = async (req, res) => {
-    let local = await prisma.local.findUnique({
-        where: {
-            id: Number(req.params.id)
+    try {
+        let local = await prisma.local.findUnique({
+            where: {
+                id: Number(req.params.id)
+            }
+        })
+        if (local) {
+            res.status(200).json(local).end()
+        } else {
+            res.status(404).send({ mensagem: "Local não encontrado" }).end()
         }
-    })
-
-    if (local != null) {
-        res.status(200).json(local).end()
-    } else {
-        res.status(200).send({ mensagem: "erro" }).end()
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error).end()
     }
 }
 
@@ -58,7 +72,7 @@ const del = async (req, res) => {
                 id: Number(req.params.id)
             }
         })
-        res.status(200).send({ mensagem: `local de id ${local.id} foi excluido com sucesso` }).end()
+        res.status(204).send({ mensagem: `local de id ${local.id} foi excluido com sucesso` }).end()
     } catch (err) {
         res.status(200).send({ mensagem: "erro" }).end()
     }

@@ -1,15 +1,15 @@
 tela home
 
-modal das partidas
-terminar cadastro
-friends 
-encaminhar para o perfil 
-puxar info user 
-seta para subir para cima
-poder encerrar encontro
-editar encontro
+modal das partidas: certo
+terminar cadastro : adiado
+friends : certo
+encaminhar para o perfil : certo
+puxar info user : certo
+seta para subir para cima: certo
+poder encerrar encontro : adiado
+editar encontro : adiado
 convidar amigos para a partida
-poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse
+poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse : em andamento
 dps do login abrir modal para obter localização
 e fazer notificação de permissão para obter localização
 
