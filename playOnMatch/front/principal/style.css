@@ -37,6 +37,7 @@ body {
     align-items: center;
     justify-content: space-around;
     overflow-x: hidden;
+    position: relative;
 }
 
 body::-webkit-scrollbar {
@@ -385,4 +386,26 @@ img.iconeBusca {
 .model {
     display: none;
     visibility: hidden;
+}
+
+.localizacao {
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #001324ed;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoLocalizacao {
+    height: 80%;
+    width: 80vw;
+    background-color: var(--backgroundHome);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
