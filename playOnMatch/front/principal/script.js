@@ -353,39 +353,39 @@ function acessarPerfilAmigo(idAmigo) {
         })
 }
 
-const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
+// const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
 
-const cidadesPorPais = {
-    'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte'],
-    'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
-    'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
-    'selulite': ['cidade1', 'cidade2', 'cidade3']
-};
+// const cidadesPorPais = {
+//     'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte'],
+//     'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
+//     'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
+//     'selulite': ['cidade1', 'cidade2', 'cidade3']
+// };
 
-// Pega o datalist das opções de países
-const datalistPaises = document.getElementById('opcoes-pais');
+// // Pega o datalist das opções de países
+// const datalistPaises = document.getElementById('opcoes-pais');
 
-// Adiciona as opções de países no datalist correspondente
-paises.forEach(function (pais) {
-    const option = document.createElement('option');
-    option.value = pais;
-    datalistPaises.appendChild(option);
-});
+// // Adiciona as opções de países no datalist correspondente
+// paises.forEach(function (pais) {
+//     const option = document.createElement('option');
+//     option.value = pais;
+//     datalistPaises.appendChild(option);
+// });
 
-// Pega o datalist das opções de cidades
-const datalistCidades = document.getElementById('opcoes-cidades');
+// // Pega o datalist das opções de cidades
+// const datalistCidades = document.getElementById('opcoes-cidades');
 
-// Atualiza o datalist de cidades com as opções do país selecionado
-function atualizarCidades() {
-    const paisSelecionado = document.getElementById('pais').value;
-    const cidades = cidadesPorPais[paisSelecionado] || [];
-    datalistCidades.innerHTML = '';
-    cidades.forEach(function (cidade) {
-        const option = document.createElement('option');
-        option.value = cidade;
-        datalistCidades.appendChild(option);
-    });
-}
+// // Atualiza o datalist de cidades com as opções do país selecionado
+// function atualizarCidades() {
+//     const paisSelecionado = document.getElementById('pais').value;
+//     const cidades = cidadesPorPais[paisSelecionado] || [];
+//     datalistCidades.innerHTML = '';
+//     cidades.forEach(function (cidade) {
+//         const option = document.createElement('option');
+//         option.value = cidade;
+//         datalistCidades.appendChild(option);
+//     });
+// }
 
 
 
