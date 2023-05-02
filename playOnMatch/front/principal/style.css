@@ -280,10 +280,10 @@ img.iconeBusca {
 }
 
 .buttonTop {
-    position: absolute;
+    position: fixed;
     height: 40px;
     width: 40px;
-    right: 0;
+    margin-left: 1550px;
     bottom: 0;
     margin-bottom: 50px;
     margin-right: 40px;
