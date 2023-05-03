@@ -71,6 +71,8 @@ const deletarParticipante = async (req, res) => {
             return res.status(400).send({ mensagem: "Encontro não encontrado" }).end()
         }
 
+        let participanteEncontrado = false;
+
         encontro.EncontroUsuario.forEach(async (e) => {
             if (e.idParticipantePartida == req.params.idParticipante) {
                 await prisma.encontroUsuario.delete({
@@ -78,12 +80,15 @@ const deletarParticipante = async (req, res) => {
                         id: e.id
                     }
                 })
-
-                res.status(200).send(encontro).end()
-            } else {
-                res.status(400).send({ mensagem: "vc não pode cancelar a ida de outro participante" }).end()
+                participanteEncontrado = true;
             }
         })
+
+        if (!participanteEncontrado) {
+            return res.status(404).send({ mensagem: "Participante não encontrado" }).end()
+        }
+
+        res.status(200).send(encontro).end()
 
     } catch (error) {
         console.log(error)
@@ -120,7 +125,7 @@ const readAll = async (req, res) => {
                             select: {
                                 id: true,
                                 nome: true,
-                                criadorPartida:true
+                                criadorPartida: true
                             }
                         }
                     }
@@ -140,19 +145,19 @@ const readOne = async (req, res) => {
         where: {
             id: Number(req.params.id)
         },
-        select:{
-            EncontroUsuario:{
-                select:{
-                    idParticipante:{
-                        select:{
-                            id:true,
-                            nome:true
+        select: {
+            EncontroUsuario: {
+                select: {
+                    idParticipante: {
+                        select: {
+                            id: true,
+                            nome: true
                         }
                     },
-                    idCriador:{
-                        select:{
-                            id:true,
-                            nome:true
+                    idCriador: {
+                        select: {
+                            id: true,
+                            nome: true
                         }
                     }
                 }

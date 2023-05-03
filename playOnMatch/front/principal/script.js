@@ -123,8 +123,8 @@ function listaParticipantes() {
 
             const participantes = document.querySelector('.participantes')
             const infoParticipante = document.querySelector('.infoParticipantes')
-            // const btnCancelar = document.querySelector('.btnCancelarParticipacao')
-            // const btnParticipar = document.querySelector('.btnParticiparDoEvento')
+            const btnCancelar = document.querySelector('.btnCancelarParticipacao')
+            const btnParticipar = document.querySelector('.btnParticiparDoEvento')
 
             res.EncontroUsuario.forEach((e) => {
 
@@ -139,8 +139,6 @@ function listaParticipantes() {
 
                 let { id } = user
 
-                let participanteEncontrado = false
-
                 if (e.idCriador.id == id) {
                     let encerrarEncontro = document.querySelector('.encerrarEncontro')
                     encerrarEncontro.classList.remove("model")
@@ -149,22 +147,17 @@ function listaParticipantes() {
                     encerrarEncontro.classList.add("model")
                 }
 
-                if (id == e.idParticipante.id) {
-                    participanteEncontrado = true
-                }
-
-                // let btnCancelar = dados.querySelector('.btnCancelarParticipacao')
-                // let btnParticipar = dados.querySelector('.btnParticiparDoEvento')
-
-                // if (participanteEncontrado) {
-                //     btnCancelar.disabled = false
-                //     btnParticipar.disabled = true
-                // } else {
-                // btnCancelar.disabled = true
-                // btnParticipar.disabled = false
-                // }
                 participantes.appendChild(dados)
             })
+            let { id } = user
+            let nw = res.EncontroUsuario.filter(element => element.idParticipante.id == id)
+            if (nw.length == 1) {
+                btnCancelar.disabled = false
+                btnParticipar.disabled = true
+            } else {
+                btnCancelar.disabled = true
+                btnParticipar.disabled = false
+            }
         })
 }
 
@@ -172,13 +165,27 @@ function adicionarParticipante() {
 
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
 
-    console.log(idPartida)
+    let { id } = user
+
     const options = { method: 'POST' };
 
-    // fetch(`http://localhost:3000/adicionarParticipante/${idPartida}/3`, options)
-    //     .then(response => response.json())
-    //     .then(response => console.log(response))
-    //     .catch(err => console.error(err));
+    fetch(`http://localhost:3000/adicionarParticipante/${idPartida}/${id}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
+
+function removerParticipante() {
+    let idPartida = JSON.parse(localStorage.getItem("idPartida"))
+
+    let { id } = user
+
+    const options = { method: 'DELETE' };
+
+    fetch(`http://localhost:3000/excluirParticipante/${idPartida}/${id}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
 }
 
 function abrirModalPartida(id) {
@@ -353,44 +360,44 @@ function acessarPerfilAmigo(idAmigo) {
         })
 }
 
-const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
+// const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
 
-const cidadesPorPais = {
-    'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte'],
-    'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
-    'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
-    'selulite': ['cidade1', 'cidade2', 'cidade3']
-};
+// const cidadesPorPais = {
+//     'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte'],
+//     'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
+//     'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
+//     'selulite': ['cidade1', 'cidade2', 'cidade3']
+// };
 
-// Pega o datalist das opções de países
-const datalistPaises = document.getElementById('opcoes-pais');
+// // Pega o datalist das opções de países
+// const datalistPaises = document.getElementById('opcoes-pais');
 
-// Adiciona as opções de países no datalist correspondente
-paises.forEach(function (pais) {
-    const option = document.createElement('option');
-    option.value = pais;
-    datalistPaises.appendChild(option);
-});
+// // Adiciona as opções de países no datalist correspondente
+// paises.forEach(function (pais) {
+//     const option = document.createElement('option');
+//     option.value = pais;
+//     datalistPaises.appendChild(option);
+// });
 
-// Pega o datalist das opções de cidades
-const datalistCidades = document.getElementById('opcoes-cidades');
+// // Pega o datalist das opções de cidades
+// const datalistCidades = document.getElementById('opcoes-cidades');
 
-// Atualiza o datalist de cidades com as opções do país selecionado
-function atualizarCidades() {
-    const paisSelecionado = document.getElementById('pais').value;
-    const cidades = cidadesPorPais[paisSelecionado] || [];
-    datalistCidades.innerHTML = '';
-    cidades.forEach(function (cidade) {
-        const option = document.createElement('option');
-        option.value = cidade;
-        datalistCidades.appendChild(option);
-    });
-}
+// // Atualiza o datalist de cidades com as opções do país selecionado
+// function atualizarCidades() {
+//     const paisSelecionado = document.getElementById('pais').value;
+//     const cidades = cidadesPorPais[paisSelecionado] || [];
+//     datalistCidades.innerHTML = '';
+//     cidades.forEach(function (cidade) {
+//         const option = document.createElement('option');
+//         option.value = cidade;
+//         datalistCidades.appendChild(option);
+//     });
+// }
 
 function pegarLocalizacaoUsuario() {
     let pais = document.getElementById('pais').value;
     let cidade = document.getElementById('cidade').value;
-    
+
     let modalLocalizacao = document.querySelector('.localizacao')
 
     modalLocalizacao.classList.add("model")
