@@ -387,6 +387,14 @@ function atualizarCidades() {
     });
 }
 
+function pegarLocalizacaoUsuario() {
+    let pais = document.getElementById('pais').value;
+    let cidade = document.getElementById('cidade').value;
+    
+    let modalLocalizacao = document.querySelector('.localizacao')
+
+    modalLocalizacao.classList.add("model")
+}
 
 
 

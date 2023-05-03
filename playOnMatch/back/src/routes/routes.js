@@ -6,15 +6,14 @@ const middleware = require('../middleware/middleware')
 
 router.post('/criarUsuario', usuario.create)
 router.post('/login', usuario.login)
-router.post('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo',middleware.solicitacaoAmizade,usuario.updateListaAmigo)
 router.get('/listarUsuarios', usuario.read)
 router.get('/listarUsuario/:id', usuario.listaUsuario)
 router.get('/encontrarUsuario', usuario.readOne)
 
-router.get('/perfilUsuario/:idLogado/:idUsuario', middleware.autVerPerfil,usuario.readPerfil)
+router.get('/perfilUsuario/:idLogado/:idUsuario', middleware.autVerPerfil, usuario.readPerfil)
 
-router.get('/perfil/:idUsuario',usuario.readPerfil)
-router.get('/lista/:idUsuario',usuario.listarAmigos)
+router.get('/perfil/:idUsuario', usuario.readPerfil)
+router.get('/lista/:idUsuario', usuario.listarAmigos)
 router.put('/atualizarUsuario/:id', middleware.autorizacao, usuario.update)
 router.delete('/excluirUsuario/:id', usuario.eliminate)
 router.delete('/excluirAmigo/:idLogado/:idAmigo', usuario.eliminateAmigo)
@@ -36,6 +35,12 @@ router.get('/listarLocais', local.readAll)
 router.get('/listarLocal/:id', local.readOne)
 router.delete('/apagarLocal/:id', local.del)
 router.put('/editarLocal/:id', local.update)
+
+const listaAmigo = require('../controllers/controllerListaAmigo')
+
+router.post('/enviarSolicitacao/:idCriador/:idAmigo',listaAmigo.enviarSolicitacaoAmizade)
+router.get('/verSolicitacao/:idAmigo',listaAmigo.responsderSolicitacaoAmizade)
+router.post('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', middleware.solicitacaoAmizade, usuario.updateListaAmigo)
 
 
 module.exports = router

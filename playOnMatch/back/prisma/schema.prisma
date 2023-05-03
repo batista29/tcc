@@ -27,6 +27,7 @@ model Lista_amigos {
   id        Int      @id @default(autoincrement())
   idAmigo   Int?
   idCriador Int
+  situacao  Int @default(0)
   amigo     Usuario? @relation("amigo", fields: [idAmigo], references: [id])
   criador   Usuario  @relation("criador", fields: [idCriador], references: [id])
 }

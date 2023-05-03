@@ -146,17 +146,17 @@ const login = async (req, res) => {
             usuario["token"] = token;
             res.status(200).send({ mensagem: "Seu login foi bem-sucedido", usuario }).end();
         }
-        
+
         sendLoginResponse(res, usuario, token);
 
-        
+
 
     } catch (error) {
         console.log(error);
         res.status(500).send({ mensagem: "Erro interno do servidor" });
     }
 
-    
+
 
 }
 
@@ -231,37 +231,23 @@ const verificarAmigo = async (idLogado, idUsuario) => {
 
 const updateListaAmigo = async (req, res) => {
 
-    const listaDeQuemRecebeu = await prisma.lista_amigos.create({
-        data: {
-            criador: { connect: { id: Number(req.params.idCriadorLista) } },
-            amigo: { connect: { id: Number(req.params.idNovoAmigo) } }
-        }
-    });
+    console.log(req.params)
 
-    const listaDeQuemEnviou = await prisma.lista_amigos.create({
-        data: {
-            criador: { connect: { id: Number(req.params.idNovoAmigo) } },
-            amigo: { connect: { id: Number(req.params.idCriadorLista) } }
-        }
-    });
+    // const listaDeQuemRecebeu = await prisma.lista_amigos.create({
+    //     data: {
+    //         criador: { connect: { id: Number(req.params.idCriadorLista) } },
+    //         amigo: { connect: { id: Number(req.params.idNovoAmigo) } }
+    //     }
+    // });
+
+    // const listaDeQuemEnviou = await prisma.lista_amigos.create({
+    //     data: {
+    //         criador: { connect: { id: Number(req.params.idNovoAmigo) } },
+    //         amigo: { connect: { id: Number(req.params.idCriadorLista) } }
+    //     }
+    // });
 
     res.status(200).send('sucesso').end()
-}
-
-const respostaAmizade = (req, res) => {
-
-    const { RespUsuario } = req.body
-
-
-    if (RespUsuario === true) {
-        return {
-            mensagem: "solicitação de amizade aceita"
-        }
-    } else if (RespUsuario === false) {
-        return {
-            mensagem: "solicitação de amizade rejeitada"
-        }
-    }
 }
 
 const listarAmigos = async (req, res) => {
@@ -347,7 +333,7 @@ module.exports = {
     verificarAmigo,
     readListaAmigo,
     updateListaAmigo,
-    respostaAmizade,
+    // respostaAmizade,
     listarAmigos,
     eliminateAmigo,
     listaUsuario
