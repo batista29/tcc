@@ -60,24 +60,27 @@
             </div>
         </div>
     </main>
-    <!-- <div class="localizacao">
+    <div class="localizacao">
         <div class="infoLocalizacao">
-            <p>teste</p>
-            <label for="pais">País:</label>
-            <input type="text" id="pais" name="pais" list="opcoes-pais" onchange="atualizarCidades()">
+            <div class="formLocal">
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" list="opcoes-pais" onchange="atualizarCidades()">
 
-            <datalist id="opcoes-pais">
-            </datalist>
+                <datalist id="opcoes-pais">
+                </datalist>
 
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" name="cidade" list="opcoes-cidades">
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" list="opcoes-cidades">
 
-            <datalist id="opcoes-cidades">
-            </datalist>
-
-            <button>confirmar</button>
+                <datalist id="opcoes-cidades">
+                </datalist>
+                <button onclick="pegarLocalizacaoUsuario()" class="btnConfirmarLocalizacao">confirmar</button>
+            </div>
+            <div class="descricaoLocalizacao">
+                <p>PlayOnMatch precisa da localização do um usuário para mostrar partidas que ocorrem na cidade da pessoa. <br  > Ao obter a localização do usuário, o site pode exibir informações precisas sobre partidas que ocorrem na cidade do usuário, incluindo datas, horários e locais. Isso ajuda o usuário a economizar tempo e esforço na busca por partidas que ocorrem na sua região.</p>
+            </div>
         </div>
-    </div> -->
+    </div>
     <div class="modalPartidas model">
         <div class="infoPartida">
             <button class="encerrarEncontro model">Finalizar Encontro?</button>

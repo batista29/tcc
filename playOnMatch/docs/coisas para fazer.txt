@@ -13,6 +13,10 @@ poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele
 dps do login abrir modal para obter localização
 e fazer notificação de permissão para obter localização
 
+criar modal que vai poder visitar ou adicionar aquele usuario
+filtro por cidade (local)
+terminar lista de amigos
+
 tela perfil
 
 terminar de puxar dados user

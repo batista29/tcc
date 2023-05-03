@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const verificarAmigo = require('../controllers/controllerUsuario')
-const respostaAmizade = require('../controllers/controllerUsuario')
+const respostaAmizade = require('../controllers/controllerListaAmigo')
 
 const autorizacao = (req, res, next) => {
 
