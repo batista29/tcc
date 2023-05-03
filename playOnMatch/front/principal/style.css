@@ -408,7 +408,7 @@ img.iconeBusca {
     align-items: center;
 }
 
-.formLocal{
+.formLocal {
     height: 100%;
     width: 50%;
     display: flex;
@@ -417,12 +417,12 @@ img.iconeBusca {
     flex-direction: column;
 }
 
-.descricaoLocalizacao{
+.descricaoLocalizacao {
     width: 40%;
     text-align: justify;
 }
 
-.btnConfirmarLocalizacao{
+.btnConfirmarLocalizacao {
     height: 30px;
     width: 150px;
     margin-top: 20px;
@@ -431,7 +431,18 @@ img.iconeBusca {
     background-color: var(--backgroundLogin);
 }
 
-.btnConfirmarLocalizacao:hover{
+.btnConfirmarLocalizacao:hover {
     cursor: pointer;
-    background-color:var(--cor5) ;
+    background-color: var(--cor5);
+}
+
+.modaAdicionar {
+    height: 100px;
+    width: 130px;
+    background-color: black;
+}
+
+.modaAdicionar button {
+    height: 30px;
+    width: 100px;
 }

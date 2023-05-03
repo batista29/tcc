@@ -14,6 +14,13 @@ const enviarSolicitacaoAmizade = async (req, res) => {
             idAmigo: idAmigo
         }
     })
+
+    const lista2 = await prisma.lista_amigos.create({
+        data: {
+            idCriador: idAmigo,
+            idAmigo: idCriador
+        }
+    })
     res.status(200).send({ mensagem: 'solicitação enviada' })
     console.log('solicitação enviada')
 }
@@ -41,13 +48,9 @@ const respostaAmizade = (req, res) => {
     const { RespUsuario } = req.body
 
     if (RespUsuario === 1) {
-        return {
-            mensagem: "solicitação de amizade aceita"
-        }
+        return 1
     } else if (RespUsuario === 2) {
-        return {
-            mensagem: "solicitação de amizade rejeitada"
-        }
+        return 2
     }
 }
 

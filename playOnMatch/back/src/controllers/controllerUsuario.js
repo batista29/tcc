@@ -231,22 +231,45 @@ const verificarAmigo = async (idLogado, idUsuario) => {
 
 const updateListaAmigo = async (req, res) => {
 
-    console.log(req.params)
+    let { RespUsuario } = req.body
+    let { idCriadorLista } = req.params
+    let { idNovoAmigo } = req.params
 
-    // const listaDeQuemRecebeu = await prisma.lista_amigos.create({
-    //     data: {
-    //         criador: { connect: { id: Number(req.params.idCriadorLista) } },
-    //         amigo: { connect: { id: Number(req.params.idNovoAmigo) } }
-    //     }
-    // });
+    const amigo = await prisma.usuario.findUnique({
+        where: {
+            id: Number(idNovoAmigo)
+        }, select: {
+            amigo: true,
+            criadorListaAmigo: true
+        }
+    })
 
-    // const listaDeQuemEnviou = await prisma.lista_amigos.create({
-    //     data: {
-    //         criador: { connect: { id: Number(req.params.idNovoAmigo) } },
-    //         amigo: { connect: { id: Number(req.params.idCriadorLista) } }
-    //     }
-    // });
+    let findAmigo = amigo.amigo.find(lista => lista.idCriador == idCriadorLista && lista.idAmigo == idNovoAmigo)
+    let findDono = amigo.criadorListaAmigo.find(lista => lista.idCriador == idNovoAmigo && lista.idAmigo == idCriadorLista)
 
+    if (RespUsuario == 1) {
+        const listaDeQuemRecebeu = await prisma.lista_amigos.update({
+            where: { id: findAmigo.id },
+            data: { situacao: 1 }
+        })
+
+        const listaAmigoDono = await prisma.lista_amigos.update({
+            where: { id: findDono.id },
+            data: { situacao: 1 }
+        })
+    }
+
+    if (RespUsuario == 2) {
+        const listaDeQuemRecebeu = await prisma.lista_amigos.update({
+            where: { id: findAmigo.id },
+            data: { situacao: 2 }
+        })
+
+        const listaAmigoDono = await prisma.lista_amigos.update({
+            where: { id: findDono.id },
+            data: { situacao: 2 }
+        })
+    }
     res.status(200).send('sucesso').end()
 }
 
@@ -260,7 +283,12 @@ const listarAmigos = async (req, res) => {
                 select: {
                     id: true,
                     criador: true,
-                    amigo: true
+                    amigo: {
+                        select: {
+                            id:true,
+                            nome:true
+                        }
+                    }
                 }
             }
         }

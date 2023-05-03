@@ -38,9 +38,9 @@ router.put('/editarLocal/:id', local.update)
 
 const listaAmigo = require('../controllers/controllerListaAmigo')
 
-router.post('/enviarSolicitacao/:idCriador/:idAmigo',listaAmigo.enviarSolicitacaoAmizade)
-router.get('/verSolicitacao/:idAmigo',listaAmigo.responsderSolicitacaoAmizade)
-router.post('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', middleware.solicitacaoAmizade, usuario.updateListaAmigo)
+router.post('/enviarSolicitacao/:idCriador/:idAmigo', listaAmigo.enviarSolicitacaoAmizade)
+router.get('/verSolicitacao/:idAmigo', listaAmigo.responsderSolicitacaoAmizade)
+router.put('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', usuario.updateListaAmigo)
 
 
 module.exports = router

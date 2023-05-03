@@ -39,22 +39,23 @@ const autVerPerfil = async (req, res, next) => {
     })
 }
 
-const solicitacaoAmizade = async (req, res, next) => {
-    const resultado = await respostaAmizade.respostaAmizade(req)
+// const solicitacaoAmizade = async (req, res, next) => {
+//     const resultado = await respostaAmizade.respostaAmizade(req)
+//     console.log(resultado)
 
-    const token = req.headers.authorization
-    jwt.verify(token, process.env.KEY, (err, data) => {
-        if (err != null) {
-            res.status(404).json(err).end()
-        } else {
-            if (resultado.mensagem == "solicitação de amizade aceita") {
-                next()
-            } else {
-                res.status(403).send({ mensagem: 'solicitação de amizade rejeitada' });
-            }
-        }
-    })
-}
+//     const token = req.headers.authorization
+//     jwt.verify(token, process.env.KEY, (err, data) => {
+//         if (err != null) {
+//             res.status(404).json(err).end()
+//         } else {
+//             if (resultado == 1) {
+//                 next()
+//             } else {
+//                 res.status(403).send({ mensagem: 'solicitação de amizade rejeitada' });
+//             }
+//         }
+//     })
+// }
 
 
 
@@ -62,5 +63,5 @@ const solicitacaoAmizade = async (req, res, next) => {
 module.exports = {
     autorizacao,
     autVerPerfil,
-    solicitacaoAmizade
+    // solicitacaoAmizade
 }

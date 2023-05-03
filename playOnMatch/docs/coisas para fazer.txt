@@ -15,7 +15,7 @@ e fazer notificação de permissão para obter localização
 
 criar modal que vai poder visitar ou adicionar aquele usuario
 filtro por cidade (local)
-terminar lista de amigos
+terminar lista de amigos: quase 100%
 
 tela perfil
 
