@@ -97,15 +97,11 @@ header {
 }
 
 .btn {
-    height: 30px;
-    width: 60px;
-    background-color: #00f63e;
+    height: 50px;
+    width: 50px;
+    background-color:#00bdec;
     border: none;
     cursor: pointer;
-}
-
-.btn:hover {
-    background-color: blue;
 }
 
 .grid-template-areas-5 {
@@ -162,10 +158,6 @@ img {
     width: 100%;
 }
 
-.btnHistorico {
-    background-color: blue;
-}
-
 .sobre {
     height: 100vh;
 }
@@ -202,15 +194,15 @@ img {
     right: 0;
 }
 
-.btnFecharModal:hover {
+.btnFecharModal:hover, .btnFechaModalAmigos:hover, .btnFechaModalNotificacao:hover {
     background-color: #025959;
     color: white;
     cursor: pointer;
 }
 
-.ModalAtualizarPerfil,
-.ModalSobreMim,
-.ModalAmigos {
+.modalAtualizarPerfil,
+.modalNotificacao,
+.modalAmigos {
     background-color: #0123405b;
     color: black;
     height: 100vh;
@@ -223,7 +215,7 @@ img {
 }
 
 .atualizarPerfil,
-.sobreMim,
+.notificacaoModal,
 .amigosModal {
     height: 50%;
     width: 75%;
@@ -236,7 +228,7 @@ img {
 }
 
 .btnFechaModalAtualizarPerfil,
-.btnFechaModalSobreMim,
+.btnFechaModalNotificacao,
 .btnFechaModalAmigos {
     height: 30px;
     width: 30px;

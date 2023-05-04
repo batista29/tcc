@@ -1,11 +1,10 @@
-const btn1 = document.querySelector('.btnHistorico')
-const btn2 = document.querySelector('.btnSobre')
-const btn3 = document.querySelector('.btnAmigos')
+const btnNotificacao = document.querySelector('.btnNotificacao')
+const btnAmigo = document.querySelector('.btnAmigos')
 
 const btnEditarPerfil = document.querySelector('.btnEditarPerfil')
 const btnAtualizarPerfil = document.querySelector('.btnAtualizarPerfil')
 const btnFechaModalAtualizarPerfil = document.querySelector('.btnFechaModalAtualizarPerfil')
-const btnFechaModalSobreMim = document.querySelector('.btnFechaModalSobreMim')
+const btnFechaModalNotificacao = document.querySelector('.btnFechaModalNotificacao')
 const btnFechaModalAmigos = document.querySelector('.btnFechaModalAmigos')
 
 
@@ -22,7 +21,7 @@ const infoPartida = document.querySelector('.infoPartida')
 function listar() {
 
     let id = JSON.parse(localStorage.getItem('perfil'))
-    console.log(id)
+
     const options = { method: 'GET' };
 
     fetch(`http://localhost:3000/perfil/${id}`, options)
@@ -55,26 +54,26 @@ function listar() {
 }
 
 
-function mudarCorBotao() {
+// function mudarCorBotao() {
 
-    btn1.addEventListener('click', function () {
-        btn1.style.background = 'blue'
-        btn2.style.background = '#00f63e'
-        btn3.style.background = '#00f63e'
-    })
+// btn1.addEventListener('click', function () {
+// btn1.style.background = 'blue'
+// btn2.style.background = '#00f63e'
+// btn3.style.background = '#00f63e'
+// })
 
-    btn2.addEventListener('click', function () {
-        btn2.style.background = 'blue'
-        btn3.style.background = '#00f63e'
-        btn1.style.background = '#00f63e'
-    })
+// btn2.addEventListener('click', function () {
+// btn2.style.background = 'blue'
+// btn3.style.background = '#00f63e'
+// btn1.style.background = '#00f63e'
+// })
 
-    btn3.addEventListener('click', function () {
-        btn3.style.background = 'blue'
-        btn1.style.background = '#00f63e'
-        btn2.style.background = '#00f63e'
-    })
-}
+// btn3.addEventListener('click', function () {
+//     btn3.style.background = 'blue'
+//     btn1.style.background = '#00f63e'
+//     btn2.style.background = '#00f63e'
+// })
+// }
 
 setTimeout(() => {
     let partidas = document.querySelectorAll('.infoPartida');
@@ -88,14 +87,14 @@ setTimeout(() => {
 
 
 btnEditarPerfil.addEventListener('click', function () {
-    let atualizarPerfil = document.querySelector('.ModalAtualizarPerfil')
+    let atualizarPerfil = document.querySelector('.modalAtualizarPerfil')
 
     atualizarPerfil.style.display = "flex"
 })
 
 
 btnFechaModalAtualizarPerfil.addEventListener('click', function (e) {
-    let atualizarPerfil = document.querySelector('.ModalAtualizarPerfil')
+    let atualizarPerfil = document.querySelector('.modalAtualizarPerfil')
 
     atualizarPerfil.style.display = "none"
 })
@@ -111,29 +110,52 @@ btnAtualizarPerfil.addEventListener('click', function (e) {
     e.preventDefault();
 })
 
-btn2.addEventListener('click', function () {
-    let sobreMim = document.querySelector('.ModalSobreMim')
+btnNotificacao.addEventListener('click', function () {
+    let notificacaoModal = document.querySelector('.modalNotificacao')
 
-    sobreMim.style.display = "flex"
+    notificacaoModal.style.display = "flex"
 })
 
-btnFechaModalSobreMim.addEventListener('click', function (e) {
-    let sobreMim = document.querySelector('.ModalSobreMim')
+btnFechaModalNotificacao.addEventListener('click', function (e) {
+    let notificacaoModal = document.querySelector('.modalNotificacao')
 
-    sobreMim.style.display = "none"
+    notificacaoModal.style.display = "none"
 })
 
-btn3.addEventListener('click', function () {
-    let amigosModal = document.querySelector('.ModalAmigos')
+btnAmigo.addEventListener('click', function () {
+    let amigosModal = document.querySelector('.modalAmigos')
 
     amigosModal.style.display = "flex"
 })
 
 btnFechaModalAmigos.addEventListener('click', function (e) {
-    let amigosModal = document.querySelector('.ModalAmigos')
+    let amigosModal = document.querySelector('.modalAmigos')
 
     amigosModal.style.display = "none"
 })
 
-mudarCorBotao()
+function notificaoAmizade() {
+
+    let { id } = JSON.parse(localStorage.getItem('usuario'))
+    const options = { method: 'GET' };
+
+    const dadosNotificacao = document.querySelector('.dadosNotificacao')
+    const notificacaoModal = document.querySelector('.notificacaoModal')
+
+    fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
+        .then(response => response.json())
+        .then(res => {
+            let solicitacaoAmizade = res.amigo.filter(element => element.situacao == 0)
+            solicitacaoAmizade.forEach((e) => {
+                console.log(e)
+                let notificaoAmizade = dadosNotificacao.cloneNode(true)
+                notificaoAmizade.classList.remove("model")
+
+                notificaoAmizade.querySelector('.nomeNotificacao').innerHTML = e.idAmigo
+
+                notificacaoModal.appendChild(notificaoAmizade)
+            })
+        })
+}
+notificaoAmizade()
 listar()
