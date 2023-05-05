@@ -32,6 +32,7 @@ header {
     align-items: center;
     position: fixed;
     top: 0;
+    z-index: 1;
 }
 
 .modalNotificacao{
@@ -123,7 +124,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .abrirModal1 {
-    position: absolute;
     height: 4vh;
     width: 4vh;
     border-radius: 25px;
@@ -159,7 +159,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .idLocal {
-    position: absolute;
+    
     padding-left: 12px;
 }
 

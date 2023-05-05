@@ -421,6 +421,7 @@ function notificaoAmizade() {
                 let notificaoAmizade = dadosNotificacao.cloneNode(true)
                 notificaoAmizade.classList.remove("model")
 
+                notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.criador.id
                 notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.criador.nome + " mandou uma solicitação de amizade"
 
                 notificacaoModal.appendChild(notificaoAmizade)
@@ -428,18 +429,23 @@ function notificaoAmizade() {
         })
 }
 
-function responderSolicitacaoAmizader(resposta) {
+function responderSolicitacaoAmizader(resposta, teste) {
+
+    let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
+    let { id } = user
+
 
     const options = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: resposta
+        body: `{"RespUsuario":${resposta}}`
     };
 
-    // fetch('http://localhost:3000/solicitacaoAmizade/3/2', options)
-    //     .then(response => response.json())
-    //     .then(response => console.log(response))
-    //     .catch(err => console.error(err));
+    fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
+        .then(response => {
+            console.log(response)
+            return response.json()})
+        .then(response => console.log(response))
 }
 
 notificaoAmizade()

@@ -248,6 +248,7 @@ const updateListaAmigo = async (req, res) => {
     let findDono = amigo.criadorListaAmigo.find(lista => lista.idCriador == idNovoAmigo && lista.idAmigo == idCriadorLista)
 
     if (RespUsuario == 1) {
+      
         const listaDeQuemRecebeu = await prisma.lista_amigos.update({
             where: { id: findAmigo.id },
             data: { situacao: 1 }
@@ -270,7 +271,8 @@ const updateListaAmigo = async (req, res) => {
             data: { situacao: 2 }
         })
     }
-    res.status(200).send('sucesso').end()
+
+    res.status(200).json('sucesso').end()
 }
 
 const listarAmigos = async (req, res) => {
@@ -285,8 +287,8 @@ const listarAmigos = async (req, res) => {
                     criador: true,
                     amigo: {
                         select: {
-                            id:true,
-                            nome:true
+                            id: true,
+                            nome: true
                         }
                     }
                 }
