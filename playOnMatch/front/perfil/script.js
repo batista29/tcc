@@ -134,5 +134,4 @@ btnFechaModalAmigos.addEventListener('click', function (e) {
     amigosModal.style.display = "none"
 })
 
-notificaoAmizade()
 listar()

@@ -35,7 +35,7 @@ header {
     z-index: 1;
 }
 
-.modalNotificacao{
+.modalNotificacao {
     height: 100vh;
     width: 380px;
     position: fixed;
@@ -46,28 +46,28 @@ header {
     font-size: 14px;
 }
 
-.itensNotificacao{
+.itensNotificacao {
     height: 100px;
     width: 100%;
     background-color: #008F8C;
     display: flex;
     align-items: center;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 }
 
-.descricaoNotificacao{
+.descricaoNotificacao {
     width: 50%;
 }
 
-.btnsResposta{
+.btnsResposta {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap:5px;
+    gap: 5px;
 }
 
 .btnAceitarAmizade,
-.btnRecusarAmizade{
+.btnRecusarAmizade {
     height: 30px;
     width: 80px;
     border: none;
@@ -159,7 +159,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .idLocal {
-    
+
     padding-left: 12px;
 }
 
@@ -265,7 +265,7 @@ body::-webkit-scrollbar-thumb {
     border-bottom: 1px solid rgb(0, 0, 0);
 }
 
-.buttons{
+.buttons {
     gap: 10px;
 }
 
@@ -278,14 +278,15 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-.btnNotificacao:hover{
+.btnNotificacao:hover {
     background-color: var(--cor5);
 }
 
-.imgNotificacao{
+.imgNotificacao {
     height: 24px;
     width: 24px;
 }
+
 /* .perfil:hover {
     background-color: #00bdec;
     cursor: pointer;
@@ -334,15 +335,16 @@ img.iconeBusca {
     background-color: #0123405b;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 
 .infoPartida {
-    height: 90%;
-    width: 75%;
+    height: 60%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: var(--textoHome);
     border-radius: 10px;
     position: relative;
     flex-direction: column;
@@ -410,13 +412,16 @@ img.iconeBusca {
 
 .participantes {
     height: 70%;
-    width: 80%;
-    background-color: #00bdec;
+    width: 60%;
+    background-color: var(--backgroundLogin);
+    font-size: 1.5em;
+    border: 1px solid black;
+    border-radius: 30px;
 }
 
 .infoParticipantes {
     display: flex;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     justify-content: space-around;
 }
 
@@ -514,4 +519,18 @@ img.iconeBusca {
 .modaAdicionar button {
     height: 30px;
     width: 100px;
+}
+
+.btnAdicionarAmigo,
+.btnVisitarPerfil {
+    height: 100%;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+}
+
+.imgAdicionarUsuario,
+.imgVisitarUsuario{
+    height: 25px;
+    width: 25px;
 }
