@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --backgroundHome: #012340;
     --backgroundLogin: #025959;
     --textoHome: #04D939;
@@ -7,6 +7,14 @@
     --cor5: #03A63C;
     --cor6: #00bdec;
     --header: cadetblue;
+} */
+
+:root {
+    --backgroundHome: #012340;
+    --backgroundLogin: #025959;
+    --cor4: #008F8C;
+    --cor5: #0CABA8;
+    --textoHome: #0FC2C0;
 }
 
 * {
@@ -17,15 +25,58 @@
 
 header {
     display: flex;
-    background-color: var(--header);
+    background-color: var(--backgroundLogin);
     height: 10vh;
     width: 100%;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+}
+
+.modalNotificacao{
+    height: 100vh;
+    width: 380px;
+    position: fixed;
+    background-color: var(--backgroundLogin);
+    right: 0;
+    top: 0;
+    z-index: 1;
+    font-size: 14px;
+}
+
+.itensNotificacao{
+    height: 100px;
+    width: 100%;
+    background-color: #008F8C;
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+}
+
+.descricaoNotificacao{
+    width: 50%;
+}
+
+.btnsResposta{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:5px;
+}
+
+.btnAceitarAmizade,
+.btnRecusarAmizade{
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--backgroundLogin);
+    color: white;
 }
 
 h1 {
-    color: #012340;
+    color: white;
 }
 
 body {
@@ -42,14 +93,11 @@ body {
 
 body::-webkit-scrollbar {
     width: 10px;
-    /* width of the entire scrollbar */
 }
 
 body::-webkit-scrollbar-thumb {
     background-color: white;
-    /* color of the scroll thumb */
     border-radius: 20px;
-    /* roundness of the scroll thumb */
 }
 
 .read {
@@ -61,7 +109,6 @@ body::-webkit-scrollbar-thumb {
     padding: 30px;
     margin-top: 5vh;
     flex-wrap: wrap;
-    position: relative;
 }
 
 .friends {
@@ -69,7 +116,7 @@ body::-webkit-scrollbar-thumb {
     top: 0;
     right: 0;
     position: fixed;
-    background-color: var(--header);
+    background-color: var(--backgroundLogin);
     min-height: 100%;
     max-height: auto;
     width: 18%;
@@ -211,16 +258,38 @@ body::-webkit-scrollbar-thumb {
 
 .perfil {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 10px;
+    align-items: center;
     height: 10vh;
+    justify-content: space-around;
     border-bottom: 1px solid rgb(0, 0, 0);
 }
 
-.perfil:hover {
-    background-color: #00bdec;
+.buttons{
+    gap: 10px;
+}
+
+.btnNotificacao {
+    height: 35px;
+    width: 35px;
+    background-color: var(--cor4);
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
 }
+
+.btnNotificacao:hover{
+    background-color: var(--cor5);
+}
+
+.imgNotificacao{
+    height: 24px;
+    width: 24px;
+}
+/* .perfil:hover {
+    background-color: #00bdec;
+    cursor: pointer;
+} */
 
 .filtro {
     text-align: center;

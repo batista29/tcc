@@ -1,12 +1,16 @@
 :root {
     --backgroundHome: #012340;
     --backgroundLogin: #025959;
-    --textoHome: #04D939;
-    --textoHome2: #00f63e;
-    --cor4: #027333;
-    --cor5: #03A63C;
+    --cor4: #008F8C;
+    --cor5: #0CABA8;
+    --textoHome: #0FC2C0;
+    /* --textoHome2: #00f63e;
     --cor6: #00bdec;
-    --header: cadetblue;
+    --header: cadetblue; */
+}
+a{
+    text-decoration: none;
+    color: var(--backgroundHome);
 }
 
 * {
@@ -22,7 +26,7 @@ body {
 
 header {
     display: flex;
-    background-color: var(--header);
+    background-color: var(--backgroundLogin);
     height: 10vh;
     width: 100%;
     justify-content: center;
@@ -50,15 +54,11 @@ header {
     height: 85%;
     width: 100%;
     display: grid;
-    justify-items:center
+    justify-items: center
 }
 
 .nomeUsuario {
     grid-area: nomeUsuario;
-}
-
-.partidasJogadas {
-    grid-area: partidasJogadas;
 }
 
 .dataNascimento {
@@ -77,11 +77,15 @@ header {
     grid-area: relacionamento;
 }
 
+.btnEditarPerfil {
+    grid-area: buttons;
+}
+
 .cidade {
     grid-area: cidade;
 }
 
-.buttons{
+.buttons {
     display: flex;
     width: 100%;
     gap: 10px;
@@ -90,23 +94,44 @@ header {
     margin: 0 10px 20px 10px;
 }
 
-.btnEditarPerfil {
+.btnNotificacao,
+.btnAmigos {
+    height: 40px;
+    width: 40px;
+    background-color: var(--cor5);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btnEditarPerfil{
+    height:30px;
+    width: 80px;
+    background-color: var(--cor5);
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
     position: absolute;
     right: 0;
     margin-right: 30px;
 }
 
-.btn {
-    height: 50px;
-    width: 50px;
-    background-color:#00bdec;
-    border: none;
-    cursor: pointer;
+.btnNotificacao:hover,
+.btnAmigos:hover,
+.btnEditarPerfil:hover {
+    background-color: var(--textoHome);
+}
+
+.imgNotificacao,
+.imgAmigos {
+    height: 25px;
+    width: 25px;
 }
 
 .grid-template-areas-5 {
+    margin-top:10px ;
     grid-template-areas:
-        "nomeUsuario  amigos . dataNascimento"
+        "nomeUsuario btnEditarPerfil . dataNascimento"
         "partidasJogadas esporte cidade relacionamento"
 }
 
@@ -135,7 +160,7 @@ header {
 .graficos,
 .infoUser {
     border: 1px solid rgb(255, 255, 255);
-    background-color: rgb(14, 34, 99);
+    background-color: var(--backgroundLogin)
 }
 
 .infoPartida {
@@ -143,13 +168,11 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    /* background-color: #00bdec; */
     font-size: 20px;
 }
 
 .infoPartida:hover {
-    /* background-color: #00bdec; */
-    background-color: var(--backgroundLogin);
+    background-color: var(--cor4);
     cursor: pointer;
 }
 
@@ -163,7 +186,7 @@ img {
 }
 
 .modal {
-    background-color: #0123405b;
+    /* background-color: var(--backgroundHome); */
     height: 100vh;
     width: 100%;
     top: 0;
@@ -194,7 +217,9 @@ img {
     right: 0;
 }
 
-.btnFecharModal:hover, .btnFechaModalAmigos:hover, .btnFechaModalNotificacao:hover {
+.btnFecharModal:hover,
+.btnFechaModalAmigos:hover,
+.btnFechaModalNotificacao:hover {
     background-color: #025959;
     color: white;
     cursor: pointer;

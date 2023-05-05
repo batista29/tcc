@@ -13,19 +13,31 @@
     <header>
         <h1>PlayOnMatch</h1>
     </header>
+    <div class="modalNotificacao">
+        <div class="itensNotificacao model">
+            <div class="descricaoNotificacao">
+                <p class="nomeSolicitacao"></p>
+            </div>
+            <div class="btnsResposta">
+                <button onclick="responderSolicitacaoAmizader(1)" class="btnAceitarAmizade">aceitar</button>
+                <button onclick="responderSolicitacaoAmizader(2)" class="btnRecusarAmizade">recusar</button>
+            </div>
+        </div>
+    </div>
     <main>
         <button onclick="abrirModal()" class="abrirModal1">+</button>
-        <div class="partidasFavoritas model">
+        <!-- <div class="partidasFavoritas model">
 
-        </div>
-        <div class="filtro">
-            <input class="filtroTituloPartidas" type="text">
-            <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
-            <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)"
-                pattern="\d{2}/\d{2}/\d{4}" placeholder="dd/mm/yyyy" maxlength="10">
-        </div>
+        </div> -->
+
 
         <div class="read">
+            <div class="filtro">
+                <input class="filtroTituloPartidas" type="text">
+                <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
+                <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)"
+                    pattern="\d{2}/\d{2}/\d{4}" placeholder="dd/mm/yyyy" maxlength="10">
+            </div>
             <div onclick="abrirModalPartida(this)" class="readInfo model">
                 <div class="readLocal">
                     <button class="btnFavoritarPartida">
@@ -47,9 +59,16 @@
             <button id="btnTopo" class="buttonTop">+++</button>
         </div>
         <div class="friends">
-            <div class="perfil model" onclick="acessarPerfil(this)">
+            <div class="perfil model">
                 <p class="idUser">Id</p>
                 <p class="nomeUser">Nome:</p>
+                <div class="buttons">
+                    <button class="btnNotificacao"><img class="imgNotificacao" src="../../docs/imgs/notificacao.png"
+                            alt="">
+                    </button>
+                    <button class="btnNotificacao"><img class="imgNotificacao"
+                            src="../../docs/imgs/configuracoes-cog.png" alt=""></button>
+                </div>
             </div>
             <div class="allFriends">
                 <h2>FRIENDS</h2>

@@ -404,6 +404,45 @@ function pegarLocalizacaoUsuario() {
 }
 
 
+function notificaoAmizade() {
+
+    let { id } = JSON.parse(localStorage.getItem('usuario'))
+    const options = { method: 'GET' };
+
+    const dadosNotificacao = document.querySelector('.itensNotificacao')
+    const notificacaoModal = document.querySelector('.modalNotificacao')
+
+    fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
+        .then(response => response.json())
+        .then(res => {
+            let solicitacaoAmizade = res.amigo.filter(element => element.situacao == 0)
+            solicitacaoAmizade.forEach((e) => {
+                console.log(e)
+                let notificaoAmizade = dadosNotificacao.cloneNode(true)
+                notificaoAmizade.classList.remove("model")
+
+                notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.criador.nome + " mandou uma solicitação de amizade"
+
+                notificacaoModal.appendChild(notificaoAmizade)
+            })
+        })
+}
+
+function responderSolicitacaoAmizader(resposta) {
+
+    const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: resposta
+    };
+
+    // fetch('http://localhost:3000/solicitacaoAmizade/3/2', options)
+    //     .then(response => response.json())
+    //     .then(response => console.log(response))
+    //     .catch(err => console.error(err));
+}
+
+notificaoAmizade()
 
 listaAmigos()
 usuario()

@@ -1,4 +1,4 @@
-const btnNotificacao = document.querySelector('.btnNotificacao')
+// const btnNotificacao = document.querySelector('.btnNotificacao')
 const btnAmigo = document.querySelector('.btnAmigos')
 
 const btnEditarPerfil = document.querySelector('.btnEditarPerfil')
@@ -33,8 +33,8 @@ function listar() {
 
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
             usuario.querySelector('.dataNascimento').innerHTML = res.nascimento.split('T')[0]
-            usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Paritdas Jogadas"
-            usuario.querySelector('.amigos').innerHTML = res.criadorListaAmigo.length + " Amigos"
+            usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas Jogadas"
+            // usuario.querySelector('.amigos').innerHTML = res.criadorListaAmigo.length + " Amigos"
 
             main.appendChild(usuario)
 
@@ -110,11 +110,11 @@ btnAtualizarPerfil.addEventListener('click', function (e) {
     e.preventDefault();
 })
 
-btnNotificacao.addEventListener('click', function () {
-    let notificacaoModal = document.querySelector('.modalNotificacao')
+// btnNotificacao.addEventListener('click', function () {
+//     let notificacaoModal = document.querySelector('.modalNotificacao')
 
-    notificacaoModal.style.display = "flex"
-})
+//     notificacaoModal.style.display = "flex"
+// })
 
 btnFechaModalNotificacao.addEventListener('click', function (e) {
     let notificacaoModal = document.querySelector('.modalNotificacao')
@@ -134,28 +134,5 @@ btnFechaModalAmigos.addEventListener('click', function (e) {
     amigosModal.style.display = "none"
 })
 
-function notificaoAmizade() {
-
-    let { id } = JSON.parse(localStorage.getItem('usuario'))
-    const options = { method: 'GET' };
-
-    const dadosNotificacao = document.querySelector('.dadosNotificacao')
-    const notificacaoModal = document.querySelector('.notificacaoModal')
-
-    fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
-        .then(response => response.json())
-        .then(res => {
-            let solicitacaoAmizade = res.amigo.filter(element => element.situacao == 0)
-            solicitacaoAmizade.forEach((e) => {
-                console.log(e)
-                let notificaoAmizade = dadosNotificacao.cloneNode(true)
-                notificaoAmizade.classList.remove("model")
-
-                notificaoAmizade.querySelector('.nomeNotificacao').innerHTML = e.idAmigo
-
-                notificacaoModal.appendChild(notificaoAmizade)
-            })
-        })
-}
 notificaoAmizade()
 listar()
