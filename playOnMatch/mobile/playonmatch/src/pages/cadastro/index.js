@@ -4,8 +4,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 
-  const [email, setEmail] = useState('rodrod@gmail.com')
-  const [senha, setSenha] = useState('123')
+  const [nome, setNome] = useState('')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+  const [nascimento, setNascimento] = useState('')
+  const [cep, setCep] = useState('')
 
   let dados = {
     email: email,
@@ -13,7 +16,7 @@ export default function Login({ navigation }) {
   }
 
   const userLogin = () => {
-    fetch("http://10.87.207.35:3000/login", {
+    fetch("", {
       method: 'POST',
       headers: {
         Accept: 'application/json',
