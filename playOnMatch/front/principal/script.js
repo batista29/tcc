@@ -125,8 +125,12 @@ function listaParticipantes() {
             const infoParticipante = document.querySelector('.infoParticipantes')
             const btnCancelar = document.querySelector('.btnCancelarParticipacao')
             const btnParticipar = document.querySelector('.btnParticiparDoEvento')
+            const btnAdicionarAmigo = document.querySelector('.btnAdicionarAmigo')
+            const btnVisitarPerfil = document.querySelector('.btnVisitarPerfil')
 
             res.EncontroUsuario.forEach((e) => {
+
+                console.log(e)
 
                 let nomeParticipante = e.idParticipante.nome
                 let idParticipante = e.idParticipante.id
@@ -147,8 +151,13 @@ function listaParticipantes() {
                     encerrarEncontro.classList.add("model")
                 }
 
+                if (e.idCriador.id == e.idParticipante.id) {
+                    btnAdicionarAmigo.classList.add('model')
+                }
+
                 participantes.appendChild(dados)
             })
+
             let { id } = user
             let nw = res.EncontroUsuario.filter(element => element.idParticipante.id == id)
             if (nw.length == 1) {
@@ -158,6 +167,10 @@ function listaParticipantes() {
                 btnCancelar.disabled = true
                 btnParticipar.disabled = false
             }
+
+            // let usuarioCriador = res.EncontroUsuario.filter(element => )
+
+
         })
 }
 
@@ -444,8 +457,17 @@ function responderSolicitacaoAmizader(resposta, teste) {
     fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
         .then(response => {
             console.log(response)
-            return response.json()})
+            return response.json()
+        })
         .then(response => console.log(response))
+}
+
+function adicionarAmigo() {
+    console.log('oi')
+}
+
+function visitarPerfil() {
+    console.log('oi')
 }
 
 notificaoAmizade()
