@@ -125,12 +125,8 @@ function listaParticipantes() {
             const infoParticipante = document.querySelector('.infoParticipantes')
             const btnCancelar = document.querySelector('.btnCancelarParticipacao')
             const btnParticipar = document.querySelector('.btnParticiparDoEvento')
-            const btnAdicionarAmigo = document.querySelector('.btnAdicionarAmigo')
-            const btnVisitarPerfil = document.querySelector('.btnVisitarPerfil')
 
             res.EncontroUsuario.forEach((e) => {
-
-                console.log(e)
 
                 let nomeParticipante = e.idParticipante.nome
                 let idParticipante = e.idParticipante.id
@@ -142,6 +138,8 @@ function listaParticipantes() {
                 dados.querySelector('.nomeParticipante').innerHTML = nomeParticipante
 
                 let { id } = user
+                let btnAdicionarAmigo = dados.querySelector('.btnAdicionarAmigo')
+                // let btnVisitarPerfil = dados.querySelector('.btnVisitarPerfil')
 
                 if (e.idCriador.id == id) {
                     let encerrarEncontro = document.querySelector('.encerrarEncontro')
@@ -151,7 +149,7 @@ function listaParticipantes() {
                     encerrarEncontro.classList.add("model")
                 }
 
-                if (e.idCriador.id == e.idParticipante.id) {
+                if (id == e.idParticipante.id) {
                     btnAdicionarAmigo.classList.add('model')
                 }
 
@@ -168,8 +166,12 @@ function listaParticipantes() {
                 btnParticipar.disabled = false
             }
 
-            // let usuarioCriador = res.EncontroUsuario.filter(element => )
 
+            // let usuarioCriador = res.EncontroUsuario.filter(element => element.idParticipante.id == id)
+
+            // if (usuarioCriador) {
+            //     btnAdicionarAmigo.classList.add('model')
+            // }
 
         })
 }
@@ -317,6 +319,8 @@ function listaAmigos() {
                 let friendsInfo = document.querySelector('.friends_info')
 
                 res.forEach((e) => {
+                    
+                    console.log(e)
 
                     let info = friendsInfo.cloneNode(true)
 
