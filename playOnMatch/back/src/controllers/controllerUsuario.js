@@ -60,6 +60,8 @@ const readOne = async (req, res) => {
 }
 
 const update = async (req, res) => {
+    console.log('teste')
+
     try {
         let usuario = await prisma.usuario.update({
             where: {
@@ -67,9 +69,10 @@ const update = async (req, res) => {
             },
             data: req.body
         })
-        res.status(200).send({ mensagem: `Usuario ${usuario.nome} foi atualizado com sucesso` }).end()
+        res.status(200).json(usuario).end()
     } catch (error) {
-        res.status(200).send({ mensagem: `Erro ${error.code}, usuário não foi encontrado` }).end()
+        console.error(error)
+        res.status(400).send(error).end()
     }
 }
 
@@ -96,6 +99,8 @@ const readPerfil = async (req, res) => {
                 id: true,
                 nascimento: true,
                 nome: true,
+                cep:true,
+                email:true,
                 criadorListaAmigo: true,
                 participante: {
                     select: {

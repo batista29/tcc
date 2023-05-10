@@ -280,14 +280,18 @@ function formatarData(campo) {
     }, 10);
 }
 
-const perfil = document.querySelector('.perfil')
 
-function acessarPerfil(id) {
-    id = id.children[0].innerHTML.slice(1)
+function acessarPerfil() {
+    
+    let { id } = user
+
+    // id = id.children[0].innerHTML.slice(1)
     localStorage.setItem("perfil", JSON.stringify(id))
     window.location.href = "../perfil/index.html"
-
 }
+
+const perfil = document.querySelector('.perfil')
+const per = document.querySelector('.friends')
 
 function usuario() {
     let { id } = user
@@ -298,10 +302,13 @@ function usuario() {
         .then(response => response.json())
         .then(res => {
 
+            perfil.cloneNode(true)
             perfil.classList.remove("model")
 
             perfil.querySelector(".idUser").innerHTML = "#" + res.usuario.id
             perfil.querySelector(".nomeUser").innerText = res.usuario.nome
+
+            per.appendChild(perfil)
         })
 }
 
@@ -319,8 +326,6 @@ function listaAmigos() {
                 let friendsInfo = document.querySelector('.friends_info')
 
                 res.forEach((e) => {
-                    
-                    console.log(e)
 
                     let info = friendsInfo.cloneNode(true)
 
@@ -343,11 +348,6 @@ btnTopo.addEventListener("click", function () {
 
 
 const encerrarPartida = document.querySelector('.encerrarEncontro')
-
-// encerrarPartida.addEventListener("click", function () {
-//     console.log('oi')
-// })
-
 
 function acessarPerfilAmigo(idAmigo) {
 

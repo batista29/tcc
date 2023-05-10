@@ -22,16 +22,16 @@
                 <p class="dados nomeUsuario"></p>
                 <p class="dados partidasJogadas"></p>
                 <p class="dados dataNascimento"></p>
+                <p class="dados email model"></p>
                 <!-- <p class="dados entrada">Entrou em Outubro de 2020</p> -->
             </div>
             <div class="buttons">
                 <button class="btnAmigos"><img class="imgAmigos" src="../../docs/imgs/amigos.png" alt=""></button>
-                <button class="btnEditarPerfil">Editar perfil</button>
+                <button onclick="abrirModalEditarPerfil(this)" class="btnEditarPerfil">Editar perfil</button>
             </div>
         </div>
         <div class="historico">
-            <div class="graficos">
-            </div>
+
             <div class="partidas">
                 <div class="infoPartida model">
                     <p class="tituloPartida">bascus partida 5x5</p>
@@ -54,10 +54,14 @@
                 <button class="btnFechaModalAtualizarPerfil">x</button>
                 <form action="">
                     <label for="">Nome:</label>
-                    <input type="text">
+                    <input class="atlNome" type="text">
                     <label for="">Email:</label>
-                    <input type="email">
-                    <button class="btnAtualizarPerfil">enviar</button>
+                    <input class="atlEmail" type="email">
+                    <label for="">data de nascimento:</label>
+                    <input class="atlNascimento" type="text">
+                    <label for="">cep:</label>
+                    <input class="atlCep" type="email">
+                    <button onclick="editarPerfil()" class="btnAtualizarPerfil">enviar</button>
                 </form>
             </div>
         </div>

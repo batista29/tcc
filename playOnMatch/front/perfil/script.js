@@ -34,7 +34,7 @@ function listar() {
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
             usuario.querySelector('.dataNascimento').innerHTML = res.nascimento.split('T')[0]
             usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas Jogadas"
-            // usuario.querySelector('.amigos').innerHTML = res.criadorListaAmigo.length + " Amigos"
+            usuario.querySelector('.email').innerHTML = res.email
 
             main.appendChild(usuario)
 
@@ -85,11 +85,25 @@ setTimeout(() => {
     });
 }, 100);
 
+function abrirModalEditarPerfil(dados) {
+    let nome = dados.parentNode.parentNode.children[2].children[0].innerHTML
+    let nascimento = dados.parentNode.parentNode.children[2].children[2].innerHTML
+    let email = dados.parentNode.parentNode.children[2].children[3].innerHTML
 
-btnEditarPerfil.addEventListener('click', function () {
+    window.localStorage.setItem('dadosPerfil', JSON.stringify({ 'nome': nome, 'nascimento': nascimento, "email": email }));
+
     let atualizarPerfil = document.querySelector('.modalAtualizarPerfil')
 
     atualizarPerfil.style.display = "flex"
+}
+
+btnEditarPerfil.addEventListener('click', function (a) {
+
+    // console.log(a.appendChil)
+
+
+
+
 })
 
 
@@ -133,5 +147,57 @@ btnFechaModalAmigos.addEventListener('click', function (e) {
 
     amigosModal.style.display = "none"
 })
+
+function editarPerfil() {
+
+    let usuario = JSON.parse(localStorage.getItem('usuario'))
+    let dadosPerfil = JSON.parse(localStorage.getItem("dadosPerfil"));
+
+    let atlNome = document.querySelector('.atlNome')
+    let atlEmail = document.querySelector('.atlEmail')
+    let atlNascimento = document.querySelector('.atlNascimento')
+    let atlCep = document.querySelector('.atlCep')
+
+
+    let dados = {
+        nome: atlNome.value.trim(),
+        email: atlEmail.value.trim(),
+        nascimento: atlNascimento.value.trim(),
+        cep: atlCep.value.trim()
+    }
+
+    if (dados.nome.length == 0) {
+        dados.nome = dadosPerfil.nome
+    }
+
+    if (dados.email.length == 0) {
+        dados.email = dadosPerfil.email
+    }
+
+    if (dados.nascimento.length == 0) {
+        dados.nascimento = dadosPerfil.nasciment
+    }
+
+    if (dados.cep.length == 0) {
+        dados.cep = '0'
+    }
+
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: usuario.token
+        },
+        body: JSON.stringify(dados)
+    };
+
+    fetch(`http://localhost:3000/atualizarUsuario/${usuario.id}`, options)
+        .then(response => {
+            console.log(response)
+            return response.json()
+        })
+        .then(res => console.log(res))
+        window.location.reload()
+}
 
 listar()

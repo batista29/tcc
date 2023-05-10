@@ -10,20 +10,19 @@ poder encerrar encontro : adiado
 editar encontro : adiado
 convidar amigos para a partida
 poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse : em andamento
-dps do login abrir modal para obter localização
+dps do login abrir modal para obter localização:certo
 e fazer notificação de permissão para obter localização
 
-criar modal que vai poder visitar ou adicionar aquele usuario
-filtro por cidade (local)
+criar modal que vai poder visitar ou adicionar aquele usuario: feito
+filtro por cidade (local) : feito
 terminar lista de amigos: quase 100%
 
 tela perfil
 
-terminar de puxar dados user
-editar perfil
+terminar de puxar dados user:feito
+editar perfil:feito
+modal para mais info sobre a partida:feito
 puxar dados partida
-modal para mais info sobre a partida
-colocar estatisticas do jogos
 modal para poder acessar perfil ou adicionar amigo pelos dados da partida
 
 mobile: tudo

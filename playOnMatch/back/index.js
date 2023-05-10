@@ -11,5 +11,5 @@ server.use(cors())
 server.use(router)
 
 server.listen(3000, () => {
-    console.log("server rodando")
+    console.log("api rodando")
 })
