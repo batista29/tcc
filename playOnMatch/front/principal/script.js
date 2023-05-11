@@ -474,6 +474,12 @@ function visitarPerfil() {
     console.log('oi')
 }
 
+function openMenu(){
+    let menu = document.querySelector('.partidasFavoritas')
+
+    menu.style.display = 'block'
+}
+
 notificaoAmizade()
 
 listaAmigos()

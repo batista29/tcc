@@ -8,7 +8,6 @@
     --cor6: #00bdec;
     --header: cadetblue;
 } */
-
 :root {
     --backgroundHome: #012340;
     --backgroundLogin: #025959;
@@ -30,9 +29,13 @@ header {
     width: 100%;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 1;
+}
+
+main{
+    position: relative;
 }
 
 .modalNotificacao {
@@ -105,10 +108,10 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     color: white;
     width: 80%;
-    margin-left: 3vh;
+    /* margin-left: 3vh; */
     gap: 20px;
     padding: 30px;
-    margin-top: 5vh;
+    /* margin-top: 5vh; */
     flex-wrap: wrap;
 }
 
@@ -292,7 +295,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 } */
 
-.filtro {
+/* .filtro {
     text-align: center;
     width: 88%;
     display: flex;
@@ -301,7 +304,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 20px;
     border-radius: 25px;
     padding-right: 30px;
-}
+} */
 
 .filtroTituloPartidas,
 .filtroDatePartidas {
@@ -318,8 +321,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .iconeBusca {
-    height: 35px;
-    width: 35px;
+    height: 15px;
+    width: 15px;
 }
 
 img.iconeBusca {
@@ -388,9 +391,12 @@ img.iconeBusca {
 }
 
 .partidasFavoritas {
-    height: 90vh;
+    display: none;
+    height: 100vh;
     width: 30vw;
     background-color: #00bdec;
+    position: absolute;
+    top: 0;
 }
 
 .btnFechaModalPartidas {
@@ -536,4 +542,8 @@ img.iconeBusca {
     border-radius: 50%;
     cursor: pointer;
 
+}
+
+#menu{
+ cursor: pointer;
 }

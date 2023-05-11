@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body onload="carregar()">
@@ -15,6 +16,7 @@
             <h1>PlayOnMatch</h1>
         </a>
     </header>
+    
     <!-- <div class="modalNotificacao">
         <div class="itensNotificacao model">
             <div class="descricaoNotificacao">
@@ -28,12 +30,13 @@
         </div>
     </div> -->
     <main>
+        <i id="menu" class="material-icons" onclick="openMenu()">menu</i> 
         <button onclick="abrirModal()" class="abrirModal1">+</button>
-        <!-- <div class="partidasFavoritas model">
+        <div class="partidasFavoritas">
 
-        </div> -->
+        </div>
         <div class="read">
-            <div class="filtro">
+             <div class="filtro">
                 <input class="filtroTituloPartidas" type="text">
                 <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
                 <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)"
