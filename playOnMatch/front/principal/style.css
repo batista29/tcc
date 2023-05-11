@@ -29,13 +29,14 @@ header {
     width: 100%;
     justify-content: center;
     align-items: center;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1;
 }
 
-main{
+main {
     position: relative;
+    margin-top: 10vh;
 }
 
 .modalNotificacao {
@@ -108,11 +109,11 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     color: white;
     width: 80%;
-    /* margin-left: 3vh; */
     gap: 20px;
-    padding: 30px;
-    /* margin-top: 5vh; */
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2vw;
 }
 
 .friends {
@@ -123,7 +124,7 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--backgroundLogin);
     min-height: 100%;
     max-height: auto;
-    width: 18%;
+    width: 20%;
 }
 
 .abrirModal1 {
@@ -140,8 +141,8 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--backgroundLogin);
     border-radius: 25px;
     border: 2px solid rgb(130, 179, 212);
-    height: 250px;
-    width: 350px;
+    height: 220px;
+    width: 300px;
     font-size: 20px;
     transition: transform 1s;
 }
@@ -295,7 +296,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 } */
 
-/* .filtro {
+.filtro {
     text-align: center;
     width: 88%;
     display: flex;
@@ -304,7 +305,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 20px;
     border-radius: 25px;
     padding-right: 30px;
-} */
+}
 
 .filtroTituloPartidas,
 .filtroDatePartidas {
@@ -370,7 +371,6 @@ img.iconeBusca {
     width: 300px;
     border: none;
     background-color: #ec0000;
-
 }
 
 .encerrarEncontro:hover {
@@ -391,12 +391,36 @@ img.iconeBusca {
 }
 
 .partidasFavoritas {
-    display: none;
-    height: 100vh;
-    width: 30vw;
-    background-color: #00bdec;
-    position: absolute;
+    height: 90vh;
+    width: 3vw;
+    background-color: var(--backgroundLogin);
+    position: fixed;
     top: 0;
+    transition: all 0.5s ease;
+    z-index: 1;
+    margin: 10vh 0 0 0;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.aux {
+    height: 90vh;
+    width: 3vw;
+    background-color: var(--backgroundLogin);
+    position: fixed;
+    top: 0;
+    transition: all 0.5s ease;
+    z-index: 1;
+    margin: 10vh 0 0 0;
+    display: flex;
+    border-top: 1px solid black;
+    flex-direction: column;
+    align-items: center;
+}
+
+.partidasFavoritas.active {
+    width: 15vw;
 }
 
 .btnFechaModalPartidas {
@@ -536,7 +560,7 @@ img.iconeBusca {
 }
 
 .imgAdicionarUsuario,
-.imgVisitarUsuario{
+.imgVisitarUsuario {
     height: 25px;
     width: 25px;
     border-radius: 50%;
@@ -544,6 +568,25 @@ img.iconeBusca {
 
 }
 
-#menu{
- cursor: pointer;
+#humburger {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    margin-left: 30px;
+}
+
+.iconsImgs {
+    height: 40px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.teste {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.teste>p {
+    margin-left: 10px;
 }

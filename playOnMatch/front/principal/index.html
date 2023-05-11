@@ -12,11 +12,12 @@
 
 <body onload="carregar()">
     <header>
+        <i id="humburger" class="material-icons" data-target="menu">menu</i>
         <a href="">
             <h1>PlayOnMatch</h1>
         </a>
     </header>
-    
+
     <!-- <div class="modalNotificacao">
         <div class="itensNotificacao model">
             <div class="descricaoNotificacao">
@@ -29,14 +30,25 @@
             </div>
         </div>
     </div> -->
-    <main>
-        <i id="menu" class="material-icons" onclick="openMenu()">menu</i> 
-        <button onclick="abrirModal()" class="abrirModal1">+</button>
-        <div class="partidasFavoritas">
 
+    <main>
+        <!-- <button onclick="abrirModal()" class="abrirModal1">+</button> -->
+        <div data-content id="menu" class="partidasFavoritas">
+
+            <div class="aux">
+                <div class="teste">
+                    <img class="iconsImgs" src="../../docs/imgs/estrela.png" alt="">
+                </div>
+                <div>
+                    <img class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
+                </div>
+                <div>
+                    <img class="iconsImgs" src="../../docs/imgs/configuracoes-cog.png" alt="">
+                </div>
+            </div>
         </div>
         <div class="read">
-             <div class="filtro">
+            <div class="filtro">
                 <input class="filtroTituloPartidas" type="text">
                 <img class="iconeBusca" src="../../docs/imgs/pesquisa.png" alt="">
                 <input type="text" class="filtroDatePartidas" id="data" name="data" oninput="formatarData(this)"
@@ -60,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <button id="btnTopo" class="buttonTop">+++</button>
+            <!-- <button id="btnTopo" class="buttonTop">+++</button> -->
         </div>
         <div class="friends">
             <div onclick="acessarPerfil()" class="perfil model">
@@ -107,7 +119,7 @@
             </div>
         </div>
     </div> -->
-    <div class="modalPartidas model">
+    <!-- <div class="modalPartidas model">
         <div class="infoPartida">
             <button class="encerrarEncontro model">Finalizar Encontro?</button>
             <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
@@ -164,7 +176,7 @@
                 <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 <script src="script.js"></script>
 

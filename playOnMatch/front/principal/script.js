@@ -282,7 +282,7 @@ function formatarData(campo) {
 
 
 function acessarPerfil() {
-    
+
     let { id } = user
 
     // id = id.children[0].innerHTML.slice(1)
@@ -342,9 +342,9 @@ function listaAmigos() {
 
 var btnTopo = document.getElementById("btnTopo");
 
-btnTopo.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+// btnTopo.addEventListener("click", function () {
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+// });
 
 
 const encerrarPartida = document.querySelector('.encerrarEncontro')
@@ -474,11 +474,28 @@ function visitarPerfil() {
     console.log('oi')
 }
 
-function openMenu(){
-    let menu = document.querySelector('.partidasFavoritas')
+const tab = document.querySelector('[data-target]'),
+    tabContent = document.querySelector('[data-content]')
 
-    menu.style.display = 'block'
-}
+tab.addEventListener('click', () => {
+    tabContent.classList.forEach((e) => {
+        if (e == 'active') {
+            tabContent.classList.remove('active')
+        } else {
+            tabContent.classList.add('active')
+        }
+    })
+})
+
+
+
+// function openMenu() {
+
+//     let menu = document.querySelector('.partidasFavoritas')
+
+//     menu.classList.add('active')
+
+// }
 
 notificaoAmizade()
 
