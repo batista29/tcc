@@ -396,7 +396,7 @@ img.iconeBusca {
     background-color: var(--backgroundLogin);
     position: fixed;
     top: 0;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     z-index: 1;
     margin: 10vh 0 0 0;
     border: 1px solid black;
@@ -410,7 +410,7 @@ img.iconeBusca {
     background-color: var(--backgroundLogin);
     position: fixed;
     top: 0;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     z-index: 1;
     margin: 10vh 0 0 0;
     display: flex;
@@ -572,7 +572,7 @@ img.iconeBusca {
     cursor: pointer;
     position: absolute;
     left: 0;
-    margin-left: 30px;
+    margin-left: 12px;
 }
 
 .iconsImgs {
@@ -587,6 +587,25 @@ img.iconeBusca {
     width: 100%;
 }
 
+.teste:hover {
+    cursor: pointer;
+    background-color: var(--cor5);
+}
+
 .teste>p {
-    margin-left: 10px;
+    visibility: hidden;
+    height: 100%;
+}
+
+.partidasFavoritas.active>.teste>p {
+    visibility: visible;
+    margin-left: 3vw;
+    transition: all 1s ease;
+}
+
+.partidasInteressado,
+.notificacoes,
+.configuracoes {
+    height: 90vw;
+    background-color: #012340;
 }

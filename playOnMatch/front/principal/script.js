@@ -489,15 +489,8 @@ tab.addEventListener('click', () => {
 
 
 
-// function openMenu() {
 
-//     let menu = document.querySelector('.partidasFavoritas')
-
-//     menu.classList.add('active')
-
-// }
 
 notificaoAmizade()
-
 listaAmigos()
 usuario()
