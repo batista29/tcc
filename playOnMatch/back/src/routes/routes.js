@@ -42,5 +42,9 @@ router.post('/enviarSolicitacao/:idCriador/:idAmigo', listaAmigo.enviarSolicitac
 router.get('/verSolicitacao/:idAmigo', listaAmigo.responsderSolicitacaoAmizade)
 router.put('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', usuario.updateListaAmigo)
 
+const favorito = require('../controllers/controllerFavoritos')
+
+router.post('/favoritarEncontro/:idUsuario/:idEncontro',favorito.createFavoritos)
+router.get('/encontros/:idUsuario',favorito.readFavorito)
 
 module.exports = router

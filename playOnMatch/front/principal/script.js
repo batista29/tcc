@@ -68,24 +68,35 @@ function pegarLocalizacaoUsuario() {
 
 
 
-function favoritarPartida(event) {
+function favoritarPartida(idEncontro) {
 
     // faz parar o  evento do pai dele 
-    event.stopPropagation();
+    // event.stopPropagation();
+
+    const { id } = user
+
+    idEncontro = idEncontro.parentNode.children[1].children[0].innerHTML.slice(1)
+    console.log()
+
+    const options = { method: 'POST' };
+
+    // fetch(`http://localhost:3000/favoritarEncontro/${id}/${idEncontro}`, options)
+    //     .then(response => response.json())
+    //     .then(response => console.log(response))
+    //     .catch(err => console.error(err));
 
     // para selecionar o elemento que disparou o evento, que é o próprio botão que foi clicado.
-    const btnFavoritarPartida = event.currentTarget;
+    // const btnFavoritarPartida = event.currentTarget;
     // Em seguida, usei querySelector com currentTarget para selecionar a imagem dentro desse botão específico.
     // Dessa forma, a troca da imagem só acontece dentro do botão que foi clicado.
-    const imgEstrela = btnFavoritarPartida.querySelector('.imgEstrela');
+    // const imgEstrela = btnFavoritarPartida.querySelector('.imgEstrela');
 
-    if (imgEstrela.src.includes('estrela.png')) {
-        imgEstrela.src = '../../docs/imgs/estrelaAmarela.png';
-    } else {
-        imgEstrela.src = '../../docs/imgs/estrela.png';
-    }
+    // if (imgEstrela.src.includes('estrela.png')) {
+    //     imgEstrela.src = '../../docs/imgs/estrelaAmarela.png';
+    // } else {
+    //     imgEstrela.src = '../../docs/imgs/estrela.png';
+    // }
 }
-
 
 
 
@@ -183,8 +194,6 @@ function fecharModal() {
 function listaParticipantes() {
 
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
-
-    console.log(idPartida)
 
     const options = { method: 'GET' };
 

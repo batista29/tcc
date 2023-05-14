@@ -20,6 +20,7 @@ model Usuario {
   criadorListaAmigo Lista_amigos[]    @relation("criador")
   criadorPartida    EncontroUsuario[] @relation("criadorPartida")
   participante      EncontroUsuario[] @relation("participantePartida")
+  favoritos         favoritos[]
 }
 
 model Lista_amigos {
@@ -40,6 +41,17 @@ model Encontro {
   id_local        Int
   local           Local             @relation(fields: [id_local], references: [id])
   EncontroUsuario EncontroUsuario[]
+  favoritos       favoritos[]
+}
+
+model favoritos {
+  id         Int      @id @default(autoincrement())
+  idUsuario  Int
+  idEncontro Int
+  usuario    Usuario  @relation(fields: [idUsuario], references: [id])
+  encontro   Encontro @relation(fields: [idEncontro], references: [id])
+
+  @@unique([idUsuario, idEncontro])
 }
 
 model Local {
@@ -47,8 +59,8 @@ model Local {
   nome     String
   rua      String
   bairro   String
-  cidade   String
-  pais     String
+  cidade   String @unique
+  pais     String @unique
   Encontro Encontro[]
 }
 
