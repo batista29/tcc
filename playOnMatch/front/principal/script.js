@@ -7,6 +7,67 @@ const filtroDatePartidas = document.querySelector('.filtroDatePartidas')
 
 const user = JSON.parse(localStorage.getItem('usuario'))
 
+
+if (!sessionStorage.getItem('pegarLocalização')) {
+
+    let local = document.querySelector('.localizacao')
+
+    local.classList.remove('model')
+
+    sessionStorage.setItem('pegarLocalização', 'true');
+}
+
+
+const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
+
+const cidadesPorPais = {
+    'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte', 'Jaguariúna'],
+    'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
+    'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
+    'selulite': ['cidade1', 'cidade2', 'cidade3']
+};
+
+// Pega o datalist das opções de países
+const datalistPaises = document.getElementById('opcoes-pais');
+
+// Adiciona as opções de países no datalist correspondente
+paises.forEach(function (pais) {
+    const option = document.createElement('option');
+    option.value = pais;
+    datalistPaises.appendChild(option);
+});
+
+// Pega o datalist das opções de cidades
+const datalistCidades = document.getElementById('opcoes-cidades');
+
+// Atualiza o datalist de cidades com as opções do país selecionado
+function atualizarCidades() {
+    const paisSelecionado = document.getElementById('pais').value;
+    const cidades = cidadesPorPais[paisSelecionado] || [];
+    datalistCidades.innerHTML = '';
+    cidades.forEach(function (cidade) {
+        const option = document.createElement('option');
+        option.value = cidade;
+        datalistCidades.appendChild(option);
+    });
+}
+
+function pegarLocalizacaoUsuario() {
+    let pais = document.getElementById('pais').value;
+    let cidade = document.getElementById('cidade').value;
+
+    localStorage.setItem("localização", JSON.stringify({ "pais": pais, "cidade": cidade }))
+
+    let modalLocalizacao = document.querySelector('.localizacao')
+
+    window.location.reload()
+
+    modalLocalizacao.classList.add("model")
+}
+
+
+
+
 function favoritarPartida(event) {
 
     // faz parar o  evento do pai dele 
@@ -25,24 +86,32 @@ function favoritarPartida(event) {
     }
 }
 
+
+
+
 function carregar() {
 
     const options = {
         method: 'GET'
     };
 
+    const localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
+
     fetch('http://localhost:3000/listarEncontros', options)
         .then(response => response.json())
         .then(res => {
-            res.forEach(dados => {
+            let nwRes = res.filter(e => e.local.pais === localizacaoUsuario.pais && e.local.cidade === localizacaoUsuario.cidade)
 
+            nwRes.forEach(dados => {
+
+                console.log(dados.local)
                 let tabela = readInfo.cloneNode(true)
 
                 tabela.classList.remove("model")
 
-                let date = new Date(dados.data);
+                let date = new Date(dados.dataHora);
 
-                let horas = dados.data.split('T')[1].split('.')[0]
+                let horas = dados.dataHora.split('T')[1].split('.')[0]
 
                 let dataFormatada = date.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
@@ -52,7 +121,7 @@ function carregar() {
                 tabela.querySelector('.titulo').innerHTML = dados.titulo
 
                 tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
-                tabela.querySelector('.endereco').innerHTML = dados.local.endereco
+                tabela.querySelector('.endereco').innerHTML = dados.local.nome
 
                 let btnFavoritarPartida = tabela.querySelector('.btnFavoritarPartida');
                 btnFavoritarPartida.addEventListener('click', favoritarPartida);
@@ -115,6 +184,8 @@ function listaParticipantes() {
 
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
 
+    console.log(idPartida)
+
     const options = { method: 'GET' };
 
     fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
@@ -165,14 +236,6 @@ function listaParticipantes() {
                 btnCancelar.disabled = true
                 btnParticipar.disabled = false
             }
-
-
-            // let usuarioCriador = res.EncontroUsuario.filter(element => element.idParticipante.id == id)
-
-            // if (usuarioCriador) {
-            //     btnAdicionarAmigo.classList.add('model')
-            // }
-
         })
 }
 
@@ -205,7 +268,7 @@ function removerParticipante() {
 
 function abrirModalPartida(id) {
 
-    id = id.children[0].children[2].children[0].innerHTML.slice(1)
+    id = id.children[0].children[1].children[0].innerHTML.slice(1)
 
     let partida = document.querySelector('.modalPartidas')
     partida.classList.remove("model")
@@ -293,24 +356,24 @@ function acessarPerfil() {
 const perfil = document.querySelector('.perfil')
 const per = document.querySelector('.friends')
 
-function usuario() {
-    let { id } = user
+// function usuario() {
+//     let { id } = user
 
-    const options = { method: 'GET' };
+//     const options = { method: 'GET' };
 
-    fetch(`http://localhost:3000/listarUsuario/${id}`, options)
-        .then(response => response.json())
-        .then(res => {
+//     fetch(`http://localhost:3000/listarUsuario/${id}`, options)
+//         .then(response => response.json())
+//         .then(res => {
 
-            perfil.cloneNode(true)
-            perfil.classList.remove("model")
+//             perfil.cloneNode(true)
+//             perfil.classList.remove("model")
 
-            perfil.querySelector(".idUser").innerHTML = "#" + res.usuario.id
-            perfil.querySelector(".nomeUser").innerText = res.usuario.nome
+//             perfil.querySelector(".idUser").innerHTML = "#" + res.usuario.id
+//             perfil.querySelector(".nomeUser").innerText = res.usuario.nome
 
-            per.appendChild(perfil)
-        })
-}
+//             per.appendChild(perfil)
+//         })
+// }
 
 function listaAmigos() {
 
@@ -319,14 +382,17 @@ function listaAmigos() {
 
         let { id } = user
 
-        fetch(`http://localhost:3000/lista/${id}`, options)
+        fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
             .then(response => response.json())
             .then(res => {
                 let allFriends = document.querySelector('.allFriends')
                 let friendsInfo = document.querySelector('.friends_info')
 
-                res.forEach((e) => {
+                let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
 
+                console.log(amigo)
+                amigo.forEach((e) => {
+                    console.log(e)
                     let info = friendsInfo.cloneNode(true)
 
                     info.classList.remove("model")
@@ -377,69 +443,24 @@ function acessarPerfilAmigo(idAmigo) {
         })
 }
 
-// const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
-
-// const cidadesPorPais = {
-//     'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte'],
-//     'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
-//     'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
-//     'selulite': ['cidade1', 'cidade2', 'cidade3']
-// };
-
-// // Pega o datalist das opções de países
-// const datalistPaises = document.getElementById('opcoes-pais');
-
-// // Adiciona as opções de países no datalist correspondente
-// paises.forEach(function (pais) {
-//     const option = document.createElement('option');
-//     option.value = pais;
-//     datalistPaises.appendChild(option);
-// });
-
-// // Pega o datalist das opções de cidades
-// const datalistCidades = document.getElementById('opcoes-cidades');
-
-// // Atualiza o datalist de cidades com as opções do país selecionado
-// function atualizarCidades() {
-//     const paisSelecionado = document.getElementById('pais').value;
-//     const cidades = cidadesPorPais[paisSelecionado] || [];
-//     datalistCidades.innerHTML = '';
-//     cidades.forEach(function (cidade) {
-//         const option = document.createElement('option');
-//         option.value = cidade;
-//         datalistCidades.appendChild(option);
-//     });
-// }
-
-function pegarLocalizacaoUsuario() {
-    let pais = document.getElementById('pais').value;
-    let cidade = document.getElementById('cidade').value;
-
-    let modalLocalizacao = document.querySelector('.localizacao')
-
-    modalLocalizacao.classList.add("model")
-}
-
-
 function notificaoAmizade() {
 
     let { id } = JSON.parse(localStorage.getItem('usuario'))
     const options = { method: 'GET' };
 
     const dadosNotificacao = document.querySelector('.itensNotificacao')
-    const notificacaoModal = document.querySelector('.modalNotificacao')
+    const notificacaoModal = document.querySelector('.notificacoes')
 
     fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
         .then(response => response.json())
         .then(res => {
-            let solicitacaoAmizade = res.amigo.filter(element => element.situacao == 0)
+            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0)
             solicitacaoAmizade.forEach((e) => {
-                console.log(e)
                 let notificaoAmizade = dadosNotificacao.cloneNode(true)
                 notificaoAmizade.classList.remove("model")
 
-                notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.criador.id
-                notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.criador.nome + " mandou uma solicitação de amizade"
+                notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.amigo.id
+                notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.amigo.nome + " mandou uma solicitação de amizade"
 
                 notificacaoModal.appendChild(notificaoAmizade)
             })
@@ -466,13 +487,13 @@ function responderSolicitacaoAmizader(resposta, teste) {
         .then(response => console.log(response))
 }
 
-function adicionarAmigo() {
-    console.log('oi')
-}
+// function adicionarAmigo() {
+//     console.log('oi')
+// }
 
-function visitarPerfil() {
-    console.log('oi')
-}
+// function visitarPerfil() {
+//     console.log('oi')
+// }
 
 const tab = document.querySelector('[data-target]'),
     tabContent = document.querySelector('[data-content]')
@@ -487,10 +508,54 @@ tab.addEventListener('click', () => {
     })
 })
 
+function sair() {
+    localStorage.clear()
+    sessionStorage.clear()
+    window.location.href = "../login/index.html"
+}
 
 
+const menuInteresses = document.querySelector('.menuInteresses')
+
+menuInteresses.addEventListener('click', () => {
+    let partidasInteressado = document.querySelector('.partidasInteressado')
+
+    partidasInteressado.classList.toggle('model')
+
+})
+
+const menuNotificacoes = document.querySelector('.menuNotificacoes')
+
+menuNotificacoes.addEventListener('click', () => {
+
+    let notificacoes = document.querySelector('.notificacoes')
+
+    notificacoes.classList.toggle('model')
+})
+const menuConfiguracoes = document.querySelector('.menuConfiguracoes')
+
+menuConfiguracoes.addEventListener('click', () => {
+    let configuracoes = document.querySelector('.configuracoes')
+
+    configuracoes.classList.toggle('model')
+})
 
 
+// function listarNotificacoes() {
+
+//     const user = JSON.parse(localStorage.getItem('usuario'))
+
+//     let { id } = user
+
+
+//     const options = { method: 'GET' };
+
+//     fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
+//         .then(response => response.json())
+//         .then(response => console.log(response))
+// }
+
+// listarNotificacoes()
 notificaoAmizade()
 listaAmigos()
-usuario()
+// usuario()

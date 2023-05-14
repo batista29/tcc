@@ -501,6 +501,7 @@ img.iconeBusca {
     background-color: #001324ed;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 
 .infoLocalizacao {
@@ -581,23 +582,31 @@ img.iconeBusca {
     margin-bottom: 10px;
 }
 
-.teste {
+.menuInteresses,
+.menuNotificacoes,
+.menuConfiguracoes {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.teste:hover {
+.menuInteresses:hover,
+.menuNotificacoes:hover,
+.menuConfiguracoes:hover {
     cursor: pointer;
     background-color: var(--cor5);
 }
 
-.teste>p {
+.menuInteresses>p,
+.menuNotificacoes>p,
+.menuConfiguracoes>p {
     visibility: hidden;
     height: 100%;
 }
 
-.partidasFavoritas.active>.teste>p {
+.partidasFavoritas.active>.menuInteresses>p,
+.partidasFavoritas.active>.menuNotificacoes>p,
+.partidasFavoritas.active>.menuConfiguracoes>p {
     visibility: visible;
     margin-left: 3vw;
     transition: all 1s ease;
@@ -608,4 +617,6 @@ img.iconeBusca {
 .configuracoes {
     height: 90vw;
     background-color: #012340;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }

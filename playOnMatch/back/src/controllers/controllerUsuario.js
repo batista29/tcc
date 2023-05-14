@@ -99,8 +99,8 @@ const readPerfil = async (req, res) => {
                 id: true,
                 nascimento: true,
                 nome: true,
-                cep:true,
-                email:true,
+                cep: true,
+                email: true,
                 criadorListaAmigo: true,
                 participante: {
                     select: {
@@ -253,27 +253,27 @@ const updateListaAmigo = async (req, res) => {
     let findDono = amigo.criadorListaAmigo.find(lista => lista.idCriador == idNovoAmigo && lista.idAmigo == idCriadorLista)
 
     if (RespUsuario == 1) {
-      
+
         const listaDeQuemRecebeu = await prisma.lista_amigos.update({
             where: { id: findAmigo.id },
-            data: { situacao: 1 }
+            data: { status: 1 }
         })
 
         const listaAmigoDono = await prisma.lista_amigos.update({
             where: { id: findDono.id },
-            data: { situacao: 1 }
+            data: { status: 1 }
         })
     }
 
     if (RespUsuario == 2) {
         const listaDeQuemRecebeu = await prisma.lista_amigos.update({
             where: { id: findAmigo.id },
-            data: { situacao: 2 }
+            data: { status: 2 }
         })
 
         const listaAmigoDono = await prisma.lista_amigos.update({
             where: { id: findDono.id },
-            data: { situacao: 2 }
+            data: { status: 2 }
         })
     }
 

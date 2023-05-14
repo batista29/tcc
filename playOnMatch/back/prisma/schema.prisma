@@ -16,7 +16,6 @@ model Usuario {
   email             String            @unique
   senha             String
   nascimento        DateTime
-  cep               String?
   amigo             Lista_amigos[]    @relation("amigo")
   criadorListaAmigo Lista_amigos[]    @relation("criador")
   criadorPartida    EncontroUsuario[] @relation("criadorPartida")
@@ -27,7 +26,7 @@ model Lista_amigos {
   id        Int      @id @default(autoincrement())
   idAmigo   Int?
   idCriador Int
-  situacao  Int @default(0)
+  status    Int      @default(0)
   amigo     Usuario? @relation("amigo", fields: [idAmigo], references: [id])
   criador   Usuario  @relation("criador", fields: [idCriador], references: [id])
 }
@@ -36,21 +35,21 @@ model Lista_amigos {
 model Encontro {
   id              Int               @id @default(autoincrement())
   descricao       String
-  data            DateTime
+  dataHora        DateTime
   titulo          String
   id_local        Int
-  esporte         String
   local           Local             @relation(fields: [id_local], references: [id])
   EncontroUsuario EncontroUsuario[]
 }
 
 model Local {
-  id         Int        @id @default(autoincrement())
-  nome       String
-  capacidade Int
-  endereco   String
-  referencia String?
-  Encontro   Encontro[]
+  id       Int        @id @default(autoincrement())
+  nome     String
+  rua      String
+  bairro   String
+  cidade   String
+  pais     String
+  Encontro Encontro[]
 }
 
 model EncontroUsuario {
@@ -58,6 +57,7 @@ model EncontroUsuario {
   id_encontro           Int
   idCriadorPartida      Int
   idParticipantePartida Int?
+  status                Int      @default(0)
   idCriador             Usuario  @relation("criadorPartida", fields: [idCriadorPartida], references: [id])
   idParticipante        Usuario? @relation("participantePartida", fields: [idParticipantePartida], references: [id])
   encontro              Encontro @relation(fields: [id_encontro], references: [id])

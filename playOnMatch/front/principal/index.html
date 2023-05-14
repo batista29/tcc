@@ -17,39 +17,36 @@
             <h1>PlayOnMatch</h1>
         </a>
     </header>
-
-    <!-- <div class="modalNotificacao">
-        <div class="itensNotificacao model">
-            <div class="descricaoNotificacao">
-                <p class="idSolicitacao model"></p>
-                <p class="nomeSolicitacao"></p>
-            </div>
-            <div class="btnsResposta">
-                <button onclick="responderSolicitacaoAmizader(1,this)" class="btnAceitarAmizade">aceitar</button>
-                <button onclick="responderSolicitacaoAmizader(2,this)" class="btnRecusarAmizade">recusar</button>
-            </div>
-        </div>
-    </div> -->
-
     <main>
         <!-- <button onclick="abrirModal()" class="abrirModal1">+</button> -->
         <div data-content id="menu" class="partidasFavoritas">
-            <div class="teste">
+            <div class="menuInteresses">
                 <img class="iconsImgs" src="../../docs/imgs/estrela.png" alt="">
                 <p class="titulosMenu">Interesses</p>
             </div>
             <div class="partidasInteressado model">
 
             </div>
-            <div class="teste">
+            <div class="menuNotificacoes">
                 <img class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
                 <p class="titulosMenu">Notificações</p>
             </div>
             <div class="notificacoes model">
-
+                <div class="itensNotificacao model">
+                    <div class="descricaoNotificacao">
+                        <p class="idSolicitacao model"></p>
+                        <p class="nomeSolicitacao"></p>
+                    </div>
+                    <div class="btnsResposta">
+                        <button onclick="responderSolicitacaoAmizader(1,this)"
+                            class="btnAceitarAmizade">aceitar</button>
+                        <button onclick="responderSolicitacaoAmizader(2,this)"
+                            class="btnRecusarAmizade">recusar</button>
+                    </div>
+                </div>
             </div>
-            <div class="teste">
-                <img class="iconsImgs" src="../../docs/imgs/configuracoes-cog.png" alt="">
+            <div class="menuConfiguracoes">
+                <img onclick="sair()" class="iconsImgs" src="../../docs/imgs/configuracoes-cog.png" alt="">
                 <p class="titulosMenu">Configurações</p>
             </div>
             <div class="configuracoes model">
@@ -69,9 +66,6 @@
                     <button class="btnFavoritarPartida">
                         <img class="imgEstrela" src="../../docs/imgs/estrela.png" alt="">
                     </button>
-                    <div class="imgEsporte">
-                        <img class="iconeEsporte" src="../../docs/imgs/variante-de-bola-de-basquete.png" alt="">
-                    </div>
                     <div class="titulos">
                         <p class="idLocal"></p>
                         <p class="titulo"></p>
@@ -85,7 +79,7 @@
             <!-- <button id="btnTopo" class="buttonTop">+++</button> -->
         </div>
         <div class="friends">
-            <div onclick="acessarPerfil()" class="perfil model">
+            <!-- <div onclick="acessarPerfil()" class="perfil model">
                 <p class="idUser">Id</p>
                 <p class="nomeUser">Nome:</p>
                 <div class="buttons">
@@ -95,7 +89,7 @@
                     <button class="btnNotificacao"><img class="imgNotificacao"
                             src="../../docs/imgs/configuracoes-cog.png" alt=""></button>
                 </div>
-            </div>
+            </div> -->
             <div class="allFriends">
                 <h2>FRIENDS</h2>
                 <div class="friends_info model" onclick="acessarPerfilAmigo(this)">
@@ -105,7 +99,7 @@
             </div>
         </div>
     </main>
-    <!-- <div class="localizacao">
+    <div class="localizacao model">
         <div class="infoLocalizacao">
             <div class="formLocal">
                 <label for="pais">País:</label>
@@ -128,8 +122,8 @@
                     a economizar tempo e esforço na busca por partidas que ocorrem na sua região.</p>
             </div>
         </div>
-    </div> -->
-    <!-- <div class="modalPartidas model">
+    </div>
+    <div class="modalPartidas model">
         <div class="infoPartida">
             <button class="encerrarEncontro model">Finalizar Encontro?</button>
             <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
@@ -186,7 +180,7 @@
                 <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
             </div>
         </div>
-    </div> -->
+    </div>
 </body>
 <script src="script.js"></script>
 

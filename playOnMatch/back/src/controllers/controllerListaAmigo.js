@@ -34,17 +34,17 @@ const responsderSolicitacaoAmizade = async (req, res) => {
             id: idAmigo
         },
         select: {
-            amigo:{
-                select:{
-                    criador:{
-                        select:{
-                            id:true,
-                            nome:true
+            criadorListaAmigo: {
+                select: {
+                    amigo: {
+                        select: {
+                            id: true,
+                            nome: true
                         }
                     },
-                    situacao:true
+                    status: true,
                 }
-            }
+            },
         }
     })
 

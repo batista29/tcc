@@ -4,17 +4,13 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
     try {
-        const { nome, capacidade, endereco, } = req.body;
-        if (!nome || !capacidade || !endereco) {
-            return res.status(400).send({ mensagem: 'Campos obrigatórios não preenchidos' });
-        }
+        // const { nome, rua, bairro, } = req.body;
+        // if (!nome || !rua || !bairro) {
+        //     return res.status(400).send({ mensagem: 'Campos obrigatórios não preenchidos' });
+        // }
 
         let local = await prisma.local.create({
-            data: {
-                nome,
-                capacidade,
-                endereco
-            }
+            data: req.body
         })
         return res.status(201).json(local).end()
     } catch (error) {

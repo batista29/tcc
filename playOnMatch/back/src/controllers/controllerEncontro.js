@@ -103,14 +103,16 @@ const readAll = async (req, res) => {
             select: {
                 id: true,
                 descricao: true,
-                data: true,
+                dataHora:true,
                 titulo: true,
                 id_local: true,
                 local: {
                     select: {
                         nome: true,
-                        capacidade: true,
-                        endereco: true
+                        pais:true,
+                        cidade:true,
+                        bairro:true,
+                        rua:true
                     }
                 },
                 EncontroUsuario: {

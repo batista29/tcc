@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE `lista_amigos` MODIFY `idAmigo` INTEGER NOT NULL DEFAULT 0,
-    MODIFY `idDono` INTEGER NOT NULL DEFAULT 0;

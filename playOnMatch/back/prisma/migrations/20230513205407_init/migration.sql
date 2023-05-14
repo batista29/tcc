@@ -16,7 +16,7 @@ CREATE TABLE `Lista_amigos` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `idAmigo` INTEGER NULL,
     `idCriador` INTEGER NOT NULL,
-    `situacao` INTEGER NOT NULL DEFAULT 0,
+    `status` INTEGER NOT NULL DEFAULT 0,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -25,10 +25,9 @@ CREATE TABLE `Lista_amigos` (
 CREATE TABLE `Encontro` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `descricao` VARCHAR(191) NOT NULL,
-    `data` DATETIME(3) NOT NULL,
+    `dataHora` DATETIME(3) NOT NULL,
     `titulo` VARCHAR(191) NOT NULL,
     `id_local` INTEGER NOT NULL,
-    `esporte` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -37,9 +36,9 @@ CREATE TABLE `Encontro` (
 CREATE TABLE `Local` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(191) NOT NULL,
-    `capacidade` INTEGER NOT NULL,
-    `endereco` VARCHAR(191) NOT NULL,
-    `referencia` VARCHAR(191) NULL,
+    `rua` VARCHAR(191) NOT NULL,
+    `cidade` VARCHAR(191) NOT NULL,
+    `pais` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -50,6 +49,7 @@ CREATE TABLE `EncontroUsuario` (
     `id_encontro` INTEGER NOT NULL,
     `idCriadorPartida` INTEGER NOT NULL,
     `idParticipantePartida` INTEGER NULL,
+    `status` INTEGER NOT NULL DEFAULT 0,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
