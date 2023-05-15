@@ -4,19 +4,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 
-  const [nome, setNome] = useState('')
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [nascimento, setNascimento] = useState('')
-  const [cep, setCep] = useState('')
+  const [nome, setNome] = useState('senai')
+  const [email, setEmail] = useState('senai')
+  const [senha, setSenha] = useState('123')
+  const [nascimento, setNascimento] = useState('2020-03-19T14:21:00+02:00')
 
   let dados = {
+    nome: nome,
     email: email,
-    senha: senha
+    senha: senha,
+    nascimento: nascimento
   }
 
+  console.log(dados)
+
   const userLogin = () => {
-    fetch("", {
+    fetch("http://10.87.207.35:3000/criarUsuario", {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -28,22 +31,21 @@ export default function Login({ navigation }) {
       .then(res => {
         return res.json()
       })
-      .then(data => {
-        console.log(data)
-        if (data.mensagem == 'Senha incorreta') {
-          alert('Senha incorreta')
-        } else if (data.mensagem == 'Seu login foi bem-sucedido') {
-          navigation.navigate("Home")
-        }else if(data.mensagem == 'Usuário não encontrado'){
-          alert('Usuário não encontrado')
-        }
-      })
+      .then(response => { console.log(response) })
   }
 
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.texto1}>LOGIN</Text>
+        <Text style={styles.texto1}>CADASTRE-SE</Text>
+        <Text style={styles.texto}>Digite o seu nome</Text>
+        <TextInput
+          style={styles.inputs}
+          value={nome}
+          onChangeText={(value) => {
+            setNome(value)
+          }}
+        ></TextInput>
         <Text style={styles.texto}>Digite o seu e-mail</Text>
         <TextInput
           style={styles.inputs}
@@ -60,13 +62,21 @@ export default function Login({ navigation }) {
             setSenha(value)
           }}
         ></TextInput>
+        <Text style={styles.texto}>Digite a sua nascimento</Text>
+        <TextInput
+          style={styles.inputs}
+          value={nascimento}
+          onChangeText={(value) => {
+            setNascimento(value)
+          }}
+        ></TextInput>
         <TouchableOpacity
           style={styles.botaoEntrar}
           onPress={() => {
             userLogin()
           }}
         >
-          <Text style={styles.texto}>Entrar</Text>
+          <Text style={styles.texto}>CRIAR</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -84,9 +94,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#0f0f3a',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 400,
+    height: 500,
     width: 350,
-    border:'2px solid #00f63e'
+    border: '2px solid #00f63e'
   },
   inputs: {
     backgroundColor: '#fff',
