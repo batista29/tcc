@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 
-  const [email, setEmail] = useState('rodrod@gmail.com')
+  const [email, setEmail] = useState('senai')
   const [senha, setSenha] = useState('123')
 
   let dados = {
@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
         if (data.mensagem == 'Senha incorreta') {
           alert('Senha incorreta')
         } else if (data.mensagem == 'Seu login foi bem-sucedido') {
-          navigation.navigate("Home")
+          navigation.navigate("Main")
         }else if(data.mensagem == 'Usuário não encontrado'){
           alert('Usuário não encontrado')
         }
