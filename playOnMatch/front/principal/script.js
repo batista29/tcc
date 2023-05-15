@@ -143,42 +143,67 @@ function carregar() {
 }
 
 
+function listaLocais() {
+    const options1 = { method: 'GET' };
+
+    fetch('http://localhost:3000/listarLocais', options1)
+        .then(response => response.json())
+        .then(res => {
+
+            let opcao = document.getElementById("opcoes")
+            const localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
+
+            opcao.innerHTML = "";
+
+            let nwDados = res.filter(e => e.pais == localizacaoUsuario.pais && e.cidade == localizacaoUsuario.cidade)
+
+            nwDados.forEach(function (valor) {
+                var optionElement = document.createElement("option");
+                optionElement.value = "#" + valor.id + " - " + valor.nome
+
+                opcao.appendChild(optionElement);
+            })
+        })
+}
+
+listaLocais()
+
 function adicionarEncontro() {
 
     // criar encontro
-    let descricaoSubmit = document.querySelector("#descricaoSubmit").value
-    let dataSubmit = document.querySelector("#dataSubmit").value
-    let tituloSubmit = document.querySelector("#tituloSubmit").value
-    let id_localSubmit = document.querySelector("#id_localSubmit").value
+    let consulta = document.getElementById('consulta')
+    let nwLocal = consulta.value.split('-')[0].slice(1)
 
-    let data = dataSubmit + "T00:00:00.000Z"
+    let descricaoSubmit = document.querySelector("#descricaoSubmit")
+
+    let dataSubmit = document.querySelector("#dataSubmit")
+    let horaSubmit = document.querySelector("#timeSubmit")
+    let tituloSubmit = document.querySelector("#tituloSubmit")
+
+    let data = dataSubmit.value + "T" + horaSubmit.value + ":00.000Z"
 
     let dados = {
-        descricao: descricaoSubmit,
-        data: data,
-        titulo: tituloSubmit,
-        id_local: Number(id_localSubmit)
+        descricao: descricaoSubmit.value,
+        dataHora: data,
+        titulo: tituloSubmit.value,
+        id_local: Number(nwLocal)
     }
+
+    let { id } = user
 
     const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: '{"descricao":"","data":"","titulo":"","id_local":,"esporte":""}'
+        body: JSON.stringify(dados)
     };
 
-    fetch('http://localhost:3000/criarEncontro/3', options)
+    fetch(`http://localhost:3000/criarEncontro/${id}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+        .then(response =>{ 
+            console.log(response)
+            window.location.reload()
+        })
 
-
-    // criar encontro usuario
-
-    // const options2 ={
-    //     idEncontro:
-    //     idCriador:
-    //     idParticipante:
-    // }
 }
 
 function abrirModal() {
@@ -417,9 +442,9 @@ function listaAmigos() {
 
 var btnTopo = document.getElementById("btnTopo");
 
-// btnTopo.addEventListener("click", function () {
-//     window.scrollTo({ top: 0, behavior: 'smooth' });
-// });
+btnTopo.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 
 const encerrarPartida = document.querySelector('.encerrarEncontro')

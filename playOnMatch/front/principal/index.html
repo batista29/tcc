@@ -18,7 +18,7 @@
         </a>
     </header>
     <main>
-        <!-- <button onclick="abrirModal()" class="abrirModal1">+</button> -->
+        <button onclick="abrirModal()" class="abrirModal1">+</button>
         <div data-content id="menu" class="partidasFavoritas">
             <div class="menuInteresses">
                 <img class="iconsImgs" src="../../docs/imgs/estrela.png" alt="">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <button id="btnTopo" class="buttonTop">+++</button> -->
+            <button id="btnTopo" class="buttonTop">↥</button>
         </div>
         <div class="friends">
             <!-- <div onclick="acessarPerfil()" class="perfil model">
@@ -158,23 +158,16 @@
                 <button class="sair" onclick="fecharModal()">X</button>
                 <form class="formularioCadastroPartida" action="">
                     <label for="">titulo</label>
-                    <input type="text">
+                    <input id="tituloSubmit" type="text">
                     <label for="">descrição</label>
-                    <input type="text">
+                    <input id="descricaoSubmit" type="text">
                     <label for="">data</label>
-                    <input type="date">
+                    <input id="dataSubmit" type="date">
                     <label for="">hora</label>
-                    <input type="time">
-                    <label for="">esporte</label>
-                    <input type="text">
+                    <input id="timeSubmit" type="time">
                     <label for="">Endereço</label>
                     <input type="text" id="consulta" name="consulta" list="opcoes">
                     <datalist id="opcoes">
-                        <option value="SELECT * FROM tabela1"></option>
-                        <option value="SELECT * FROM tabela2"></option>
-                        <option value="SELECT * FROM tabela3"></option>
-                        <option value="SELECT * FROM tabela4"></option>
-                        <option value="SELECT * FROM tabela5"></option>
                     </datalist>
                 </form>
                 <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
