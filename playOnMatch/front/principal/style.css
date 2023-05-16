@@ -626,3 +626,8 @@ img.iconeBusca {
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
+
+.btnAtualizarEncontro{
+    height: 20px;
+    width: 20px;
+}

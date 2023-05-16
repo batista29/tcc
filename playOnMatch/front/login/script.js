@@ -54,7 +54,6 @@ function cadastrarUsuario() {
     let inpEmail = document.getElementById('email').value
     let inpSenha = document.getElementById('senha').value
     let inpData = document.getElementById('data').value
-    let inpCep = document.getElementById('cep').value
 
     if (inpNome.length == 0 || inpEmail.length == 0 || inpSenha.length == 0 || inpData.length == 0) {
         erroC.style.color = "black"
@@ -68,7 +67,6 @@ function cadastrarUsuario() {
             email: inpEmail.trim(),
             senha: inpSenha.trim(),
             nascimento: newDate.trim(),
-            cep: inpCep.trim()
         }
 
         const options = {

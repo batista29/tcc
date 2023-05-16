@@ -10,6 +10,7 @@ const create = async (req, res) => {
         const newEncontro = await prisma.encontro.create({
             data: req.body
         });
+        console.log(newEncontro)
 
         // Cria um novo registro para o encontro e os usuários relacionados
         const encontroUsuario = await prisma.encontroUsuario.create({
@@ -103,16 +104,17 @@ const readAll = async (req, res) => {
             select: {
                 id: true,
                 descricao: true,
-                dataHora:true,
+                dataHora: true,
+                dataFim:true,
                 titulo: true,
                 id_local: true,
                 local: {
                     select: {
                         nome: true,
-                        pais:true,
-                        cidade:true,
-                        bairro:true,
-                        rua:true
+                        pais: true,
+                        cidade: true,
+                        bairro: true,
+                        rua: true
                     }
                 },
                 EncontroUsuario: {
@@ -150,7 +152,7 @@ const readOne = async (req, res) => {
         select: {
             EncontroUsuario: {
                 select: {
-                    id:true,
+                    id: true,
                     idParticipante: {
                         select: {
                             id: true,
@@ -190,34 +192,30 @@ const update = async (req, res) => {
     }
 }
 
+const finalizarEncontro = async (req, res) => {
+    const currentDate = new Date(Date.now());
+
+    let encontro = await prisma.encontro.update({
+        where: { id: Number(req.params.id) },
+        data: {
+            dataFim: currentDate
+        }
+    })
+    res.status(200).json(encontro).end()
+}
+
 const del = async (req, res) => {
     try {
-        const encontro = await prisma.encontro.findUnique({
+        let encontro = await prisma.encontro.delete({
             where: {
                 id: Number(req.params.id)
             }
         })
 
-        if (!encontro) {
-            return res.status(404).send({
-                mensagem: "Encontro não encontrado"
-            }).end()
-        }
-
-        await prisma.encontro.delete({
-            where: {
-                id: Number(req.params.id)
-            }
-        })
-
-        res.status(200).send({
-            mensagem: `Encontro de id ${encontro.id} foi excluído com sucesso`
-        }).end()
+        res.status(200).json(encontro).end()
     } catch (err) {
         console.log(err)
-        res.status(500).send({
-            mensagem: "Ocorreu um erro ao excluir o encontro"
-        }).end()
+        res.status(500).send({ mensagem: "Ocorreu um erro ao excluir o encontro" }).end()
     }
 }
 
@@ -228,5 +226,6 @@ module.exports = {
     readOne,
     del,
     deletarParticipante,
-    update
+    update,
+    finalizarEncontro
 }

@@ -276,10 +276,16 @@ function listaParticipantes() {
 
                 if (e.idCriador.id == id) {
                     let encerrarEncontro = document.querySelector('.encerrarEncontro')
+                    let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
+                    btnCancelar.classList.add("model")
+                    btnParticipar.classList.add("model")
                     encerrarEncontro.classList.remove("model")
+                    btnAtualizarEncontro.classList.remove("model")
                 } else {
                     let encerrarEncontro = document.querySelector('.encerrarEncontro')
+                    let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
                     encerrarEncontro.classList.add("model")
+                    btnAtualizarEncontro.classList.add("model")
                 }
 
                 if (id == e.idParticipante.id) {
@@ -476,6 +482,27 @@ btnTopo.addEventListener("click", function () {
 
 
 const encerrarPartida = document.querySelector('.encerrarEncontro')
+
+function cancelarEncontro() {
+
+    let idPartida = JSON.parse(localStorage.getItem("idPartida"))
+
+    let user = JSON.parse(localStorage.getItem('usuario'))
+
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: user.token
+        },
+        body: false
+    };
+
+    fetch(`http://localhost:3000/finalizarEncontro/${idPartida}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
 
 function acessarPerfilAmigo(idAmigo) {
 

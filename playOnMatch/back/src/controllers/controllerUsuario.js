@@ -18,11 +18,12 @@ const create = async (req, res) => {
         res.status(201).json(usuario).end()
 
     } catch (error) {
-        if (error.meta.target === 'Usuario_email_key') {
-            res.status(400).send({ erro: 'Email já existente' }).end()
-        } if (error.meta.target === "Usuario_senha_key") {
-            res.status(400).send({ erro: '' }).end()
-        }
+        console.log(error)
+        // if (error.meta.target === 'Usuario_email_key') {
+        //     res.status(400).send({ erro: 'Email já existente' }).end()
+        // } if (error.meta.target === "Usuario_senha_key") {
+        //     res.status(400).send({ erro: '' }).end()
+        // }
     }
 }
 
