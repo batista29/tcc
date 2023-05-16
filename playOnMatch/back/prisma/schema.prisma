@@ -32,7 +32,6 @@ model Lista_amigos {
   criador   Usuario  @relation("criador", fields: [idCriador], references: [id])
 }
 
-//Encontro normal, sem premiação
 model Encontro {
   id              Int               @id @default(autoincrement())
   descricao       String
@@ -59,8 +58,8 @@ model Local {
   nome     String
   rua      String
   bairro   String
-  cidade   String @unique
-  pais     String @unique
+  cidade   String     @unique
+  pais     String     @unique
   Encontro Encontro[]
 }
 

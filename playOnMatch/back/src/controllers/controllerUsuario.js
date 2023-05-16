@@ -60,7 +60,6 @@ const readOne = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    console.log('teste')
 
     try {
         let usuario = await prisma.usuario.update({

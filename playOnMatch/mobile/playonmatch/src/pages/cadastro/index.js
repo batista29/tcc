@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, View, Image, Text, TouchableOpacity } from "reac
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Login({ navigation }) {
+export default function Cadastro({ navigation }) {
 
   const [nome, setNome] = useState('senai')
   const [email, setEmail] = useState('senai')

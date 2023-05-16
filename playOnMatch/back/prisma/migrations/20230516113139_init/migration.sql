@@ -5,7 +5,6 @@ CREATE TABLE `Usuario` (
     `email` VARCHAR(191) NOT NULL,
     `senha` VARCHAR(191) NOT NULL,
     `nascimento` DATETIME(3) NOT NULL,
-    `cep` VARCHAR(191) NULL,
 
     UNIQUE INDEX `Usuario_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -33,13 +32,26 @@ CREATE TABLE `Encontro` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `favoritos` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `idUsuario` INTEGER NOT NULL,
+    `idEncontro` INTEGER NOT NULL,
+
+    UNIQUE INDEX `favoritos_idUsuario_idEncontro_key`(`idUsuario`, `idEncontro`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Local` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(191) NOT NULL,
     `rua` VARCHAR(191) NOT NULL,
+    `bairro` VARCHAR(191) NOT NULL,
     `cidade` VARCHAR(191) NOT NULL,
     `pais` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `Local_cidade_key`(`cidade`),
+    UNIQUE INDEX `Local_pais_key`(`pais`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -62,6 +74,12 @@ ALTER TABLE `Lista_amigos` ADD CONSTRAINT `Lista_amigos_idCriador_fkey` FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE `Encontro` ADD CONSTRAINT `Encontro_id_local_fkey` FOREIGN KEY (`id_local`) REFERENCES `Local`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `favoritos` ADD CONSTRAINT `favoritos_idUsuario_fkey` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `favoritos` ADD CONSTRAINT `favoritos_idEncontro_fkey` FOREIGN KEY (`idEncontro`) REFERENCES `Encontro`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `EncontroUsuario` ADD CONSTRAINT `EncontroUsuario_idCriadorPartida_fkey` FOREIGN KEY (`idCriadorPartida`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

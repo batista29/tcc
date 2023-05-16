@@ -22,7 +22,6 @@ const enviarSolicitacaoAmizade = async (req, res) => {
         }
     })
     res.status(200).send({ mensagem: 'solicitação enviada' })
-    console.log('solicitação enviada')
 }
 
 const responsderSolicitacaoAmizade = async (req, res) => {
@@ -47,8 +46,6 @@ const responsderSolicitacaoAmizade = async (req, res) => {
             },
         }
     })
-
-    console.log(resposta)
 
     res.status(200).send(resposta).end()
 }
