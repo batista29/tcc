@@ -37,6 +37,7 @@ model Encontro {
   id              Int               @id @default(autoincrement())
   descricao       String
   dataHora        DateTime
+  dataFim         DateTime?
   titulo          String
   id_local        Int
   local           Local             @relation(fields: [id_local], references: [id])
@@ -59,8 +60,8 @@ model Local {
   nome     String
   rua      String
   bairro   String
-  cidade   String @unique
-  pais     String @unique
+  cidade   String     @unique
+  pais     String     @unique
   Encontro Encontro[]
 }
 
