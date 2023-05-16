@@ -142,30 +142,30 @@ function carregar() {
             let nwRes = res.filter(e => e.local.pais === localizacaoUsuario.pais && e.local.cidade === localizacaoUsuario.cidade)
 
             nwRes.forEach(dados => {
+                if (dados.dataFim == null) {
+                    let tabela = readInfo.cloneNode(true)
 
-                console.log(dados.local)
-                let tabela = readInfo.cloneNode(true)
+                    tabela.classList.remove("model")
 
-                tabela.classList.remove("model")
+                    let date = new Date(dados.dataHora);
 
-                let date = new Date(dados.dataHora);
+                    let horas = dados.dataHora.split('T')[1].split('.')[0]
 
-                let horas = dados.dataHora.split('T')[1].split('.')[0]
+                    let dataFormatada = date.toLocaleDateString("pt-BR", {
+                        timeZone: "UTC",
+                    });
 
-                let dataFormatada = date.toLocaleDateString("pt-BR", {
-                    timeZone: "UTC",
-                });
+                    tabela.querySelector('.idLocal').innerHTML = "#" + dados.id
+                    tabela.querySelector('.titulo').innerHTML = dados.titulo
 
-                tabela.querySelector('.idLocal').innerHTML = "#" + dados.id
-                tabela.querySelector('.titulo').innerHTML = dados.titulo
+                    tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
+                    tabela.querySelector('.endereco').innerHTML = dados.local.nome
 
-                tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
-                tabela.querySelector('.endereco').innerHTML = dados.local.nome
+                    let btnFavoritarPartida = tabela.querySelector('.btnFavoritarPartida');
+                    btnFavoritarPartida.addEventListener('click', favoritarPartida);
 
-                let btnFavoritarPartida = tabela.querySelector('.btnFavoritarPartida');
-                btnFavoritarPartida.addEventListener('click', favoritarPartida);
-
-                read.appendChild(tabela)
+                    read.appendChild(tabela)
+                }
             });
         })
 }
@@ -488,20 +488,20 @@ function cancelarEncontro() {
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
 
     let user = JSON.parse(localStorage.getItem('usuario'))
+    // const currentDate = new Date(Date.now());
 
-    const options = {
+    let options = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            authorization: user.token
+            authorization:user.token
         },
-        body: false
+        body: 'false'
     };
 
     fetch(`http://localhost:3000/finalizarEncontro/${idPartida}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+        .then(res => console.log(res))
 }
 
 function acessarPerfilAmigo(idAmigo) {

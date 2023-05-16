@@ -10,7 +10,6 @@ const create = async (req, res) => {
         const newEncontro = await prisma.encontro.create({
             data: req.body
         });
-        console.log(newEncontro)
 
         // Cria um novo registro para o encontro e os usuários relacionados
         const encontroUsuario = await prisma.encontroUsuario.create({

@@ -25,6 +25,7 @@ CREATE TABLE `Encontro` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `descricao` VARCHAR(191) NOT NULL,
     `dataHora` DATETIME(3) NOT NULL,
+    `dataFim` DATETIME(3) NULL,
     `titulo` VARCHAR(191) NOT NULL,
     `id_local` INTEGER NOT NULL,
 
