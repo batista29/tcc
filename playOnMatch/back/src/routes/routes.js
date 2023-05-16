@@ -46,5 +46,6 @@ const favorito = require('../controllers/controllerFavoritos')
 
 router.post('/favoritarEncontro/:idUsuario/:idEncontro',favorito.createFavoritos)
 router.get('/encontros/:idUsuario',favorito.readFavorito)
+router.delete('/removerEncontros/:idUsuario/:idEncontro',favorito.removerFavorito)
 
 module.exports = router

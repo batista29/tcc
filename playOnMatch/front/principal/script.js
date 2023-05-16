@@ -66,8 +66,6 @@ function pegarLocalizacaoUsuario() {
 }
 
 
-
-
 function favoritarPartida(idEncontro) {
 
     // faz parar o  evento do pai dele 
@@ -76,14 +74,44 @@ function favoritarPartida(idEncontro) {
     const { id } = user
 
     idEncontro = idEncontro.parentNode.children[1].children[0].innerHTML.slice(1)
-    console.log()
 
-    const options = { method: 'POST' };
+    const btnFavoritarPartida = document.getElementById('favorito')
 
-    // fetch(`http://localhost:3000/favoritarEncontro/${id}/${idEncontro}`, options)
-    //     .then(response => response.json())
-    //     .then(response => console.log(response))
-    //     .catch(err => console.error(err));
+    console.log(btnFavoritarPartida.classList)
+
+
+    const adicionarFavorito = () => {
+
+        const options = { method: 'POST' };
+
+        fetch(`http://localhost:3000/favoritarEncontro/${id}/${idEncontro}`, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+
+        btnFavoritarPartida.classList.add('favorito');
+    }
+
+
+
+    const removerFavorito = () => {
+        const options2 = { method: 'DELETE' };
+
+        fetch(`http://localhost:3000/removerEncontros/${id}/${idEncontro}`, options2)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+
+        btnFavoritarPartida.classList.remove('favorito');
+    }
+
+
+    if (btnFavoritarPartida.classList.contains('favorito')) {
+        removerFavorito()
+    } else {
+        adicionarFavorito()
+    }
+
 
     // para selecionar o elemento que disparou o evento, que é o próprio botão que foi clicado.
     // const btnFavoritarPartida = event.currentTarget;
@@ -199,7 +227,7 @@ function adicionarEncontro() {
 
     fetch(`http://localhost:3000/criarEncontro/${id}`, options)
         .then(response => response.json())
-        .then(response =>{ 
+        .then(response => {
             console.log(response)
             window.location.reload()
         })

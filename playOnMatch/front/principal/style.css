@@ -128,7 +128,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .abrirModal1 {
-    position: absolute;
     height: 5vh;
     width: 5vh;
     border-radius: 25px;
