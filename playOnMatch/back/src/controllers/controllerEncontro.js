@@ -192,15 +192,22 @@ const update = async (req, res) => {
 }
 
 const finalizarEncontro = async (req, res) => {
-    const currentDate = new Date(Date.now());
 
-    let encontro = await prisma.encontro.update({
-        where: { id: Number(req.params.id) },
-        data: {
-            dataFim: currentDate
-        }
-    })
-    res.status(200).json(encontro).end()
+    try {
+        const currentDate = new Date(Date.now());
+
+        let encontro = await prisma.encontro.update({
+            where: { id: Number(req.params.id) },
+            data: {
+                dataFim: currentDate
+            }
+        })
+        res.status(200).json(encontro).end() 
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error).end() 
+    }
+  
 }
 
 const del = async (req, res) => {

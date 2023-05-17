@@ -50,7 +50,12 @@
                 <p class="titulosMenu">Configurações</p>
             </div>
             <div class="configuracoes model">
-
+                <button>
+                    <p>acessarPerfil</p>
+                </button>
+                <button>
+                    <p>sair</p>
+                </button>
             </div>
         </div>
 
@@ -125,8 +130,16 @@
     </div>
     <div class="modalPartidas model">
         <div class="infoPartida">
-            <button class="btnAtualizarEncontro model"></button>
-            <button onclick="cancelarEncontro(this)" class="encerrarEncontro model">Finalizar Encontro?</button>
+            <button class="btnConfigEncontro" onclick="abrirModalConfigEncontro()">...</button>
+            <div class="modalConfigEncontro model">
+                <button onclick="cancelarEncontro()" class="encerrarEncontro model">Finalizar Encontro?</button>
+                <button class="btnConvidarAmigo">
+                    convidar amigo
+                </button>
+                <button class="btnAtualizarEncontro">
+                    atualizar encontro
+                </button>
+            </div>
             <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
             <div class="participantes">
                 <div class="infoParticipantes model">

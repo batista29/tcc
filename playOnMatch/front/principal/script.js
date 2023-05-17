@@ -194,7 +194,6 @@ function listaLocais() {
         })
 }
 
-listaLocais()
 
 function adicionarEncontro() {
 
@@ -458,7 +457,6 @@ function listaAmigos() {
 
                 let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
 
-                console.log(amigo)
                 amigo.forEach((e) => {
                     console.log(e)
                     let info = friendsInfo.cloneNode(true)
@@ -487,16 +485,15 @@ function cancelarEncontro() {
 
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
 
-    let user = JSON.parse(localStorage.getItem('usuario'))
-    // const currentDate = new Date(Date.now());
+    let { token } = user
 
     let options = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            authorization:user.token
+            authorization: token
         },
-        body: 'false'
+        body: JSON.stringify({})
     };
 
     fetch(`http://localhost:3000/finalizarEncontro/${idPartida}`, options)
@@ -629,6 +626,17 @@ menuConfiguracoes.addEventListener('click', () => {
     configuracoes.classList.toggle('model')
 })
 
+function abrirModalConfigEncontro() {
+    let modalConfigEncontro = document.querySelector('.modalConfigEncontro')
+
+    if (modalConfigEncontro.classList.contains("model")) {
+        modalConfigEncontro.classList.remove("model")
+    } else {
+        modalConfigEncontro.classList.add("model")
+
+    }
+}
+
 
 // function listarNotificacoes() {
 
@@ -645,6 +653,7 @@ menuConfiguracoes.addEventListener('click', () => {
 // }
 
 // listarNotificacoes()
+listaLocais()
 notificaoAmizade()
 listaAmigos()
 // usuario()
