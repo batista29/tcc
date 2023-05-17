@@ -4,10 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Cadastro({ navigation }) {
 
-  const [nome, setNome] = useState('senai')
-  const [email, setEmail] = useState('senai')
-  const [senha, setSenha] = useState('123')
-  const [nascimento, setNascimento] = useState('2020-03-19T14:21:00+02:00')
+  const [nome, setNome] = useState([])
+  const [email, setEmail] = useState([])
+  const [senha, setSenha] = useState([])
+  const [nascimento, setNascimento] = useState('2023-01-01T22:00:00.000Z')
 
   let dados = {
     nome: nome,
@@ -18,7 +18,7 @@ export default function Cadastro({ navigation }) {
 
   console.log(dados)
 
-  const userLogin = () => {
+  const createUser = () => {
     fetch("http://10.87.207.35:3000/criarUsuario", {
       method: 'POST',
       headers: {
@@ -73,7 +73,7 @@ export default function Cadastro({ navigation }) {
         <TouchableOpacity
           style={styles.botaoEntrar}
           onPress={() => {
-            userLogin()
+            createUser()
           }}
         >
           <Text style={styles.texto}>CRIAR</Text>
