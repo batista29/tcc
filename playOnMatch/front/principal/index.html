@@ -133,10 +133,10 @@
             <button class="btnConfigEncontro" onclick="abrirModalConfigEncontro()">...</button>
             <div class="modalConfigEncontro model">
                 <button onclick="cancelarEncontro()" class="encerrarEncontro model">Finalizar Encontro?</button>
-                <button class="btnConvidarAmigo">
+                <button class="btnConvidarAmigo" onclick="modalAbrirConvidarAmigo()">
                     convidar amigo
                 </button>
-                <button class="btnAtualizarEncontro">
+                <button class="btnAtualizarEncontro" onclick="modalAbrirAtualizarEncontro()">
                     atualizar encontro
                 </button>
             </div>
@@ -185,6 +185,38 @@
                     </datalist>
                 </form>
                 <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
+            </div>
+        </div>
+    </div>
+    <div class="modalConvidarAmigo model">
+        <div class="modal">
+            <div class="inputsConvidarAmigo">
+                <button class="sairModalPartidas" onclick="fecharModalConvidarAmigo()">X</button>
+                <div class="infoConvidarAmigos">
+                    <p class="nomeAmigoConvite">nome</p>
+                    <p class="idAmigoConvite">id</p>
+                    <button class="enviar">CONVIDAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modalAtualizarEncontro model">
+        <div class="modal">
+            <div class="inputsAtualizarEncontro">
+                <button class="sairModalAtualizarEncontro" onclick="fecharModalAtualizarEncontro()">X</button>
+                <label for="">Descrição</label>
+                <input class="atualizarDescricaoEncontro" type="text">
+                <label for="">Titulo</label>
+                <input class="atualizarTituloEncontro" type="text">
+                <label for="">Data</label>
+                <input class="atualizarDataEncontro" type="date">
+                <label for="">Hora</label>
+                <input class="atualizarHoraEncontro" type="time">
+                <label for="">Endereço</label>
+                <input type="text" id="consulta" name="consulta" list="opcoes">
+                <datalist id="opcoes">
+                </datalist>
+                <button onclick="atualizarEncontro()" class="enviar">ATUALIZAR</button>
             </div>
         </div>
     </div>

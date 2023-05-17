@@ -484,8 +484,11 @@ const encerrarPartida = document.querySelector('.encerrarEncontro')
 function cancelarEncontro() {
 
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
+    console.log(idPartida)
 
     let { token } = user
+    let { id } = user
+    console.log(token)
 
     let options = {
         method: 'PUT',
@@ -496,8 +499,12 @@ function cancelarEncontro() {
         body: JSON.stringify({})
     };
 
-    fetch(`http://localhost:3000/finalizarEncontro/${idPartida}`, options)
-        .then(response => response.json())
+    fetch(`http://localhost:3000/finalizarEncontro/${id}/${idPartida}`, options)
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+            return response.json()
+        })
         .then(res => console.log(res))
 }
 
@@ -633,7 +640,6 @@ function abrirModalConfigEncontro() {
         modalConfigEncontro.classList.remove("model")
     } else {
         modalConfigEncontro.classList.add("model")
-
     }
 }
 
@@ -653,7 +659,103 @@ function abrirModalConfigEncontro() {
 // }
 
 // listarNotificacoes()
+
+// usuario()
+
+function modalAbrirConvidarAmigo() {
+    let modalAparecer = document.querySelector(".modalConvidarAmigo");
+    modalAparecer.classList.remove("model")
+}
+
+function fecharModalConvidarAmigo() {
+    let modalAparecer = document.querySelector(".modalConvidarAmigo");
+    modalAparecer.classList.add("model")
+}
+
+function modalAbrirAtualizarEncontro() {
+    let modalAparecer = document.querySelector(".modalAtualizarEncontro");
+    modalAparecer.classList.remove("model")
+}
+
+function fecharModalAtualizarEncontro() {
+    let modalAparecer = document.querySelector(".modalAtualizarEncontro");
+    modalAparecer.classList.add("model")
+}
+
+function atualizarEncontro() {
+
+    let atualizarTituloEncontro = document.querySelector('.atualizarTituloEncontro')
+    let atualizarDescricaoEncontro = document.querySelector('.atualizarDescricaoEncontro')
+    // let atualizarDataEncontro = document.querySelector('.atualizarDataEncontro')
+    // let atualizarHoraEncontro = document.querySelector('.atualizarHoraEncontro')
+    let local = document.querySelector('#consulta')
+
+    let data = {};
+
+    if (atualizarTituloEncontro.value) {
+        data.titulo = atualizarTituloEncontro.value;
+    }
+    // if (atualizarDataEncontro.value && atualizarHoraEncontro.value) {
+    //     data.dataHora = atualizarTituloEncontro.value;
+    // }
+
+    if (atualizarDescricaoEncontro.value) {
+        data.descricao = atualizarDescricaoEncontro.value;
+    }
+
+    if (local.value) {
+        data.local = local.value;
+    }
+
+    let { token } = user
+    let { id } = user
+
+    let idPartida = JSON.parse(localStorage.getItem("idPartida"))
+
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: token
+        },
+        body: JSON.stringify(data)
+    };
+
+    fetch(`http://localhost:3000/editarEncontro/${idPartida}/${id}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
+
+function convidarAmigosParaEncontro() {
+    setTimeout(() => {
+        const options = { method: 'GET' };
+
+        let { id } = user
+
+        fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
+            .then(response => response.json())
+            .then(res => {
+                let inputsConvidarAmigo = document.querySelector('.inputsConvidarAmigo')
+                let infoConvidarAmigos = document.querySelector('.infoConvidarAmigos')
+
+                let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
+
+                amigo.forEach((e) => {
+                    console.log(e)
+                    let info = infoConvidarAmigos.cloneNode(true)
+
+                    info.classList.remove("model")
+
+                    info.querySelector('.idAmigoConvite').innerHTML = e.amigo.id
+                    info.querySelector('.nomeAmigoConvite').innerHTML = e.amigo.nome
+
+                    inputsConvidarAmigo.appendChild(info)
+                })
+            })
+    }, 100)
+}
+
 listaLocais()
 notificaoAmizade()
 listaAmigos()
-// usuario()
