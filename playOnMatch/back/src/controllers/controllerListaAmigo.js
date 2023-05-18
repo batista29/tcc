@@ -35,6 +35,7 @@ const responsderSolicitacaoAmizade = async (req, res) => {
         select: {
             criadorListaAmigo: {
                 select: {
+                    idCriador:true,
                     amigo: {
                         select: {
                             id: true,

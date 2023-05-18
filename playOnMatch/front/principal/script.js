@@ -538,7 +538,8 @@ function acessarPerfilAmigo(idAmigo) {
 
 function notificaoAmizade() {
 
-    let { id } = JSON.parse(localStorage.getItem('usuario'))
+    let { id } = user
+
     const options = { method: 'GET' };
 
     const dadosNotificacao = document.querySelector('.itensNotificacao')
@@ -547,8 +548,11 @@ function notificaoAmizade() {
     fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
         .then(response => response.json())
         .then(res => {
-            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0)
+
+            // let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0 && element.idCriador != id)
+            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => console.log(element))
             solicitacaoAmizade.forEach((e) => {
+
                 let notificaoAmizade = dadosNotificacao.cloneNode(true)
                 notificaoAmizade.classList.remove("model")
 
@@ -557,6 +561,8 @@ function notificaoAmizade() {
 
                 notificacaoModal.appendChild(notificaoAmizade)
             })
+
+
         })
 }
 

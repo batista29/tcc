@@ -99,26 +99,38 @@ const readPerfil = async (req, res) => {
                 id: true,
                 nascimento: true,
                 nome: true,
-                cep: true,
                 email: true,
                 criadorListaAmigo: true,
                 participante: {
                     select: {
                         encontro: {
                             select: {
-                                data: true,
+                                dataHora: true,
+                                dataFim: true,
                                 descricao: true,
-                                esporte: true,
                                 titulo: true,
                                 local: {
                                     select: {
-                                        endereco: true
+                                        nome: true,
+                                        pais: true,
+                                        cidade: true,
+                                    }
+                                },
+                                EncontroUsuario: {
+                                    select: {
+                                        idParticipante: {
+                                            select: {
+                                                id: true,
+                                                nome: true
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 },
+
             }
         })
         res.status(200).send(usuario).end()

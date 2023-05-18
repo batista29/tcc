@@ -40,12 +40,34 @@ function listar() {
 
             res.participante.forEach((e) => {
 
+                let dataSplit = e.encontro.dataHora.split("T")[0]
+                let horaSplit = e.encontro.dataHora.split("T")[1].split('.')[0]
+                var dateFim = new Date(dataSplit);
+
+                let dataFimFormatada = dateFim.toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                });
+
+                let horaFim = ""
+                if (e.encontro.dataFim == null) {
+                    horaFim = "Não Acabou"
+
+                } else {
+                    horaFim = e.encontro.dataFim.split("T")[1].split(".")[0]
+                }
+
+
+                console.log()
+
                 let dadosPartida = infoPartida.cloneNode(true)
                 dadosPartida.classList.remove("model")
 
                 dadosPartida.querySelector('.tituloPartida').innerHTML = e.encontro.titulo
-                dadosPartida.querySelector('.enderecoPartida').innerHTML = e.encontro.local.endereco
-                dadosPartida.querySelector('.dataHora').innerHTML = e.encontro.data.split("T")[1].split(":")[0] + "h " + e.encontro.data.split("T")[0]
+                dadosPartida.querySelector('.enderecoPartida').innerHTML = e.encontro.local.nome
+                dadosPartida.querySelector('.data').innerHTML = dataFimFormatada
+                dadosPartida.querySelector('.horaInicio').innerHTML = horaSplit
+                dadosPartida.querySelector('.horaFim').innerHTML = horaFim
+
                 partida.appendChild(dadosPartida)
 
             })
@@ -197,7 +219,7 @@ function editarPerfil() {
             return response.json()
         })
         .then(res => console.log(res))
-        window.location.reload()
+    window.location.reload()
 }
 
 listar()
