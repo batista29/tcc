@@ -1,24 +1,79 @@
-import { StyleSheet, TextInput, View, Image, Text, TouchableOpacity } from "react-native";
-import { useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useEffect } from 'react';
+import { Picker, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 
-export default function Cadastro({ navigation }) {
+const YearPicker = () => {
+  //pegar ano
+  const startYear = 1901;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const years = [];
 
-  const [nome, setNome] = useState([])
-  const [email, setEmail] = useState([])
-  const [senha, setSenha] = useState([])
-  const [nascimento, setNascimento] = useState('2023-01-01T22:00:00.000Z')
+  for (let year = startYear; year <= currentYear; year++) {
+    years.push(year.toString());
+  }
+
+  const [selectedYear, setSelectedYear] = useState('');
+
+  const handleYearChange = (value) => {
+    setSelectedYear(value);
+  };
+
+  //pegar dia
+  const startDay = 1;
+  const days = [];
+
+  for (let day = startDay; day <= 31; day++) {
+    days.push(day.toString());
+  }
+
+  const [selectedDay, setSelectedDay] = useState('');
+
+  const handleDayChange = (value) => {
+    setSelectedDay(value);
+  };
+
+  //pegar mês
+  const startMonth = 1;
+  const months = [];
+
+  for (let month = startMonth; month <= 12; month++) {
+    months.push(month.toString());
+  }
+
+  const [selectedMonth, setSelectedMonth] = useState('');
+
+  const handleMonthChange = (value) => {
+    setSelectedMonth(value);
+  };
+
+  if (selectedDay.length < 2) {
+    var diaFormatado = "0" + selectedDay + 'T00:00:00Z'
+  } else {
+    var diaFormatado = selectedDay + 'T00:00:00Z'
+  }
+
+  if (selectedMonth.length < 2) {
+    var mesFormatado = "0" + selectedMonth
+  } else {
+    var mesFormatado = selectedMonth
+  }
+
+  var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
+  console.log(dataEnviar)
+
+  const [nome, setNome] = useState('teste3');
+  const [email, setEmail] = useState('teste3@gmail.com');
+  const [senha, setSenha] = useState('123');
 
   let dados = {
     nome: nome,
     email: email,
     senha: senha,
-    nascimento: nascimento
+    nascimento: dataEnviar,
   }
-
   console.log(dados)
 
-  const createUser = () => {
+  const cadastrarPessoa = () => {
     fetch("http://10.87.207.35:3000/criarUsuario", {
       method: 'POST',
       headers: {
@@ -31,96 +86,72 @@ export default function Cadastro({ navigation }) {
       .then(res => {
         return res.json()
       })
-      .then(response => { console.log(response) })
+      .then(data => { console.log(data) })
   }
 
   return (
-    <View style={styles.main}>
-      <View style={styles.container}>
-        <Text style={styles.texto1}>CADASTRE-SE</Text>
-        <Text style={styles.texto}>Digite o seu nome</Text>
-        <TextInput
-          style={styles.inputs}
-          value={nome}
-          onChangeText={(value) => {
-            setNome(value)
-          }}
-        ></TextInput>
-        <Text style={styles.texto}>Digite o seu e-mail</Text>
-        <TextInput
-          style={styles.inputs}
-          value={email}
-          onChangeText={(value) => {
-            setEmail(value)
-          }}
-        ></TextInput>
-        <Text style={styles.texto}>Digite a sua senha</Text>
-        <TextInput
-          style={styles.inputs}
-          value={senha}
-          onChangeText={(value) => {
-            setSenha(value)
-          }}
-        ></TextInput>
-        <Text style={styles.texto}>Digite a sua nascimento</Text>
-        <TextInput
-          style={styles.inputs}
-          value={nascimento}
-          onChangeText={(value) => {
-            setNascimento(value)
-          }}
-        ></TextInput>
-        <TouchableOpacity
-          style={styles.botaoEntrar}
-          onPress={() => {
-            createUser()
-          }}
+    <View style={styles.container}>
+      <View style={styles.inpInfos}>
+        <Text>Infos</Text>
+      </View>
+      <View style={styles.pickerData}>
+
+        <Picker style={styles.selecionarData}
+          selectedValue={selectedDay}
+          onValueChange={handleDayChange}
         >
-          <Text style={styles.texto}>CRIAR</Text>
+          {days.map((day) => (
+            <Picker.Item key={day} label={day} value={day} />
+          ))}
+        </Picker>
+
+        <Picker style={styles.selecionarData}
+          selectedValue={selectedMonth}
+          onValueChange={handleMonthChange}
+        >
+          {months.map((month) => (
+            <Picker.Item key={month} label={month} value={month} />
+          ))}
+        </Picker>
+
+        <Picker style={styles.selecionarData}
+          selectedValue={selectedYear}
+          onValueChange={handleYearChange}
+        >
+          {years.map((year) => (
+            <Picker.Item key={year} label={year} value={year} />
+          ))}
+        </Picker>
+
+        <TouchableOpacity onPress={() => {
+          cadastrarPessoa()
+        }}>
+          <Text>Criar</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
+
+export default YearPicker;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: '#272f33',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   container: {
-    backgroundColor: '#0f0f3a',
+    flex: 1,
+    backgroundColor: '#008F8C',
     alignItems: 'center',
-    justifyContent: 'center',
-    height: 500,
-    width: 350,
-    border: '2px solid #00f63e'
+    justifyContent: 'center'
   },
-  inputs: {
-    backgroundColor: '#fff',
-    border: '1px solid black',
-    width: 200,
-    marginBottom: 20
+  selecionarData: {
+    width: '200px',
+    height: '35px',
+    marginTop: '10px'
   },
-  texto: {
-    color: 'white',
-    fontFamily: 'sans-serif',
-    fontSize: 20,
-    marginBottom: 5
+  pickerData: {
+    flex: 1
   },
-  texto1: {
-    fontSize: 25,
-    color: 'white',
-    fontFamily: 'sans-serif',
-    marginBottom: 20
-  },
-  botaoEntrar: {
-    height: 25,
-    width: 200,
-    alignItems: 'center',
-    border: '1px solid white',
-    marginTop: 10
+  inpInfos: {
+    flex: 2
   }
-});
+})
