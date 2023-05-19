@@ -11,14 +11,16 @@ const enviarSolicitacaoAmizade = async (req, res) => {
     const lista = await prisma.lista_amigos.create({
         data: {
             idCriador: idCriador,
-            idAmigo: idAmigo
+            idAmigo: idAmigo,
+            remetente:idCriador
         }
     })
 
     const lista2 = await prisma.lista_amigos.create({
         data: {
             idCriador: idAmigo,
-            idAmigo: idCriador
+            idAmigo: idCriador,
+            remetente:idCriador
         }
     })
     res.status(200).send({ mensagem: 'solicitação enviada' })

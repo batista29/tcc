@@ -28,6 +28,7 @@ model Lista_amigos {
   idAmigo   Int?
   idCriador Int
   status    Int      @default(0)
+  remetente Int
   amigo     Usuario? @relation("amigo", fields: [idAmigo], references: [id])
   criador   Usuario  @relation("criador", fields: [idCriador], references: [id])
 }
@@ -59,8 +60,8 @@ model Local {
   nome     String
   rua      String
   bairro   String
-  cidade   String   
-  pais     String  
+  cidade   String
+  pais     String
   Encontro Encontro[]
 }
 
