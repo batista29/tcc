@@ -3,17 +3,17 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView,
 
 export default function NewPartida() {
 
-    //pegar ano
-    const startYear = 1901;
+    //pegar ano=
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
+    const nextYear = currentYear + 1;
     const years = [];
 
-    for (let year = startYear; year <= currentYear; year++) {
+    for (let year = currentYear; year <= nextYear; year++) {
         years.push(year.toString());
     }
 
-    const [selectedYear, setSelectedYear] = useState('1901');
+    const [selectedYear, setSelectedYear] = useState(currentYear);
 
     const handleYearChange = (value) => {
         setSelectedYear(value);
@@ -61,21 +61,50 @@ export default function NewPartida() {
 
     var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const [locais, setLocais] = useState([])
+    const [selectedLocal, setSelectedLocal] = useState([])
 
-    const [descricao, setDescricao] = useState([])
+    const handleLocalChange = (value) => {
+        setSelectedLocal(value);
+    };
+
+    const [descricao, setDescricao] = useState("gfdgfgd")
     const [dataHora, setDataHora] = useState('2023-01-01T22:00:00Z')
-    const [titulo, setTitulo] = useState([])
-
-    // console.log(locais)
+    const [titulo, setTitulo] = useState("gdfgdgg")
 
     useEffect(() => {
         fetch('http://10.87.207.35:3000/listarLocais')
             .then(res => { return res.json() })
             .then(data => {
-                data.map((e, index) => {
-                    setLocais(e)
-                })
+                setLocais(data)
             })
     })
 
@@ -83,11 +112,12 @@ export default function NewPartida() {
         descricao: descricao,
         dataHora: dataHora,
         titulo: titulo,
-        id_local: 1
+        id_local: Number(selectedLocal)
     }
 
     const cadastrarEncontro = () => {
-        fetch("http://10.87.207.35:3000/criarEncontro/1", {
+        console.log(dados)
+        fetch(`http://10.87.207.35:3000/criarEncontro/${dados.id_local}`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -101,6 +131,8 @@ export default function NewPartida() {
             })
             .then(data => { console.log(data) })
     }
+
+
 
     return (
         <View style={styles.container}>
@@ -117,6 +149,17 @@ export default function NewPartida() {
                         setDescricao(value)
                     }}>
                 </TextInput>
+
+                <Picker style={styles.selecionarData}
+                    selectedValue={selectedLocal}
+                    onValueChange={handleLocalChange}
+                >
+                    {locais.map((dados) => (
+
+                        < Picker.Item key={dados.id} label={dados.cidade} value={dados.id} />
+                    ))}
+                </Picker>
+
                 <Text style={styles.textDate}>Selecione o dia</Text>
                 <Picker style={styles.selecionarData}
                     selectedValue={selectedDay}
@@ -195,5 +238,10 @@ const styles = StyleSheet.create({
     },
     textBtnCadastrar: {
         color: 'white'
-    }
+    },
+    selecionarData: {
+        width: '220px',
+        height: '40px',
+        marginBottom: '40px',
+    },
 })
