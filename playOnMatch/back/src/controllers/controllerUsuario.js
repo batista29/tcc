@@ -15,7 +15,7 @@ const create = async (req, res) => {
             data: info
         })
 
-        res.status(201).json(usuario).end()
+        res.status(201).send({ mensagem: "OK" }).end()
 
     } catch (error) {
         console.log(error)

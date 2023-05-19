@@ -1,7 +1,65 @@
 import { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
 
 export default function NewPartida() {
+
+    //pegar ano
+    const startYear = 1901;
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const years = [];
+
+    for (let year = startYear; year <= currentYear; year++) {
+        years.push(year.toString());
+    }
+
+    const [selectedYear, setSelectedYear] = useState('1901');
+
+    const handleYearChange = (value) => {
+        setSelectedYear(value);
+    };
+
+    //pegar dia
+    const startDay = 1;
+    const days = [];
+
+    for (let day = startDay; day <= 31; day++) {
+        days.push(day.toString());
+    }
+
+    const [selectedDay, setSelectedDay] = useState('01');
+
+    const handleDayChange = (value) => {
+        setSelectedDay(value);
+    };
+
+    //pegar mês
+    const startMonth = 1;
+    const months = [];
+
+    for (let month = startMonth; month <= 12; month++) {
+        months.push(month.toString());
+    }
+
+    const [selectedMonth, setSelectedMonth] = useState('01');
+
+    const handleMonthChange = (value) => {
+        setSelectedMonth(value);
+    };
+
+    if (selectedDay.length < 2) {
+        var diaFormatado = "0" + selectedDay + 'T00:00:00Z'
+    } else {
+        var diaFormatado = selectedDay + 'T00:00:00Z'
+    }
+
+    if (selectedMonth.length < 2) {
+        var mesFormatado = "0" + selectedMonth
+    } else {
+        var mesFormatado = selectedMonth
+    }
+
+    var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
     const [locais, setLocais] = useState([])
 
@@ -59,12 +117,39 @@ export default function NewPartida() {
                         setDescricao(value)
                     }}>
                 </TextInput>
-                <TextInput style={styles.inputs} placeholder='Data e Hora do encontro'
-                    value={dataHora}
-                    onChangeText={(value) => {
-                        setDataHora(value)
-                    }}>
-                </TextInput>
+                <Text style={styles.textDate}>Selecione o dia</Text>
+                <Picker style={styles.selecionarData}
+                    selectedValue={selectedDay}
+                    onValueChange={handleDayChange}
+                >
+                    {days.map((day) => (
+                        <Picker.Item key={day} label={day} value={day} />
+                    ))}
+                </Picker>
+
+                <Text style={styles.textDate}>Selecione o mês</Text>
+
+                <Picker style={styles.selecionarData}
+                    selectedValue={selectedMonth}
+                    onValueChange={handleMonthChange}
+                >
+                    {months.map((month) => (
+                        <Picker.Item key={month} label={month} value={month} />
+                    ))}
+                </Picker>
+
+                <Text style={styles.textDate}>Selecione o ano</Text>
+
+                <Picker style={styles.selecionarData}
+                    selectedValue={selectedYear}
+                    onValueChange={handleYearChange}
+                >
+                    {years.map((year) => (
+                        <Picker.Item key={year} label={year} value={year} />
+                    ))}
+                </Picker>
+
+
                 <TouchableOpacity style={styles.btnCadastrar} onPress={() => {
                     cadastrarEncontro()
                 }}>

@@ -26,13 +26,15 @@ export default function Login({ navigation }) {
         return res.json()
       })
       .then(data => {
-        console.log(data)
         if (data.mensagem == 'Senha incorreta') {
           alert('Senha incorreta')
         } else if (data.mensagem == 'Seu login foi bem-sucedido') {
           navigation.navigate("Main")
-        }else if(data.mensagem == 'Usuário não encontrado'){
+        } else if (data.mensagem == 'Usuário não encontrado') {
           alert('Usuário não encontrado')
+        } else {
+          alert("Erro ao efetuar login")
+          window.location.reload()
         }
       })
   }
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 400,
     width: 350,
-    border:'2px solid #00f63e'
+    border: '2px solid #00f63e'
   },
   inputs: {
     backgroundColor: '#fff',

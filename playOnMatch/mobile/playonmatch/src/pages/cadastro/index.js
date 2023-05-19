@@ -12,7 +12,7 @@ const YearPicker = () => {
     years.push(year.toString());
   }
 
-  const [selectedYear, setSelectedYear] = useState('');
+  const [selectedYear, setSelectedYear] = useState('1901');
 
   const handleYearChange = (value) => {
     setSelectedYear(value);
@@ -26,7 +26,7 @@ const YearPicker = () => {
     days.push(day.toString());
   }
 
-  const [selectedDay, setSelectedDay] = useState('');
+  const [selectedDay, setSelectedDay] = useState('01');
 
   const handleDayChange = (value) => {
     setSelectedDay(value);
@@ -40,7 +40,7 @@ const YearPicker = () => {
     months.push(month.toString());
   }
 
-  const [selectedMonth, setSelectedMonth] = useState('');
+  const [selectedMonth, setSelectedMonth] = useState('01');
 
   const handleMonthChange = (value) => {
     setSelectedMonth(value);
@@ -59,7 +59,6 @@ const YearPicker = () => {
   }
 
   var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
-  console.log(dataEnviar)
 
   const [nome, setNome] = useState('teste3');
   const [email, setEmail] = useState('teste3@gmail.com');
@@ -71,63 +70,107 @@ const YearPicker = () => {
     senha: senha,
     nascimento: dataEnviar,
   }
+
   console.log(dados)
 
   const cadastrarPessoa = () => {
-    fetch("http://10.87.207.35:3000/criarUsuario", {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dados)
+    if (dados.nome.length == 0 || dados.email.length == 0 || dados.senha.length == 0 || dados.nascimento.length < 19) {
+      alert('Algum campo vazio')
+    } else {
+      fetch("http://10.87.207.35:3000/criarUsuario", {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+      }
+      )
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          console.log(data)
+          if (data.erro == 'Email já existente') {
+            alert('Esse e-mail já existente')
+          } else if (data.mensagem == "OK") {
+            alert("Usuario criado")
+            window.location.reload()
+          } else {
+            alert("Erro ao criar")
+            window.location.reload()
+          }
+        })
     }
-    )
-      .then(res => {
-        return res.json()
-      })
-      .then(data => { console.log(data) })
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.inpInfos}>
-        <Text>Infos</Text>
-      </View>
       <View style={styles.pickerData}>
+        <View style={styles.divInputs}>
+          <TextInput style={styles.inputs} placeholder='Insira o seu nome'
+            value={nome}
+            onChangeText={(value) => {
+              setNome(value)
+            }}>
+          </TextInput>
 
-        <Picker style={styles.selecionarData}
-          selectedValue={selectedDay}
-          onValueChange={handleDayChange}
-        >
-          {days.map((day) => (
-            <Picker.Item key={day} label={day} value={day} />
-          ))}
-        </Picker>
+          <TextInput style={styles.inputs} placeholder='Insira o seu email'
+            value={email}
+            onChangeText={(value) => {
+              setEmail(value)
+            }}>
+          </TextInput>
 
-        <Picker style={styles.selecionarData}
-          selectedValue={selectedMonth}
-          onValueChange={handleMonthChange}
-        >
-          {months.map((month) => (
-            <Picker.Item key={month} label={month} value={month} />
-          ))}
-        </Picker>
+          <TextInput secureTextEntry={true} style={styles.inputs} placeholder='Insira a sua senha'
+            value={senha}
+            onChangeText={(value) => {
+              setSenha(value)
+            }}>
+          </TextInput>
+        </View>
 
-        <Picker style={styles.selecionarData}
-          selectedValue={selectedYear}
-          onValueChange={handleYearChange}
-        >
-          {years.map((year) => (
-            <Picker.Item key={year} label={year} value={year} />
-          ))}
-        </Picker>
+        <View style={styles.divSelect}>
 
-        <TouchableOpacity onPress={() => {
-          cadastrarPessoa()
-        }}>
-          <Text>Criar</Text>
-        </TouchableOpacity>
+          <Text style={styles.textDate}>Selecione o dia</Text>
+
+          <Picker style={styles.selecionarData}
+            selectedValue={selectedDay}
+            onValueChange={handleDayChange}
+          >
+            {days.map((day) => (
+              <Picker.Item key={day} label={day} value={day} />
+            ))}
+          </Picker>
+
+          <Text style={styles.textDate}>Selecione o mês</Text>
+
+          <Picker style={styles.selecionarData}
+            selectedValue={selectedMonth}
+            onValueChange={handleMonthChange}
+          >
+            {months.map((month) => (
+              <Picker.Item key={month} label={month} value={month} />
+            ))}
+          </Picker>
+
+          <Text style={styles.textDate}>Selecione o ano</Text>
+
+          <Picker style={styles.selecionarData}
+            selectedValue={selectedYear}
+            onValueChange={handleYearChange}
+          >
+            {years.map((year) => (
+              <Picker.Item key={year} label={year} value={year} />
+            ))}
+          </Picker>
+
+          <TouchableOpacity style={styles.btnCriar} onPress={() => {
+            cadastrarPessoa()
+          }}>
+            <Text style={styles.textBtnCriar}>Criar</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -139,19 +182,49 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#008F8C',
+    backgroundColor: '#012340',
     alignItems: 'center',
     justifyContent: 'center'
   },
-  selecionarData: {
-    width: '200px',
-    height: '35px',
-    marginTop: '10px'
-  },
   pickerData: {
-    flex: 1
+    height: '650px',
+    width: '350px',
+    backgroundColor: '#008F8C',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '2px solid white'
   },
-  inpInfos: {
-    flex: 2
+  selecionarData: {
+    width: '220px',
+    height: '40px',
+    marginBottom: '40px',
+  },
+  btnCriar: {
+    border: '1px solid white',
+    width: '220px',
+    height: '45px',
+    backgroundColor: '#012340',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
+  textBtnCriar: {
+    color: 'white',
+    fontSize: '20px'
+  },
+  divInputs: {
+    marginBottom: '25px'
+  },
+  inputs: {
+    width: '220px',
+    height: '40px',
+    marginBottom: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    backgroundColor: 'white',
+    color: 'black',
+  },
+  textDate: {
+    fontSize: '20px',
+    color: 'white',
   }
 })

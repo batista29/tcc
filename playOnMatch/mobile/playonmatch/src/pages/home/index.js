@@ -6,7 +6,7 @@ import principal from './principal/index.js'
 const Tab = createMaterialTopTabNavigator();
 
 export default function Main() {
-    return(
+    return (
         <Tab.Navigator>
             <Tab.Screen name="principal" component={principal}></Tab.Screen>
         </Tab.Navigator>
