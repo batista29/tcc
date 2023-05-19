@@ -21,14 +21,11 @@
         <button onclick="abrirModal()" class="abrirModal1">+</button>
         <div data-content id="menu" class="partidasFavoritas">
             <div class="menuInteresses">
-                <img class="iconsImgs" src="../../docs/imgs/estrela.png" alt="">
+                <img class="iconsImgs imgInteresses" src="../../docs/imgs/estrela.png" alt="">
                 <p class="titulosMenu">Interesses</p>
             </div>
-            <div class="partidasInteressado model">
-
-            </div>
             <div class="menuNotificacoes">
-                <img class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
+                <img class="iconsImgs imgNotificacoes" src="../../docs/imgs/notificacao.png" alt="">
                 <p class="titulosMenu">Notificações</p>
             </div>
             <div class="notificacoes model">
@@ -46,7 +43,7 @@
                 </div>
             </div>
             <div class="menuConfiguracoes">
-                <img class="iconsImgs" src="../../docs/imgs/configuracoes-cog.png" alt="">
+                <img class="iconsImgs imgConfiguracao" src="../../docs/imgs/configuracoes-cog.png" alt="">
                 <p class="titulosMenu">Configurações</p>
             </div>
             <div class="configuracoes model">
@@ -84,17 +81,6 @@
             <button id="btnTopo" class="buttonTop">↥</button>
         </div>
         <div class="friends">
-            <!-- <div onclick="acessarPerfil()" class="perfil model">
-                <p class="idUser">Id</p>
-                <p class="nomeUser">Nome:</p>
-                <div class="buttons">
-                    <button class="btnNotificacao"><img class="imgNotificacao" src="../../docs/imgs/notificacao.png"
-                            alt="">
-                    </button>
-                    <button class="btnNotificacao"><img class="imgNotificacao"
-                            src="../../docs/imgs/configuracoes-cog.png" alt=""></button>
-                </div>
-            </div> -->
             <div class="allFriends">
                 <h2>FRIENDS</h2>
                 <div class="friends_info model" onclick="acessarPerfilAmigo(this)">
@@ -180,11 +166,29 @@
                     <label for="">hora</label>
                     <input id="timeSubmit" type="time">
                     <label for="">Endereço</label>
-                    <input type="text" id="consulta" name="consulta" list="opcoes">
-                    <datalist id="opcoes">
-                    </datalist>
+                    <div class="btnsLocais">
+                        <input type="text" id="consulta" name="consulta" list="opcoes">
+                        <datalist id="opcoes">
+                        </datalist>
+                        <button title="Criar Local" class="btnAbrirModalCriaLocal">+</button>
+                    </div>
+
                 </form>
                 <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
+            </div>
+            <div class="modalCriarLocal model">
+                <div class="cadastroLocal">
+                    <form action="" class="formCadastroLocal">
+                        <button class="btnFecharModalCriarLocal">x</button>
+                        <label for="">Nome:</label>
+                        <input type="text">
+                        <label for="">Rua:</label>
+                        <input type="text">
+                        <label for="">Bairro:</label>
+                        <input type="text">
+                    </form>
+                    <button>criar</button>
+                </div>
             </div>
         </div>
     </div>

@@ -68,6 +68,12 @@ main {
     border-radius: 30px;
     background-color: var(--backgroundLogin);
     color: white;
+    cursor: pointer;
+}
+
+.btnAceitarAmizade:hover,
+.btnRecusarAmizade:hover {
+    background-color: var(--backgroundHome);
 }
 
 h1 {
@@ -112,8 +118,8 @@ body::-webkit-scrollbar-thumb {
     right: 0;
     position: fixed;
     background-color: var(--backgroundLogin);
-    min-height: 100%;
-    max-height: auto;
+    height: 90%;
+    margin-top: 10vh;
     width: 20%;
 }
 
@@ -198,7 +204,8 @@ body::-webkit-scrollbar-thumb {
 .inputsCadastro,
 .inputsConvidarAmigo,
 .inputsAtualizarEncontro,
-.inputsAtualizarEncontro {
+.inputsAtualizarEncontro,
+.cadastroLocal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -568,8 +575,9 @@ img.iconeBusca {
     width: 25px;
     border-radius: 50%;
     cursor: pointer;
-
 }
+
+/* width: 15vw; */
 
 #humburger {
     cursor: pointer;
@@ -589,7 +597,6 @@ img.iconeBusca {
 .menuConfiguracoes {
     display: flex;
     align-items: center;
-    width: 100%;
 }
 
 .menuInteresses:hover,
@@ -626,7 +633,6 @@ img.iconeBusca {
 .configuracoes {
     display: flex;
     flex-direction: column;
-
 }
 
 .btnConfigEncontro {
@@ -645,7 +651,6 @@ img.iconeBusca {
 
 .btnConfigEncontro:hover {
     background-color: #008F8C;
-
 }
 
 .modalConfigEncontro {
@@ -670,4 +675,55 @@ img.iconeBusca {
     border-radius: 25px;
     background-color: var(--textoHome);
     color: var(--backgroundHome);
+}
+
+.btnsLocais {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.btnsLocais>input {
+    width: 20vh;
+    height: 3vh;
+}
+
+.btnAbrirModalCriaLocal {
+    position: absolute;
+    right: 0;
+    margin-right: 20%;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.btnAbrirModalCriaLocal:hover {
+    background-color: #008F8C;
+}
+
+.modalCriarLocal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 110vh;
+    width: 100%;
+    background-color: #0123405b;
+    align-items: center;
+    justify-content: center;
+}
+
+.formCadastroLocal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40vh;
+    width: 50vh;
+    background-color: var(--backgroundLogin);
+    color: var(--textoHome);
+    border-radius: 10px;
+    position: relative;
 }

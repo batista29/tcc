@@ -12,7 +12,7 @@ const enviarSolicitacaoAmizade = async (req, res) => {
         data: {
             idCriador: idCriador,
             idAmigo: idAmigo,
-            remetente:idCriador
+            remetente: idCriador
         }
     })
 
@@ -20,7 +20,7 @@ const enviarSolicitacaoAmizade = async (req, res) => {
         data: {
             idCriador: idAmigo,
             idAmigo: idCriador,
-            remetente:idCriador
+            remetente: idCriador
         }
     })
     res.status(200).send({ mensagem: 'solicitação enviada' })
@@ -37,7 +37,7 @@ const responsderSolicitacaoAmizade = async (req, res) => {
         select: {
             criadorListaAmigo: {
                 select: {
-                    idCriador:true,
+                    idCriador: true,
                     amigo: {
                         select: {
                             id: true,
@@ -45,6 +45,7 @@ const responsderSolicitacaoAmizade = async (req, res) => {
                         }
                     },
                     status: true,
+                    remetente:true
                 }
             },
         }
@@ -57,9 +58,9 @@ const respostaAmizade = (req, res) => {
 
     const { RespUsuario } = req.body
 
-    if (RespUsuario === 1) {
+    if (RespUsuario == 1) {
         return 1
-    } else if (RespUsuario === 2) {
+    } else if (RespUsuario == 2) {
         return 2
     }
 }

@@ -316,7 +316,10 @@ function adicionarParticipante() {
 
     fetch(`http://localhost:3000/adicionarParticipante/${idPartida}/${id}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+        })
         .catch(err => console.error(err));
 }
 
@@ -329,7 +332,10 @@ function removerParticipante() {
 
     fetch(`http://localhost:3000/excluirParticipante/${idPartida}/${id}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+        })
         .catch(err => console.error(err));
 }
 
@@ -458,9 +464,7 @@ function listaAmigos() {
                 let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
 
                 amigo.forEach((e) => {
-                    console.log(e)
                     let info = friendsInfo.cloneNode(true)
-
                     info.classList.remove("model")
 
                     info.querySelector('.idAmigo').innerHTML = e.amigo.id
@@ -488,7 +492,6 @@ function cancelarEncontro() {
 
     let { token } = user
     let { id } = user
-    console.log(token)
 
     let options = {
         method: 'PUT',
@@ -549,9 +552,10 @@ function notificaoAmizade() {
         .then(response => response.json())
         .then(res => {
 
-            // let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0 && element.idCriador != id)
-            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => console.log(element))
+            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0 && element.remetente != id)
             solicitacaoAmizade.forEach((e) => {
+
+                console.log(e)
 
                 let notificaoAmizade = dadosNotificacao.cloneNode(true)
                 notificaoAmizade.classList.remove("model")
@@ -561,8 +565,6 @@ function notificaoAmizade() {
 
                 notificacaoModal.appendChild(notificaoAmizade)
             })
-
-
         })
 }
 
@@ -571,6 +573,8 @@ function responderSolicitacaoAmizader(resposta, teste) {
     let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
     let { id } = user
 
+
+    console.log(resposta)
 
     const options = {
         method: 'PUT',
@@ -581,6 +585,7 @@ function responderSolicitacaoAmizader(resposta, teste) {
     fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
         .then(response => {
             console.log(response)
+            window.location.reload()
             return response.json()
         })
         .then(response => console.log(response))
@@ -637,7 +642,55 @@ menuConfiguracoes.addEventListener('click', () => {
     let configuracoes = document.querySelector('.configuracoes')
 
     configuracoes.classList.toggle('model')
+
 })
+
+let imgConfiguracao = document.querySelector('.imgConfiguracao')
+
+imgConfiguracao.addEventListener('click', function (event) {
+
+    event.stopPropagation()
+
+    tabContent.classList.forEach((e) => {
+        if (e == 'active') {
+            tabContent.classList.remove('active')
+        } else {
+            tabContent.classList.add('active')
+        }
+    })
+})
+
+let imgNotificacoes = document.querySelector('.imgNotificacoes')
+
+imgNotificacoes.addEventListener('click', function (event) {
+
+    event.stopPropagation()
+
+    tabContent.classList.forEach((e) => {
+        if (e == 'active') {
+            tabContent.classList.remove('active')
+        } else {
+            tabContent.classList.add('active')
+        }
+    })
+})
+
+let imgInteresses = document.querySelector('.imgInteresses')
+
+imgInteresses.addEventListener('click', function (event) {
+
+    event.stopPropagation()
+
+    tabContent.classList.forEach((e) => {
+        if (e == 'active') {
+            tabContent.classList.remove('active')
+        } else {
+            tabContent.classList.add('active')
+        }
+    })
+})
+
+
 
 function abrirModalConfigEncontro() {
     let modalConfigEncontro = document.querySelector('.modalConfigEncontro')
@@ -761,6 +814,31 @@ function convidarAmigosParaEncontro() {
             })
     }, 100)
 }
+
+let btnAbrirModalCriaLocal = document.querySelector('.btnAbrirModalCriaLocal')
+
+btnAbrirModalCriaLocal.addEventListener("click", function (event) {
+    event.preventDefault()
+
+    let modalCriarLoal = document.querySelector('.modalCriarLocal')
+
+    modalCriarLoal.classList.remove("model")
+})
+
+let btnFecharModalCriarLocal = document.querySelector('.btnFecharModalCriarLocal')
+
+btnFecharModalCriarLocal.addEventListener('click', function (event){
+    let modalCriarLoal = document.querySelector('.modalCriarLocal')
+
+    modalCriarLoal.classList.add("model")
+})
+
+// function abrirModalCadastroLocal() {
+//    
+// }
+
+
+
 
 listaLocais()
 notificaoAmizade()

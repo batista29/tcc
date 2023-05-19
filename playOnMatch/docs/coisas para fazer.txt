@@ -1,22 +1,21 @@
 tela home
 
 modal das partidas: certo
-terminar cadastro : adiado
+terminar cadastro : feito
 friends : certo
 encaminhar para o perfil : certo
 puxar info user : certo
 seta para subir para cima: certo
-poder encerrar encontro : adiado
-editar encontro : adiado
+poder encerrar encontro : feito
+editar encontro : 	
 convidar amigos para a partida
 poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse : em andamento
 dps do login abrir modal para obter localização:certo
-e fazer notificação de permissão para obter localização
+criar modal para pesquisar usuarios
 
 criar modal que vai poder visitar ou adicionar aquele usuario: feito
 filtro por cidade (local) : feito
-terminar lista de amigos: quase 100%
-
+	
 tela perfil
 
 terminar de puxar dados user:feito
