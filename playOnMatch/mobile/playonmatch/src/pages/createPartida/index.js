@@ -61,34 +61,6 @@ export default function NewPartida() {
 
     var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const [locais, setLocais] = useState([])
     const [selectedLocal, setSelectedLocal] = useState([])
 
