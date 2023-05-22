@@ -71,13 +71,11 @@ const YearPicker = () => {
     nascimento: dataEnviar,
   }
 
-  console.log(dados)
-
   const cadastrarPessoa = () => {
     if (dados.nome.length == 0 || dados.email.length == 0 || dados.senha.length == 0 || dados.nascimento.length < 19) {
       alert('Algum campo vazio')
     } else {
-      fetch("http://10.87.207.35:3000/criarUsuario", {
+      fetch("http://10.87.207.7:3000/criarUsuario", {
         method: 'POST',
         headers: {
           Accept: 'application/json',

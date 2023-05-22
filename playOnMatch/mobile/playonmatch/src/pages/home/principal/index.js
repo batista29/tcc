@@ -5,7 +5,7 @@ export default function principal({ navigation }) {
     const [encontros, setEncontros] = useState([])
 
     useEffect(() => {
-        fetch('http://10.87.207.35:3000/listarEncontros')
+        fetch('http://10.87.207.7:3000/listarEncontros')
             .then(res => { return res.json() })
             .then(data => { setEncontros(data) })
     })

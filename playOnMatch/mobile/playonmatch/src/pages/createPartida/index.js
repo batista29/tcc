@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function NewPartida() {
 
     //pegar ano=
@@ -62,18 +62,17 @@ export default function NewPartida() {
     var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
     const [locais, setLocais] = useState([])
-    const [selectedLocal, setSelectedLocal] = useState([])
+    const [selectedLocal, setSelectedLocal] = useState('1')
 
     const handleLocalChange = (value) => {
         setSelectedLocal(value);
     };
 
-    const [descricao, setDescricao] = useState("gfdgfgd")
-    const [dataHora, setDataHora] = useState('2023-01-01T22:00:00Z')
-    const [titulo, setTitulo] = useState("gdfgdgg")
+    const [descricao, setDescricao] = useState("")
+    const [titulo, setTitulo] = useState("")
 
     useEffect(() => {
-        fetch('http://10.87.207.35:3000/listarLocais')
+        fetch('http://10.87.207.7:3000/listarLocais')
             .then(res => { return res.json() })
             .then(data => {
                 setLocais(data)
@@ -82,14 +81,26 @@ export default function NewPartida() {
 
     let dados = {
         descricao: descricao,
-        dataHora: dataHora,
+        dataHora: dataEnviar,
         titulo: titulo,
         id_local: Number(selectedLocal)
     }
 
+    const [lida, setLida] = useState([]);
+
+    const getData = async () => {
+        try {
+            let id = await AsyncStorage.getItem("idLogin");
+            setLida(id)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (lida.length == 0) getData();
+
     const cadastrarEncontro = () => {
-        console.log(dados)
-        fetch(`http://10.87.207.35:3000/criarEncontro/${dados.id_local}`, {
+        fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -99,7 +110,12 @@ export default function NewPartida() {
         }
         )
             .then(res => {
-                return res.json()
+                if (res.status == 201) {
+                    alert("Sucesso")
+                    navition.navigate("Main")
+                } else {
+                    alert("Erro")
+                }
             })
             .then(data => { console.log(data) })
     }
@@ -109,12 +125,14 @@ export default function NewPartida() {
     return (
         <View style={styles.container}>
             <View style={styles.main}>
+                <Text style={styles.textDate}>Titulo do encontro</Text>
                 <TextInput style={styles.inputs} placeholder='Titulo do encontro'
                     value={titulo}
                     onChangeText={(value) => {
                         setTitulo(value)
                     }}>
                 </TextInput>
+                <Text style={styles.textDate}>Descrição do encontro</Text>
                 <TextInput style={styles.inputs} placeholder='Descrição do encontro'
                     value={descricao}
                     onChangeText={(value) => {
@@ -122,7 +140,8 @@ export default function NewPartida() {
                     }}>
                 </TextInput>
 
-                <Picker style={styles.selecionarData}
+                <Text style={styles.textDate}>Selecione o Local</Text>
+                <Picker style={styles.selecionar}
                     selectedValue={selectedLocal}
                     onValueChange={handleLocalChange}
                 >
@@ -133,7 +152,7 @@ export default function NewPartida() {
                 </Picker>
 
                 <Text style={styles.textDate}>Selecione o dia</Text>
-                <Picker style={styles.selecionarData}
+                <Picker style={styles.selecionar}
                     selectedValue={selectedDay}
                     onValueChange={handleDayChange}
                 >
@@ -144,7 +163,7 @@ export default function NewPartida() {
 
                 <Text style={styles.textDate}>Selecione o mês</Text>
 
-                <Picker style={styles.selecionarData}
+                <Picker style={styles.selecionar}
                     selectedValue={selectedMonth}
                     onValueChange={handleMonthChange}
                 >
@@ -155,7 +174,7 @@ export default function NewPartida() {
 
                 <Text style={styles.textDate}>Selecione o ano</Text>
 
-                <Picker style={styles.selecionarData}
+                <Picker style={styles.selecionar}
                     selectedValue={selectedYear}
                     onValueChange={handleYearChange}
                 >
@@ -184,7 +203,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     main: {
-        height: '330px',
+        height: '630px',
         width: '330px',
         alignItems: 'center',
         justifyContent: 'center',
@@ -192,11 +211,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#012340'
     },
     inputs: {
-        color: 'white',
+        color: 'black',
         border: '1px solid white',
-        marginTop: '30px',
-        height: '30px',
-        width: '200px'
+        marginTop: '10px',
+        width: '220px',
+        height: '35px',
+        marginBottom: '20px',
+        backgroundColor: 'white'
     },
     btnCadastrar: {
         width: '150px',
@@ -211,9 +232,15 @@ const styles = StyleSheet.create({
     textBtnCadastrar: {
         color: 'white'
     },
-    selecionarData: {
+    selecionar: {
         width: '220px',
-        height: '40px',
-        marginBottom: '40px',
+        height: '35px',
+        marginBottom: '20px',
+        marginTop: '5px',
     },
+    textDate: {
+        color: 'white',
+        marginTop: '10px',
+        fontSize: '15px'
+    }
 })

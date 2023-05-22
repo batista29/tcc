@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 
-  const [email, setEmail] = useState('senai')
+  const [email, setEmail] = useState('teste3@gmail.com')
   const [senha, setSenha] = useState('123')
 
   let dados = {
@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   }
 
   const userLogin = () => {
-    fetch("http://10.87.207.35:3000/login", {
+    fetch("http://10.87.207.7:3000/login", {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -26,6 +26,7 @@ export default function Login({ navigation }) {
         return res.json()
       })
       .then(data => {
+        AsyncStorage.setItem('idLogin', data.usuario.id)
         if (data.mensagem == 'Senha incorreta') {
           alert('Senha incorreta')
         } else if (data.mensagem == 'Seu login foi bem-sucedido') {
