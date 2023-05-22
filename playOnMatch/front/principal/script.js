@@ -467,7 +467,7 @@ function listaAmigos() {
                     let info = friendsInfo.cloneNode(true)
                     info.classList.remove("model")
 
-                    info.querySelector('.idAmigo').innerHTML = e.amigo.id
+                    info.querySelector('.idAmigo').innerHTML = "#" + e.amigo.id
                     info.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
 
                     allFriends.appendChild(info)
@@ -476,11 +476,11 @@ function listaAmigos() {
     }, 100)
 }
 
-var btnTopo = document.getElementById("btnTopo");
+// var btnTopo = document.getElementById("btnTopo");
 
-btnTopo.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+// btnTopo.addEventListener("click", function () {
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+// });
 
 
 const encerrarPartida = document.querySelector('.encerrarEncontro')
@@ -516,7 +516,7 @@ function acessarPerfilAmigo(idAmigo) {
     let { token } = user
     let { id } = user
 
-    idAmigo = idAmigo.children[0].innerHTML
+    idAmigo = idAmigo.children[0].innerHTML.slice(1)
 
     const options = {
         method: 'GET',
@@ -524,6 +524,8 @@ function acessarPerfilAmigo(idAmigo) {
             authorization: token
         }
     };
+
+    console.log(idAmigo)
 
     fetch(`http://localhost:3000/perfilUsuario/${id}/${idAmigo}`, options)
         .then(response => {
@@ -827,7 +829,7 @@ btnAbrirModalCriaLocal.addEventListener("click", function (event) {
 
 let btnFecharModalCriarLocal = document.querySelector('.btnFecharModalCriarLocal')
 
-btnFecharModalCriarLocal.addEventListener('click', function (event){
+btnFecharModalCriarLocal.addEventListener('click', function (event) {
     let modalCriarLoal = document.querySelector('.modalCriarLocal')
 
     modalCriarLoal.classList.add("model")
@@ -837,9 +839,78 @@ btnFecharModalCriarLocal.addEventListener('click', function (event){
 //    
 // }
 
+function fecharModalConviteAmizade() {
+    let modalMandarSolicitacao = document.querySelector('.modalMandarSolicitacao')
+    modalMandarSolicitacao.classList.add('model')
+}
+
+function abrirModalConviteAmizade() {
+    let modalMandarSolicitacao = document.querySelector('.modalMandarSolicitacao')
+    modalMandarSolicitacao.classList.remove('model')
+}
+
+var inputUsuario = document.getElementById("usuario");
+var listaUsuariosElement = document.getElementById("lista-usuarios");
+
+inputUsuario.addEventListener("input", function () {
+    const filter = inputUsuario.value.toLowerCase().trim();
+
+    fetch('http://localhost:3000/listarUsuarios')
+        .then(response => response.json())
+        .then(data => {
+            const infoUserSolicitacao = document.querySelector('.dadosUser');
+
+            // Limpar resultados anteriores
+            infoUserSolicitacao.innerHTML = "";
+
+            if (filter === "") {
+                return; // Se o filtro estiver vazio, não exiba resultados
+            }
+
+            const usuariosFiltrados = data.filter(usuario => {
+                const dados = `${usuario.nome} # ${usuario.id}`.toLowerCase();
+                return dados.includes(filter);
+            });
+
+            usuariosFiltrados.forEach(usuario => {
+                const info = document.createElement('div');
+                info.classList.add('usuariosPesquisa');
+
+                const idElement = document.createElement('span');
+                idElement.classList.add('idUser');
+                idElement.innerHTML = "#"+usuario.id;
+
+                const nomeElement = document.createElement('span');
+                nomeElement.classList.add('nomeUser');
+                nomeElement.innerHTML = usuario.nome;
+
+                const btnAdicionar = document.createElement('button')
+                btnAdicionar.innerHTML = 'adicionar'
+
+                info.appendChild(idElement);
+                info.appendChild(nomeElement);
+                info.appendChild(btnAdicionar);
+
+                infoUserSolicitacao.appendChild(info);
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+
+
+
+
+
+
+function listarUsuarios() {
+
+}
 
 
 
 listaLocais()
 notificaoAmizade()
 listaAmigos()
+listarUsuarios()
