@@ -105,6 +105,7 @@ const readPerfil = async (req, res) => {
                     select: {
                         encontro: {
                             select: {
+                                id:true,
                                 dataHora: true,
                                 dataFim: true,
                                 descricao: true,

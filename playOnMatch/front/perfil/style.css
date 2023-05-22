@@ -33,6 +33,23 @@ header {
     align-items: center;
 }
 
+.imgFundo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.time1,.time2,.versus{
+    height: 130px;
+    width: 150px;
+}
+
+/* .infoEncontro{
+    height: 100%;
+} */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -198,7 +215,7 @@ img {
 
 .itensModal {
     height: 50%;
-    width: 75%;
+    width: 45%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -210,13 +227,13 @@ img {
 
 .detalhesEncontro{
     height: 100%;
-    width: 50%;
+    width: 60%;
     background-color: aqua;
 }
 
 .participantes{
     height: 100%;
-    width: 50%;
+    width: 40%;
     background-color: #008F8C;
 }
 
@@ -256,13 +273,18 @@ img {
 .notificacaoModal,
 .amigosModal {
     height: 50%;
-    width: 75%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 25%;
     background-color: white;
     border-radius: 10px;
     position: relative;
+    text-align: center;
+}
+
+.infoAmigos{
+    margin-top: 4%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .btnFechaModalAtualizarPerfil,

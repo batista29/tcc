@@ -33,24 +33,36 @@
         <div class="historico">
 
             <div class="partidas">
-                <div class="infoPartida model">
-                    <p class="tituloPartida">bascus partida 5x5</p>
-                    <p class="enderecoPartida">nova Jaguariuna</p>
-                    <p class="data">19h 21/04</p>
+                <div onclick="detalhesPartida(this)" class="infoPartida model">
+                    <p class="idPartida model"></p>
+                    <p class="tituloPartida"></p>
+                    <p class="enderecoPartida"></p>
+                    <p class="data"></p>
                     <p class="horaInicio"></p>
-                    <p class="horaFim">19h 21/04</p>
+                    <p class="horaFim"></p>
                 </div>
             </div>
         </div>
         <div class="modal">
             <div class="itensModal">
                 <button class="btnFecharModal">x</button>
-                <div class="detalhesEncontro">
-                    <h2>titulo</h2>
-                    <p>descrição</p>
-                    <p>local</p>
-                    <p>data</p>
-                </div>
+                <section class="detalhesEncontro">
+                    <h2>Encontro</h2>
+                    <div class="infoEncontro">
+                        <h3 class="tituloEncontro">titulo</h3>
+                        <p class="descricaoEncontro">descrição</p>
+                        <div class="imgFundo">
+                            <img class="time1" src="../../docs/imgs/pessoa.png" alt="">
+                            <img class="versus" src="../../docs/imgs/versus.png" alt="">
+                            <img class="time2" src="../../docs/imgs/pessoa.png" alt="">
+                        </div>
+                        <p class="paisEncontro">pais</p>
+                        <p class="cidadeEncontro">cidade</p>
+                        <p class="nomeEncontro">nome</p>
+                        <p class="dataEncontro">data</p>
+                        <p class="encerramentoEncontro">encerramento</p>
+                    </div>
+                </section>
                 <section class="participantes">
                     <h2>participantes</h2>
                     <div class="infoParticipantes">
@@ -71,8 +83,6 @@
                     <input class="atlEmail" type="email">
                     <label for="">data de nascimento:</label>
                     <input class="atlNascimento" type="text">
-                    <label for="">cep:</label>
-                    <input class="atlCep" type="email">
                     <button onclick="editarPerfil()" class="btnAtualizarPerfil">enviar</button>
                 </form>
             </div>
@@ -92,6 +102,10 @@
             <div class="amigosModal">
                 <button class="btnFechaModalAmigos">x</button>
                 <H3>AMIGOS</H3>
+                <div class="infoAmigos model">
+                    <p class="idAmigo">id</p>
+                    <p class="nomeAmigo">nome</p>
+                </div>
             </div>
         </div>
     </main>

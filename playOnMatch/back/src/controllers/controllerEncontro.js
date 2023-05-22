@@ -104,7 +104,7 @@ const readAll = async (req, res) => {
                 id: true,
                 descricao: true,
                 dataHora: true,
-                dataFim:true,
+                dataFim: true,
                 titulo: true,
                 id_local: true,
                 local: {
@@ -149,6 +149,20 @@ const readOne = async (req, res) => {
             id: Number(req.params.id)
         },
         select: {
+            id: true,
+            descricao: true,
+            dataHora: true,
+            dataFim: true,
+            titulo: true,
+            local: {
+                select: {
+                    nome: true,
+                    rua: true,
+                    bairro: true,
+                    cidade: true,
+                    pais: true,
+                }
+            },
             EncontroUsuario: {
                 select: {
                     id: true,
@@ -202,8 +216,8 @@ const finalizarEncontro = async (req, res) => {
         res.status(200).json(encontro).end()
     } catch (error) {
         console.log(error)
-        res.status(500).json(error).end() 
-    } 
+        res.status(500).json(error).end()
+    }
 }
 
 const del = async (req, res) => {

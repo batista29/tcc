@@ -1,11 +1,11 @@
 // const btnNotificacao = document.querySelector('.btnNotificacao')
 const btnAmigo = document.querySelector('.btnAmigos')
-
 const btnEditarPerfil = document.querySelector('.btnEditarPerfil')
 const btnAtualizarPerfil = document.querySelector('.btnAtualizarPerfil')
 const btnFechaModalAtualizarPerfil = document.querySelector('.btnFechaModalAtualizarPerfil')
 const btnFechaModalNotificacao = document.querySelector('.btnFechaModalNotificacao')
 const btnFechaModalAmigos = document.querySelector('.btnFechaModalAmigos')
+const user = JSON.parse(localStorage.getItem('usuario'))
 
 
 const btnFecharModal = document.querySelector('.btnFecharModal')
@@ -17,14 +17,21 @@ const infoUser = document.querySelector('.dadoss')
 const partida = document.querySelector('.partidas')
 const infoPartida = document.querySelector('.infoPartida')
 
-
 function listar() {
 
-    let id = JSON.parse(localStorage.getItem('perfil'))
+    let idUsuario = JSON.parse(localStorage.getItem('perfil'))
+    let { id } = user
+
+    let btnEditarPerfil = document.querySelector('.btnEditarPerfil')
+    if (idUsuario != id) {
+        btnEditarPerfil.classList.add('model')
+    }
+
+    console.log(id)
 
     const options = { method: 'GET' };
 
-    fetch(`http://localhost:3000/perfil/${id}`, options)
+    fetch(`http://localhost:3000/perfil/${idUsuario}`, options)
         .then(response => response.json())
         .then(res => {
             let usuario = infoUser.cloneNode(true)
@@ -56,12 +63,10 @@ function listar() {
                     horaFim = e.encontro.dataFim.split("T")[1].split(".")[0]
                 }
 
-
-                console.log()
-
                 let dadosPartida = infoPartida.cloneNode(true)
                 dadosPartida.classList.remove("model")
 
+                dadosPartida.querySelector('.idPartida').innerHTML = e.encontro.id
                 dadosPartida.querySelector('.tituloPartida').innerHTML = e.encontro.titulo
                 dadosPartida.querySelector('.enderecoPartida').innerHTML = e.encontro.local.nome
                 dadosPartida.querySelector('.data').innerHTML = dataFimFormatada
@@ -69,6 +74,7 @@ function listar() {
                 dadosPartida.querySelector('.horaFim').innerHTML = horaFim
 
                 partida.appendChild(dadosPartida)
+
 
             })
 
@@ -178,14 +184,12 @@ function editarPerfil() {
     let atlNome = document.querySelector('.atlNome')
     let atlEmail = document.querySelector('.atlEmail')
     let atlNascimento = document.querySelector('.atlNascimento')
-    let atlCep = document.querySelector('.atlCep')
 
 
     let dados = {
         nome: atlNome.value.trim(),
         email: atlEmail.value.trim(),
         nascimento: atlNascimento.value.trim(),
-        cep: atlCep.value.trim()
     }
 
     if (dados.nome.length == 0) {
@@ -198,10 +202,6 @@ function editarPerfil() {
 
     if (dados.nascimento.length == 0) {
         dados.nascimento = dadosPerfil.nasciment
-    }
-
-    if (dados.cep.length == 0) {
-        dados.cep = '0'
     }
 
     const options = {
@@ -218,8 +218,57 @@ function editarPerfil() {
             console.log(response)
             return response.json()
         })
-        .then(res => console.log(res))
-    window.location.reload()
+        .then(res => {
+            console.log(res)
+            window.location.reload()
+        })
 }
 
+function listarAmigos() {
+    let idUsuario = JSON.parse(localStorage.getItem('perfil'))
+    const options = { method: 'GET' };
+
+    fetch(`http://localhost:3000/verSolicitacao/${idUsuario}`, options)
+        .then(response => response.json())
+        .then(res => {
+            let amigosModal = document.querySelector('.amigosModal')
+            let infoAmigos = document.querySelector('.infoAmigos')
+
+            res.criadorListaAmigo.forEach((e) => {
+                let dados = infoAmigos.cloneNode(true)
+
+                dados.classList.remove('model')
+                dados.querySelector('.idAmigo').innerHTML = "#" + e.amigo.id
+                dados.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
+
+                amigosModal.appendChild(dados)
+            })
+        })
+}
+
+
+function detalhesPartida(idPartida) {
+
+    idPartida = idPartida.children[0].innerHTML
+    const options = { method: 'GET' };
+
+    fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            let detalhesEncontro =document.querySelector('.detalhesEncontro')
+            let infoEncontro = document.querySelector('.infoEncontro')
+
+            
+
+            
+
+
+
+
+            
+        })
+}
+
+listarAmigos()
 listar()
