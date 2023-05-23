@@ -27,8 +27,6 @@ function listar() {
         btnEditarPerfil.classList.add('model')
     }
 
-    console.log(id)
-
     const options = { method: 'GET' };
 
     fetch(`http://localhost:3000/perfil/${idUsuario}`, options)
@@ -255,19 +253,28 @@ function detalhesPartida(idPartida) {
     fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
         .then(response => response.json())
         .then(response => {
-            console.log(response)
-            let detalhesEncontro =document.querySelector('.detalhesEncontro')
+            console.log(response.dataHora)
+            let detalhesEncontro = document.querySelector('.detalhesEncontro')
             let infoEncontro = document.querySelector('.infoEncontro')
 
             let dados = infoEncontro.cloneNode(true)
             dados.classList.remove('model')
 
-            
+            let data = new Date(response.dataHora);
 
 
+            let nwData = data.toLocaleDateString("pt-BR", {
+                timeZone: "UTC",
+            });
 
+            dados.querySelector('.tituloEncontro').innerHTML = response.titulo
+            dados.querySelector('.descricaoEncontro').innerHTML = response.descricao
+            dados.querySelector('.enderecoEncontro').innerHTML = response.local.cidade +"-" + response.local.pais 
+            dados.querySelector('.nomeEncontro').innerHTML = response.local.nome
+            dados.querySelector('.dataEncontro').innerHTML = nwData
+            // dados.querySelector('.encerramentoEncontro').innerHTML = response.local.nome
 
-            
+            detalhesEncontro.appendChild(dados)
         })
 }
 

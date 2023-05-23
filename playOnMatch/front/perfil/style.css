@@ -8,7 +8,8 @@
     --cor6: #00bdec;
     --header: cadetblue; */
 }
-a{
+
+a {
     text-decoration: none;
     color: var(--backgroundHome);
 }
@@ -33,22 +34,49 @@ header {
     align-items: center;
 }
 
-.imgFundo{
-    width: 100%;
+.infoEncontro {
+    position: relative;
     height: 100%;
+}
+
+.imgFundo {
+    height: 40%;
     display: flex;
     justify-content: center;
-    gap: 5%;
+    align-items: center;
 }
 
-.time1,.time2,.versus{
-    height: 130px;
-    width: 150px;
+.detalhePartida {
+    width: 100%;
+    position: absolute;
+    margin: 5%;
 }
 
-/* .infoEncontro{
-    height: 100%;
-} */
+.imgLocalizacaoEncontro {
+    height: 40px;
+    width: 40px;
+}
+
+.tituloEncontro {
+    font-size: 3em;
+    margin-bottom: 10%;
+}
+
+.enderecoEncontro{
+    width: 100%;
+}
+
+.local {
+    width: 100%;
+    display: flex;
+}
+
+.time1,
+.time2,
+.versus {
+    height: 120px;
+    width: 120px;
+}
 
 .container {
     display: flex;
@@ -121,8 +149,8 @@ header {
     cursor: pointer;
 }
 
-.btnEditarPerfil{
-    height:30px;
+.btnEditarPerfil {
+    height: 30px;
     width: 80px;
     background-color: var(--cor5);
     border: none;
@@ -146,7 +174,7 @@ header {
 }
 
 .grid-template-areas-5 {
-    margin-top:10px ;
+    margin-top: 10px;
     grid-template-areas:
         "nomeUsuario btnEditarPerfil . dataNascimento"
         "partidasJogadas esporte cidade relacionamento"
@@ -225,13 +253,13 @@ img {
     color: black;
 }
 
-.detalhesEncontro{
+.detalhesEncontro {
     height: 100%;
     width: 60%;
     background-color: aqua;
 }
 
-.participantes{
+.participantes {
     height: 100%;
     width: 40%;
     background-color: #008F8C;
@@ -272,15 +300,23 @@ img {
 .atualizarPerfil,
 .notificacaoModal,
 .amigosModal {
-    height: 50%;
-    width: 25%;
+    height: 30%;
+    width: 20%;
+    padding: 20px;
     background-color: white;
     border-radius: 10px;
     position: relative;
     text-align: center;
 }
 
-.infoAmigos{
+.atualizarPerfil>form {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.infoAmigos {
     margin-top: 4%;
     width: 100%;
     display: flex;
@@ -310,6 +346,8 @@ img {
     width: 60px;
     margin: 10px;
     border-radius: 30px;
+    position: absolute;
+    bottom: 0;
 }
 
 .btnAtualizarPerfil:hover {

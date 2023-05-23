@@ -128,7 +128,7 @@ function loginUsuario() {
             })
             .then(res => {
                 console.log(res.mensagem)
-                if (res.mensagem === 'usuario não encontrado') {
+                if (res.mensagem === 'Usuário não encontrado') {
                     erroL.style.color = "black"
                     erroL.innerHTML = res.mensagem
                 }
