@@ -123,6 +123,25 @@ body::-webkit-scrollbar-thumb {
     width: 20%;
 }
 
+.allFriends{
+    height: 80%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.friends_info{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    cursor: pointer;
+}
+
+.friends_info:hover{
+    background-color: var(--cor4);
+}
+
 .abrirModal1 {
     height: 5vh;
     width: 5vh;
@@ -201,11 +220,23 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
 }
 
+.modalMandarSolicitacao{
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 110vh;
+    width: 100%;
+    background-color: #0123405b;
+    align-items: center;
+    justify-content: center;
+}
+
 .inputsCadastro,
 .inputsConvidarAmigo,
 .inputsAtualizarEncontro,
 .inputsAtualizarEncontro,
-.cadastroLocal {
+.cadastroLocal,
+.infoUserSolicitacao {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,6 +246,11 @@ body::-webkit-scrollbar-thumb {
     color: var(--textoHome);
     border-radius: 10px;
     position: relative;
+}
+
+.dadosUser{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .formularioCadastroPartida {
@@ -726,4 +762,16 @@ img.iconeBusca {
     color: var(--textoHome);
     border-radius: 10px;
     position: relative;
+}
+
+.abrirModalEncontrarAmigo{
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    margin-top: 5%;
+
+}
+
+.imgAdicionaAmigo{
+    height: 100%;
 }

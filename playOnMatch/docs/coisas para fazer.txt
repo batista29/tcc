@@ -11,7 +11,7 @@ editar encontro :em andamento
 convidar amigos para a partida
 poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse : em andamento
 dps do login abrir modal para obter localização:certo
-criar modal para pesquisar usuarios
+criar modal para pesquisar usuarios: certo
 
 criar modal que vai poder visitar ou adicionar aquele usuario: feito
 filtro por cidade (local) : feito

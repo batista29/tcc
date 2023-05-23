@@ -28,7 +28,19 @@ const create = async (req, res) => {
 }
 
 const read = async (req, res) => {
-    let usuario = await prisma.usuario.findMany()
+    let usuario = await prisma.usuario.findMany({
+        select:{
+            id:true,
+            nome:true,
+            email:true,
+            nascimento:true,
+            criadorListaAmigo:{
+                select:{
+                    amigo:true
+                }
+            }
+        }
+    })
     res.status(200).json(usuario).end()
 }
 

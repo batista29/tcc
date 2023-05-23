@@ -78,14 +78,26 @@
                     </div>
                 </div>
             </div>
-            <button id="btnTopo" class="buttonTop">↥</button>
+            <!-- <button id="btnTopo" class="buttonTop">↥</button> -->
         </div>
         <div class="friends">
+            <h2>FRIENDS</h2>
             <div class="allFriends">
-                <h2>FRIENDS</h2>
                 <div class="friends_info model" onclick="acessarPerfilAmigo(this)">
                     <p class="idAmigo">id</p>
                     <p class="nomeAmigo">nome</p>
+                </div>
+            </div>
+            <button onclick="abrirModalConviteAmizade()" class="abrirModalEncontrarAmigo"><img class="imgAdicionaAmigo"
+                    src="../../docs/imgs/adicionar-usuario.png" alt=""></button>
+        </div>
+        <div class="modalMandarSolicitacao model">
+            <div class="infoUserSolicitacao">
+                <button onclick="fecharModalConviteAmizade()" class="btnFecharModalConviteAmizade">x</button>
+                <input id="usuario" class="dtlUser" type="text">
+                <img src="" alt="">
+                <div class="dadosUser">
+                    <div class="usuariosPesquisa model"></div>
                 </div>
             </div>
         </div>
