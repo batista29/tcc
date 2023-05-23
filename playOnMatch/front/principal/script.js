@@ -860,11 +860,10 @@ inputUsuario.addEventListener("input", function () {
         .then(data => {
             const infoUserSolicitacao = document.querySelector('.dadosUser');
 
-            // Limpar resultados anteriores
             infoUserSolicitacao.innerHTML = "";
 
             if (filter === "") {
-                return; // Se o filtro estiver vazio, não exiba resultados
+                return;
             }
 
             const usuariosFiltrados = data.filter(usuario => {
@@ -873,19 +872,42 @@ inputUsuario.addEventListener("input", function () {
             });
 
             usuariosFiltrados.forEach(usuario => {
+
                 const info = document.createElement('div');
                 info.classList.add('usuariosPesquisa');
 
                 const idElement = document.createElement('span');
                 idElement.classList.add('idUser');
-                idElement.innerHTML = "#"+usuario.id;
+                idElement.innerHTML = "#" + usuario.id;
 
                 const nomeElement = document.createElement('span');
                 nomeElement.classList.add('nomeUser');
                 nomeElement.innerHTML = usuario.nome;
 
-                const btnAdicionar = document.createElement('button')
-                btnAdicionar.innerHTML = 'adicionar'
+                let btnAdicionar = document.createElement('button')
+                btnAdicionar.style.marginLeft = '10px';
+                btnAdicionar.style.background = 'transparent';
+                btnAdicionar.style.border = 'none';
+                btnAdicionar.style.cursor = 'pointer';
+
+                let imgAdicionar = document.createElement('img');
+
+                imgAdicionar.src = '../../docs/imgs/adicionar-usuario.png';
+                imgAdicionar.style.width = '15px';
+                imgAdicionar.style.borderRadius = '10%';
+
+
+                btnAdicionar.onclick = function () {
+                    let idAmigo = this.parentNode.children[0].innerHTML.slice(1)
+                    let { id } = user
+                    const options = { method: 'POST' };
+
+                    fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
+                        .then(response => response.json())
+                        .then(response => console.log(response))
+                }
+
+                btnAdicionar.appendChild(imgAdicionar)
 
                 info.appendChild(idElement);
                 info.appendChild(nomeElement);

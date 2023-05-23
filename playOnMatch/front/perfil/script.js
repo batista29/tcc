@@ -259,7 +259,8 @@ function detalhesPartida(idPartida) {
             let detalhesEncontro =document.querySelector('.detalhesEncontro')
             let infoEncontro = document.querySelector('.infoEncontro')
 
-            
+            let dados = infoEncontro.cloneNode(true)
+            dados.classList.remove('model')
 
             
 

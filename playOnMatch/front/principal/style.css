@@ -248,6 +248,11 @@ body::-webkit-scrollbar-thumb {
     position: relative;
 }
 
+.dadosUser{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
 .formularioCadastroPartida {
     height: 100%;
     width: 100%;
