@@ -7,7 +7,7 @@ encaminhar para o perfil : certo
 puxar info user : certo
 seta para subir para cima: certo
 poder encerrar encontro : feito
-editar encontro : 	
+editar encontro :em andamento 	
 convidar amigos para a partida
 poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse : em andamento
 dps do login abrir modal para obter localização:certo
@@ -25,4 +25,3 @@ puxar dados partida
 modal para poder acessar perfil ou adicionar amigo pelos dados da partida
 
 mobile: tudo
-
