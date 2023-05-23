@@ -75,7 +75,7 @@ const YearPicker = () => {
     if (dados.nome.length == 0 || dados.email.length == 0 || dados.senha.length == 0 || dados.nascimento.length < 19) {
       alert('Algum campo vazio')
     } else {
-      fetch("http://10.87.207.7:3000/criarUsuario", {
+      fetch("http://192.168.1.99:3000/criarUsuario", {
         method: 'POST',
         headers: {
           Accept: 'application/json',

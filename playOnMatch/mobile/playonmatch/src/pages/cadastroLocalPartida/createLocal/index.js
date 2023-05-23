@@ -17,7 +17,7 @@ export default function NewPartida() {
     }
 
     const cadastrarLocal = () => {
-        fetch(`http://10.87.207.7:3000/criarLocal`, {
+        fetch(`http://192.168.1.99:3000/criarLocal`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

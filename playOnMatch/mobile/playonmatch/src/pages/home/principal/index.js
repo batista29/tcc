@@ -5,7 +5,7 @@ export default function principal({ navigation }) {
     const [encontros, setEncontros] = useState([])
 
     useEffect(() => {
-        fetch('http://10.87.207.7:3000/listarEncontros')
+        fetch('http://192.168.1.99:3000/listarEncontros')
             .then(res => { return res.json() })
             .then(data => { setEncontros(data) })
     })
@@ -13,7 +13,7 @@ export default function principal({ navigation }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.btnCadastroPartida} onPress={() => {
-                navigation.navigate("NewPartida")
+                navigation.navigate("NewLocalPartida")
             }}>
                 <Text style={styles.textBtnAdd}>+</Text>
             </TouchableOpacity>

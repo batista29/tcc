@@ -100,7 +100,7 @@ export default function NewPartida() {
     if (lida.length == 0) getData();
 
     const cadastrarEncontro = () => {
-        fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
+        fetch(`http://192.168.1.99:3000/criarEncontro/${lida}`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#008F8C',
+        backgroundColor: '#012340',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         border: '2px solid white',
-        backgroundColor: '#012340'
+        backgroundColor: '#008F8C'
     },
     inputs: {
         color: 'black',
@@ -222,12 +222,12 @@ const styles = StyleSheet.create({
     btnCadastrar: {
         width: '150px',
         height: '30px',
-        border: '1px solid #0FC2C0',
-        backgroundColor: 'black',
+        border: '2px solid black',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '15px',
-        marginTop: '30px'
+        marginTop: '30px',
+        color: 'black'
     },
     textBtnCadastrar: {
         color: 'white'
