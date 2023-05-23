@@ -18,7 +18,7 @@
         </a>
     </header>
     <main>
-        <button onclick="abrirModal()" class="abrirModal1">+</button>
+        <button onclick="abrirModal()" class="abrirModal1">Jogar</button>
         <div data-content id="menu" class="partidasFavoritas">
             <div class="menuInteresses">
                 <img class="iconsImgs imgInteresses" src="../../docs/imgs/estrela.png" alt="">
@@ -93,6 +93,7 @@
         </div>
         <div class="modalMandarSolicitacao model">
             <div class="infoUserSolicitacao">
+                <h3>Procurar Usuario</h3>
                 <button onclick="fecharModalConviteAmizade()" class="btnFecharModalConviteAmizade">x</button>
                 <input id="usuario" class="dtlUser" type="text">
                 <img src="" alt="">
@@ -141,8 +142,12 @@
             <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
             <div class="participantes">
                 <div class="infoParticipantes model">
-                    <p class="idParticipante">id</p>
-                    <p class="nomeParticipante">nome</p>
+                    <p class="idParticipante">#id</p>
+                    <div class="detalheParticipante">
+                        <p class="nomeParticipante">nome</p>
+                        <p class="nomeParticipante">descrição</p>
+                    </div>
+
                     <div class="btnsAdicionar">
                         <button onclick="adicionarAmigo()" class="btnAdicionarAmigo">
                             <img class="imgAdicionarUsuario" src="../../docs/imgs/adicionar-usuario.png" alt="">
@@ -151,7 +156,6 @@
                             <img class="imgVisitarUsuario" src="../../docs/imgs/do-utilizador.png" alt="">
                         </button>
                     </div>
-
                 </div>
                 <div class="modaAdicionar model">
                     <button>visitar perfil</button>
@@ -168,6 +172,7 @@
         <div class="modal">
             <div class="inputsCadastro">
                 <button class="sair" onclick="fecharModal()">X</button>
+                <h3>Cria Encontro</h3>
                 <form class="formularioCadastroPartida" action="">
                     <label for="">titulo</label>
                     <input id="tituloSubmit" type="text">
@@ -184,14 +189,14 @@
                         </datalist>
                         <button title="Criar Local" class="btnAbrirModalCriaLocal">+</button>
                     </div>
-
                 </form>
-                <button class="enviar" onclick="adicionarEncontro()">ENVIAR</button>
+                <button class="enviar" onclick="adicionarEncontro()">Criar</button>
             </div>
             <div class="modalCriarLocal model">
                 <div class="cadastroLocal">
+                    <button class="btnFecharModalCriarLocal">x</button>
+                    <h3>Criar Local Para Encontro</h3>
                     <form action="" class="formCadastroLocal">
-                        <button class="btnFecharModalCriarLocal">x</button>
                         <label for="">Nome:</label>
                         <input type="text">
                         <label for="">Rua:</label>
@@ -199,7 +204,7 @@
                         <label for="">Bairro:</label>
                         <input type="text">
                     </form>
-                    <button>criar</button>
+                    <button class="btnCriarLocal">criar</button>
                 </div>
             </div>
         </div>

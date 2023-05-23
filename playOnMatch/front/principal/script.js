@@ -266,7 +266,7 @@ function listaParticipantes() {
                 let dados = infoParticipante.cloneNode(true)
                 dados.classList.remove('model')
 
-                dados.querySelector('.idParticipante').innerHTML = idParticipante
+                dados.querySelector('.idParticipante').innerHTML = "#" + idParticipante
                 dados.querySelector('.nomeParticipante').innerHTML = nomeParticipante
 
                 let { id } = user
