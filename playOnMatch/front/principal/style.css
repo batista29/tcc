@@ -164,13 +164,14 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--backgroundLogin);
     border-radius: 25px;
     border: 2px solid rgb(130, 179, 212);
-    height: 220px;
+    height: 30vh;
     width: 300px;
     font-size: 20px;
     transition: transform 1s;
 }
 
 .readLocal {
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -181,8 +182,29 @@ body::-webkit-scrollbar-thumb {
 }
 
 .titulos {
+    height: 50%;
     width: 100%;
     text-align: center;
+}
+
+.imgLocalizacao,
+.imgCalendario {
+    height: 5vh;
+}
+
+.dadosLocalizacao{
+    display: flex;
+    align-items: center;
+}
+
+.dadosData{
+    display: flex;
+    align-items: center;
+}
+
+.data,.endereco{
+    margin: 15px;
+    font-size: 0.7em;
 }
 
 .idLocal {
@@ -190,7 +212,9 @@ body::-webkit-scrollbar-thumb {
     padding-left: 12px;
 }
 
-/* .titulo {} */
+.titulo {
+    font-size: 0.8em;
+}
 
 .imgEsporte {
     height: 50%;
@@ -204,10 +228,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .infoData {
-    /* background-color: pink; */
+    height: 55%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    margin: 10px 10px 0 10px;
 }
 
 /* MODAL cadastrar */
@@ -539,13 +562,13 @@ img.iconeBusca {
     /* justify-content: space-evenly; */
 }
 
-.idParticipante{
+.idParticipante {
     padding: 2%;
     width: 5%;
     margin-right: 7%;
 }
 
-.detalheParticipante{
+.detalheParticipante {
     width: 70%;
     display: flex;
     justify-content: center;
@@ -877,7 +900,7 @@ img.iconeBusca {
     position: relative;
 }
 
-.btnFecharModalConviteAmizade{
+.btnFecharModalConviteAmizade {
     height: 2vh;
     width: 2vw;
     border-radius: 50%;
@@ -888,6 +911,6 @@ img.iconeBusca {
     right: 0;
 }
 
-.infoUserSolicitacao>h3{
+.infoUserSolicitacao>h3 {
     color: white;
 }
