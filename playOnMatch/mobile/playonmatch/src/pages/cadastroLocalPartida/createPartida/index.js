@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function NewPartida() {
 
     //pegar ano=
@@ -100,7 +101,7 @@ export default function NewPartida() {
     if (lida.length == 0) getData();
 
     const cadastrarEncontro = () => {
-        fetch(`http://192.168.1.99:3000/criarEncontro/${lida}`, {
+        fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

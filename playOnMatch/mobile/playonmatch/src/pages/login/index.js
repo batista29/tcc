@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   }
   console.log(dados)
   const userLogin = () => {
-    fetch("http://192.168.1.99:3000/login", {
+    fetch("http://10.87.207.7:3000/login", {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -26,7 +26,6 @@ export default function Login({ navigation }) {
         return res.json()
       })
       .then(data => {
-        console.log(data)
         AsyncStorage.setItem('idLogin', data.usuario.id)
         if (data.mensagem == 'Senha incorreta') {
           alert('Senha incorreta')
