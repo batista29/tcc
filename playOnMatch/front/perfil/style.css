@@ -1,12 +1,16 @@
-:root {
+/* :root {
     --backgroundHome: #012340;
     --backgroundLogin: #025959;
     --cor4: #008F8C;
     --cor5: #0CABA8;
     --textoHome: #0FC2C0;
-    /* --textoHome2: #00f63e;
-    --cor6: #00bdec;
-    --header: cadetblue; */
+} */
+:root {
+    --backgroundHome: #B9B4D9;
+    --backgroundLogin: #1A1E26;
+    --cor4: #5D75A6;
+    --cor5: #405173;
+    --textoHome: #283040;
 }
 
 a {
@@ -58,7 +62,7 @@ header {
     width: 40px;
 }
 
-.date{
+.date {
     display: flex;
     align-items: center;
 }
@@ -88,7 +92,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--backgroundHome);
+    background-color: var(--cor5);
 }
 
 .infoUser {
@@ -260,15 +264,17 @@ img {
 }
 
 .detalhesEncontro {
+    color: white;
     height: 100%;
     width: 60%;
-    background-color: aqua;
+    background-color: var(--textoHome);
 }
 
 .participantes {
+    color: white;
     height: 100%;
     width: 40%;
-    background-color: #008F8C;
+    background-color: var(--textoHome);
 }
 
 .btnFecharModal {
@@ -373,10 +379,19 @@ img {
     cursor: pointer;
 }
 
-.infoParticipantes{
+.infoParticipantes {
     display: flex;
 }
 
 .model {
     display: none;
+}
+
+.time1,
+.versus,
+.time2,
+.imgLocalizacaoEncontro,
+.imgData,
+.btnAmigos {
+    filter: invert(100%)
 }

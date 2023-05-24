@@ -69,7 +69,7 @@
                         <img class="imgEstrela" src="../../docs/imgs/estrela.png" alt="">
                     </button>
                     <div class="titulos">
-                        <p class="idLocal"></p>
+                        <p class="idLocal model"></p>
                         <p class="titulo"></p>
                     </div>
                     <div class="infoData">
@@ -204,13 +204,13 @@
                     <h3>Criar Local Para Encontro</h3>
                     <form action="" class="formCadastroLocal">
                         <label for="">Nome:</label>
-                        <input type="text">
+                        <input class="inpNomeLocal" type="text">
                         <label for="">Rua:</label>
-                        <input type="text">
+                        <input class="inpRuaLocal" type="text">
                         <label for="">Bairro:</label>
-                        <input type="text">
+                        <input class="inpBairroLocal" type="text">
                     </form>
-                    <button class="btnCriarLocal">criar</button>
+                    <button onclick="criarLocal()" class="btnCriarLocal">criar</button>
                 </div>
             </div>
         </div>
@@ -230,20 +230,24 @@
     <div class="modalAtualizarEncontro model">
         <div class="modal">
             <div class="inputsAtualizarEncontro">
-                <button class="sairModalAtualizarEncontro" onclick="fecharModalAtualizarEncontro()">X</button>
-                <label for="">Descrição</label>
-                <input class="atualizarDescricaoEncontro" type="text">
-                <label for="">Titulo</label>
-                <input class="atualizarTituloEncontro" type="text">
-                <label for="">Data</label>
-                <input class="atualizarDataEncontro" type="date">
-                <label for="">Hora</label>
-                <input class="atualizarHoraEncontro" type="time">
-                <label for="">Endereço</label>
-                <input type="text" id="consulta" name="consulta" list="opcoes">
-                <datalist id="opcoes">
-                </datalist>
-                <button onclick="atualizarEncontro()" class="enviar">ATUALIZAR</button>
+                <h3>Atualizar Encontro</h3>
+                <form action="" class="formularioAtualizarEncontro">
+                    <button class="sairModalAtualizarEncontro" onclick="fecharModalAtualizarEncontro()">X</button>
+                    <label for="">Descrição</label>
+                    <input class="atualizarDescricaoEncontro" type="text">
+                    <label for="">Titulo</label>
+                    <input class="atualizarTituloEncontro" type="text">
+                    <label for="">Data</label>
+                    <input class="atualizarDataEncontro" type="date">
+                    <label for="">Hora</label>
+                    <input class="atualizarHoraEncontro" type="time">
+                    <label for="">Endereço</label>
+                    <input type="text" id="consulta" name="consulta" list="opcoes">
+                    <datalist id="opcoes">
+                    </datalist>
+                </form>
+
+                <button onclick="atualizarEncontro()" class="btnAtualizarEncontro">ATUALIZAR</button>
             </div>
         </div>
     </div>

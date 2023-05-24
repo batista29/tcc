@@ -26,7 +26,7 @@ router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.delet
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)
-router.put('/editarEncontro/:id/:idUsuario', middleware.autorizacao, encontro.update)
+router.put('/editarEncontro/:id/:idEncontro', middleware.autorizacao, encontro.update)
 router.put('/finalizarEncontro/:id/:idEncontro', middleware.autorizacao, encontro.finalizarEncontro)
 
 const local = require('../controllers/controllerLocal')

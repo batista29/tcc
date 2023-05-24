@@ -1,9 +1,16 @@
-:root {
-    --backgroundHome: #012340;
-    --backgroundLogin: #025959;
+/* :root {
+    --backgroundHome: #88A649;
+    --backgroundLogin: #274001;
     --cor4: #008F8C;
     --cor5: #0CABA8;
     --textoHome: #0FC2C0;
+} */
+:root {
+    --backgroundHome: #B9B4D9;
+    --cor4: #5D75A6;
+    --cor5: #405173;
+    --textoHome: #283040;
+    --backgroundLogin: #1A1E26;
 }
 
 * {
@@ -83,7 +90,7 @@ h1 {
 body {
     height: 100vh;
     width: 100vw;
-    background-color: var(--backgroundHome);
+    background-color: var(--cor5);
     color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     align-items: center;
@@ -164,7 +171,7 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--backgroundLogin);
     border-radius: 25px;
     border: 2px solid rgb(130, 179, 212);
-    height: 30vh;
+    height: 25vh;
     width: 300px;
     font-size: 20px;
     transition: transform 1s;
@@ -184,36 +191,41 @@ body::-webkit-scrollbar-thumb {
 .titulos {
     height: 50%;
     width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .imgLocalizacao,
-.imgCalendario {
-    height: 5vh;
+.imgCalendario,
+.imgEstrela,
+.iconsImgs,
+.imgAdicionaAmigo,
+.iconeBusca,
+.imgVisitarUsuario {
+    height: 4vh;
+    filter: invert(100%);
 }
 
-.dadosLocalizacao{
+.dadosLocalizacao {
     display: flex;
     align-items: center;
 }
 
-.dadosData{
+.dadosData {
     display: flex;
     align-items: center;
 }
 
-.data,.endereco{
+.data,
+.endereco {
     margin: 15px;
-    font-size: 0.7em;
+    font-size: 1em;
 }
 
+.titulo,
 .idLocal {
-
-    padding-left: 12px;
-}
-
-.titulo {
-    font-size: 0.8em;
+    font-size: 1.3em;
 }
 
 .imgEsporte {
@@ -230,7 +242,7 @@ body::-webkit-scrollbar-thumb {
 .infoData {
     height: 55%;
     width: 100%;
-    display: flex;
+    padding: 2%;
 }
 
 /* MODAL cadastrar */
@@ -270,16 +282,31 @@ body::-webkit-scrollbar-thumb {
     height: 40vh;
     width: 50vh;
     background-color: var(--backgroundLogin);
-    color: var(--textoHome);
+    color: white;
     border-radius: 10px;
     position: relative;
+}
+
+.formularioAtualizarEncontro{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formularioAtualizarEncontro>input{
+    color: white;
+    height: 3vh;
+    background-color: transparent;
+    border: none;
+    border-bottom:1px solid var(--backgroundHome);
+
 }
 
 .inputsCadastro {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 70vh;
+    height: 55vh;
     width: 50vh;
     background-color: var(--backgroundLogin);
     color: var(--textoHome);
@@ -315,6 +342,7 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 5%;
     border: 1px solid black;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .formularioCadastroPartida>label {
@@ -323,11 +351,11 @@ body::-webkit-scrollbar-thumb {
 
 .formularioCadastroPartida>input,
 #consulta {
-    width: 14vw;
+    width: 17vw;
     height: 4vh;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--backgroundHome);
     color: rgb(231, 231, 231);
 }
 
@@ -350,10 +378,18 @@ body::-webkit-scrollbar-thumb {
 }
 
 .enviar {
-    height: 7vh;
-    width: 10vw;
+    height: 5vh;
+    width: 7vw;
     border: 1px solid black;
-    margin-bottom: 20px;
+    border-radius: 30px;
+    background-color: var(--cor4);
+}
+
+.btnAtualizarEncontro{
+    height: 10vh;
+    width: 6vw;
+    margin: 5%;
+    border: 1px solid black;
     border-radius: 30px;
     background-color: var(--cor4);
 }
@@ -412,12 +448,12 @@ body::-webkit-scrollbar-thumb {
 .filtroTituloPartidas,
 .filtroDatePartidas {
     background-color: transparent;
-    height: 25px;
-    width: 350px;
-    margin: 0vh 0vh 0vh 3vh;
-    padding: 30px 60px 30px 60px;
+    height: 20px;
+    width: 250px;
+    margin: 0vh 20px 0vh 20px;
+    padding: 20px 40px 20px 40px;
     border: none;
-    background-color: #025959;
+    background-color: var(--backgroundLogin);
     border-radius: 30px;
     color: white;
     font-size: 22px;
@@ -627,7 +663,7 @@ img.iconeBusca {
 .infoLocalizacao {
     height: 80%;
     width: 80vw;
-    background-color: var(--backgroundHome);
+    background-color: var(--cor5);
     color: white;
     display: flex;
     align-items: center;
@@ -779,7 +815,7 @@ img.iconeBusca {
 .sairModalAtualizarEncontro {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     margin: 1vh;
     height: 4vh;
     width: 4vh;

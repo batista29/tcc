@@ -190,7 +190,7 @@ const update = async (req, res) => {
     try {
         let encontro = await prisma.encontro.update({
             where: {
-                id: Number(req.params.id)
+                id: Number(req.params.idEncontro)
             },
             data: req.body
         })

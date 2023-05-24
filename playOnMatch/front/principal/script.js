@@ -249,6 +249,8 @@ function listaParticipantes() {
 
     const options = { method: 'GET' };
 
+    console.log(idPartida)
+
     fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
         .then(response => response.json())
         .then(res => {
@@ -342,6 +344,7 @@ function removerParticipante() {
 function abrirModalPartida(id) {
 
     id = id.children[0].children[1].children[0].innerHTML.slice(1)
+    console.log(id)
 
     let partida = document.querySelector('.modalPartidas')
     partida.classList.remove("model")
@@ -366,9 +369,11 @@ function filterCardsTitulo() {
         let partidas = document.querySelectorAll('.readInfo');
 
         partidas.forEach((e) => {
-            if (!e.children[0].children[2].children[0].innerHTML.slice(1) == '') {
 
-                let titulo = e.children[0].children[2].children[1].innerHTML
+
+            if (!e.children[0].children[1].children[0].innerHTML.slice(1) == '') {
+
+                let titulo = e.children[0].children[1].children[1].innerHTML
                 titulo = titulo.toLowerCase()
 
                 let filter = filtroTituloPartidas.value
@@ -386,8 +391,6 @@ function filterCardsTitulo() {
     }, 100);
 }
 
-// filtroDatePartidas.addEventListener('input', filterCardsData)
-
 function formatarData(campo) {
     const valorSemMascara = campo.value.replace(/\D/g, '');
 
@@ -400,9 +403,9 @@ function formatarData(campo) {
 
         partidas.forEach((e) => {
 
-            if (!e.children[0].children[2].children[0].innerHTML.slice(1) == '') {
+            if (!e.children[0].children[2].children[1].children[1].innerHTML == '') {
 
-                let dataHTML = e.children[0].children[3].children[1].innerHTML
+                let dataHTML = e.children[0].children[2].children[1].children[1].innerHTML.split('-')[0]
 
                 if (!dataHTML.includes(campo.value)) {
                     e.style.display = 'none'
@@ -756,9 +759,6 @@ function atualizarEncontro() {
     if (atualizarTituloEncontro.value) {
         data.titulo = atualizarTituloEncontro.value;
     }
-    // if (atualizarDataEncontro.value && atualizarHoraEncontro.value) {
-    //     data.dataHora = atualizarTituloEncontro.value;
-    // }
 
     if (atualizarDescricaoEncontro.value) {
         data.descricao = atualizarDescricaoEncontro.value;
@@ -782,10 +782,12 @@ function atualizarEncontro() {
         body: JSON.stringify(data)
     };
 
-    fetch(`http://localhost:3000/editarEncontro/${idPartida}/${id}`, options)
+    fetch(`http://localhost:3000/editarEncontro/${id}/${idPartida}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+        })
 }
 
 function convidarAmigosParaEncontro() {
@@ -830,9 +832,9 @@ btnAbrirModalCriaLocal.addEventListener("click", function (event) {
 let btnFecharModalCriarLocal = document.querySelector('.btnFecharModalCriarLocal')
 
 btnFecharModalCriarLocal.addEventListener('click', function (event) {
-    let modalCriarLoal = document.querySelector('.modalCriarLocal')
+    let modalCriarLocal = document.querySelector('.modalCriarLocal')
 
-    modalCriarLoal.classList.add("model")
+    modalCriarLocal.classList.add("model")
 })
 
 // function abrirModalCadastroLocal() {
@@ -923,7 +925,34 @@ inputUsuario.addEventListener("input", function () {
 
 
 
+function criarLocal() {
 
+    let localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
+    let inpNomeLocal = document.querySelector('.inpNomeLocal')
+    let inpRuaLocal = document.querySelector('.inpRuaLocal')
+    let inpBairroLocal = document.querySelector('.inpBairroLocal')
+
+    let dados = {
+        nome: inpNomeLocal.value,
+        rua: inpRuaLocal.value,
+        bairro: inpBairroLocal.value,
+        cidade: localizacaoUsuario.cidade,
+        pais: localizacaoUsuario.pais
+    }
+
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    };
+
+    fetch('http://localhost:3000/criarLocal', options)
+        .then(response => {
+            window.location.reload()
+            response.json()
+        })
+        .then(response => console.log(response))
+}
 
 
 function listarUsuarios() {

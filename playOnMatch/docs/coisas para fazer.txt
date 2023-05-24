@@ -7,10 +7,12 @@ encaminhar para o perfil : certo
 puxar info user : certo
 seta para subir para cima: certo
 poder encerrar encontro : feito
-editar encontro :em andamento 	
-convidar amigos para a partida
+editar encontro :feito	
+
+convidar amigos para a partida:Em andamento()()()()
+
 poder favoritar partidas para o usuario ter um melhor acesso as partidas que ele tem interesse : em andamento
-dps do login abrir modal para obter localização:certo
+dps do login abrir modal para obter localização:certo (arrumar)
 criar modal para pesquisar usuarios: certo
 
 criar modal que vai poder visitar ou adicionar aquele usuario: feito
