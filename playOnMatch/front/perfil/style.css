@@ -52,9 +52,15 @@ header {
     margin: 5%;
 }
 
-.imgLocalizacaoEncontro {
+.imgLocalizacaoEncontro,
+.imgData {
     height: 40px;
     width: 40px;
+}
+
+.date{
+    display: flex;
+    align-items: center;
 }
 
 .tituloEncontro {
@@ -62,7 +68,7 @@ header {
     margin-bottom: 10%;
 }
 
-.enderecoEncontro{
+.enderecoEncontro {
     width: 100%;
 }
 
@@ -298,7 +304,16 @@ img {
 }
 
 .atualizarPerfil,
-.notificacaoModal,
+.notificacaoModal {
+    height: 30%;
+    width: 20%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+}
+
 .amigosModal {
     height: 30%;
     width: 20%;
@@ -307,6 +322,8 @@ img {
     border-radius: 10px;
     position: relative;
     text-align: center;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .atualizarPerfil>form {
@@ -354,6 +371,10 @@ img {
     background-color: #012340;
     color: white;
     cursor: pointer;
+}
+
+.infoParticipantes{
+    display: flex;
 }
 
 .model {

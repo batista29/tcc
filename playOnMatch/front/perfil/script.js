@@ -142,6 +142,8 @@ btnFechaModalAtualizarPerfil.addEventListener('click', function (e) {
 btnFecharModal.addEventListener('click', function (e) {
     let modal = document.querySelector('.modal')
 
+    window.location.reload()
+
     modal.style.display = 'none'
 })
 
@@ -253,7 +255,6 @@ function detalhesPartida(idPartida) {
     fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
         .then(response => response.json())
         .then(response => {
-            console.log(response.dataHora)
             let detalhesEncontro = document.querySelector('.detalhesEncontro')
             let infoEncontro = document.querySelector('.infoEncontro')
 
@@ -269,12 +270,23 @@ function detalhesPartida(idPartida) {
 
             dados.querySelector('.tituloEncontro').innerHTML = response.titulo
             dados.querySelector('.descricaoEncontro').innerHTML = response.descricao
-            dados.querySelector('.enderecoEncontro').innerHTML = response.local.cidade +"-" + response.local.pais 
+            dados.querySelector('.enderecoEncontro').innerHTML = response.local.cidade + "-" + response.local.pais
             dados.querySelector('.nomeEncontro').innerHTML = response.local.nome
             dados.querySelector('.dataEncontro').innerHTML = nwData
-            // dados.querySelector('.encerramentoEncontro').innerHTML = response.local.nome
 
             detalhesEncontro.appendChild(dados)
+
+            let participantes = document.querySelector('.participantes')
+            let infoParticipantes = document.querySelector('.infoParticipantes')
+
+            response.EncontroUsuario.forEach((e) => {
+                let info = infoParticipantes.cloneNode(true)
+                info.classList.remove('model')
+                info.querySelector('.idParticipante').innerHTML = "#" +e.idParticipante.id
+                info.querySelector('.nomeParticipante').innerHTML = e.idParticipante.nome
+                participantes.appendChild(info)
+            })
+
         })
 }
 
