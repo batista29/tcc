@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     textBtnCadastrar: {
-        color: 'white'
+        color: 'black'
     },
     selecionar: {
         width: '220px',

@@ -26,18 +26,31 @@ export default function NewPartida() {
             })
     })
 
+    let date = new Date(perfil.nascimento);
+
+    let dataFormatada = date.toLocaleDateString("pt-BR", {
+        timeZone: "UTC",
+    });
+
+
+
     return (
         <View style={styles.container}>
             <View style={styles.main}>
                 <View>
-                    <Text style={styles.texto}>{perfil.nome}</Text>
-                    <Text style={styles.texto}>{perfil.email}</Text>
-                    <Text style={styles.texto}>{perfil.nascimento}</Text>
-                </View>
-                <View>
-                    <ScrollView>
-                        <View></View>
-                    </ScrollView>
+                    <Text style={styles.texto}>Nome: {perfil.nome}</Text>
+                    <Text style={styles.texto}>Email: {perfil.email}</Text>
+                    <Text style={styles.texto}>Nascimento: {dataFormatada}</Text>
+                    {/* {
+                        perfil.participante.map((e, index) => {
+                            console.log(e)
+                            return (
+                                <View key={index}>
+                                    <Text>{e}</Text>
+                                </View>
+                            )
+                        })
+                    } */}
                 </View>
             </View>
         </View>
