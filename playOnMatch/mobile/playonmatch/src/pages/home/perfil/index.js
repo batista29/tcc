@@ -22,7 +22,6 @@ export default function NewPartida() {
         fetch(`http://10.87.207.7:3000/perfil/${lida}`)
             .then(res => { return res.json() })
             .then(data => {
-                console.log(data)
                 setPerfil(data)
             })
     })

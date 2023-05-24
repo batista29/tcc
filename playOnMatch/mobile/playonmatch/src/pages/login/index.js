@@ -26,10 +26,10 @@ export default function Login({ navigation }) {
         return res.json()
       })
       .then(data => {
-        AsyncStorage.setItem('idLogin', data.usuario.id)
         if (data.mensagem == 'Senha incorreta') {
           alert('Senha incorreta')
         } else if (data.mensagem == 'Seu login foi bem-sucedido') {
+          AsyncStorage.setItem('idLogin', data.usuario.id)
           navigation.navigate("Main")
         } else if (data.mensagem == 'Usuário não encontrado') {
           alert('Usuário não encontrado')
@@ -53,7 +53,7 @@ export default function Login({ navigation }) {
           }}
         ></TextInput>
         <Text style={styles.texto}>Digite a sua senha</Text>
-        <TextInput
+        <TextInput secureTextEntry={true} 
           style={styles.inputs}
           value={senha}
           onChangeText={(value) => {

@@ -129,7 +129,7 @@ const YearPicker = () => {
         </View>
 
         <View style={styles.divSelect}>
-
+          <Text style={styles.textDate}>Data de nascimento:</Text>
           <Text style={styles.textDate}>Selecione o dia</Text>
 
           <Picker style={styles.selecionarData}
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   pickerData: {
-    height: '650px',
+    height: '670px',
     width: '350px',
     backgroundColor: '#008F8C',
     alignItems: 'center',
