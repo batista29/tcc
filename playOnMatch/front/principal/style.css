@@ -1,10 +1,3 @@
-/* :root {
-    --backgroundHome: #88A649;
-    --backgroundLogin: #274001;
-    --cor4: #008F8C;
-    --cor5: #0CABA8;
-    --textoHome: #0FC2C0;
-} */
 :root {
     --backgroundHome: #B9B4D9;
     --cor4: #5D75A6;
@@ -663,7 +656,7 @@ img.iconeBusca {
 .infoLocalizacao {
     height: 80%;
     width: 80vw;
-    background-color: var(--cor5);
+    background-color: var(--textoHome);
     color: white;
     display: flex;
     align-items: center;
@@ -678,9 +671,18 @@ img.iconeBusca {
     flex-direction: column;
 }
 
+.formLocal>input{
+    height: 4vh;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--backgroundHome);
+    color: white;
+}
+
 .descricaoLocalizacao {
     width: 40%;
     text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btnConfirmarLocalizacao {
@@ -689,12 +691,12 @@ img.iconeBusca {
     margin-top: 20px;
     border: none;
     border-radius: 20px;
-    background-color: var(--backgroundLogin);
+    background-color: var(--cor4);
 }
 
 .btnConfirmarLocalizacao:hover {
     cursor: pointer;
-    background-color: var(--cor5);
+    background-color: var(--textoHome);
 }
 
 .modaAdicionar {

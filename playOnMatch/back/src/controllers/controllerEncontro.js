@@ -6,17 +6,16 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
     try {
-        //cria novo encontro
         const newEncontro = await prisma.encontro.create({
             data: req.body
         });
 
-        // Cria um novo registro para o encontro e os usuários relacionados
         const encontroUsuario = await prisma.encontroUsuario.create({
             data: {
                 id_encontro: newEncontro.id,
                 idCriadorPartida: Number(req.params.idCriadorPartida),
-                idParticipantePartida: Number(req.params.idCriadorPartida)
+                idParticipantePartida: Number(req.params.idCriadorPartida),
+                status: 1
             },
         });
         res.status(201).send({ mensagem: encontroUsuario }).end()
@@ -49,7 +48,8 @@ const novoParticipante = async (req, res) => {
         data: {
             id_encontro: Number(req.params.idEncontro),
             idCriadorPartida: encontro?.EncontroUsuario[0]?.idCriadorPartida,
-            idParticipantePartida: Number(req.params.idNovoParticipante)
+            idParticipantePartida: Number(req.params.idNovoParticipante),
+            status: 1
         }
     })
     res.status(200).send(encontroUsuario).end()
@@ -235,6 +235,91 @@ const del = async (req, res) => {
     }
 }
 
+const convidarUsario = async (req, res) => {
+    try {
+        let encontro = await prisma.encontro.findUnique({
+            where: {
+                id: Number(req.params.idEncontro)
+            },
+            select: {
+                id: true,
+                EncontroUsuario: {
+                    select: {
+                        idCriadorPartida: true
+                    }
+                }
+            }
+        })
+
+        let convidarAmigo = await prisma.encontroUsuario.create({
+            data: {
+                id_encontro: Number(req.params.idEncontro),
+                idCriadorPartida: encontro?.EncontroUsuario[0]?.idCriadorPartida,
+                idParticipantePartida: Number(req.params.idAmigo)
+            }
+        })
+        res.status(201).json(convidarAmigo).end()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const verConvite = async (req, res) => {
+    try {
+        let participante = await prisma.usuario.findUnique({
+            where: {
+                id: Number(req.params.idParticipante)
+            },
+            select: {
+                participante: true
+            }
+        })
+        res.status(200).json(participante).end()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const responderConvite = async (req, res) => {
+
+    try {
+        let { respConvite } = req.body
+
+        const participante = await prisma.usuario.findUnique({
+            where: {
+                id: Number(req.params.idParticipante)
+            },
+            select: {
+                participante: true
+            }
+        })
+
+        let encontroUsuario = participante.participante.find(e => e.status == 0)
+
+        if (respConvite == 1) {
+            let encontro = await prisma.encontroUsuario.update({
+                where: {
+                    id: encontroUsuario.id
+                },
+                data: { status: 1 }
+            })
+        }
+
+        if (respConvite == 2) {
+            let encontro = await prisma.encontroUsuario.update({
+                where: {
+                    id: encontroUsuario.id
+                },
+                data: { status: 2 }
+            })
+        }
+
+        res.status(200).json(participante).end()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     create,
     novoParticipante,
@@ -243,5 +328,8 @@ module.exports = {
     del,
     deletarParticipante,
     update,
-    finalizarEncontro
+    finalizarEncontro,
+    convidarUsario,
+    verConvite,
+    responderConvite
 }

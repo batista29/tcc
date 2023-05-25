@@ -259,51 +259,7 @@ const verificarAmigo = async (idLogado, idUsuario) => {
 
 }
 
-const updateListaAmigo = async (req, res) => {
 
-    let { RespUsuario } = req.body
-    let { idCriadorLista } = req.params
-    let { idNovoAmigo } = req.params
-
-    const amigo = await prisma.usuario.findUnique({
-        where: {
-            id: Number(idNovoAmigo)
-        }, select: {
-            amigo: true,
-            criadorListaAmigo: true
-        }
-    })
-
-    let findAmigo = amigo.amigo.find(lista => lista.idCriador == idCriadorLista && lista.idAmigo == idNovoAmigo)
-    let findDono = amigo.criadorListaAmigo.find(lista => lista.idCriador == idNovoAmigo && lista.idAmigo == idCriadorLista)
-
-    if (RespUsuario == 1) {
-
-        const listaDeQuemRecebeu = await prisma.lista_amigos.update({
-            where: { id: findAmigo.id },
-            data: { status: 1 }
-        })
-
-        const listaAmigoDono = await prisma.lista_amigos.update({
-            where: { id: findDono.id },
-            data: { status: 1 }
-        })
-    }
-
-    if (RespUsuario == 2) {
-        const listaDeQuemRecebeu = await prisma.lista_amigos.update({
-            where: { id: findAmigo.id },
-            data: { status: 2 }
-        })
-
-        const listaAmigoDono = await prisma.lista_amigos.update({
-            where: { id: findDono.id },
-            data: { status: 2 }
-        })
-    }
-
-    res.status(200).json('sucesso').end()
-}
 
 const listarAmigos = async (req, res) => {
     const usuario = await prisma.usuario.findUnique({
@@ -392,7 +348,7 @@ module.exports = {
     readPerfil,
     verificarAmigo,
     readListaAmigo,
-    updateListaAmigo,
+    // updateListaAmigo,
     // respostaAmizade,
     listarAmigos,
     eliminateAmigo,

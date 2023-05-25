@@ -16,6 +16,7 @@ CREATE TABLE `Lista_amigos` (
     `idAmigo` INTEGER NULL,
     `idCriador` INTEGER NOT NULL,
     `status` INTEGER NOT NULL DEFAULT 0,
+    `remetente` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -49,10 +50,9 @@ CREATE TABLE `Local` (
     `rua` VARCHAR(191) NOT NULL,
     `bairro` VARCHAR(191) NOT NULL,
     `cidade` VARCHAR(191) NOT NULL,
+    `estado` VARCHAR(191) NOT NULL,
     `pais` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `Local_cidade_key`(`cidade`),
-    UNIQUE INDEX `Local_pais_key`(`pais`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

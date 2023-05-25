@@ -61,6 +61,7 @@ model Local {
   rua      String
   bairro   String
   cidade   String
+  estado   String
   pais     String
   Encontro Encontro[]
 }

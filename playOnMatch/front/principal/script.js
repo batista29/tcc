@@ -20,30 +20,55 @@ if (!sessionStorage.getItem('pegarLocalização')) {
 
 const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
 
-const cidadesPorPais = {
-    'Brasil': ['Rio de Janeiro', 'São Paulo', 'Belo Horizonte', 'Jaguariúna'],
-    'Argentina': ['Buenos Aires', 'Córdoba', 'Rosário'],
+const estadosPorPais = {
+    'Brasil': ['Rio de Janeiro', 'São Paulo', 'Minas Gerais'],
+    'Argentina': ['Buenos Aires', 'Córdoba', 'Santa Fé'],
     'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
-    'selulite': ['cidade1', 'cidade2', 'cidade3']
+    'selulite': ['estado1', 'estado2', 'estado3']
 };
 
-// Pega o datalist das opções de países
-const datalistPaises = document.getElementById('opcoes-pais');
+const cidadesPorEstado = {
+    'Rio de Janeiro': ['Rio de Janeiro', 'Niterói', 'Petrópolis'],
+    'São Paulo': ['São Paulo', 'Campinas', 'Guarulhos'],
+    'Minas Gerais': ['Belo Horizonte', 'Uberlândia', 'Juiz de Fora'],
+    'Buenos Aires': ['Buenos Aires', 'La Plata', 'Mar del Plata'],
+    'Córdoba': ['Córdoba', 'Villa Carlos Paz', 'Río Cuarto'],
+    'Santa Fé': ['Santa Fé', 'Rosário', 'Venado Tuerto'],
+    'Berlim': ['Berlim', 'Hamburgo', 'Munique'],
+    'Munique': ['Munique', 'Nuremberg', 'Augsburg'],
+    'Hamburgo': ['Hamburgo', 'Bremen', 'Lübeck'],
+    'estado1': ['cidade1', 'cidade2', 'cidade3'],
+    'estado2': ['cidade4', 'cidade5', 'cidade6'],
+    'estado3': ['cidade7', 'cidade8', 'cidade9']
+};
 
-// Adiciona as opções de países no datalist correspondente
+const datalistPaises = document.getElementById('opcoes-pais');
+const datalistEstados = document.getElementById('opcoes-estados');
+const datalistCidades = document.getElementById('opcoes-cidades');
+
+
+
 paises.forEach(function (pais) {
     const option = document.createElement('option');
     option.value = pais;
     datalistPaises.appendChild(option);
 });
 
-// Pega o datalist das opções de cidades
-const datalistCidades = document.getElementById('opcoes-cidades');
-
-// Atualiza o datalist de cidades com as opções do país selecionado
-function atualizarCidades() {
+function atualizarEstados() {
     const paisSelecionado = document.getElementById('pais').value;
-    const cidades = cidadesPorPais[paisSelecionado] || [];
+    const estados = estadosPorPais[paisSelecionado] || [];
+    datalistEstados.innerHTML = '';
+    datalistCidades.innerHTML = '';
+    estados.forEach(function (estado) {
+        const option = document.createElement('option');
+        option.value = estado;
+        datalistEstados.appendChild(option);
+    });
+}
+
+function atualizarCidades() {
+    const estadoSelecionado = document.getElementById('estado').value;
+    const cidades = cidadesPorEstado[estadoSelecionado] || [];
     datalistCidades.innerHTML = '';
     cidades.forEach(function (cidade) {
         const option = document.createElement('option');

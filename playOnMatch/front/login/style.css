@@ -1,11 +1,21 @@
-:root {
+/* :root {
     --backgroundHome: #012340;
     --backgroundLogin: #025959;
     --textoHome: #04D939;
     --textoHome2: #00f63e;
     --cor4: #027333;
     --cor5: #03A63C;
+} */
+
+:root {
+    --teste:#04D939 ;
+    --backgroundHome: #B9B4D9;
+    --backgroundLogin: #1A1E26;
+    --cor4: #5D75A6;
+    --cor5: #405173;
+    --textoHome: #283040;
 }
+
 
 * {
     padding: 0;
@@ -71,7 +81,7 @@ main {
 }
 
 .btn-login {
-    color: var(--textoHome);
+    color: var(--cor4);
 }
 
 .btn-cadastro {
@@ -81,7 +91,7 @@ main {
 }
 
 .btn-cadastro:hover {
-    color: var(--textoHome);
+    color: var(--cor4);
     opacity: 1;
     filter: none;
 }
@@ -111,15 +121,15 @@ main {
 }
 
 .formulario form button {
-  height: 40px;
-  width: 300px;
-  background-color: var(--backgroundHome);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    height: 40px;
+    width: 300px;
+    background-color: var(--cor4);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .formulario>form>input::placeholder {
@@ -127,10 +137,8 @@ main {
 }
 
 .btns {
-    background-color: transparent;
     border: transparent;
     height: 40px;
-    background-color: var(--backgroundHome);
     color: white;
     border-radius: 30px;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);

@@ -22,6 +22,9 @@ const encontro = require('../controllers/controllerEncontro')
 
 router.post('/criarEncontro/:idCriadorPartida', encontro.create)
 router.post('/adicionarParticipante/:idEncontro/:idNovoParticipante', encontro.novoParticipante)
+router.put('/responderConvite/:idParticipante', encontro.responderConvite)
+router.get('/verConvite/:idParticipante', encontro.verConvite)
+router.get('/convidarAmigo/:idEncontro/:idAmigo', encontro.convidarUsario)
 router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.deletarParticipante)
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
@@ -41,12 +44,12 @@ const listaAmigo = require('../controllers/controllerListaAmigo')
 
 router.post('/enviarSolicitacao/:idCriador/:idAmigo', listaAmigo.enviarSolicitacaoAmizade)
 router.get('/verSolicitacao/:idAmigo', listaAmigo.responsderSolicitacaoAmizade)
-router.put('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', usuario.updateListaAmigo)
+router.put('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', listaAmigo.updateListaAmigo)
 
 const favorito = require('../controllers/controllerFavoritos')
 
-router.post('/favoritarEncontro/:idUsuario/:idEncontro',favorito.createFavoritos)
-router.get('/encontros/:idUsuario',favorito.readFavorito)
-router.delete('/removerEncontros/:idUsuario/:idEncontro',favorito.removerFavorito)
+router.post('/favoritarEncontro/:idUsuario/:idEncontro', favorito.createFavoritos)
+router.get('/encontros/:idUsuario', favorito.readFavorito)
+router.delete('/removerEncontros/:idUsuario/:idEncontro', favorito.removerFavorito)
 
 module.exports = router

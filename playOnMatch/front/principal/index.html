@@ -18,7 +18,7 @@
         </a>
     </header>
     <main>
-        <button onclick="abrirModal()" class="abrirModal1">Jogar</button>
+        <button onclick="abrirModal()" class="abrirModal1">Criar Encontro</button>
         <div data-content id="menu" class="partidasFavoritas">
             <div class="menuInteresses">
                 <img class="iconsImgs imgInteresses" src="../../docs/imgs/estrela.png" alt="">
@@ -113,23 +113,29 @@
         <div class="infoLocalizacao">
             <div class="formLocal">
                 <label for="pais">País:</label>
-                <input type="text" id="pais" name="pais" list="opcoes-pais" onchange="atualizarCidades()">
-
-                <datalist id="opcoes-pais">
-                </datalist>
-
+                <input type="text" id="pais" list="opcoes-pais" oninput="atualizarEstados()">
+                
+                <datalist id="opcoes-pais"></datalist>
+                
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" list="opcoes-estados" oninput="atualizarCidades()">
+                
+                <datalist id="opcoes-estados"></datalist>
+                
                 <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" name="cidade" list="opcoes-cidades">
-
-                <datalist id="opcoes-cidades">
-                </datalist>
+                <input type="text" id="cidade" list="opcoes-cidades">
+                
+                <datalist id="opcoes-cidades"></datalist>
                 <button onclick="pegarLocalizacaoUsuario()" class="btnConfirmarLocalizacao">confirmar</button>
             </div>
             <div class="descricaoLocalizacao">
-                <p>PlayOnMatch precisa da localização do um usuário para mostrar partidas que ocorrem na cidade da
-                    pessoa. <br> Ao obter a localização do usuário, o site pode exibir informações precisas sobre
-                    partidas que ocorrem na cidade do usuário, incluindo datas, horários e locais. Isso ajuda o usuário
-                    a economizar tempo e esforço na busca por partidas que ocorrem na sua região.</p>
+                <p>PlayOnMatch precisa da localização do usuário para mostrar partidas que ocorrem no local em que a
+                    pessoa
+                    se Encontra. <br> Ao obter a localização atual do usuário, o site pode exibir informações precisas
+                    sobre
+                    partidas que estão ocerrendo no local onde ele está, incluindo datas, horários e locais. Isso ajuda
+                    o usuário
+                    a economizar tempo e esforço na busca por partidas.</p>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ function estilizarBotoes() {
         formularioCadastro.style.display = "none"
         formularioLogin.style.display = ""
 
-        btnLogin.style.color = '#04D939'
+        btnLogin.style.color = '#5D75A6'
         btnLogin.style.opacity = '200';
         btnLogin.style.filter = 'none';
 
@@ -36,7 +36,7 @@ function estilizarBotoes() {
         formularioCadastro.style.display = "flex"
         formularioLogin.style.display = "none"
 
-        btnCadastro.style.color = '#04D939'
+        btnCadastro.style.color = '#5D75A6'
         btnCadastro.style.opacity = '200';
         btnCadastro.style.filter = 'none';
 
@@ -118,7 +118,7 @@ function loginUsuario() {
     };
 
     if (inpEmail.length == 0 || inpSenha == 0) {
-        erroL.style.color = "black"
+        erroL.style.color = "red"
         erroL.innerHTML = "Campo Vazio"
     } else {
         fetch('http://localhost:3000/login', options)
@@ -129,11 +129,11 @@ function loginUsuario() {
             .then(res => {
                 console.log(res.mensagem)
                 if (res.mensagem === 'Usuário não encontrado') {
-                    erroL.style.color = "black"
+                    erroL.style.color = "red"
                     erroL.innerHTML = res.mensagem
                 }
                 if (res.mensagem === 'senha incorreta') {
-                    erroL.style.color = "black"
+                    erroL.style.color = "red"
                     erroL.innerHTML = res.mensagem
                 }
                 if (res.mensagem === 'Seu login foi bem-sucedido') {
