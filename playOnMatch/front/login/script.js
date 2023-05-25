@@ -132,7 +132,7 @@ function loginUsuario() {
                     erroL.style.color = "red"
                     erroL.innerHTML = res.mensagem
                 }
-                if (res.mensagem === 'senha incorreta') {
+                if (res.mensagem === 'Senha incorreta') {
                     erroL.style.color = "red"
                     erroL.innerHTML = res.mensagem
                 }

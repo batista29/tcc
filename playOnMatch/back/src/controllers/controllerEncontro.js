@@ -166,6 +166,7 @@ const readOne = async (req, res) => {
             EncontroUsuario: {
                 select: {
                     id: true,
+                    status:true,
                     idParticipante: {
                         select: {
                             id: true,

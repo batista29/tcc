@@ -20,10 +20,10 @@
     <main>
         <button onclick="abrirModal()" class="abrirModal1">Criar Encontro</button>
         <div data-content id="menu" class="partidasFavoritas">
-            <div class="menuInteresses">
+            <!-- <div class="menuInteresses">
                 <img class="iconsImgs imgInteresses" src="../../docs/imgs/estrela.png" alt="">
                 <p class="titulosMenu">Interesses</p>
-            </div>
+            </div> -->
             <div class="menuNotificacoes">
                 <img class="iconsImgs imgNotificacoes" src="../../docs/imgs/notificacao.png" alt="">
                 <p class="titulosMenu">Notificações</p>
@@ -65,9 +65,9 @@
             </div>
             <div onclick="abrirModalPartida(this)" class="readInfo model">
                 <div class="readLocal">
-                    <button id="favorito" onclick="favoritarPartida(this)" class="btnFavoritarPartida">
+                    <!-- <button id="favorito" onclick="favoritarPartida(this)" class="btnFavoritarPartida">
                         <img class="imgEstrela" src="../../docs/imgs/estrela.png" alt="">
-                    </button>
+                    </button> -->
                     <div class="titulos">
                         <p class="idLocal model"></p>
                         <p class="titulo"></p>
@@ -213,7 +213,7 @@
                         <input class="inpNomeLocal" type="text">
                         <label for="">Rua:</label>
                         <input class="inpRuaLocal" type="text">
-                        <label for="">Bairro:</label>
+                        <label for="F">Bairro:</label>
                         <input class="inpBairroLocal" type="text">
                     </form>
                     <button onclick="criarLocal()" class="btnCriarLocal">criar</button>
@@ -225,10 +225,10 @@
         <div class="modal">
             <div class="inputsConvidarAmigo">
                 <button class="sairModalPartidas" onclick="fecharModalConvidarAmigo()">X</button>
-                <div class="infoConvidarAmigos">
-                    <p class="nomeAmigoConvite">nome</p>
+                <div class="infoConvidarAmigos model">
                     <p class="idAmigoConvite">id</p>
-                    <button class="enviar">CONVIDAR</button>
+                    <p class="nomeAmigoConvite">nome</p>
+                    <button class="btnConvidar">Convidar</button>
                 </div>
             </div>
         </div>

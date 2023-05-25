@@ -79,9 +79,10 @@ function atualizarCidades() {
 
 function pegarLocalizacaoUsuario() {
     let pais = document.getElementById('pais').value;
+    let estado = document.getElementById('estado').value;
     let cidade = document.getElementById('cidade').value;
 
-    localStorage.setItem("localização", JSON.stringify({ "pais": pais, "cidade": cidade }))
+    localStorage.setItem("localização", JSON.stringify({ "pais": pais, "estado": estado, "cidade": cidade }))
 
     let modalLocalizacao = document.querySelector('.localizacao')
 
@@ -136,22 +137,7 @@ function favoritarPartida(idEncontro) {
     } else {
         adicionarFavorito()
     }
-
-
-    // para selecionar o elemento que disparou o evento, que é o próprio botão que foi clicado.
-    // const btnFavoritarPartida = event.currentTarget;
-    // Em seguida, usei querySelector com currentTarget para selecionar a imagem dentro desse botão específico.
-    // Dessa forma, a troca da imagem só acontece dentro do botão que foi clicado.
-    // const imgEstrela = btnFavoritarPartida.querySelector('.imgEstrela');
-
-    // if (imgEstrela.src.includes('estrela.png')) {
-    //     imgEstrela.src = '../../docs/imgs/estrelaAmarela.png';
-    // } else {
-    //     imgEstrela.src = '../../docs/imgs/estrela.png';
-    // }
 }
-
-
 
 function carregar() {
 
@@ -186,9 +172,6 @@ function carregar() {
                     tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
                     tabela.querySelector('.endereco').innerHTML = dados.local.nome
 
-                    let btnFavoritarPartida = tabela.querySelector('.btnFavoritarPartida');
-                    btnFavoritarPartida.addEventListener('click', favoritarPartida);
-
                     read.appendChild(tabela)
                 }
             });
@@ -222,7 +205,6 @@ function listaLocais() {
 
 function adicionarEncontro() {
 
-    // criar encontro
     let consulta = document.getElementById('consulta')
     let nwLocal = consulta.value.split('-')[0].slice(1)
 
@@ -255,7 +237,6 @@ function adicionarEncontro() {
             console.log(response)
             window.location.reload()
         })
-
 }
 
 function abrirModal() {
@@ -285,7 +266,9 @@ function listaParticipantes() {
             const btnCancelar = document.querySelector('.btnCancelarParticipacao')
             const btnParticipar = document.querySelector('.btnParticiparDoEvento')
 
-            res.EncontroUsuario.forEach((e) => {
+            let encontro = res.EncontroUsuario.filter((e => e.status == 1))
+
+            encontro.forEach((e) => {
 
                 let nomeParticipante = e.idParticipante.nome
                 let idParticipante = e.idParticipante.id
@@ -317,7 +300,6 @@ function listaParticipantes() {
                 if (id == e.idParticipante.id) {
                     btnAdicionarAmigo.classList.add('model')
                 }
-
                 participantes.appendChild(dados)
             })
 
@@ -368,8 +350,7 @@ function removerParticipante() {
 
 function abrirModalPartida(id) {
 
-    id = id.children[0].children[1].children[0].innerHTML.slice(1)
-    console.log(id)
+    id = id.children[0].children[0].children[0].innerHTML.slice(1)
 
     let partida = document.querySelector('.modalPartidas')
     partida.classList.remove("model")
@@ -489,9 +470,13 @@ function listaAmigos() {
                 let allFriends = document.querySelector('.allFriends')
                 let friendsInfo = document.querySelector('.friends_info')
 
+                let inputsConvidarAmigo = document.querySelector('.inputsConvidarAmigo')
+                let infoConvidarAmigos = document.querySelector('.infoConvidarAmigos')
+
                 let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
 
                 amigo.forEach((e) => {
+
                     let info = friendsInfo.cloneNode(true)
                     info.classList.remove("model")
 
@@ -499,6 +484,14 @@ function listaAmigos() {
                     info.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
 
                     allFriends.appendChild(info)
+
+                    let dados = infoConvidarAmigos.cloneNode(true)
+                    dados.classList.remove("model")
+
+                    dados.querySelector('.idAmigoConvite').innerHTML = e.amigo.id
+                    dados.querySelector('.nomeAmigoConvite').innerHTML = e.amigo.nome
+
+                    inputsConvidarAmigo.appendChild(dados)
                 })
             })
     }, 100)
@@ -651,12 +644,12 @@ function sair() {
 
 const menuInteresses = document.querySelector('.menuInteresses')
 
-menuInteresses.addEventListener('click', () => {
-    let partidasInteressado = document.querySelector('.partidasInteressado')
+// menuInteresses.addEventListener('click', () => {
+//     let partidasInteressado = document.querySelector('.partidasInteressado')
 
-    partidasInteressado.classList.toggle('model')
+//     partidasInteressado.classList.toggle('model')
 
-})
+// })
 
 const menuNotificacoes = document.querySelector('.menuNotificacoes')
 
@@ -705,20 +698,20 @@ imgNotificacoes.addEventListener('click', function (event) {
     })
 })
 
-let imgInteresses = document.querySelector('.imgInteresses')
+// let imgInteresses = document.querySelector('.imgInteresses')
 
-imgInteresses.addEventListener('click', function (event) {
+// imgInteresses.addEventListener('click', function (event) {
 
-    event.stopPropagation()
+//     event.stopPropagation()
 
-    tabContent.classList.forEach((e) => {
-        if (e == 'active') {
-            tabContent.classList.remove('active')
-        } else {
-            tabContent.classList.add('active')
-        }
-    })
-})
+//     tabContent.classList.forEach((e) => {
+//         if (e == 'active') {
+//             tabContent.classList.remove('active')
+//         } else {
+//             tabContent.classList.add('active')
+//         }
+//     })
+// })
 
 
 
@@ -849,9 +842,9 @@ let btnAbrirModalCriaLocal = document.querySelector('.btnAbrirModalCriaLocal')
 btnAbrirModalCriaLocal.addEventListener("click", function (event) {
     event.preventDefault()
 
-    let modalCriarLoal = document.querySelector('.modalCriarLocal')
+    let modalCriarLocal = document.querySelector('.modalCriarLocal')
 
-    modalCriarLoal.classList.remove("model")
+    modalCriarLocal.classList.remove("model")
 })
 
 let btnFecharModalCriarLocal = document.querySelector('.btnFecharModalCriarLocal')
@@ -861,10 +854,6 @@ btnFecharModalCriarLocal.addEventListener('click', function (event) {
 
     modalCriarLocal.classList.add("model")
 })
-
-// function abrirModalCadastroLocal() {
-//    
-// }
 
 function fecharModalConviteAmizade() {
     let modalMandarSolicitacao = document.querySelector('.modalMandarSolicitacao')
@@ -962,6 +951,7 @@ function criarLocal() {
         rua: inpRuaLocal.value,
         bairro: inpBairroLocal.value,
         cidade: localizacaoUsuario.cidade,
+        estado: localizacaoUsuario.estado,
         pais: localizacaoUsuario.pais
     }
 
@@ -976,17 +966,17 @@ function criarLocal() {
             window.location.reload()
             response.json()
         })
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+        })
 }
 
-
-function listarUsuarios() {
-
+function convidarAmigosParaEncontro(){
+    
 }
-
 
 
 listaLocais()
 notificaoAmizade()
 listaAmigos()
-listarUsuarios()
+// listarUsuarios()
