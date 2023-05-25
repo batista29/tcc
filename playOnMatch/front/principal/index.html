@@ -114,17 +114,17 @@
             <div class="formLocal">
                 <label for="pais">País:</label>
                 <input type="text" id="pais" list="opcoes-pais" oninput="atualizarEstados()">
-                
+
                 <datalist id="opcoes-pais"></datalist>
-                
+
                 <label for="estado">Estado:</label>
                 <input type="text" id="estado" list="opcoes-estados" oninput="atualizarCidades()">
-                
+
                 <datalist id="opcoes-estados"></datalist>
-                
+
                 <label for="cidade">Cidade:</label>
                 <input type="text" id="cidade" list="opcoes-cidades">
-                
+
                 <datalist id="opcoes-cidades"></datalist>
                 <button onclick="pegarLocalizacaoUsuario()" class="btnConfirmarLocalizacao">confirmar</button>
             </div>
@@ -152,6 +152,9 @@
                 </button>
             </div>
             <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
+            <div class="descricaoModalEncontro">
+                <p>teste</p>
+            </div>
             <div class="participantes">
                 <div class="infoParticipantes model">
                     <p class="idParticipante">#id</p>

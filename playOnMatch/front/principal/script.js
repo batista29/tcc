@@ -223,20 +223,24 @@ function adicionarEncontro() {
         id_local: Number(nwLocal)
     }
 
-    let { id } = user
+    if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0) {
+        alert("Digite todos os dados pedidos")
+    } else {
+        let { id } = user
 
-    const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-    };
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dados)
+        };
 
-    fetch(`http://localhost:3000/criarEncontro/${id}`, options)
-        .then(response => response.json())
-        .then(response => {
-            console.log(response)
-            window.location.reload()
-        })
+        fetch(`http://localhost:3000/criarEncontro/${id}`, options)
+            .then(response => response.json())
+            .then(response => {
+                alert("Evento criado")
+                window.location.reload()
+            })
+    }
 }
 
 function abrirModal() {
