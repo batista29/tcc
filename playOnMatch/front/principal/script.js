@@ -376,10 +376,11 @@ function filterCardsTitulo() {
 
         partidas.forEach((e) => {
 
+            console.log()
 
-            if (!e.children[0].children[1].children[0].innerHTML.slice(1) == '') {
+            if (!e.children[0].children[0].children[1].innerHTML == '') {
 
-                let titulo = e.children[0].children[1].children[1].innerHTML
+                let titulo = e.children[0].children[0].children[1].innerHTML
                 titulo = titulo.toLowerCase()
 
                 let filter = filtroTituloPartidas.value
@@ -409,9 +410,11 @@ function formatarData(campo) {
 
         partidas.forEach((e) => {
 
-            if (!e.children[0].children[2].children[1].children[1].innerHTML == '') {
+            console.log(e.children[0].children[1].children[1].children[1].innerHTML.split('-')[0])
 
-                let dataHTML = e.children[0].children[2].children[1].children[1].innerHTML.split('-')[0]
+            if (!e.children[0].children[1].children[1].children[1].innerHTML.split('-')[0] == '') {
+
+                let dataHTML = e.children[0].children[1].children[1].children[1].innerHTML.split('-')[0]
 
                 if (!dataHTML.includes(campo.value)) {
                     e.style.display = 'none'
@@ -971,8 +974,8 @@ function criarLocal() {
         })
 }
 
-function convidarAmigosParaEncontro(){
-    
+function convidarAmigosParaEncontro() {
+
 }
 
 
