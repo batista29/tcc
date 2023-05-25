@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native'
 
-export default function principal({ navigation }) {
+export default function Main({ navigation }) {
     const [encontros, setEncontros] = useState([])
 
     useEffect(() => {

@@ -7,6 +7,8 @@ export default function NewPartida() {
     const [perfil, setPerfil] = useState([]);
     const [lida, setLida] = useState([]);
 
+    const [encontro, setEncontro] = useState([]);
+
     const getData = async () => {
         try {
             let id = await AsyncStorage.getItem("idLogin");
@@ -26,31 +28,29 @@ export default function NewPartida() {
             })
     })
 
-    let date = new Date(perfil.nascimento);
 
-    let dataFormatada = date.toLocaleDateString("pt-BR", {
-        timeZone: "UTC",
-    });
+    setTimeout(() => {
+        let data = perfil.participante || []
 
+        let ids = []
+
+        data.forEach(e => {
+
+            ids.push(e.encontro.id)
+
+        });
+
+        setEncontro(ids)
+    }, 100)
+
+    console.log(encontro)
 
 
     return (
         <View style={styles.container}>
             <View style={styles.main}>
                 <View>
-                    <Text style={styles.texto}>Nome: {perfil.nome}</Text>
-                    <Text style={styles.texto}>Email: {perfil.email}</Text>
-                    <Text style={styles.texto}>Nascimento: {dataFormatada}</Text>
-                    {/* {
-                        perfil.participante.map((e, index) => {
-                            console.log(e)
-                            return (
-                                <View key={index}>
-                                    <Text>{e}</Text>
-                                </View>
-                            )
-                        })
-                    } */}
+
                 </View>
             </View>
         </View>

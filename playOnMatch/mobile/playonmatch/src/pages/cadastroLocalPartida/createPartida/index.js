@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function NewPartida() {
+export default function NewPartida({ navigation }) {
 
     //pegar ano=
     const currentDate = new Date();
@@ -101,24 +101,28 @@ export default function NewPartida() {
     if (lida.length == 0) getData();
 
     const cadastrarEncontro = () => {
-        fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dados)
+        if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0) {
+            alert("Algum campo vazio")
+        } else {
+            fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            }
+            )
+                .then(res => {
+                    if (res.status == 201) {
+                        alert("Sucesso")
+                        navigation.navigate("Main")
+                    } else {
+                        alert("Erro")
+                    }
+                })
+                .then(data => { console.log(data) })
         }
-        )
-            .then(res => {
-                if (res.status == 201) {
-                    alert("Sucesso")
-                    navition.navigate("Main")
-                } else {
-                    alert("Erro")
-                }
-            })
-            .then(data => { console.log(data) })
     }
 
 

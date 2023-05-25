@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-export default function NewPartida() {
+
+export default function NewPartida({ navigation }) {
 
     const [nome, setNome] = useState("")
     const [rua, setRua] = useState("")
     const [bairro, setBairro] = useState("")
     const [cidade, setCidade] = useState("")
+    const [estado, setEstado] = useState("")
     const [pais, setPais] = useState("")
 
     let dados = {
@@ -13,29 +15,34 @@ export default function NewPartida() {
         rua: rua,
         bairro: bairro,
         cidade: cidade,
+        estado: estado,
         pais: pais
     }
 
     const cadastrarLocal = () => {
-        fetch(`http://10.87.207.7:3000/criarLocal`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dados)
+        if (dados.nome.length == 0 || dados.rua.length == 0 || dados.bairro.length == 0 || dados.cidade.length == 0 || dados.estado.length == 0 || dados.pais.length == 0) {
+            alert("Algum campo vazio")
+        } else {
+            fetch(`http://10.87.207.7:3000/criarLocal`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            }
+            )
+                .then(res => {
+                    console.log(res)
+                    if (res.status == 201) {
+                        alert("Sucesso")
+                        navigation.navigate("NewPartida")
+                    } else {
+                        alert("Erro")
+                    }
+                })
+                .then(data => { console.log(data) })
         }
-        )
-            .then(res => {
-                console.log(res)
-                if (res.status == 201) {
-                    alert("Sucesso")
-                    // navition.navigate("Main")
-                } else {
-                    alert("Erro")
-                }
-            })
-            .then(data => { console.log(data) })
     }
 
     return (
@@ -72,6 +79,14 @@ export default function NewPartida() {
                     placeholder='Cidade...'>
 
                 </TextInput>
+                <Text style={styles.texto}>Digite o nome do estado</Text>
+                <TextInput style={styles.input}
+                    value={estado} onChangeText={(value) => {
+                        setEstado(value)
+                    }}
+                    placeholder='Estado...'>
+
+                </TextInput>
                 <Text style={styles.texto}>Digite o nome do País</Text>
                 <TextInput style={styles.input}
                     value={pais} onChangeText={(value) => {
@@ -99,7 +114,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     main: {
-        height: '550px',
+        height: '630px',
         width: '330px',
         alignItems: 'center',
         justifyContent: 'center',

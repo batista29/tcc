@@ -11,33 +11,37 @@ export default function Login({ navigation }) {
     email: email,
     senha: senha
   }
-  console.log(dados)
+
   const userLogin = () => {
-    fetch("http://10.87.207.7:3000/login", {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dados)
+    if (dados.email.length == 0 || dados.senha.length == 0) {
+      alert("Senha ou email em branco")
+    } else {
+      fetch("http://10.87.207.7:3000/login", {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+      }
+      )
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          if (data.mensagem == 'Senha incorreta') {
+            alert('Senha incorreta')
+          } else if (data.mensagem == 'Seu login foi bem-sucedido') {
+            AsyncStorage.setItem('idLogin', data.usuario.id)
+            navigation.navigate("Main")
+          } else if (data.mensagem == 'Usuário não encontrado') {
+            alert('Usuário não encontrado')
+          } else {
+            alert("Erro ao efetuar login")
+            window.location.reload()
+          }
+        })
     }
-    )
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        if (data.mensagem == 'Senha incorreta') {
-          alert('Senha incorreta')
-        } else if (data.mensagem == 'Seu login foi bem-sucedido') {
-          AsyncStorage.setItem('idLogin', data.usuario.id)
-          navigation.navigate("Main")
-        } else if (data.mensagem == 'Usuário não encontrado') {
-          alert('Usuário não encontrado')
-        } else {
-          alert("Erro ao efetuar login")
-          window.location.reload()
-        }
-      })
   }
 
   return (
@@ -53,7 +57,7 @@ export default function Login({ navigation }) {
           }}
         ></TextInput>
         <Text style={styles.texto}>Digite a sua senha</Text>
-        <TextInput secureTextEntry={true} 
+        <TextInput secureTextEntry={true}
           style={styles.inputs}
           value={senha}
           onChangeText={(value) => {
