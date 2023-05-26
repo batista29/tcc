@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textoInfo: {
-        fontSize: '17px',
+        fontSize: '20px',
         color: 'white'
     },
     textoPerfil: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
     infos: {
         height: '150px',
-        width: '300px',
+        width: '320px',
         backgroundColor: '#1A1E26',
         marginTop: '20px',
         alignItems: 'center',

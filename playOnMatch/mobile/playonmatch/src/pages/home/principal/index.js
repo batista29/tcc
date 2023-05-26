@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         marginTop: '20px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '3px solid #B9B4D9'
+        border: '3px solid #B9B4D9',
+        marginBottom:'20px'
     },
     texto: {
         fontSize: '20px',

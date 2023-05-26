@@ -180,17 +180,17 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#012340',
+    backgroundColor: '#1A1E26',
     alignItems: 'center',
     justifyContent: 'center'
   },
   pickerData: {
     height: '670px',
     width: '350px',
-    backgroundColor: '#008F8C',
+    backgroundColor: '#283040',
     alignItems: 'center',
     justifyContent: 'center',
-    border: '2px solid white'
+    border: '2px solid #B9B4D9'
   },
   selecionarData: {
     width: '220px',
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   btnCriar: {
     border: '1px solid white',
     width: '220px',
-    height: '45px',
+    height: '40px',
     backgroundColor: '#012340',
     justifyContent: 'center',
     textAlign: 'center'
