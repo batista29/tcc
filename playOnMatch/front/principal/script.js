@@ -259,8 +259,6 @@ function listaParticipantes() {
 
     const options = { method: 'GET' };
 
-    console.log(idPartida)
-
     fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
         .then(response => response.json())
         .then(res => {
@@ -569,57 +567,29 @@ function acessarPerfilAmigo(idAmigo) {
         })
 }
 
-function notificaoAmizade() {
 
-    let { id } = user
+// function responderSolicitacaoAmizader(resposta, teste) {
 
-    const options = { method: 'GET' };
-
-    const dadosNotificacao = document.querySelector('.itensNotificacao')
-    const notificacaoModal = document.querySelector('.notificacoes')
-
-    fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
-        .then(response => response.json())
-        .then(res => {
-
-            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0 && element.remetente != id)
-            solicitacaoAmizade.forEach((e) => {
-
-                console.log(e)
-
-                let notificaoAmizade = dadosNotificacao.cloneNode(true)
-                notificaoAmizade.classList.remove("model")
-
-                notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.amigo.id
-                notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.amigo.nome + " mandou uma solicitação de amizade"
-
-                notificacaoModal.appendChild(notificaoAmizade)
-            })
-        })
-}
-
-function responderSolicitacaoAmizader(resposta, teste) {
-
-    let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
-    let { id } = user
+//     let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
+//     let { id } = user
 
 
-    console.log(resposta)
+//     console.log(resposta)
 
-    const options = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: `{"RespUsuario":${resposta}}`
-    };
+//     const options = {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: `{"RespUsuario":${resposta}}`
+//     };
 
-    fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
-        .then(response => {
-            console.log(response)
-            window.location.reload()
-            return response.json()
-        })
-        .then(response => console.log(response))
-}
+//     fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
+//         .then(response => {
+//             console.log(response)
+//             window.location.reload()
+//             return response.json()
+//         })
+//         .then(response => console.log(response))
+// }
 
 // function adicionarAmigo() {
 //     console.log('oi')
@@ -978,11 +948,99 @@ function criarLocal() {
         })
 }
 
-function convidarAmigosParaEncontro() {
+function convidarAmigosParaEncontro(idAmigo) {
+    idAmigo = idAmigo.parentNode.children[0].innerHTML
+    let idPartida = JSON.parse(localStorage.getItem("idPartida"))
 
+
+    const options = { method: 'POST' };
+
+    fetch(`http://localhost:3000/convidarAmigo/${idPartida}/${idAmigo}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
+
+function notificaoAmizade() {
+
+    let { id } = user
+
+    const options = { method: 'GET' };
+
+    const dadosNotificacao = document.querySelector('.itensNotificacao')
+    const notificacaoModal = document.querySelector('.notificacoes')
+
+    fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
+        .then(response => response.json())
+        .then(res => {
+
+            let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0 && element.remetente != id)
+            solicitacaoAmizade.forEach((e) => {
+
+                let notificaoAmizade = dadosNotificacao.cloneNode(true)
+                notificaoAmizade.classList.remove("model")
+
+                notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.amigo.id
+                notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.amigo.nome + " mandou uma solicitação de amizade"
+
+                let btnAceitarConvite = document.querySelectorAll('.btnAceitarConvite')
+                btnAceitarConvite.forEach(btn => btn.classList.add('model'));
+                let btnRecusarConvite = document.querySelectorAll('.btnRecusarConvite')
+                btnRecusarConvite.forEach(btn => btn.classList.add('model'));
+
+                let btnAceitarAmizade = document.querySelectorAll('.btnAceitarAmizade')
+                btnAceitarAmizade.forEach(btn => btn.classList.remove('model'));
+                let btnRecusarAmizade = document.querySelectorAll('.btnRecusarAmizade')
+                btnRecusarAmizade.forEach(btn => btn.classList.remove('model'));
+
+
+
+                notificacaoModal.appendChild(notificaoAmizade)
+            })
+
+
+        })
 }
 
 
+function verConvite() {
+    const options = { method: 'GET' };
+
+    let { id } = user
+
+    fetch(`http://localhost:3000/verConvite/${id}`, options)
+        .then(response => response.json())
+        .then(response => {
+            let notificacoes = document.querySelector('.notificacoes')
+            let itensNotificacao = document.querySelector('.itensNotificacao')
+
+            let conviteEncontros = response.participante.filter((e) => e.status == 0)
+
+            conviteEncontros.forEach((e) => {
+                let info = itensNotificacao.cloneNode(true)
+                info.classList.remove('model')
+
+                info.querySelector('.nomeSolicitacao').innerHTML = e.idCriador.nome + ": convidou você para uma partida"
+
+                let btnAceitarAmizade = document.querySelectorAll('.btnAceitarAmizade')
+                btnAceitarAmizade.forEach(btn => btn.classList.add('model'));
+                let btnRecusarAmizade = document.querySelectorAll('.btnRecusarAmizade')
+                btnRecusarAmizade.forEach(btn => btn.classList.add('model'));
+
+                let btnAceitarConvite = document.querySelectorAll('.btnAceitarConvite')
+                btnAceitarConvite.forEach(btn => btn.classList.remove('model'));
+                let btnRecusarConvite = document.querySelectorAll('.btnRecusarConvite')
+                btnRecusarConvite.forEach(btn => btn.classList.remove('model'));
+
+                notificacoes.appendChild(info)
+            })
+
+
+        })
+        .catch(err => console.error(err));
+}
+
+verConvite()
 listaLocais()
 notificaoAmizade()
 listaAmigos()

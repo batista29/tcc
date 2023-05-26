@@ -166,7 +166,7 @@ const readOne = async (req, res) => {
             EncontroUsuario: {
                 select: {
                     id: true,
-                    status:true,
+                    status: true,
                     idParticipante: {
                         select: {
                             id: true,
@@ -272,7 +272,14 @@ const verConvite = async (req, res) => {
                 id: Number(req.params.idParticipante)
             },
             select: {
-                participante: true
+                participante: {
+                    select:{
+                        id:true,
+                        idCriador:true,
+                        id_encontro:true,
+                        status:true
+                    }
+                },
             }
         })
         res.status(200).json(participante).end()

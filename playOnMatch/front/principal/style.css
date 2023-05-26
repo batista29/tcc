@@ -43,7 +43,7 @@ main {
 .itensNotificacao {
     height: 100px;
     width: 100%;
-    background-color: #008F8C;
+    background-color: var(--textoHome);
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -66,7 +66,7 @@ main {
     width: 80px;
     border: none;
     border-radius: 30px;
-    background-color: var(--backgroundLogin);
+    background-color: var(--cor4);
     color: white;
     cursor: pointer;
 }
@@ -306,6 +306,7 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--cor4);
     border: none;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .infoConvidarAmigos:hover {
@@ -819,7 +820,7 @@ img.iconeBusca {
 .notificacoes,
 .configuracoes {
     height: 90vw;
-    background-color: #012340;
+    background-color: var(--textoHome);
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
