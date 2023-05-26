@@ -568,49 +568,25 @@ function acessarPerfilAmigo(idAmigo) {
 }
 
 
-// function responderSolicitacaoAmizader(resposta, teste) {
+function responderSolicitacaoAmizader(resposta, teste) {
 
-//     let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
-//     let { id } = user
+    let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
+    let { id } = user
 
+    const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: `{"RespUsuario":${resposta}}`
+    };
 
-//     console.log(resposta)
-
-//     const options = {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: `{"RespUsuario":${resposta}}`
-//     };
-
-//     fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
-//         .then(response => {
-//             console.log(response)
-//             window.location.reload()
-//             return response.json()
-//         })
-//         .then(response => console.log(response))
-// }
-
-// function adicionarAmigo() {
-//     console.log('oi')
-// }
-
-// function visitarPerfil() {
-//     console.log('oi')
-// }
-
-const tab = document.querySelector('[data-target]'),
-    tabContent = document.querySelector('[data-content]')
-
-tab.addEventListener('click', () => {
-    tabContent.classList.forEach((e) => {
-        if (e == 'active') {
-            tabContent.classList.remove('active')
-        } else {
-            tabContent.classList.add('active')
-        }
-    })
-})
+    fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+            return response.json()
+        })
+        .then(response => console.log(response))
+}
 
 function sair() {
     localStorage.clear()
@@ -618,24 +594,22 @@ function sair() {
     window.location.href = "../login/index.html"
 }
 
-
-const menuInteresses = document.querySelector('.menuInteresses')
-
-// menuInteresses.addEventListener('click', () => {
-//     let partidasInteressado = document.querySelector('.partidasInteressado')
-
-//     partidasInteressado.classList.toggle('model')
-
-// })
-
 const menuNotificacoes = document.querySelector('.menuNotificacoes')
+const imgConfiguracao = document.querySelector('.imgConfiguracao')
+const imgNotificacoes = document.querySelector('.imgNotificacoes')
 
-menuNotificacoes.addEventListener('click', () => {
+
+
+menuNotificacoes.addEventListener('click', (event) => {
+    // if(event.target === imgNotificacoes){
+        
+    // }
 
     let notificacoes = document.querySelector('.notificacoes')
 
     notificacoes.classList.toggle('model')
 })
+
 const menuConfiguracoes = document.querySelector('.menuConfiguracoes')
 
 menuConfiguracoes.addEventListener('click', () => {
@@ -645,52 +619,71 @@ menuConfiguracoes.addEventListener('click', () => {
 
 })
 
-let imgConfiguracao = document.querySelector('.imgConfiguracao')
+const tab = document.querySelector('[data-target]'),
+    tabContent = document.querySelector('[data-content]')
+
+tab.addEventListener('click', () => {
+
+    tabContent.classList.forEach((e) => {
+
+        if (e == 'active') {
+            tabContent.classList.remove('active')
+
+        } else {
+            tabContent.classList.add('active')
+        }
+    })
+})
+
 
 imgConfiguracao.addEventListener('click', function (event) {
 
-    event.stopPropagation()
-
+    // console.log(event.target)
     tabContent.classList.forEach((e) => {
+
+        let configuracoes = document.querySelector('.configuracoes')
+
         if (e == 'active') {
             tabContent.classList.remove('active')
+
+            configuracoes.classList.remove('model')
+
         } else {
             tabContent.classList.add('active')
+            let configuracoes = document.querySelector('.configuracoes')
+
+            configuracoes.classList.add('model')
+
+            let notificacoes = document.querySelector('.notificacoes')
+
+            notificacoes.classList.add('model')
         }
     })
 })
 
-let imgNotificacoes = document.querySelector('.imgNotificacoes')
 
 imgNotificacoes.addEventListener('click', function (event) {
 
-    event.stopPropagation()
+    // event.stopPropagation()
 
     tabContent.classList.forEach((e) => {
         if (e == 'active') {
             tabContent.classList.remove('active')
+            let notificacoes = document.querySelector('.notificacoes')
+
+            notificacoes.classList.remove('model')
         } else {
             tabContent.classList.add('active')
+
+            let configuracoes = document.querySelector('.configuracoes')
+
+            configuracoes.classList.add('model')
+            let notificacoes = document.querySelector('.notificacoes')
+
+            notificacoes.classList.add('model')
         }
     })
 })
-
-// let imgInteresses = document.querySelector('.imgInteresses')
-
-// imgInteresses.addEventListener('click', function (event) {
-
-//     event.stopPropagation()
-
-//     tabContent.classList.forEach((e) => {
-//         if (e == 'active') {
-//             tabContent.classList.remove('active')
-//         } else {
-//             tabContent.classList.add('active')
-//         }
-//     })
-// })
-
-
 
 function abrirModalConfigEncontro() {
     let modalConfigEncontro = document.querySelector('.modalConfigEncontro')
@@ -701,25 +694,6 @@ function abrirModalConfigEncontro() {
         modalConfigEncontro.classList.add("model")
     }
 }
-
-
-// function listarNotificacoes() {
-
-//     const user = JSON.parse(localStorage.getItem('usuario'))
-
-//     let { id } = user
-
-
-//     const options = { method: 'GET' };
-
-//     fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
-//         .then(response => response.json())
-//         .then(response => console.log(response))
-// }
-
-// listarNotificacoes()
-
-// usuario()
 
 function modalAbrirConvidarAmigo() {
     let modalAparecer = document.querySelector(".modalConvidarAmigo");
@@ -914,8 +888,6 @@ inputUsuario.addEventListener("input", function () {
         });
 });
 
-
-
 function criarLocal() {
 
     let localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
@@ -983,25 +955,10 @@ function notificaoAmizade() {
                 notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.amigo.id
                 notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.amigo.nome + " mandou uma solicitação de amizade"
 
-                let btnAceitarConvite = document.querySelectorAll('.btnAceitarConvite')
-                btnAceitarConvite.forEach(btn => btn.classList.add('model'));
-                let btnRecusarConvite = document.querySelectorAll('.btnRecusarConvite')
-                btnRecusarConvite.forEach(btn => btn.classList.add('model'));
-
-                let btnAceitarAmizade = document.querySelectorAll('.btnAceitarAmizade')
-                btnAceitarAmizade.forEach(btn => btn.classList.remove('model'));
-                let btnRecusarAmizade = document.querySelectorAll('.btnRecusarAmizade')
-                btnRecusarAmizade.forEach(btn => btn.classList.remove('model'));
-
-
-
                 notificacaoModal.appendChild(notificaoAmizade)
             })
-
-
         })
 }
-
 
 function verConvite() {
     const options = { method: 'GET' };
@@ -1012,7 +969,7 @@ function verConvite() {
         .then(response => response.json())
         .then(response => {
             let notificacoes = document.querySelector('.notificacoes')
-            let itensNotificacao = document.querySelector('.itensNotificacao')
+            let itensNotificacao = document.querySelector('.itensNotificacaoConvite')
 
             let conviteEncontros = response.participante.filter((e) => e.status == 0)
 
@@ -1020,22 +977,29 @@ function verConvite() {
                 let info = itensNotificacao.cloneNode(true)
                 info.classList.remove('model')
 
-                info.querySelector('.nomeSolicitacao').innerHTML = e.idCriador.nome + ": convidou você para uma partida"
-
-                let btnAceitarAmizade = document.querySelectorAll('.btnAceitarAmizade')
-                btnAceitarAmizade.forEach(btn => btn.classList.add('model'));
-                let btnRecusarAmizade = document.querySelectorAll('.btnRecusarAmizade')
-                btnRecusarAmizade.forEach(btn => btn.classList.add('model'));
-
-                let btnAceitarConvite = document.querySelectorAll('.btnAceitarConvite')
-                btnAceitarConvite.forEach(btn => btn.classList.remove('model'));
-                let btnRecusarConvite = document.querySelectorAll('.btnRecusarConvite')
-                btnRecusarConvite.forEach(btn => btn.classList.remove('model'));
+                info.querySelector('.nomeSolicitacaoConvite ').innerHTML = e.idCriador.nome + ": convidou você para uma partida"
 
                 notificacoes.appendChild(info)
             })
+        })
+        .catch(err => console.error(err));
+}
 
+function responderConvite(resposta) {
 
+    let { id } = user
+
+    const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: `{"respConvite":${resposta}}`
+    };
+
+    fetch(`http://localhost:3000/responderConvite/${id}`, options)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            window.location.reload()
         })
         .catch(err => console.error(err));
 }

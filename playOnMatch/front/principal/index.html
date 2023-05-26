@@ -20,10 +20,6 @@
     <main>
         <button onclick="abrirModal()" class="abrirModal1">Criar Encontro</button>
         <div data-content id="menu" class="partidasFavoritas">
-            <!-- <div class="menuInteresses">
-                <img class="iconsImgs imgInteresses" src="../../docs/imgs/estrela.png" alt="">
-                <p class="titulosMenu">Interesses</p>
-            </div> -->
             <div class="menuNotificacoes">
                 <img class="iconsImgs imgNotificacoes" src="../../docs/imgs/notificacao.png" alt="">
                 <p class="titulosMenu">Notificações</p>
@@ -36,15 +32,21 @@
                     </div>
                     <div class="btnsResposta">
                         <button onclick="responderSolicitacaoAmizader(1,this)"
-                            class="btnAceitarAmizade">aceitarAmizade</button>
+                            class="btnAceitarAmizade"><img src="../../docs/imgs/verifica.png" alt=""></button>
                         <button onclick="responderSolicitacaoAmizader(2,this)"
-                            class="btnRecusarAmizade">recusarAmizade</button>
-
-                        <button class="btnAceitarConvite">aceitarConvite</button>
-                        <button class="btnRecusarConvite">recuzarConvite
-
+                            class="btnRecusarAmizade"><img src="../../docs/imgs/excluir.png" alt=""></button>
                         </button>
-
+                    </div>
+                </div>
+                <div class="itensNotificacaoConvite model">
+                    <div class="descricaoNotificacaoConvite">
+                        <p class="idSolicitacaoConvite model"></p>
+                        <p class="nomeSolicitacaoConvite"></p>
+                    </div>
+                    <div class="btnsRespostaConvite">
+                        <button onclick="responderConvite(1)" class="btnAceitarConvite"><img src="../../docs/imgs/verifica.png" alt=""></button>
+                        <button onclick="responderConvite(2)" class="btnRecusarConvite"><img src="../../docs/imgs/excluir.png" alt=""></button>
+                        </button>
                     </div>
                 </div>
             </div>

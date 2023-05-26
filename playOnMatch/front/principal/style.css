@@ -40,40 +40,55 @@ main {
     font-size: 14px;
 }
 
-.itensNotificacao {
-    height: 100px;
+.itensNotificacao,
+.itensNotificacaoConvite {
+    height: 120px;
     width: 100%;
-    background-color: var(--textoHome);
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    background-color: var(--backgroundLogin);
+    border-bottom: 1px solid var(--backgroundHome);
 }
 
-.descricaoNotificacao {
-    width: 50%;
+.nomeSolicitacaoConvite,
+.nomeSolicitacao {
+    font-size: 1.3em;
+    padding: 2%;
 }
 
-.btnsResposta {
+.descricaoNotificacao,
+.descricaoNotificacaoConvite {
+    height: 70%;
+}
+
+.btnsResposta,
+.btnsRespostaConvite {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     gap: 5px;
 }
 
-.btnAceitarAmizade,
-.btnRecusarAmizade {
+.btnsRespostaConvite img,
+.btnsResposta img {
     height: 30px;
-    width: 80px;
+    width: 30px;
+}
+
+.btnAceitarAmizade,
+.btnRecusarAmizade,
+.btnAceitarConvite,
+.btnRecusarConvite {
+    height: 30px;
+    width: 50px;
     border: none;
-    border-radius: 30px;
-    background-color: var(--cor4);
-    color: white;
     cursor: pointer;
+    background-color: transparent;
+    transition: transform 1s;
 }
 
 .btnAceitarAmizade:hover,
-.btnRecusarAmizade:hover {
-    background-color: var(--backgroundHome);
+.btnRecusarAmizade:hover,
+.btnAceitarConvite:hover,
+.btnRecusarConvite:hover {
+    transform: scale(1.2);
 }
 
 h1 {
@@ -125,8 +140,25 @@ body::-webkit-scrollbar-thumb {
 
 .allFriends {
     height: 80%;
+    width: 98%;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    text-align: left;
+}
+
+.allFriends::-webkit-scrollbar {
+    width: 12px;
+}
+
+.allFriends::-webkit-scrollbar-track {
+    background-color: var(--backgroundLogin);
+    border-radius: 30px;
+}
+
+.allFriends::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 20px;
+    border: 2px solid gray;
 }
 
 .friends_info {
@@ -192,7 +224,6 @@ body::-webkit-scrollbar-thumb {
 .imgLocalizacao,
 .imgCalendario,
 .imgEstrela,
-.iconsImgs,
 .imgAdicionaAmigo,
 .iconeBusca,
 .imgVisitarUsuario,
@@ -348,6 +379,21 @@ body::-webkit-scrollbar-thumb {
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
+
+/* .dadosUser::-webkit-scrollbar {
+    width: 12px;
+}
+
+.dadosUser::-webkit-scrollbar-track {
+    background-color: gray;
+    border-radius: 30px;
+}
+
+.dadosUser::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 20px;
+    border: 2px solid gray;
+} */
 
 .formularioCadastroPartida {
     height: 100%;
@@ -782,14 +828,16 @@ img.iconeBusca {
 }
 
 .iconsImgs {
-    height: 40px;
+    height: 100%;
+    width: 50px;
     display: block;
-    margin-bottom: 10px;
+    filter: invert(100%);
 }
-
+x
 .menuInteresses,
 .menuNotificacoes,
 .menuConfiguracoes {
+    height: 5%;
     display: flex;
     align-items: center;
 }
@@ -816,13 +864,31 @@ img.iconeBusca {
     transition: all 1s ease;
 }
 
-.partidasInteressado,
 .notificacoes,
 .configuracoes {
-    height: 90vw;
-    background-color: var(--textoHome);
+    height: 100vw;
+    background-color: var(--backgroundLogin);
     overflow-y: scroll;
     scroll-behavior: smooth;
+    transition: transform 1s;
+}
+
+.notificacoes::-webkit-scrollbar,
+.configuracoes::-webkit-scrollbar {
+    width: 12px;
+}
+
+.notificacoes::-webkit-scrollbar-track,
+.configuracoes::-webkit-scrollbar-track {
+    background-color: var(--backgroundLogin);
+    border-radius: 20px;
+}
+
+.notificacoes::-webkit-scrollbar-thumb,
+.configuracoes::-webkit-scrollbar-thumb {
+    background-color: var(--backgroundHome);
+    /* border-radius: 20px; */
+    border: 2px solid gray;
 }
 
 .configuracoes {
@@ -998,4 +1064,8 @@ img.iconeBusca {
 
 .infoUserSolicitacao>h3 {
     color: white;
+}
+
+.notificacoes.mostrar {
+    transform: scale(1.1);
 }
