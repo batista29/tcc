@@ -36,22 +36,51 @@ export default function NewPartida() {
 
         data.forEach(e => {
 
-            ids.push(e.encontro.id)
+            ids.push(e.encontro)
 
         });
 
         setEncontro(ids)
     }, 100)
 
-    console.log(encontro)
-
+    let date = new Date(perfil.nascimento);
+    let dataNascimentoFormatada = date.toLocaleDateString("pt-BR", {
+        timeZone: "UTC",
+    });
 
     return (
         <View style={styles.container}>
             <View style={styles.main}>
                 <View>
-
+                    <Text>{perfil.nome}</Text>
+                    <Text>{perfil.email}</Text>
+                    <Text>{dataNascimentoFormatada}</Text>
                 </View>
+            </View>
+            <View style={styles.second}>
+                <ScrollView>
+                    <View>
+                        {
+                            encontro.map((e, index) => {
+
+                                let date = new Date(e.dataHora);
+                                let dataFormatada = date.toLocaleDateString("pt-BR", {
+                                    timeZone: "UTC",
+                                });
+                                let horas = e.dataHora.split('T')[1].split('.')[0].split(':')
+                                let horasFormatada = horas[0] + ':' + horas[1]
+
+                                return (
+                                    <View key={index} style={styles.infos}>
+                                        <Text style={styles.texto}>Local: {e.local.nome}</Text>
+                                        <Text style={styles.texto}>Cidade: {e.local.cidade} - {e.local.pais}</Text>
+                                        <Text style={styles.texto}>Data e hora: {dataFormatada} - {horasFormatada}</Text>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
+                </ScrollView>
             </View>
         </View>
     )
@@ -63,18 +92,35 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#012340',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-around'
     },
     main: {
-        height: '400px',
-        width: '330px',
+        height: '100px',
+        width: '200px',
         alignItems: 'center',
         justifyContent: 'center',
         border: '2px solid white',
         backgroundColor: '#008F8C'
     },
     texto: {
-        fontSize: '20px',
+        fontSize: '17px',
         color: 'white'
     },
+    infos: {
+        height: '150px',
+        width: '300px',
+        backgroundColor: '#a6dced',
+        marginTop: '20px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        border: '2px solid #00f63e',
+        marginBottom: '20px'
+    },
+    second: {
+        height: '470px',
+        width: '350px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        border: '2px solid #ffffff'
+    }
 })
