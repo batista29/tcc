@@ -42,25 +42,26 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#012340',
+        backgroundColor: '#1A1E26',
         alignItems: 'center',
     },
     infos: {
         height: '200px',
         width: '350px',
-        backgroundColor: '#a6dced',
+        backgroundColor: '#283040',
         marginTop: '20px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '2px solid #00f63e'
+        border: '3px solid #B9B4D9'
     },
     texto: {
         fontSize: '20px',
+        color: 'white'
     },
     btnCadastroPartida: {
         height: '40px',
         width: '40px',
-        backgroundColor: '#0caba8',
+        backgroundColor: '#405173',
         marginTop: '20px',
         marginBottom: '10px',
         textAlign: 'center',

@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#012340',
+        backgroundColor: '#1A1E26',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
         width: '330px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '2px solid white',
-        backgroundColor: '#008F8C'
+        border: '2px solid #B9B4D9',
+        backgroundColor: '#405173'
     },
     texto: {
         color: 'white',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     input: {
         marginBottom: '10px',
-        border: '2px solid black',
+        border: '2px solid #1A1E26',
         height: '35px',
         width: '200px',
         backgroundColor: 'white'
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     btnCriar: {
         height: '30px',
         width: '200px',
-        border: '2px solid black',
+        border: '2px solid #1A1E26',
         textAlign: 'center',
         justifyContent: 'center',
         marginTop: '20px',

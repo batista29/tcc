@@ -52,14 +52,15 @@ export default function NewPartida() {
         <View style={styles.container}>
             <View style={styles.main}>
                 <View>
-                    <Text>{perfil.nome}</Text>
-                    <Text>{perfil.email}</Text>
-                    <Text>{dataNascimentoFormatada}</Text>
+                    <Text style={styles.textoPerfil}>{perfil.nome}</Text>
+                    <Text style={styles.textoPerfil}>{perfil.email}</Text>
+                    <Text style={styles.textoPerfil}>{dataNascimentoFormatada}</Text>
                 </View>
             </View>
             <View style={styles.second}>
                 <ScrollView>
-                    <View>
+                    <View style={styles.secondInfo}>
+                    <Text style={styles.textoInfo}>Histórico</Text>
                         {
                             encontro.map((e, index) => {
 
@@ -72,9 +73,9 @@ export default function NewPartida() {
 
                                 return (
                                     <View key={index} style={styles.infos}>
-                                        <Text style={styles.texto}>Local: {e.local.nome}</Text>
-                                        <Text style={styles.texto}>Cidade: {e.local.cidade} - {e.local.pais}</Text>
-                                        <Text style={styles.texto}>Data e hora: {dataFormatada} - {horasFormatada}</Text>
+                                        <Text style={styles.textoInfo}>Local: {e.local.nome}</Text>
+                                        <Text style={styles.textoInfo}>Cidade: {e.local.cidade} - {e.local.pais}</Text>
+                                        <Text style={styles.textoInfo}>Data e hora: {dataFormatada} - {horasFormatada}</Text>
                                     </View>
                                 )
                             })
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#012340',
+        backgroundColor: '#1A1E26',
         alignItems: 'center',
         justifyContent: 'space-around'
     },
@@ -99,21 +100,28 @@ const styles = StyleSheet.create({
         width: '200px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '2px solid white',
-        backgroundColor: '#008F8C'
+        border: '2px solid #B9B4D9',
+        backgroundColor: '#405173'
     },
-    texto: {
+    secondInfo:{
+        alignItems: 'center',
+    },
+    textoInfo: {
         fontSize: '17px',
+        color: 'white'
+    },
+    textoPerfil: {
+        fontSize: '20px',
         color: 'white'
     },
     infos: {
         height: '150px',
         width: '300px',
-        backgroundColor: '#a6dced',
+        backgroundColor: '#1A1E26',
         marginTop: '20px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '2px solid #00f63e',
+        border: '2px solid #B9B4D9',
         marginBottom: '20px'
     },
     second: {
@@ -121,6 +129,7 @@ const styles = StyleSheet.create({
         width: '350px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '2px solid #ffffff'
+        border: '2px solid #B9B4D9',
+        backgroundColor:'#405173'
     }
 })

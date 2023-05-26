@@ -203,21 +203,21 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#012340',
+        backgroundColor: '#1A1E26',
         alignItems: 'center',
         justifyContent: 'center'
     },
     main: {
-        height: '630px',
+        height: '650px',
         width: '330px',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '2px solid white',
-        backgroundColor: '#008F8C'
+        border: '2px solid #B9B4D9',
+        backgroundColor: '#405173'
     },
     inputs: {
         color: 'black',
-        border: '1px solid white',
+        border: '2px solid #1A1E26',
         marginTop: '10px',
         width: '220px',
         height: '35px',
@@ -225,9 +225,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     btnCadastrar: {
-        width: '150px',
-        height: '30px',
-        border: '2px solid black',
+        width: '200px',
+        height: '35px',
+        border: '2px solid #1A1E26',
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
         height: '35px',
         marginBottom: '20px',
         marginTop: '5px',
+        border: '2px solid #1A1E26',
     },
     textDate: {
         color: 'white',
