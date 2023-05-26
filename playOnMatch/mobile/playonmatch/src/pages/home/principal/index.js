@@ -28,6 +28,14 @@ export default function Main({ navigation }) {
                                     <Text style={styles.texto}>Local: {e.local.nome} </Text>
                                     <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
                                     <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                    <View style={styles.botoes}>
+                                        <TouchableOpacity>
+                                            <Text style={styles.textoBtnParticipar}>Participar</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity>
+                                            <Text style={styles.textoBtnCancelar}>Cancelar</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             )
                         })
@@ -46,14 +54,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     infos: {
-        height: '200px',
+        height: '250px',
         width: '350px',
         backgroundColor: '#283040',
         marginTop: '20px',
         alignItems: 'center',
         justifyContent: 'center',
         border: '3px solid #B9B4D9',
-        marginBottom:'20px'
+        marginBottom: '20px'
     },
     texto: {
         fontSize: '20px',
@@ -73,5 +81,18 @@ const styles = StyleSheet.create({
     textBtnAdd: {
         color: '#fff',
         fontSize: '20px',
+    },
+    botoes: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: '2vh',
+        width: '100%',
+        justifyContent: 'space-around'
+    },
+    textoBtnParticipar: {
+        color: '#7CFC00'
+    },
+    textoBtnCancelar: {
+        color: '#FF4E00'
     }
 })
