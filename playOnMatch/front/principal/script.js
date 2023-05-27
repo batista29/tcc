@@ -830,10 +830,16 @@ function filtrarDadosAPI(input) {
                 resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
                 resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
 
-                if (id == item.id) {
-                    let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
-                    btnAddAmigo.classList.add('model')
-                }
+                let infoAmigo = item.criadorListaAmigo.filter(e => e.amigo.id == id)
+                infoAmigo.forEach(e => {
+                    if (id == item.id || e.amigo.id == id) {
+                        let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
+                        btnAddAmigo.classList.add('model')
+                    }
+
+                })
+
+
 
                 divResultados.appendChild(resultado);
             });
