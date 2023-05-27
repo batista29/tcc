@@ -99,7 +99,7 @@
         <div class="friends">
             <h2>FRIENDS</h2>
             <div class="allFriends">
-                <div class="friends_info model" onclick="acessarPerfilAmigo(this)">
+                <div class="friends_info model">
                     <p class="idAmigo">id</p>
                     <p class="nomeAmigo">nome</p>
                 </div>
@@ -116,11 +116,18 @@
                     <div class="usuariosPesquisa model">
                         <p class="idUserAdicionar"></p>
                         <p class="nomeUserAdicionar"> </p>
-                        <button onclick="enviarSolicitacao(this)" class="btnAddAmigo"><img class="imgAddUsuario"
-                                src="../../docs/imgs/adicionar-usuario.png" alt=""></button>
+                        <button class="btnAddAmigo">Adicionar</button>
                     </div>
                 </div>
                 <div id="resultados"></div>
+                <div class="modalCancelarSolicitacao model">
+                    <div class="modalParaCancelamentoDeSolicitacao">
+                        <button onclick="fecharCancelamentoDeSolicitacao()" class="btnFecharCancelamentoDeSolicitacao">x</button>
+                        <p>Deseja Cancelar Solicitação de Amizade?</p>
+                        <p>Se cancelar, terá que mandar solicitação de amizade novamente para Julius</p>
+                        <button class="bntCancelarSolicitacao">Cancelar Solicitação</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

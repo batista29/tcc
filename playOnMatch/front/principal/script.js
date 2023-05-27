@@ -485,6 +485,12 @@ function listaAmigos() {
                     let info = friendsInfo.cloneNode(true)
                     info.classList.remove("model")
 
+                    info.addEventListener('click', function () {
+
+                        acessarPerfilAmigo(this.children[0].innerHTML.slice(1))
+
+                    })
+
                     info.querySelector('.idAmigo').innerHTML = "#" + e.amigo.id
                     info.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
 
@@ -537,12 +543,12 @@ function cancelarEncontro() {
         .then(res => console.log(res))
 }
 
+// let friends_info = document.querySelector('.friends_info')
+
 function acessarPerfilAmigo(idAmigo) {
 
     let { token } = user
     let { id } = user
-
-    idAmigo = idAmigo.children[0].innerHTML.slice(1)
 
     const options = {
         method: 'GET',
@@ -550,8 +556,6 @@ function acessarPerfilAmigo(idAmigo) {
             authorization: token
         }
     };
-
-    console.log(idAmigo)
 
     fetch(`http://localhost:3000/perfilUsuario/${id}/${idAmigo}`, options)
         .then(response => {
@@ -563,7 +567,6 @@ function acessarPerfilAmigo(idAmigo) {
         })
         .then(res => {
             console.log(res)
-
         })
 }
 
@@ -812,34 +815,55 @@ function filtrarDadosAPI(input) {
         .then(response => response.json())
         .then(data => {
 
-            // Filtra os dados com base no input do usuário
             const filtrados = data.filter(item => `#${item.id} ${item.nome}`.toLocaleLowerCase().includes(input.toLocaleLowerCase()));
 
-            // Limpa a div antes de exibir os resultados
             const divResultados = document.getElementById('resultados');
             divResultados.innerHTML = '';
 
-            // Clona e exibe os resultados filtrados
-
             filtrados.forEach(item => {
                 let { id } = user
-
                 const resultado = document.querySelector('.usuariosPesquisa').cloneNode(true);
+
                 resultado.classList.remove('model')
 
                 resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
                 resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
 
+                let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
+
+                if (id == item.id) {
+                    btnAddAmigo.classList.add('model')
+                }
+
                 let infoAmigo = item.criadorListaAmigo.filter(e => e.amigo.id == id)
                 infoAmigo.forEach(e => {
-                    if (id == item.id || e.amigo.id == id) {
-                        let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
-                        btnAddAmigo.classList.add('model')
+
+                    // if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
+                    //     btnAddAmigo.innerHTML = "aguardando"
+                    // }
+
+                    if (e.amigo.id == id && e.status == 1) {
+                        btnAddAmigo.innerHTML = "Amigos"
+                    }
+
+                    if (e.amigo.id == id && e.status == 0 && id == e.remetente) {
+                        btnAddAmigo.innerHTML = "Solicitado"
                     }
 
                 })
 
 
+
+                btnAddAmigo.addEventListener('click', function () {
+
+                    if (btnAddAmigo.innerText === "Adicionar") {
+                        enviarSolicitacao(this.parentNode.children[0].innerHTML.slice(1))
+                    } else if (btnAddAmigo.innerText === "Solicitado") {
+                        abrirModalCancelarSolicitacao()
+                    } else if (btnAddAmigo.innerText === "Amigos") {
+                        acessarPerfilAmigo(this.parentNode.children[0].innerHTML.slice(1))
+                    }
+                })
 
                 divResultados.appendChild(resultado);
             });
@@ -897,7 +921,6 @@ function criarLocal() {
 function convidarAmigosParaEncontro(idAmigo) {
     idAmigo = idAmigo.parentNode.children[0].innerHTML
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
-
 
     const options = { method: 'POST' };
 
@@ -982,13 +1005,27 @@ function enviarSolicitacao(idAmigo) {
 
     idAmigo = idAmigo.parentNode.children[0].innerHTML.slice(1)
     let { id } = user
-
+    console.log(idAmigo)
     const options = { method: 'POST' };
 
     fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
         .then(response => response.json())
         .then(response => console.log(response))
 }
+
+function abrirModalCancelarSolicitacao() {
+    let modalCancelarSolicitacao = document.querySelector('.modalCancelarSolicitacao')
+
+    modalCancelarSolicitacao.classList.remove('model')
+}
+
+function fecharCancelamentoDeSolicitacao() {
+    let modalCancelarSolicitacao = document.querySelector('.modalCancelarSolicitacao')
+
+    modalCancelarSolicitacao.classList.add('model')
+
+}
+
 
 verConvite()
 listaLocais()

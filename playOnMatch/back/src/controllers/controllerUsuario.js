@@ -36,7 +36,9 @@ const read = async (req, res) => {
             nascimento:true,
             criadorListaAmigo:{
                 select:{
-                    amigo:true
+                    amigo:true,
+                    status:true,
+                    remetente:true
                 }
             }
         }

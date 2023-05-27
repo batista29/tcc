@@ -233,6 +233,7 @@ body::-webkit-scrollbar-thumb {
     filter: invert(100%);
 }
 
+
 .dadosLocalizacao {
     display: flex;
     align-items: center;
@@ -1019,6 +1020,7 @@ x .menuInteresses,
 
 .imgAdicionaAmigo {
     height: 100%;
+    cursor: pointer;
 }
 
 .infoUserSolicitacao {
@@ -1077,8 +1079,11 @@ x .menuInteresses,
 }
 
 .btnAddAmigo {
-    background-color: transparent;
+    padding: 4px;
+    background-color: var(--cor4);
     border: none;
+    border-radius: 30px;
+    cursor: pointer;
 }
 
 #resultados {
@@ -1101,4 +1106,57 @@ x .menuInteresses,
     background-color: black;
     border-radius: 20px;
     border: 2px solid gray;
+}
+
+.modalParaCancelamentoDeSolicitacao {
+    height: 40vh;
+    width: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--backgroundLogin);
+    color: var(--textoHome);
+    border-radius: 10px;
+    position: relative;
+    color: white;
+}
+
+.modalParaCancelamentoDeSolicitacao>p {
+    text-align: justify;
+    padding: 0 30px;
+}
+
+.btnFecharCancelamentoDeSolicitacao {
+    height: 2vh;
+    width: 2vw;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    padding: 5px;
+}
+
+.bntCancelarSolicitacao {
+    height: 4vh;
+    width: 12vw;
+    background-color: var(--cor4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.modalCancelarSolicitacao {
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 110vh;
+    width: 100%;
+    background-color: #0123405b;
+    align-items: center;
+    justify-content: center;
 }
