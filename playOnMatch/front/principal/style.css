@@ -375,25 +375,7 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 
-.dadosUser {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-}
 
-/* .dadosUser::-webkit-scrollbar {
-    width: 12px;
-}
-
-.dadosUser::-webkit-scrollbar-track {
-    background-color: gray;
-    border-radius: 30px;
-}
-
-.dadosUser::-webkit-scrollbar-thumb {
-    background-color: black;
-    border-radius: 20px;
-    border: 2px solid gray;
-} */
 
 .formularioCadastroPartida {
     height: 100%;
@@ -833,8 +815,8 @@ img.iconeBusca {
     display: block;
     filter: invert(100%);
 }
-x
-.menuInteresses,
+
+x .menuInteresses,
 .menuNotificacoes,
 .menuConfiguracoes {
     height: 5%;
@@ -1060,6 +1042,7 @@ x
     cursor: pointer;
     position: absolute;
     right: 0;
+    color: white;
 }
 
 .infoUserSolicitacao>h3 {
@@ -1068,4 +1051,54 @@ x
 
 .notificacoes.mostrar {
     transform: scale(1.1);
+}
+
+.usuariosPesquisa {
+    display: flex;
+    color: white;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid var(--backgroundHome);
+}
+
+.usuariosPesquisa>button>img {
+    height: 20px;
+    width: 20px;
+    filter: invert(100%);
+    cursor: pointer;
+}
+
+.dtlUser {
+    background-color: var(--cor5);
+    border: none;
+    border-radius: 20px;
+    margin: 2%;
+    padding: 7px;
+}
+
+.btnAddAmigo {
+    background-color: transparent;
+    border: none;
+}
+
+#resultados {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 0 10px;
+    margin-bottom: 30px;
+}
+
+#resultados::-webkit-scrollbar {
+    width: 12px;
+}
+
+#resultados::-webkit-scrollbar-track {
+    background-color: var(--backgroundLogin);
+    border-radius: 30px;
+}
+
+#resultados::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 20px;
+    border: 2px solid gray;
 }

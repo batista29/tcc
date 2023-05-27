@@ -31,10 +31,10 @@
                         <p class="nomeSolicitacao"></p>
                     </div>
                     <div class="btnsResposta">
-                        <button onclick="responderSolicitacaoAmizader(1,this)"
-                            class="btnAceitarAmizade"><img src="../../docs/imgs/verifica.png" alt=""></button>
-                        <button onclick="responderSolicitacaoAmizader(2,this)"
-                            class="btnRecusarAmizade"><img src="../../docs/imgs/excluir.png" alt=""></button>
+                        <button onclick="responderSolicitacaoAmizader(1,this)" class="btnAceitarAmizade"><img
+                                src="../../docs/imgs/verifica.png" alt=""></button>
+                        <button onclick="responderSolicitacaoAmizader(2,this)" class="btnRecusarAmizade"><img
+                                src="../../docs/imgs/excluir.png" alt=""></button>
                         </button>
                     </div>
                 </div>
@@ -44,8 +44,10 @@
                         <p class="nomeSolicitacaoConvite"></p>
                     </div>
                     <div class="btnsRespostaConvite">
-                        <button onclick="responderConvite(1)" class="btnAceitarConvite"><img src="../../docs/imgs/verifica.png" alt=""></button>
-                        <button onclick="responderConvite(2)" class="btnRecusarConvite"><img src="../../docs/imgs/excluir.png" alt=""></button>
+                        <button onclick="responderConvite(1)" class="btnAceitarConvite"><img
+                                src="../../docs/imgs/verifica.png" alt=""></button>
+                        <button onclick="responderConvite(2)" class="btnRecusarConvite"><img
+                                src="../../docs/imgs/excluir.png" alt=""></button>
                         </button>
                     </div>
                 </div>
@@ -107,13 +109,18 @@
         </div>
         <div class="modalMandarSolicitacao model">
             <div class="infoUserSolicitacao">
-                <h3>Procurar Usuario</h3>
+                <h3>Buscar Usuario</h3>
                 <button onclick="fecharModalConviteAmizade()" class="btnFecharModalConviteAmizade">x</button>
-                <input id="usuario" class="dtlUser" type="text">
-                <img src="" alt="">
-                <div class="dadosUser">
-                    <div class="usuariosPesquisa model"></div>
+                <input id="input" class="dtlUser" type="text">
+                <div class="dadosUser model">
+                    <div class="usuariosPesquisa model">
+                        <p class="idUserAdicionar"></p>
+                        <p class="nomeUserAdicionar"> </p>
+                        <button onclick="enviarSolicitacao(this)" class="btnAddAmigo"><img class="imgAddUsuario"
+                                src="../../docs/imgs/adicionar-usuario.png" alt=""></button>
+                    </div>
                 </div>
+                <div id="resultados"></div>
             </div>
         </div>
     </main>

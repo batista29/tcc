@@ -597,28 +597,7 @@ function sair() {
 const menuNotificacoes = document.querySelector('.menuNotificacoes')
 const imgConfiguracao = document.querySelector('.imgConfiguracao')
 const imgNotificacoes = document.querySelector('.imgNotificacoes')
-
-
-
-menuNotificacoes.addEventListener('click', (event) => {
-    // if(event.target === imgNotificacoes){
-        
-    // }
-
-    let notificacoes = document.querySelector('.notificacoes')
-
-    notificacoes.classList.toggle('model')
-})
-
 const menuConfiguracoes = document.querySelector('.menuConfiguracoes')
-
-menuConfiguracoes.addEventListener('click', () => {
-    let configuracoes = document.querySelector('.configuracoes')
-
-    configuracoes.classList.toggle('model')
-
-})
-
 const tab = document.querySelector('[data-target]'),
     tabContent = document.querySelector('[data-content]')
 
@@ -635,10 +614,23 @@ tab.addEventListener('click', () => {
     })
 })
 
+menuNotificacoes.addEventListener('click', (event) => {
+
+    let notificacoes = document.querySelector('.notificacoes')
+
+    notificacoes.classList.toggle('model')
+})
+
+
+menuConfiguracoes.addEventListener('click', () => {
+    let configuracoes = document.querySelector('.configuracoes')
+
+    configuracoes.classList.toggle('model')
+
+})
 
 imgConfiguracao.addEventListener('click', function (event) {
 
-    // console.log(event.target)
     tabContent.classList.forEach((e) => {
 
         let configuracoes = document.querySelector('.configuracoes')
@@ -664,7 +656,6 @@ imgConfiguracao.addEventListener('click', function (event) {
 
 imgNotificacoes.addEventListener('click', function (event) {
 
-    // event.stopPropagation()
 
     tabContent.classList.forEach((e) => {
         if (e == 'active') {
@@ -816,77 +807,54 @@ function abrirModalConviteAmizade() {
     modalMandarSolicitacao.classList.remove('model')
 }
 
-var inputUsuario = document.getElementById("usuario");
-var listaUsuariosElement = document.getElementById("lista-usuarios");
-
-inputUsuario.addEventListener("input", function () {
-    const filter = inputUsuario.value.toLowerCase().trim();
-
+function filtrarDadosAPI(input) {
     fetch('http://localhost:3000/listarUsuarios')
         .then(response => response.json())
         .then(data => {
-            const infoUserSolicitacao = document.querySelector('.dadosUser');
 
-            infoUserSolicitacao.innerHTML = "";
+            // Filtra os dados com base no input do usuário
+            const filtrados = data.filter(item => `#${item.id} ${item.nome}`.toLocaleLowerCase().includes(input.toLocaleLowerCase()));
 
-            if (filter === "") {
-                return;
-            }
+            // Limpa a div antes de exibir os resultados
+            const divResultados = document.getElementById('resultados');
+            divResultados.innerHTML = '';
 
-            const usuariosFiltrados = data.filter(usuario => {
-                const dados = `${usuario.nome} # ${usuario.id}`.toLowerCase();
-                return dados.includes(filter);
-            });
+            // Clona e exibe os resultados filtrados
 
-            usuariosFiltrados.forEach(usuario => {
+            filtrados.forEach(item => {
+                let { id } = user
 
-                const info = document.createElement('div');
-                info.classList.add('usuariosPesquisa');
+                const resultado = document.querySelector('.usuariosPesquisa').cloneNode(true);
+                resultado.classList.remove('model')
 
-                const idElement = document.createElement('span');
-                idElement.classList.add('idUser');
-                idElement.innerHTML = "#" + usuario.id;
+                resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
+                resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
 
-                const nomeElement = document.createElement('span');
-                nomeElement.classList.add('nomeUser');
-                nomeElement.innerHTML = usuario.nome;
-
-                let btnAdicionar = document.createElement('button')
-                btnAdicionar.style.marginLeft = '10px';
-                btnAdicionar.style.background = 'transparent';
-                btnAdicionar.style.border = 'none';
-                btnAdicionar.style.cursor = 'pointer';
-
-                let imgAdicionar = document.createElement('img');
-
-                imgAdicionar.src = '../../docs/imgs/adicionar-usuario.png';
-                imgAdicionar.style.width = '15px';
-                imgAdicionar.style.borderRadius = '10%';
-
-
-                btnAdicionar.onclick = function () {
-                    let idAmigo = this.parentNode.children[0].innerHTML.slice(1)
-                    let { id } = user
-                    const options = { method: 'POST' };
-
-                    fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
-                        .then(response => response.json())
-                        .then(response => console.log(response))
+                if (id == item.id) {
+                    let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
+                    btnAddAmigo.classList.add('model')
                 }
 
-                btnAdicionar.appendChild(imgAdicionar)
-
-                info.appendChild(idElement);
-                info.appendChild(nomeElement);
-                info.appendChild(btnAdicionar);
-
-                infoUserSolicitacao.appendChild(info);
+                divResultados.appendChild(resultado);
             });
+
         })
         .catch(error => {
-            console.error(error);
+            console.log('Erro ao buscar dados da API:', error);
         });
-});
+}
+
+// Função que é executada quando o usuário digita no campo de input
+function onChangeInput(event) {
+    const input = event.target.value;
+    filtrarDadosAPI(input);
+}
+
+// Obtém o campo de input
+const inputCampo = document.getElementById('input');
+// Adiciona o evento de digitação ao campo de input
+inputCampo.addEventListener('input', onChangeInput);
+
 
 function criarLocal() {
 
@@ -1002,6 +970,18 @@ function responderConvite(resposta) {
             window.location.reload()
         })
         .catch(err => console.error(err));
+}
+
+function enviarSolicitacao(idAmigo) {
+
+    idAmigo = idAmigo.parentNode.children[0].innerHTML.slice(1)
+    let { id } = user
+
+    const options = { method: 'POST' };
+
+    fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
 }
 
 verConvite()
