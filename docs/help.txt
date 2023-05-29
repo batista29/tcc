@@ -1,3 +1,0 @@
-tabela de eventos     id/lugar/nome/nome participantes/ horario/ categoria /status
-tabela jogadores      id/nome/idade/favoritos:esportes/lugares/altura/peso/estaticas jogadores
-tabela  ranking       categoria:campeonato,jogador/ sub categoria:qual esporte/ posição/nome do jogador/ desempenho

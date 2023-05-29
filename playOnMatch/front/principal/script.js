@@ -229,12 +229,15 @@ function listaParticipantes() {
 
             encontro.forEach((e) => {
 
+                //    console.log(e)
+
 
                 let nomeParticipante = e.idParticipante.nome
 
                 let dados = infoParticipante.cloneNode(true)
                 dados.classList.remove('model')
 
+                dados.querySelector('.idParticipante').innerHTML = e.idParticipante.id
                 dados.querySelector('.nomeParticipante').innerHTML = nomeParticipante
 
                 let { id } = user
@@ -243,7 +246,8 @@ function listaParticipantes() {
                 let amizade = e.idParticipante.criadorListaAmigo.filter(e => e.amigo.id == id)
 
                 amizade.forEach(e => {
-                    // console.log(e.amigo.id == id && e.status == 1)
+
+
                     if (e.amigo.id == id && e.status == 1) {
                         btnOptions.innerHTML = "Amigos"
                     }
@@ -255,27 +259,21 @@ function listaParticipantes() {
                     if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
                         btnOptions.innerHTML = "Aceitar solicitação"
                     }
+
                 })
 
 
+                btnOptions.addEventListener('click', function () {
+                    let idParticipante = this.parentNode.children[0].innerHTML
 
-                // if (e.idCriador.id == id) {
-                //     let encerrarEncontro = document.querySelector('.encerrarEncontro')
-                //     let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
-                //     btnCancelar.classList.add("model")
-                //     btnParticipar.classList.add("model")
-                //     encerrarEncontro.classList.remove("model")
-                //     btnAtualizarEncontro.classList.remove("model")
-                // } else {
-                //     let encerrarEncontro = document.querySelector('.encerrarEncontro')
-                //     let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
-                //     encerrarEncontro.classList.add("model")
-                //     btnAtualizarEncontro.classList.add("model")
-                // }
+                    if (btnOptions.innerText == 'Adicionar') {
+                        enviarSolicitacao(idParticipante)
+                    } else if (btnOptions.innerText === "Solicitado") {
+                        let listaRemetente = e.idParticipante.criadorListaAmigo.filter(e => e.remetente == id)
 
-                // if (id == e.idParticipante.id) {
-                //     btnAdicionarAmigo.classList.add('model')
-                // }
+                        abrirModalCancelarSolicitacao(listaRemetente)
+                    }
+                })
                 participantes.appendChild(dados)
             })
 
@@ -987,7 +985,8 @@ function enviarSolicitacao(idAmigo) {
         })
 }
 
-function abrirModalCancelarSolicitacao() {
+function abrirModalCancelarSolicitacao(lista) {
+    console.log(lista)
     let modalCancelarSolicitacao = document.querySelector('.modalCancelarSolicitacao')
 
     modalCancelarSolicitacao.classList.remove('model')
@@ -997,7 +996,10 @@ function fecharCancelamentoDeSolicitacao() {
     let modalCancelarSolicitacao = document.querySelector('.modalCancelarSolicitacao')
 
     modalCancelarSolicitacao.classList.add('model')
+}
 
+function cancelarSolicitacaoAmizade() {
+    console.log('oi')
 }
 
 

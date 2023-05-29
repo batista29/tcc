@@ -54,17 +54,6 @@ const responsderSolicitacaoAmizade = async (req, res) => {
     res.status(200).send(resposta).end()
 }
 
-// const respostaAmizade = (req, res) => {
-
-//     const { RespUsuario } = req.body
-
-//     if (RespUsuario == 1) {
-//         return 1
-//     } else if (RespUsuario == 2) {
-//         return 2
-//     }
-// }
-
 const updateListaAmigo = async (req, res) => {
 
     let { RespUsuario } = req.body
@@ -111,8 +100,32 @@ const updateListaAmigo = async (req, res) => {
     res.status(200).json('sucesso').end()
 }
 
+const cancelarSolicitacaoAmizade = async (req, res) => {
+    const usuarioLogado = await prisma.usuario.findUnique({
+        where: {
+            id: Number(req.params.idLogado)
+        },
+        select: {
+            criadorListaAmigo: true
+        }
+    })
+
+    let minhaLista = usuarioLogado.criadorListaAmigo.filter(e => e.remetente == Number(req.params.idLogado))
+
+    minhaLista.forEach(e => console.log(e))
+
+    // const solicitacao = await prisma.lista_amigos.delete({
+    //     where: {
+    //         id: Number(req.params.idListaAmizade)
+    //     }
+    // })
+    
+    res.status(200).json(usuarioLogado).end()
+}
+
 module.exports = {
     enviarSolicitacaoAmizade,
     responsderSolicitacaoAmizade,
-    updateListaAmigo
+    updateListaAmigo,
+    cancelarSolicitacaoAmizade
 }

@@ -663,7 +663,8 @@ img.iconeBusca {
 .infoParticipantes {
     display: flex;
     border-bottom: 1px solid black;
-    /* justify-content: space-evenly; */
+    position: relative;
+    align-items: center;
 }
 
 .idParticipante {
@@ -1066,6 +1067,8 @@ x .menuInteresses,
     gap: 10px;
     padding: 10px;
     border-bottom: 1px solid var(--backgroundHome);
+    align-items: center;
+    position: relative;
 }
 
 .usuariosPesquisa>button>img {
@@ -1083,15 +1086,10 @@ x .menuInteresses,
     padding: 7px;
 }
 
-.btnAddAmigo {
-    padding: 4px;
-    background-color: var(--cor4);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-}
+
 
 #resultados {
+    width: 80%;
     overflow-y: scroll;
     scroll-behavior: smooth;
     padding: 0 10px;
@@ -1164,6 +1162,7 @@ x .menuInteresses,
     background-color: #0123405b;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 
 .error{
@@ -1177,4 +1176,18 @@ x .menuInteresses,
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    position: absolute;
+    right: 0;
+    margin-right: 4%;
+}
+
+.btnAddAmigo {
+    padding: 4px;
+    background-color: var(--cor4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    margin-right: 4%;
 }

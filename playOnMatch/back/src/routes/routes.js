@@ -45,6 +45,7 @@ const listaAmigo = require('../controllers/controllerListaAmigo')
 router.post('/enviarSolicitacao/:idCriador/:idAmigo', listaAmigo.enviarSolicitacaoAmizade)
 router.get('/verSolicitacao/:idAmigo', listaAmigo.responsderSolicitacaoAmizade)
 router.put('/solicitacaoAmizade/:idCriadorLista/:idNovoAmigo', listaAmigo.updateListaAmigo)
+router.delete('/cancelarSolicitacao/:idLista',listaAmigo.cancelarSolicitacaoAmizade)
 
 const favorito = require('../controllers/controllerFavoritos')
 
