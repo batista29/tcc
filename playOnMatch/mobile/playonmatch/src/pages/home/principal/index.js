@@ -75,7 +75,7 @@ export default function Main({ navigation }) {
                                                         </View>
                                                     </View>
                                                 )
-                                            } else {
+                                            } else if (i.idParticipante.id !== lida) {
                                                 return (
                                                     <View key={index} style={styles.infos}>
                                                         <Text style={styles.texto}>{e.titulo} </Text>
