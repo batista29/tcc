@@ -26,15 +26,21 @@ export default function Main({ navigation }) {
     const addParticipante = (idPartida) => {
         const options = { method: 'POST' };
 
-        fetch(`http://10.87.207.7:3000/adicionarParticipante/${idPartida}/${lida}`,
-            options
-        )
+        fetch(`http://10.87.207.7:3000/adicionarParticipante/${idPartida}/${lida}`, options)
             .then(response => response.json())
             .then(response => {
-                if (response !== null || "") {
-                    alert('Participando')
-                    console.log(response)
-                }
+                console.log(response)
+            })
+            .catch(err => console.error(err));
+    }
+
+    const removerParticipante = (idPartida) => {
+        const options = { method: 'DELETE' };
+
+        fetch(`http://10.87.207.7:3000/excluirParticipante/${idPartida}/${lida}`, options)
+            .then(response => response.json())
+            .then(response => {
+                console.log(response)
             })
             .catch(err => console.error(err));
     }
@@ -63,7 +69,7 @@ export default function Main({ navigation }) {
                                                         <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
                                                         <Text style={styles.texto}>Data: {e.dataHora} </Text>
                                                         <View style={styles.botoes}>
-                                                            <TouchableOpacity>
+                                                            <TouchableOpacity onPress={() => { removerParticipante(e.id) }}>
                                                                 <Text style={styles.textoBtnCancelar}>Cancelar</Text>
                                                             </TouchableOpacity>
                                                         </View>
@@ -78,7 +84,7 @@ export default function Main({ navigation }) {
                                                         <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
                                                         <Text style={styles.texto}>Data: {e.dataHora} </Text>
                                                         <View style={styles.botoes}>
-                                                            <TouchableOpacity>
+                                                            <TouchableOpacity onPress={() => { addParticipante(e.id) }}>
                                                                 <Text style={styles.textoBtnParticipar}>addParticipante</Text>
                                                             </TouchableOpacity>
                                                         </View>

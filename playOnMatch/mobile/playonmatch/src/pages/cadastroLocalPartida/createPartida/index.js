@@ -4,6 +4,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function NewPartida({ navigation }) {
 
+    const [lida, setLida] = useState([]);
+
+    const getData = async () => {
+        try {
+            let id = await AsyncStorage.getItem("idLogin");
+            setLida(id)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (lida.length == 0) getData();
+
     //pegar ano=
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -63,9 +76,10 @@ export default function NewPartida({ navigation }) {
     var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
     const [locais, setLocais] = useState([])
-    const [selectedLocal, setSelectedLocal] = useState('1')
+    const [selectedLocal, setSelectedLocal] = useState([])
 
     const handleLocalChange = (value) => {
+        console.log(value)
         setSelectedLocal(value);
     };
 
@@ -87,21 +101,10 @@ export default function NewPartida({ navigation }) {
         id_local: Number(selectedLocal)
     }
 
-    const [lida, setLida] = useState([]);
-
-    const getData = async () => {
-        try {
-            let id = await AsyncStorage.getItem("idLogin");
-            setLida(id)
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    if (lida.length == 0) getData();
+    console.log(dados)
 
     const cadastrarEncontro = () => {
-        if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0) {
+        if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0 || "") {
             alert("Algum campo vazio")
         } else {
             fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
@@ -124,8 +127,6 @@ export default function NewPartida({ navigation }) {
                 .then(data => { console.log(data) })
         }
     }
-
-
 
     return (
         <View style={styles.container}>
@@ -151,8 +152,7 @@ export default function NewPartida({ navigation }) {
                     onValueChange={handleLocalChange}
                 >
                     {locais.map((dados) => (
-
-                        < Picker.Item key={dados.id} label={dados.cidade} value={dados.id} />
+                        < Picker.Item key={dados.id} label={dados.nome} value={dados.id} />
                     ))}
                 </Picker>
 
