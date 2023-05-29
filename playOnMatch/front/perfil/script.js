@@ -43,39 +43,36 @@ function listar() {
 
             main.appendChild(usuario)
 
-            res.participante.forEach((e) => {
 
-                let dataSplit = e.encontro.dataHora.split("T")[0]
-                let horaSplit = e.encontro.dataHora.split("T")[1].split('.')[0]
-                var dateFim = new Date(dataSplit);
+            for (let i = res.participante.length - 1; i >= 0; i--) {
+                let dataSplit = res.participante[i].encontro.dataHora.split("T")[0];
+                let horaSplit = res.participante[i].encontro.dataHora.split("T")[1].split('.')[0];
+                let dateFim = new Date(dataSplit);
 
                 let dataFimFormatada = dateFim.toLocaleDateString("pt-BR", {
-                    timeZone: "UTC",
+                    timeZone: "UTC"
                 });
 
-                let horaFim = ""
-                if (e.encontro.dataFim == null) {
-                    horaFim = "Não Acabou"
+                let horaFim = "";
 
+                if (res.participante[i].encontro.dataFim == null) {
+                    horaFim = "Não Acabou";
                 } else {
-                    horaFim = e.encontro.dataFim.split("T")[1].split(".")[0]
+                    horaFim = res.participante[i].encontro.dataFim.split("T")[1].split(".")[0];
                 }
 
-                let dadosPartida = infoPartida.cloneNode(true)
-                dadosPartida.classList.remove("model")
+                let dadosPartida = infoPartida.cloneNode(true);
+                dadosPartida.classList.remove("model");
 
-                dadosPartida.querySelector('.idPartida').innerHTML = e.encontro.id
-                dadosPartida.querySelector('.tituloPartida').innerHTML = e.encontro.titulo
-                dadosPartida.querySelector('.enderecoPartida').innerHTML = e.encontro.local.nome
-                dadosPartida.querySelector('.data').innerHTML = dataFimFormatada
-                dadosPartida.querySelector('.horaInicio').innerHTML = horaSplit
-                dadosPartida.querySelector('.horaFim').innerHTML = horaFim
+                dadosPartida.querySelector('.idPartida').innerHTML = res.participante[i].encontro.id;
+                dadosPartida.querySelector('.tituloPartida').innerHTML = res.participante[i].encontro.titulo;
+                dadosPartida.querySelector('.enderecoPartida').innerHTML = res.participante[i].encontro.local.nome;
+                dadosPartida.querySelector('.data').innerHTML = dataFimFormatada;
+                dadosPartida.querySelector('.horaInicio').innerHTML = horaSplit;
+                dadosPartida.querySelector('.horaFim').innerHTML = horaFim;
 
-                partida.appendChild(dadosPartida)
-
-
-            })
-
+                partida.appendChild(dadosPartida);
+            }
         })
 }
 
@@ -282,7 +279,7 @@ function detalhesPartida(idPartida) {
             response.EncontroUsuario.forEach((e) => {
                 let info = infoParticipantes.cloneNode(true)
                 info.classList.remove('model')
-                info.querySelector('.idParticipante').innerHTML = "#" +e.idParticipante.id
+                info.querySelector('.idParticipante').innerHTML = "#" + e.idParticipante.id
                 info.querySelector('.nomeParticipante').innerHTML = e.idParticipante.nome
                 participantes.appendChild(info)
             })

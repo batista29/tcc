@@ -755,9 +755,14 @@ img.iconeBusca {
 }
 
 .descricaoLocalizacao {
+    height: 100%;
     width: 40%;
     text-align: justify;
+    font-size: 1.4em;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    line-height: 1.7;
 }
 
 .btnConfirmarLocalizacao {
@@ -1159,4 +1164,9 @@ x .menuInteresses,
     background-color: #0123405b;
     align-items: center;
     justify-content: center;
+}
+
+.error{
+    font-weight: bold;
+    color: red;
 }
