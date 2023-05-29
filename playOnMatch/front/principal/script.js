@@ -229,17 +229,35 @@ function listaParticipantes() {
 
             encontro.forEach((e) => {
 
+
                 let nomeParticipante = e.idParticipante.nome
-                let idParticipante = e.idParticipante.id
 
                 let dados = infoParticipante.cloneNode(true)
                 dados.classList.remove('model')
 
-                dados.querySelector('.idParticipante').innerHTML = "#" + idParticipante
                 dados.querySelector('.nomeParticipante').innerHTML = nomeParticipante
 
                 let { id } = user
-                let btnAdicionarAmigo = dados.querySelector('.btnAdicionarAmigo')
+                let btnOptions = dados.querySelector('.btnOptions')
+
+                let amizade = e.idParticipante.criadorListaAmigo.filter(e => e.amigo.id == id)
+
+                amizade.forEach(e => {
+                    // console.log(e.amigo.id == id && e.status == 1)
+                    if (e.amigo.id == id && e.status == 1) {
+                        btnOptions.innerHTML = "Amigos"
+                    }
+
+                    if (e.amigo.id == id && e.status == 0 && id == e.remetente) {
+                        btnOptions.innerHTML = "Solicitado"
+                    }
+
+                    if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
+                        btnOptions.innerHTML = "Aceitar solicitação"
+                    }
+                })
+
+
 
                 // if (e.idCriador.id == id) {
                 //     let encerrarEncontro = document.querySelector('.encerrarEncontro')
@@ -793,10 +811,6 @@ function filtrarDadosAPI(input) {
 
                 let infoAmigo = item.criadorListaAmigo.filter(e => e.amigo.id == id)
                 infoAmigo.forEach(e => {
-
-                    // if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
-                    //     btnAddAmigo.innerHTML = "aguardando"
-                    // }
 
                     if (e.amigo.id == id && e.status == 1) {
                         btnAddAmigo.innerHTML = "Amigos"

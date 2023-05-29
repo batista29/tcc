@@ -143,7 +143,6 @@ const readAll = async (req, res) => {
 
 }
 
-
 const readOne = async (req, res) => {
     let encontro = await prisma.encontro.findUnique({
         where: {
@@ -171,7 +170,14 @@ const readOne = async (req, res) => {
                     idParticipante: {
                         select: {
                             id: true,
-                            nome: true
+                            nome: true,
+                            criadorListaAmigo:{
+                                select:{
+                                    amigo:true,
+                                    status:true,
+                                    remetente:true
+                                }
+                            }
                         }
                     },
                     idCriador: {

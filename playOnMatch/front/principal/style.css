@@ -1170,3 +1170,11 @@ x .menuInteresses,
     font-weight: bold;
     color: red;
 }
+
+.btnOptions{
+    padding: 4px;
+    background-color: var(--cor4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
