@@ -1,14 +1,43 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Main({ navigation }) {
     const [encontros, setEncontros] = useState([])
+    const [lida, setLida] = useState([]);
+
+    const getData = async () => {
+        try {
+            let id = await AsyncStorage.getItem("idLogin");
+            setLida(id)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (lida.length == 0) getData();
 
     useEffect(() => {
         fetch('http://10.87.207.7:3000/listarEncontros')
             .then(res => { return res.json() })
             .then(data => { setEncontros(data) })
     })
+
+    const addParticipante = (idPartida) => {
+        const options = { method: 'POST' };
+
+        fetch(`http://10.87.207.7:3000/adicionarParticipante/${idPartida}/${lida}`,
+            options
+        )
+            .then(response => response.json())
+            .then(response => {
+                if (response !== null || "") {
+                    alert('Participando')
+                    console.log(response)
+                }
+            })
+            .catch(err => console.error(err));
+    }
 
     return (
         <View style={styles.container}>
@@ -22,20 +51,42 @@ export default function Main({ navigation }) {
                     {
                         encontros.map((e, index) => {
                             return (
-                                <View key={index} style={styles.infos}>
-                                    <Text style={styles.texto}>{e.titulo} </Text>
-                                    <Text style={styles.texto}>Descricao: {e.descricao} </Text>
-                                    <Text style={styles.texto}>Local: {e.local.nome} </Text>
-                                    <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
-                                    <Text style={styles.texto}>Data: {e.dataHora} </Text>
-                                    <View style={styles.botoes}>
-                                        <TouchableOpacity>
-                                            <Text style={styles.textoBtnParticipar}>Participar</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <Text style={styles.textoBtnCancelar}>Cancelar</Text>
-                                        </TouchableOpacity>
-                                    </View>
+                                <View>
+                                    {
+                                        e.EncontroUsuario.map((i) => {
+                                            if (i.idParticipante.id == lida) {
+                                                return (
+                                                    <View key={index} style={styles.infos}>
+                                                        <Text style={styles.texto}>{e.titulo} </Text>
+                                                        <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                        <Text style={styles.texto}>Local: {e.local.nome} </Text>
+                                                        <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                        <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                                        <View style={styles.botoes}>
+                                                            <TouchableOpacity>
+                                                                <Text style={styles.textoBtnCancelar}>Cancelar</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </View>
+                                                )
+                                            } else {
+                                                return (
+                                                    <View key={index} style={styles.infos}>
+                                                        <Text style={styles.texto}>{e.titulo} </Text>
+                                                        <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                        <Text style={styles.texto}>Local: {e.local.nome} </Text>
+                                                        <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                        <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                                        <View style={styles.botoes}>
+                                                            <TouchableOpacity>
+                                                                <Text style={styles.textoBtnParticipar}>addParticipante</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </View>
+                                                )
+                                            }
+                                        })
+                                    }
                                 </View>
                             )
                         })

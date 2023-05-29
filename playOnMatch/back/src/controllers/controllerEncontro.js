@@ -135,13 +135,14 @@ const readAll = async (req, res) => {
                 }
             }
         })
-        res.status(200).json(encontro).end()
+        res.status(200).json(encontro.reverse()).end()
     } catch (error) {
         console.log(error)
         res.status(500).send({ mensagem: "Erro ao buscar encontros" }).end()
     }
 
 }
+
 
 const readOne = async (req, res) => {
     let encontro = await prisma.encontro.findUnique({
@@ -273,11 +274,11 @@ const verConvite = async (req, res) => {
             },
             select: {
                 participante: {
-                    select:{
-                        id:true,
-                        idCriador:true,
-                        id_encontro:true,
-                        status:true
+                    select: {
+                        id: true,
+                        idCriador: true,
+                        id_encontro: true,
+                        status: true
                     }
                 },
             }

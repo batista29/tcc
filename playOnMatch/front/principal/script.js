@@ -82,60 +82,17 @@ function pegarLocalizacaoUsuario() {
     let estado = document.getElementById('estado').value;
     let cidade = document.getElementById('cidade').value;
 
-    localStorage.setItem("localização", JSON.stringify({ "pais": pais, "estado": estado, "cidade": cidade }))
-
-    let modalLocalizacao = document.querySelector('.localizacao')
-
-    window.location.reload()
-
-    modalLocalizacao.classList.add("model")
-}
-
-
-function favoritarPartida(idEncontro) {
-
-    // faz parar o  evento do pai dele 
-    // event.stopPropagation();
-
-    const { id } = user
-
-    idEncontro = idEncontro.parentNode.children[1].children[0].innerHTML.slice(1)
-
-    const btnFavoritarPartida = document.getElementById('favorito')
-
-    console.log(btnFavoritarPartida.classList)
-
-
-    const adicionarFavorito = () => {
-
-        const options = { method: 'POST' };
-
-        fetch(`http://localhost:3000/favoritarEncontro/${id}/${idEncontro}`, options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
-
-        btnFavoritarPartida.classList.add('favorito');
-    }
-
-
-
-    const removerFavorito = () => {
-        const options2 = { method: 'DELETE' };
-
-        fetch(`http://localhost:3000/removerEncontros/${id}/${idEncontro}`, options2)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
-
-        btnFavoritarPartida.classList.remove('favorito');
-    }
-
-
-    if (btnFavoritarPartida.classList.contains('favorito')) {
-        removerFavorito()
+    if (pais == "" || estado == "" || cidade == "") {
+        let error = document.querySelector('.error')
+        error.innerHTML = 'Campo Vazio'
     } else {
-        adicionarFavorito()
+        localStorage.setItem("localização", JSON.stringify({ "pais": pais, "estado": estado, "cidade": cidade }))
+
+        let modalLocalizacao = document.querySelector('.localizacao')
+
+        window.location.reload()
+
+        modalLocalizacao.classList.add("model")
     }
 }
 
@@ -283,25 +240,24 @@ function listaParticipantes() {
 
                 let { id } = user
                 let btnAdicionarAmigo = dados.querySelector('.btnAdicionarAmigo')
-                // let btnVisitarPerfil = dados.querySelector('.btnVisitarPerfil')
 
-                if (e.idCriador.id == id) {
-                    let encerrarEncontro = document.querySelector('.encerrarEncontro')
-                    let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
-                    btnCancelar.classList.add("model")
-                    btnParticipar.classList.add("model")
-                    encerrarEncontro.classList.remove("model")
-                    btnAtualizarEncontro.classList.remove("model")
-                } else {
-                    let encerrarEncontro = document.querySelector('.encerrarEncontro')
-                    let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
-                    encerrarEncontro.classList.add("model")
-                    btnAtualizarEncontro.classList.add("model")
-                }
+                // if (e.idCriador.id == id) {
+                //     let encerrarEncontro = document.querySelector('.encerrarEncontro')
+                //     let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
+                //     btnCancelar.classList.add("model")
+                //     btnParticipar.classList.add("model")
+                //     encerrarEncontro.classList.remove("model")
+                //     btnAtualizarEncontro.classList.remove("model")
+                // } else {
+                //     let encerrarEncontro = document.querySelector('.encerrarEncontro')
+                //     let btnAtualizarEncontro = document.querySelector('.btnAtualizarEncontro')
+                //     encerrarEncontro.classList.add("model")
+                //     btnAtualizarEncontro.classList.add("model")
+                // }
 
-                if (id == e.idParticipante.id) {
-                    btnAdicionarAmigo.classList.add('model')
-                }
+                // if (id == e.idParticipante.id) {
+                //     btnAdicionarAmigo.classList.add('model')
+                // }
                 participantes.appendChild(dados)
             })
 
@@ -850,9 +806,11 @@ function filtrarDadosAPI(input) {
                         btnAddAmigo.innerHTML = "Solicitado"
                     }
 
+                    if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
+                        btnAddAmigo.innerHTML = "Aceitar solicitação"
+                    }
+
                 })
-
-
 
                 btnAddAmigo.addEventListener('click', function () {
 
@@ -1003,14 +961,16 @@ function responderConvite(resposta) {
 
 function enviarSolicitacao(idAmigo) {
 
-    idAmigo = idAmigo.parentNode.children[0].innerHTML.slice(1)
     let { id } = user
     console.log(idAmigo)
     const options = { method: 'POST' };
 
     fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => {
+            window.location.reload()
+            console.log(response)
+        })
 }
 
 function abrirModalCancelarSolicitacao() {

@@ -32,7 +32,8 @@ export default function Login({ navigation }) {
           if (data.mensagem == 'Senha incorreta') {
             alert('Senha incorreta')
           } else if (data.mensagem == 'Seu login foi bem-sucedido') {
-            AsyncStorage.setItem('idLogin', data.usuario.id)
+            let id = Number(data.usuario.id)
+            AsyncStorage.setItem('idLogin', id)
             navigation.navigate("Main")
           } else if (data.mensagem == 'Usuário não encontrado') {
             alert('Usuário não encontrado')
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif',
     fontSize: 20,
     marginBottom: 10,
-    marginTop:30
+    marginTop: 30
   },
   texto1: {
     fontSize: 20,
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif',
     marginBottom: 20
   },
-  textoBtn:{
+  textoBtn: {
     fontSize: 20,
     color: 'white',
     fontFamily: 'sans-serif',
