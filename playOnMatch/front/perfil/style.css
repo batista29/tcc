@@ -96,48 +96,36 @@ header {
 }
 
 .infoUser {
-    height: 35vh;
-    width: 60%;
+    height: 45vh;
+    width: 30%;
     display: flex;
-    flex-direction: column;
     margin-top: 5%;
     margin-bottom: 10%;
     position: relative;
+    text-align: center;
 }
 
 .dadoss {
     height: 85%;
     width: 100%;
-    display: grid;
-    justify-items: center
+    justify-items: center;
+    margin-top:7vh;
+}
+
+.amigos{
+    cursor: pointer;
+    margin-left: 1vw;
+}
+
+.downpart{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
 }
 
 .nomeUsuario {
-    grid-area: nomeUsuario;
-}
-
-.dataNascimento {
-    grid-area: dataNascimento;
-}
-
-.amigos {
-    grid-area: amigos;
-}
-
-.esporte {
-    grid-area: esporte;
-}
-
-.relacionamento {
-    grid-area: relacionamento;
-}
-
-.btnEditarPerfil {
-    grid-area: buttons;
-}
-
-.cidade {
-    grid-area: cidade;
+font-size: 2.5em;
 }
 
 .buttons {
@@ -159,10 +147,10 @@ header {
     cursor: pointer;
 }
 
-.btnEditarPerfil {
-    height: 30px;
-    width: 80px;
-    background-color: var(--cor5);
+.btnEditarPerfil {  
+    top: 0;
+    margin-top: 3vh;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     border-radius: 30px;
@@ -171,10 +159,9 @@ header {
     margin-right: 30px;
 }
 
-.btnNotificacao:hover,
-.btnAmigos:hover,
-.btnEditarPerfil:hover {
-    background-color: var(--textoHome);
+.btnEditarPerfil>img{
+    height: 2vh;
+    filter:invert(100%);
 }
 
 .imgNotificacao,
@@ -183,20 +170,25 @@ header {
     width: 25px;
 }
 
-.grid-template-areas-5 {
-    margin-top: 10px;
-    grid-template-areas:
-        "nomeUsuario btnEditarPerfil . dataNascimento"
-        "partidasJogadas esporte cidade relacionamento"
-}
-
 
 .historico {
     height: 90vh;
     width: 100%;
     margin-bottom: 5%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cima{
+    background-color: black;
+    border: white solid 1px ;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    height: 8vh;
+    align-items: center;
+    font-size: 3em;
 }
 
 .graficos {
@@ -213,7 +205,7 @@ header {
 
 .partidas,
 .graficos,
-.infoUser {
+.infoUser{
     border: 1px solid rgb(255, 255, 255);
     background-color: var(--backgroundLogin)
 }
@@ -281,17 +273,19 @@ img {
     height: 30px;
     width: 30px;
     margin: 10px;
-    border-radius: 50%;
     position: absolute;
     top: 0;
     right: 0;
+    background-color: transparent;
+    border:none;
+    font-size: 2em;
+    color: white;
 }
 
 .btnFecharModal:hover,
 .btnFechaModalAmigos:hover,
 .btnFechaModalNotificacao:hover {
-    background-color: #025959;
-    color: white;
+    color: red;
     cursor: pointer;
 }
 
@@ -352,15 +346,16 @@ img {
     height: 30px;
     width: 30px;
     margin: 10px;
-    border-radius: 50%;
+    border: none;
+    background-color: transparent;
     position: absolute;
     top: 0;
     right: 0;
+    font-size: 1em;
 }
 
 .btnFechaModalAtualizarPerfil:hover {
-    background-color: #025959;
-    color: white;
+    color: red;
     cursor: pointer;
 }
 
@@ -374,8 +369,6 @@ img {
 }
 
 .btnAtualizarPerfil:hover {
-    background-color: #012340;
-    color: white;
     cursor: pointer;
 }
 
@@ -385,6 +378,11 @@ img {
 
 .model {
     display: none;
+}
+.imguser{
+    height: 22vh;
+    width: 22vh;
+    border-radius: 200px;
 }
 
 .time1,

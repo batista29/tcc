@@ -18,19 +18,19 @@
     </header>
     <main class="container">
         <div class="infoUser">
-            <div class="dadoss grid-template-areas-5 model">
+            <div class="dadoss model">
+                <img class="imguser" src="../../docs/imgs/img.jpg">
                 <p class="dados nomeUsuario"></p>
+                <div class="downpart">
                 <p class="dados partidasJogadas"></p>
-                <p class="dados dataNascimento"></p>
+                <p onclick="abrirModalAmigos()" class="dados amigos"></p>
                 <p class="dados email model"></p>
-                <!-- <p class="dados entrada">Entrou em Outubro de 2020</p> -->
-            </div>
-            <div class="buttons">
-                <button class="btnAmigos"><img class="imgAmigos" src="../../docs/imgs/amigos.png" alt=""></button>
-                <button onclick="abrirModalEditarPerfil(this)" class="btnEditarPerfil">Editar perfil</button>
+                </div>
+                <button onclick="abrirModalEditarPerfil(this)" class="btnEditarPerfil"><img src="../../docs/imgs/configuracoes-cog.png"></button>
             </div>
         </div>
         <div class="historico">
+            <div class="cima">Partidas</div>
             <div class="partidas">
                 <div onclick="detalhesPartida(this)" class="infoPartida model">
                     <p class="idPartida model"></p>

@@ -1,6 +1,4 @@
 // const btnNotificacao = document.querySelector('.btnNotificacao')
-const btnAmigo = document.querySelector('.btnAmigos')
-const btnEditarPerfil = document.querySelector('.btnEditarPerfil')
 const btnAtualizarPerfil = document.querySelector('.btnAtualizarPerfil')
 const btnFechaModalAtualizarPerfil = document.querySelector('.btnFechaModalAtualizarPerfil')
 const btnFechaModalNotificacao = document.querySelector('.btnFechaModalNotificacao')
@@ -36,10 +34,13 @@ function listar() {
 
             usuario.classList.remove("model")
 
+            let amigos = res.criadorListaAmigo.filter(e => (e.status == 1))
+
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
-            usuario.querySelector('.dataNascimento').innerHTML = res.nascimento.split('T')[0]
-            usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas Jogadas"
+            usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas"
+            usuario.querySelector('.amigos').innerHTML = amigos.length + " Amigos"
             usuario.querySelector('.email').innerHTML = res.email
+
 
             main.appendChild(usuario)
 
@@ -79,28 +80,6 @@ function listar() {
         })
 }
 
-
-// function mudarCorBotao() {
-
-// btn1.addEventListener('click', function () {
-// btn1.style.background = 'blue'
-// btn2.style.background = '#00f63e'
-// btn3.style.background = '#00f63e'
-// })
-
-// btn2.addEventListener('click', function () {
-// btn2.style.background = 'blue'
-// btn3.style.background = '#00f63e'
-// btn1.style.background = '#00f63e'
-// })
-
-// btn3.addEventListener('click', function () {
-//     btn3.style.background = 'blue'
-//     btn1.style.background = '#00f63e'
-//     btn2.style.background = '#00f63e'
-// })
-// }
-
 setTimeout(() => {
     let partidas = document.querySelectorAll('.infoPartida');
     partidas.forEach((e) => {
@@ -112,9 +91,9 @@ setTimeout(() => {
 }, 100);
 
 function abrirModalEditarPerfil(dados) {
-    let nome = dados.parentNode.parentNode.children[2].children[0].innerHTML
-    let nascimento = dados.parentNode.parentNode.children[2].children[2].innerHTML
-    let email = dados.parentNode.parentNode.children[2].children[3].innerHTML
+    let nome = dados.parentNode.parentNode.children[1].children[0].innerHTML
+    let nascimento = dados.parentNode.parentNode.children[1].children[2].innerHTML
+    let email = dados.parentNode.parentNode.children[1].children[3].innerHTML
 
     window.localStorage.setItem('dadosPerfil', JSON.stringify({ 'nome': nome, 'nascimento': nascimento, "email": email }));
 
@@ -122,16 +101,6 @@ function abrirModalEditarPerfil(dados) {
 
     atualizarPerfil.style.display = "flex"
 }
-
-btnEditarPerfil.addEventListener('click', function (a) {
-
-    // console.log(a.appendChil)
-
-
-
-
-})
-
 
 btnFechaModalAtualizarPerfil.addEventListener('click', function (e) {
     let atualizarPerfil = document.querySelector('.modalAtualizarPerfil')
@@ -164,11 +133,11 @@ btnFechaModalNotificacao.addEventListener('click', function (e) {
     notificacaoModal.style.display = "none"
 })
 
-btnAmigo.addEventListener('click', function () {
+function abrirModalAmigos() {
     let amigosModal = document.querySelector('.modalAmigos')
 
     amigosModal.style.display = "flex"
-})
+}
 
 btnFechaModalAmigos.addEventListener('click', function (e) {
     let amigosModal = document.querySelector('.modalAmigos')
@@ -282,7 +251,7 @@ function detalhesPartida(idPartida) {
             response.EncontroUsuario.forEach((e) => {
                 let info = infoParticipantes.cloneNode(true)
                 info.classList.remove('model')
-                info.querySelector('.idParticipante').innerHTML = "#" +e.idParticipante.id
+                info.querySelector('.idParticipante').innerHTML = "#" + e.idParticipante.id
                 info.querySelector('.nomeParticipante').innerHTML = e.idParticipante.nome
                 participantes.appendChild(info)
             })
