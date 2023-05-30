@@ -333,6 +333,7 @@ img {
     flex-direction: column;
 }
 
+
 .infoAmigos {
     margin-top: 4%;
     width: 100%;
@@ -381,8 +382,24 @@ img {
 }
 .imguser{
     height: 22vh;
-    width: 22vh;
+    width: 12vw;
     border-radius: 200px;
+    z-index: 1;
+}
+
+.attimage{
+    height: 22vh;
+    width: 12vw;
+    border-radius:200px ;
+    position: absolute;
+    right: 29.8%;
+    background-color: transparent;
+    cursor: pointer;
+    
+}
+
+.attimage:hover{
+    background-color: #40517367;
 }
 
 .time1,

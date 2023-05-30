@@ -1,14 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const multer = require('multer')
 
 const usuario = require('../controllers/controllerUsuario')
 const middleware = require('../middleware/middleware')
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
-
-router.post('/criarUsuario', upload.single('image'), usuario.create)
+router.post('/criarUsuario', usuario.create)
+router.put('/atualizarFoto/:userId', usuario.atualizarFotoPerfil)
 router.post('/login', usuario.login)
 router.get('/listarUsuarios', usuario.read)
 router.get('/listarUsuario/:id', usuario.listaUsuario)

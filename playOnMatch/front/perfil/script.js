@@ -15,6 +15,8 @@ const infoUser = document.querySelector('.dadoss')
 const partida = document.querySelector('.partidas')
 const infoPartida = document.querySelector('.infoPartida')
 
+
+
 function listar() {
 
     let idUsuario = JSON.parse(localStorage.getItem('perfil'))
@@ -35,12 +37,14 @@ function listar() {
             usuario.classList.remove("model")
 
             let amigos = res.criadorListaAmigo.filter(e => (e.status == 1))
+            const urlImagem = `C:/Users/DES/Desktop/tcc/playOnMatch/back/uploads/${res.image}`
 
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
             usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas"
+
+            usuario.querySelector('.imguser').src = urlImagem
             usuario.querySelector('.amigos').innerHTML = amigos.length + " Amigos"
             usuario.querySelector('.email').innerHTML = res.email
-
 
             main.appendChild(usuario)
 
@@ -75,6 +79,10 @@ function listar() {
                 partida.appendChild(dadosPartida);
             }
         })
+}
+
+function exibirImagemPerfil(nomeArquivo) {
+    const imgElement = d
 }
 
 setTimeout(() => {
@@ -255,6 +263,7 @@ function detalhesPartida(idPartida) {
 
         })
 }
+
 
 listarAmigos()
 listar()

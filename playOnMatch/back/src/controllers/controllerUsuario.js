@@ -1,8 +1,55 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 
 const { PrismaClient } = require('@prisma/client')
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${file.originalname}`)
+    }
+});
+const parser = multer({ storage });
+// const enviarArquivo = async (req, res)=>{
+//     parser.single('image')(req, res, err => {
+//         if (err)
+//             res.status(500).json({ error: 1, payload: err }).end();
+//         else {
+//             res.status(200).json(req.file.filename).end();
+//         }
+//     });
+// }
+
+const atualizarFotoPerfil = async (req, res) => {
+    parser.single('image')(req, res, async (err) => {
+      if (err) {
+        res.status(500).json({ error: 1, payload: err }).end();
+      } else {
+        // Aqui você pode adicionar o código para atualizar o registro do usuário no banco de dados
+        const { userId } = req.params; // Supondo que você tenha um parâmetro para o ID do usuário na rota
+        const { filename } = req.file;
+  
+        try {
+          // Adicione o código para atualizar a foto de perfil do usuário no banco de dados
+          // Exemplo usando o Prisma:
+          const usuario = await prisma.usuario.update({
+            where: { id: Number(userId) },
+            data: { image: filename },
+          });
+
+          res.status(200).json(usuario).end();
+        } catch (error) {
+            console.log(error);
+          res.status(500).json({ error: 1, payload: error }).end();
+        }
+      }
+    });
+  };
 
 const prisma = new PrismaClient()
 
@@ -124,6 +171,7 @@ const readPerfil = async (req, res) => {
                 nascimento: true,
                 nome: true,
                 email: true,
+                image:true,
                 criadorListaAmigo: true,
                 participante: {
                     select: {
@@ -362,5 +410,7 @@ module.exports = {
     // respostaAmizade,
     listarAmigos,
     eliminateAmigo,
-    listaUsuario
+    listaUsuario,
+    // enviarArquivo,
+    atualizarFotoPerfil
 }
