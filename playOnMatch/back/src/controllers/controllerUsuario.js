@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+const path = require('path');
 
 const { PrismaClient } = require('@prisma/client')
 
@@ -27,47 +28,67 @@ const parser = multer({ storage });
 
 const atualizarFotoPerfil = async (req, res) => {
     parser.single('image')(req, res, async (err) => {
-      if (err) {
-        res.status(500).json({ error: 1, payload: err }).end();
-      } else {
-        // Aqui você pode adicionar o código para atualizar o registro do usuário no banco de dados
-        const { userId } = req.params; // Supondo que você tenha um parâmetro para o ID do usuário na rota
-        const { filename } = req.file;
-  
-        try {
-          // Adicione o código para atualizar a foto de perfil do usuário no banco de dados
-          // Exemplo usando o Prisma:
-          const usuario = await prisma.usuario.update({
-            where: { id: Number(userId) },
-            data: { image: filename },
-          });
+        if (err) {
+            res.status(500).json({ error: 1, payload: err }).end();
+        } else {
+            // Aqui você pode adicionar o código para atualizar o registro do usuário no banco de dados
+            const { userId } = req.params; // Supondo que você tenha um parâmetro para o ID do usuário na rota
+            const { filename } = req.file;
 
-          res.status(200).json(usuario).end();
-        } catch (error) {
-            console.log(error);
-          res.status(500).json({ error: 1, payload: error }).end();
+            try {
+                // Adicione o código para atualizar a foto de perfil do usuário no banco de dados
+                // Exemplo usando o Prisma:
+                const usuario = await prisma.usuario.update({
+                    where: { id: Number(userId) },
+                    data: { image: filename },
+                });
+
+                res.status(200).json(usuario).end();
+            } catch (error) {
+                console.log(error);
+                res.status(500).json({ error: 1, payload: error }).end();
+            }
         }
-      }
     });
-  };
+};
+
+const verImagem = async (req, res) => {
+    const { userId } = req.params
+
+    try {
+        const usuario = await prisma.usuario.findUnique({
+            where: {
+                id: Number(userId)
+            },
+            select: {
+                image: true,
+            }
+        })
+
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        const imageName = usuario.image
+        const imagePath = path.join(__dirname, "../../uploads", imageName)
+
+        res.sendFile(imagePath);
+        console.log(imagePath)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Erro ao buscar a imagem de perfil do usuário' });
+    }
+}
 
 const prisma = new PrismaClient()
 
 const fs = require('fs');
 
 const create = async (req, res) => {
-    // const image = req.file.buffer;
-    // const imageData = Buffer.from(image, 'base64');
     var info = req.body
     info.senha = await bcrypt.hash(req.body.senha, 10)
 
     try {
-        // const diretorio = 'C:/Users/jaugu/OneDrive/Área de Trabalho/tcc/playOnMatch/docs/imgs/imgsPerfil'
-        // const filename = `${Date.now()}-${req.file.originalname}`;
-        // const imagePath = `${diretorio}/${filename}`
-
-        // fs.writeFileSync(imagePath, imageData);
-
         let usuario = await prisma.usuario.create({
             data: info
         })
@@ -171,7 +192,7 @@ const readPerfil = async (req, res) => {
                 nascimento: true,
                 nome: true,
                 email: true,
-                image:true,
+                image: true,
                 criadorListaAmigo: true,
                 participante: {
                     select: {
@@ -412,5 +433,6 @@ module.exports = {
     eliminateAmigo,
     listaUsuario,
     // enviarArquivo,
-    atualizarFotoPerfil
+    atualizarFotoPerfil,
+    verImagem
 }

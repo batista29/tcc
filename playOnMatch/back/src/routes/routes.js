@@ -6,6 +6,7 @@ const middleware = require('../middleware/middleware')
 
 router.post('/criarUsuario', usuario.create)
 router.put('/atualizarFoto/:userId', usuario.atualizarFotoPerfil)
+router.get('/perfil/:userId/foto', usuario.verImagem)
 router.post('/login', usuario.login)
 router.get('/listarUsuarios', usuario.read)
 router.get('/listarUsuario/:id', usuario.listaUsuario)

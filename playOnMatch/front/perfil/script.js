@@ -37,15 +37,29 @@ function listar() {
             usuario.classList.remove("model")
 
             let amigos = res.criadorListaAmigo.filter(e => (e.status == 1))
-            const urlImagem = `C:/Users/DES/Desktop/tcc/playOnMatch/back/uploads/${res.image}`
-
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
             usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas"
-
-            usuario.querySelector('.imguser').src = urlImagem
             usuario.querySelector('.amigos').innerHTML = amigos.length + " Amigos"
             usuario.querySelector('.email').innerHTML = res.email
 
+            let options2 = { method: 'GET' };
+
+            fetch(`http://localhost:3000/perfil/${idUsuario}/foto`, options2)
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob(); // Obter a imagem como um objeto Blob
+                    } else {
+                        throw new Error('Imagem não encontrada');
+                    }
+                })
+                .then(blob => {
+                    const imageUrl = URL.createObjectURL(blob);
+                    usuario.querySelector('.imguser').src = imageUrl
+                })
+                .catch(error => {
+                    console.log(error);
+                    usuario.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
+                })
             main.appendChild(usuario)
 
 
