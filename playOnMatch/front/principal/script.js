@@ -272,7 +272,7 @@ function listaParticipantes() {
                     if (btnOptions.innerText == 'Adicionar') {
                         enviarSolicitacao(idParticipante)
                     } else if (btnOptions.innerText === "Solicitado") {
-                        abrirModalCancelarSolicitacao()
+                        abrirModalCancelarSolicitacao(idParticipante)
                     }
                 })
                 participantes.appendChild(dados)
@@ -826,13 +826,13 @@ function filtrarDadosAPI(input) {
                 })
 
                 btnAddAmigo.addEventListener('click', function () {
-
+                    let idParticipante = this.parentNode.children[0].innerHTML.slice(1)
                     if (btnAddAmigo.innerText === "Adicionar") {
-                        enviarSolicitacao(this.parentNode.children[0].innerHTML.slice(1))
+                        enviarSolicitacao(idParticipante)
                     } else if (btnAddAmigo.innerText === "Solicitado") {
-                        abrirModalCancelarSolicitacao()
+                        abrirModalCancelarSolicitacao(idParticipante)
                     } else if (btnAddAmigo.innerText === "Amigos") {
-                        acessarPerfilAmigo(this.parentNode.children[0].innerHTML.slice(1))
+                        acessarPerfilAmigo(idParticipante)
                     }
                 })
 
@@ -986,10 +986,39 @@ function enviarSolicitacao(idAmigo) {
         })
 }
 
-function abrirModalCancelarSolicitacao() {
+function abrirModalCancelarSolicitacao(idParticipante) {
+
     let modalCancelarSolicitacao = document.querySelector('.modalCancelarSolicitacao')
 
     modalCancelarSolicitacao.classList.remove('model')
+
+    const options = { method: 'GET' };
+
+    let { id } = user
+    fetch(`http://localhost:3000/listarUsuario/${id}`, options)
+        .then(response => response.json())
+        .then(response => {
+
+            console.log(idParticipante)
+
+            let lista1 = response.usuario.criadorListaAmigo.filter(e => e.remetente == id && idParticipante == e.idAmigo)
+            let lista2 = response.usuario.amigo.filter(e => e.remetente == id && idParticipante == e.idCriador)
+
+            let bntCancelarSolicitacao = document.querySelector(".bntCancelarSolicitacao")
+
+            bntCancelarSolicitacao.addEventListener('click', () => {
+                const options = { method: 'DELETE' };
+
+                fetch(`http://localhost:3000/cancelarSolicitacao/${lista1[0].id}/${lista2[0].id}`, options)
+                    .then(response => {
+                        window.location.reload()
+                        return response.json()
+                    })
+                    .then(response => console.log(response))
+                    .catch(err => console.error(err));
+            })
+        })
+        .catch(err => console.error(err));
 }
 
 function fecharCancelamentoDeSolicitacao() {
@@ -997,16 +1026,6 @@ function fecharCancelamentoDeSolicitacao() {
 
     modalCancelarSolicitacao.classList.add('model')
 }
-
-function cancelarSolicitacaoAmizade() {
-    const options = { method: 'DELETE' };
-
-    // fetch('http://localhost:3000/cancelarSolicitacao/1/2', options)
-    //     .then(response => response.json())
-    //     .then(response => console.log(response))
-    //     .catch(err => console.error(err));
-}
-
 
 verConvite()
 listaLocais()

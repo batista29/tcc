@@ -132,7 +132,9 @@ const listaUsuario = async (req, res) => {
         select: {
             id: true,
             nome: true,
-            criadorPartida: true
+            criadorPartida: true,
+            criadorListaAmigo:true,
+            amigo:true
         }
     })
     res.status(200).send({ usuario }).end()

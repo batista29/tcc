@@ -112,7 +112,7 @@ const cancelarSolicitacaoAmizade = async (req, res) => {
         }
     })
 
-    res.status(200).json(usuarioLogado).end()
+    res.status(200).json(solicitacao).end()
 }
 
 module.exports = {
