@@ -278,6 +278,28 @@ function detalhesPartida(idPartida) {
         })
 }
 
+function editarFotoPerfil(input) {
+
+    const file = input.files[0];
+    console.log(file)
+
+    let { id } = user
+
+    const form = new FormData();
+    form.append("image", file);
+
+    const options = {
+        method: 'PUT'
+    };
+
+    options.body = form;
+
+    fetch(`http://localhost:3000/atualizarFoto/${id}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
+
 
 listarAmigos()
 listar()

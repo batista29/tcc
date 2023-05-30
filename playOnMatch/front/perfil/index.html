@@ -20,14 +20,16 @@
         <div class="infoUser">
             <div class="dadoss model">
                 <img class="imguser" src="../../docs/imgs/do-utilizador.png">
-                <button class="attimage"></button>
+                <input class="attimage" type="file" id="imageInput" onchange="editarFotoPerfil(this)">
+                <!-- <button type="file" class="attimage"></button> -->
                 <p class="dados nomeUsuario"></p>
                 <div class="downpart">
-                <p class="dados partidasJogadas"></p>
-                <p onclick="abrirModalAmigos()" class="dados amigos"></p>
-                <p class="dados email model"></p>
+                    <p class="dados partidasJogadas"></p>
+                    <p onclick="abrirModalAmigos()" class="dados amigos"></p>
+                    <p class="dados email model"></p>
                 </div>
-                <button onclick="abrirModalEditarPerfil(this)" class="btnEditarPerfil"><img src="../../docs/imgs/configuracoes-cog.png"></button>
+                <button onclick="abrirModalEditarPerfil(this)" class="btnEditarPerfil"><img
+                        src="../../docs/imgs/configuracoes-cog.png"></button>
             </div>
         </div>
         <div class="historico">

@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const bcrypt = require('bcrypt');
-const multer = require('multer');
 const path = require('path');
 
 const { PrismaClient } = require('@prisma/client')
 
+const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,18 +16,10 @@ const storage = multer.diskStorage({
     }
 });
 const parser = multer({ storage });
-// const enviarArquivo = async (req, res)=>{
-//     parser.single('image')(req, res, err => {
-//         if (err)
-//             res.status(500).json({ error: 1, payload: err }).end();
-//         else {
-//             res.status(200).json(req.file.filename).end();
-//         }
-//     });
-// }
 
 const atualizarFotoPerfil = async (req, res) => {
     parser.single('image')(req, res, async (err) => {
+        console.log(req.file)
         if (err) {
             res.status(500).json({ error: 1, payload: err }).end();
         } else {
@@ -46,11 +38,24 @@ const atualizarFotoPerfil = async (req, res) => {
                 res.status(200).json(usuario).end();
             } catch (error) {
                 console.log(error);
-                res.status(500).json({ error: 1, payload: error }).end();
+                res.status(500).json({error}).end();
             }
         }
     });
 };
+
+
+// const enviarArquivo = async (req, res)=>{
+//     parser.single('image')(req, res, err => {
+//         if (err)
+//             res.status(500).json({ error: 1, payload: err }).end();
+//         else {
+//             res.status(200).json(req.file.filename).end();
+//         }
+//     });
+// }
+
+
 
 const verImagem = async (req, res) => {
     const { userId } = req.params
@@ -70,10 +75,11 @@ const verImagem = async (req, res) => {
         }
 
         const imageName = usuario.image
-        const imagePath = path.join(__dirname, "../../uploads", imageName)
+        if (imageName != null) {
+            const imagePath = path.join(__dirname, "../../uploads", imageName)
 
-        res.sendFile(imagePath);
-        console.log(imagePath)
+            res.sendFile(imagePath);
+        }
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: 'Erro ao buscar a imagem de perfil do usuário' });
@@ -83,6 +89,7 @@ const verImagem = async (req, res) => {
 const prisma = new PrismaClient()
 
 const fs = require('fs');
+const { json } = require('express');
 
 const create = async (req, res) => {
     var info = req.body
@@ -133,8 +140,8 @@ const listaUsuario = async (req, res) => {
             id: true,
             nome: true,
             criadorPartida: true,
-            criadorListaAmigo:true,
-            amigo:true
+            criadorListaAmigo: true,
+            amigo: true
         }
     })
     res.status(200).send({ usuario }).end()
