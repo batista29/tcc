@@ -26,7 +26,7 @@ router.post('/adicionarParticipante/:idEncontro/:idNovoParticipante', encontro.n
 router.put('/responderConvite/:idParticipante', encontro.responderConvite)
 router.get('/verConvite/:idParticipante', encontro.verConvite)
 router.post('/convidarAmigo/:idEncontro/:idAmigo', encontro.convidarUsario)
-router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.deletarParticipante)
+router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.deletarParticipante)//Os bico tão se perguntando
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)

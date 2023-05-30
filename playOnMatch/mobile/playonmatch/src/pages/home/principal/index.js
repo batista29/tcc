@@ -60,6 +60,23 @@ export default function Main({ navigation }) {
                                 <View>
                                     {
                                         e.EncontroUsuario.map((i) => {
+                                            console.log(i.idCriador.id)
+                                            if (i.idCriador.id == lida) {
+                                                return (
+                                                    <View key={index} style={styles.infos}>
+                                                        <Text style={styles.texto}>{e.titulo} </Text>
+                                                        <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                        <Text style={styles.texto}>Local: {e.local.nome} </Text>
+                                                        <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                        <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                                        <View style={styles.botoes}>
+                                                            <TouchableOpacity onPress={() => { addParticipante(e.id) }}>
+                                                                <Text style={styles.textoBtnParticipar}>encerrar</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </View>
+                                                )
+                                            }
                                             if (i.idParticipante.id == lida) {
                                                 return (
                                                     <View key={index} style={styles.infos}>
@@ -75,7 +92,7 @@ export default function Main({ navigation }) {
                                                         </View>
                                                     </View>
                                                 )
-                                            } else if (i.idParticipante.id !== lida) {
+                                            } if (i.idParticipante.id !== lida) {
                                                 return (
                                                     <View key={index} style={styles.infos}>
                                                         <Text style={styles.texto}>{e.titulo} </Text>

@@ -5,7 +5,6 @@ const router = require('./src/routes/routes')
 
 const server = express()
 
-
 server.use(express.json())
 server.use(cors())
 server.use(router)
