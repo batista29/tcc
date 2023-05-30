@@ -262,6 +262,9 @@ function listaParticipantes() {
 
                 })
 
+                // let listaRemetente = e.idParticipante.criadorListaAmigo.filter(e => e.remetente == id)
+
+
 
                 btnOptions.addEventListener('click', function () {
                     let idParticipante = this.parentNode.children[0].innerHTML
@@ -269,9 +272,7 @@ function listaParticipantes() {
                     if (btnOptions.innerText == 'Adicionar') {
                         enviarSolicitacao(idParticipante)
                     } else if (btnOptions.innerText === "Solicitado") {
-                        let listaRemetente = e.idParticipante.criadorListaAmigo.filter(e => e.remetente == id)
-
-                        abrirModalCancelarSolicitacao(listaRemetente)
+                        abrirModalCancelarSolicitacao()
                     }
                 })
                 participantes.appendChild(dados)
@@ -985,8 +986,7 @@ function enviarSolicitacao(idAmigo) {
         })
 }
 
-function abrirModalCancelarSolicitacao(lista) {
-    console.log(lista)
+function abrirModalCancelarSolicitacao() {
     let modalCancelarSolicitacao = document.querySelector('.modalCancelarSolicitacao')
 
     modalCancelarSolicitacao.classList.remove('model')
@@ -999,7 +999,12 @@ function fecharCancelamentoDeSolicitacao() {
 }
 
 function cancelarSolicitacaoAmizade() {
-    console.log('oi')
+    const options = { method: 'DELETE' };
+
+    // fetch('http://localhost:3000/cancelarSolicitacao/1/2', options)
+    //     .then(response => response.json())
+    //     .then(response => console.log(response))
+    //     .catch(err => console.error(err));
 }
 
 

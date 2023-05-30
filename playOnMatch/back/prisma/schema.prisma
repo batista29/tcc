@@ -16,6 +16,7 @@ model Usuario {
   email             String            @unique
   senha             String
   nascimento        DateTime
+  image             String?
   amigo             Lista_amigos[]    @relation("amigo")
   criadorListaAmigo Lista_amigos[]    @relation("criador")
   criadorPartida    EncontroUsuario[] @relation("criadorPartida")

@@ -6,10 +6,20 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
+const fs = require('fs');
+
 const create = async (req, res) => {
+    // const image = req.file.buffer;
+    // const imageData = Buffer.from(image, 'base64');
+    var info = req.body
+    info.senha = await bcrypt.hash(req.body.senha, 10)
+
     try {
-        var info = req.body
-        info.senha = await bcrypt.hash(req.body.senha, 10)
+        // const diretorio = 'C:/Users/jaugu/OneDrive/Área de Trabalho/tcc/playOnMatch/docs/imgs/imgsPerfil'
+        // const filename = `${Date.now()}-${req.file.originalname}`;
+        // const imagePath = `${diretorio}/${filename}`
+
+        // fs.writeFileSync(imagePath, imageData);
 
         let usuario = await prisma.usuario.create({
             data: info
@@ -19,26 +29,26 @@ const create = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        if (error.meta.target === 'Usuario_email_key') {
-            res.status(400).send({ erro: 'Email já existente' }).end()
-        } if (error.meta.target === "Usuario_senha_key") {
-            res.status(400).send({ erro: '' }).end()
-        }
+        // if (error.meta.target === 'Usuario_email_key') {
+        //     res.status(400).send({ erro: 'Email já existente' }).end()
+        // } if (error.meta.target === "Usuario_senha_key") {
+        //     res.status(400).send({ erro: '' }).end()
+        // }
     }
 }
 
 const read = async (req, res) => {
     let usuario = await prisma.usuario.findMany({
-        select:{
-            id:true,
-            nome:true,
-            email:true,
-            nascimento:true,
-            criadorListaAmigo:{
-                select:{
-                    amigo:true,
-                    status:true,
-                    remetente:true
+        select: {
+            id: true,
+            nome: true,
+            email: true,
+            nascimento: true,
+            criadorListaAmigo: {
+                select: {
+                    amigo: true,
+                    status: true,
+                    remetente: true
                 }
             }
         }
@@ -119,7 +129,7 @@ const readPerfil = async (req, res) => {
                     select: {
                         encontro: {
                             select: {
-                                id:true,
+                                id: true,
                                 dataHora: true,
                                 dataFim: true,
                                 descricao: true,
@@ -260,8 +270,6 @@ const verificarAmigo = async (idLogado, idUsuario) => {
 
 
 }
-
-
 
 const listarAmigos = async (req, res) => {
     const usuario = await prisma.usuario.findUnique({

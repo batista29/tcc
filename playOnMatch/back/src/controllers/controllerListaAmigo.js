@@ -101,25 +101,17 @@ const updateListaAmigo = async (req, res) => {
 }
 
 const cancelarSolicitacaoAmizade = async (req, res) => {
-    const usuarioLogado = await prisma.usuario.findUnique({
+
+    const solicitacao = await prisma.lista_amigos.deleteMany({
         where: {
-            id: Number(req.params.idLogado)
-        },
-        select: {
-            criadorListaAmigo: true
+            OR: [
+                { id: Number(req.params.idLista1) },
+                { id: Number(req.params.idLista2) }
+            ]
+
         }
     })
 
-    let minhaLista = usuarioLogado.criadorListaAmigo.filter(e => e.remetente == Number(req.params.idLogado))
-
-    minhaLista.forEach(e => console.log(e))
-
-    // const solicitacao = await prisma.lista_amigos.delete({
-    //     where: {
-    //         id: Number(req.params.idListaAmizade)
-    //     }
-    // })
-    
     res.status(200).json(usuarioLogado).end()
 }
 
