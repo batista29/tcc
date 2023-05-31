@@ -21,7 +21,7 @@ export default function NewPartida() {
     if (lida.length == 0) getData();
 
     useEffect(() => {
-        fetch(`http://10.87.207.7:3000/perfil/${lida}`)
+        fetch(`http://192.168.0.3:3000/perfil/${lida}`)
             .then(res => { return res.json() })
             .then(data => {
                 setPerfil(data)
