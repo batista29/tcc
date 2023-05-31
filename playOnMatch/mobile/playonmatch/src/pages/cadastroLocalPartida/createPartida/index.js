@@ -79,7 +79,6 @@ export default function NewPartida({ navigation }) {
     const [selectedLocal, setSelectedLocal] = useState([])
 
     const handleLocalChange = (value) => {
-        console.log(value)
         setSelectedLocal(value);
     };
 
@@ -100,8 +99,6 @@ export default function NewPartida({ navigation }) {
         titulo: titulo,
         id_local: Number(selectedLocal)
     }
-
-    console.log(dados)
 
     const cadastrarEncontro = () => {
         if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0 || "") {

@@ -33,7 +33,6 @@ export default function NewPartida({ navigation }) {
             }
             )
                 .then(res => {
-                    console.log(res)
                     if (res.status == 201) {
                         alert("Sucesso")
                         navigation.navigate("NewPartida")

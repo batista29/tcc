@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Main({ navigation }) {
     const [encontros, setEncontros] = useState([])
     const [lida, setLida] = useState([]);
+    const [token, setToken] = useState([]);
 
     const getData = async () => {
         try {
@@ -17,6 +18,17 @@ export default function Main({ navigation }) {
 
     if (lida.length == 0) getData();
 
+    const getToken = async () => {
+        try {
+            let token = await AsyncStorage.getItem("token");
+            setToken(token)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (token.length == 0) getToken();
+
     useEffect(() => {
         fetch('http://10.87.207.7:3000/listarEncontros')
             .then(res => { return res.json() })
@@ -24,9 +36,9 @@ export default function Main({ navigation }) {
     })
 
     const addParticipante = (idPartida) => {
-        const options = { method: 'POST' };
+        const options1 = { method: 'POST' };
 
-        fetch(`http://10.87.207.7:3000/adicionarParticipante/${idPartida}/${lida}`, options)
+        fetch(`http://10.87.207.7:3000/adicionarParticipante/${idPartida}/${lida}`, options1)
             .then(response => response.json())
             .then(response => {
                 console.log(response)
@@ -35,9 +47,28 @@ export default function Main({ navigation }) {
     }
 
     const removerParticipante = (idPartida) => {
-        const options = { method: 'DELETE' };
+        const options2 = { method: 'DELETE' };
 
-        fetch(`http://10.87.207.7:3000/excluirParticipante/${idPartida}/${lida}`, options)
+        fetch(`http://10.87.207.7:3000/excluirParticipante/${idPartida}/${lida}`, options2)
+            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => console.error(err));
+    }
+
+    const encerrarPartida = (idPartida) => {
+
+        const options3 = {
+            method: 'PUT',
+            headers: {
+                authorization: token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        };
+
+        fetch(`http://10.87.207.7:3000/finalizarEncontro/${lida}/${idPartida}`, options3)
             .then(response => response.json())
             .then(response => {
                 console.log(response)
@@ -56,62 +87,63 @@ export default function Main({ navigation }) {
                 <View>
                     {
                         encontros.map((e, index) => {
-                            return (
-                                <View>
-                                    {
-                                        e.EncontroUsuario.map((i) => {
-                                            console.log(i.idCriador.id)
-                                            if (i.idCriador.id == lida) {
-                                                return (
-                                                    <View key={index} style={styles.infos}>
-                                                        <Text style={styles.texto}>{e.titulo} </Text>
-                                                        <Text style={styles.texto}>Descricao: {e.descricao} </Text>
-                                                        <Text style={styles.texto}>Local: {e.local.nome} </Text>
-                                                        <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
-                                                        <Text style={styles.texto}>Data: {e.dataHora} </Text>
-                                                        <View style={styles.botoes}>
-                                                            <TouchableOpacity onPress={() => { addParticipante(e.id) }}>
-                                                                <Text style={styles.textoBtnParticipar}>encerrar</Text>
-                                                            </TouchableOpacity>
+                            if (e.dataFim == null) {
+                                return (
+                                    <View>
+                                        {
+                                            e.EncontroUsuario.map((i) => {
+                                                if (i.idCriador.id == lida) {
+                                                    return (
+                                                        <View key={index} style={styles.infos}>
+                                                            <Text style={styles.texto}>{e.titulo} </Text>
+                                                            <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                            <Text style={styles.texto}>Local: {e.local.nome} </Text>
+                                                            <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                            <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                                            <View style={styles.botoes}>
+                                                                <TouchableOpacity onPress={() => { encerrarPartida(e.id) }}>
+                                                                    <Text style={styles.textoBtnParticipar}>Encerrar Partida</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
                                                         </View>
-                                                    </View>
-                                                )
-                                            }
-                                            if (i.idParticipante.id == lida) {
-                                                return (
-                                                    <View key={index} style={styles.infos}>
-                                                        <Text style={styles.texto}>{e.titulo} </Text>
-                                                        <Text style={styles.texto}>Descricao: {e.descricao} </Text>
-                                                        <Text style={styles.texto}>Local: {e.local.nome} </Text>
-                                                        <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
-                                                        <Text style={styles.texto}>Data: {e.dataHora} </Text>
-                                                        <View style={styles.botoes}>
-                                                            <TouchableOpacity onPress={() => { removerParticipante(e.id) }}>
-                                                                <Text style={styles.textoBtnCancelar}>Cancelar</Text>
-                                                            </TouchableOpacity>
+                                                    )
+                                                }
+                                                if (i.idParticipante.id == lida && i.idCriador.id !== lida) {
+                                                    return (
+                                                        <View key={index} style={styles.infos}>
+                                                            <Text style={styles.texto}>{e.titulo} </Text>
+                                                            <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                            <Text style={styles.texto}>Local: {e.local.nome} </Text>
+                                                            <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                            <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                                            <View style={styles.botoes}>
+                                                                <TouchableOpacity onPress={() => { removerParticipante(e.id) }}>
+                                                                    <Text style={styles.textoBtnCancelar}>Cancelar</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
                                                         </View>
-                                                    </View>
-                                                )
-                                            } if (i.idParticipante.id !== lida) {
-                                                return (
-                                                    <View key={index} style={styles.infos}>
-                                                        <Text style={styles.texto}>{e.titulo} </Text>
-                                                        <Text style={styles.texto}>Descricao: {e.descricao} </Text>
-                                                        <Text style={styles.texto}>Local: {e.local.nome} </Text>
-                                                        <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
-                                                        <Text style={styles.texto}>Data: {e.dataHora} </Text>
-                                                        <View style={styles.botoes}>
-                                                            <TouchableOpacity onPress={() => { addParticipante(e.id) }}>
-                                                                <Text style={styles.textoBtnParticipar}>addParticipante</Text>
-                                                            </TouchableOpacity>
+                                                    )
+                                                } if (i.idParticipante.id !== lida) {
+                                                    return (
+                                                        <View key={index} style={styles.infos}>
+                                                            <Text style={styles.texto}>{e.titulo} </Text>
+                                                            <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                            <Text style={styles.texto}>Local: {e.local.nome} </Text>
+                                                            <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                            <Text style={styles.texto}>Data: {e.dataHora} </Text>
+                                                            <View style={styles.botoes}>
+                                                                <TouchableOpacity onPress={() => { addParticipante(e.id) }}>
+                                                                    <Text style={styles.textoBtnParticipar}>addParticipante</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
                                                         </View>
-                                                    </View>
-                                                )
-                                            }
-                                        })
-                                    }
-                                </View>
-                            )
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </View>
+                                )
+                            }
                         })
                     }
                 </View>
