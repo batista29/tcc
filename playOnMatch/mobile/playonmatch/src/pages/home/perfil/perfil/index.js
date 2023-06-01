@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function NewPartida() {
+export default function NewPartida({ navigation }) {
 
     const [perfil, setPerfil] = useState([]);
     const [lida, setLida] = useState([]);
@@ -55,7 +55,10 @@ export default function NewPartida() {
                     <Text style={styles.textoPerfil}>{perfil.email}</Text>
                     <Text style={styles.textoPerfil}>{dataNascimentoFormatada}</Text>
                     <TouchableOpacity style={styles.btnAttPerfil}>
-                        <Text style={styles.textAttPerfil}>Atualizar perfil</Text>
+                        <Text style={styles.textAttPerfil} onPress={() => {
+                            navigation.navigate("attPerfil")
+                        }}>
+                            Atualizar perfil</Text>
                     </TouchableOpacity>
                 </View>
             </View>

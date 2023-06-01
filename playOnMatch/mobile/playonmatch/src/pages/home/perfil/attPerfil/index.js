@@ -60,9 +60,9 @@ const YearPicker = () => {
 
     var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
-    const [nome, setNome] = useState('teste3');
-    const [email, setEmail] = useState('teste3@gmail.com');
-    const [senha, setSenha] = useState('123');
+    const [nome, setNome] = useState([]);
+    const [email, setEmail] = useState([]);
+    const [senha, setSenha] = useState([]);
 
     let dados = {
         nome: nome,
