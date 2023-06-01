@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 
-  const [email, setEmail] = useState('doly@gmail.com')
-  const [senha, setSenha] = useState('doly')
+  const [email, setEmail] = useState('teste3@gmail.com')
+  const [senha, setSenha] = useState('123')
 
   let dados = {
     email: email,
@@ -16,7 +16,7 @@ export default function Login({ navigation }) {
     if (dados.email.length == 0 || dados.senha.length == 0) {
       alert("Senha ou email em branco")
     } else {
-      fetch("http://192.168.0.3:3000/login", {
+      fetch("http://10.87.207.7:3000/login", {
         method: 'POST',
         headers: {
           Accept: 'application/json',

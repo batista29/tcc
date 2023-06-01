@@ -23,11 +23,11 @@ router.delete('/excluirAmigo/:idLogado/:idAmigo', usuario.eliminateAmigo)
 const encontro = require('../controllers/controllerEncontro')
 
 router.post('/criarEncontro/:idCriadorPartida', encontro.create)
-router.post('/adicionarParticipante/:idEncontro/:idNovoParticipante', encontro.novoParticipante) //Os bico tão se perguntando
+router.post('/adicionarParticipante/:idEncontro/:idNovoParticipante', encontro.novoParticipante)
 router.put('/responderConvite/:idParticipante', encontro.responderConvite)
 router.get('/verConvite/:idParticipante', encontro.verConvite)
 router.post('/convidarAmigo/:idEncontro/:idAmigo', encontro.convidarUsario)
-router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.deletarParticipante)//Os bico tão se perguntando
+router.delete('/excluirParticipante/:idEncontro/:idParticipante', encontro.deletarParticipante)
 router.get('/listarEncontros', encontro.readAll)
 router.get('/listarEncontro/:id', encontro.readOne)
 router.delete('/apagarEncontro/:id', encontro.del)

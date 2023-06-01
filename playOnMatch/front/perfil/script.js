@@ -15,8 +15,6 @@ const infoUser = document.querySelector('.dadoss')
 const partida = document.querySelector('.partidas')
 const infoPartida = document.querySelector('.infoPartida')
 
-
-
 function listar() {
 
     let idUsuario = JSON.parse(localStorage.getItem('perfil'))

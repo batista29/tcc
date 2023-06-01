@@ -21,13 +21,12 @@ export default function NewPartida() {
     if (lida.length == 0) getData();
 
     useEffect(() => {
-        fetch(`http://192.168.0.3:3000/perfil/${lida}`)
+        fetch(`http://10.87.207.7:3000/perfil/${lida}`)
             .then(res => { return res.json() })
             .then(data => {
                 setPerfil(data)
             })
     })
-
 
     setTimeout(() => {
         let data = perfil.participante || []
@@ -60,7 +59,7 @@ export default function NewPartida() {
             <View style={styles.second}>
                 <ScrollView>
                     <View style={styles.secondInfo}>
-                    <Text style={styles.textoInfo}>Histórico</Text>
+                        <Text style={styles.textoInfo}>Histórico</Text>
                         {
                             encontro.map((e, index) => {
 
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
         border: '2px solid #B9B4D9',
         backgroundColor: '#405173'
     },
-    secondInfo:{
+    secondInfo: {
         alignItems: 'center',
     },
     textoInfo: {
@@ -130,6 +129,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         border: '2px solid #B9B4D9',
-        backgroundColor:'#405173'
+        backgroundColor: '#405173'
     }
 })
