@@ -144,6 +144,7 @@ body::-webkit-scrollbar-thumb {
     overflow-y: scroll;
     scroll-behavior: smooth;
     text-align: left;
+    margin-top: 10px;
 }
 
 .allFriends::-webkit-scrollbar {
@@ -161,13 +162,19 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid gray;
 }
 
+.imguser {
+    height: 4vh;
+    border-radius: 50%;
+}
+
 .friends_info {
-    height: 40px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10%;
     cursor: pointer;
+    font-size: larger;
 }
 
 .friends_info:hover {
@@ -553,8 +560,8 @@ img.iconeBusca {
 
 .buttonTop {
     position: fixed;
-    height: 6vh;
-    width: 3vw;
+    height: 5vh;
+    width: 2vw;
     border-radius: 25px;
     font-size: 25px;
     margin-left: 1400px;
@@ -819,10 +826,11 @@ img.iconeBusca {
 }
 
 .iconsImgs {
-    height: 100%;
-    width: 50px;
+    height: 2.5vh;
+    width: 1.5vw;
     display: block;
     filter: invert(100%);
+    
 }
 
 x .menuInteresses,
@@ -1167,12 +1175,12 @@ x .menuInteresses,
     z-index: 1;
 }
 
-.error{
+.error {
     font-weight: bold;
     color: red;
 }
 
-.btnOptions{
+.btnOptions {
     padding: 4px;
     background-color: var(--cor4);
     border: none;
@@ -1194,6 +1202,24 @@ x .menuInteresses,
     margin-right: 4%;
 }
 
-a{
-    text-decoration:none
+a {
+    text-decoration: none
+}
+
+.usuarioLogado {
+    height: 100%;
+    width: 14vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    right: 0;
+}
+
+.imgPerfil {
+    height: 4.5vh;
+    width: 2.5vw;
+    border-radius: 50%;
+    position: absolute;
+    right: 2vw;
 }

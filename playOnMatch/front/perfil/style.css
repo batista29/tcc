@@ -228,6 +228,12 @@ img {
     width: 100%;
 }
 
+.imgpart{
+    height: 3.5vh;
+    width: 2vw;
+    border-radius: 50%;
+}
+
 .sobre {
     height: 100vh;
 }
@@ -387,6 +393,10 @@ img {
     z-index: 1;
 }
 
+#attimage{
+    display: none;
+}
+
 .attimage{
     height: 22vh;
     width: 12vw;
@@ -395,6 +405,8 @@ img {
     right: 29.8%;
     background-color: transparent;
     cursor: pointer;
+    color: transparent;
+   
 }
 
 .attimage:hover{

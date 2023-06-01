@@ -270,6 +270,28 @@ function detalhesPartida(idPartida) {
                 info.classList.remove('model')
                 info.querySelector('.idParticipante').innerHTML = "#" + e.idParticipante.id
                 info.querySelector('.nomeParticipante').innerHTML = e.idParticipante.nome
+
+                let options2 = { method: 'GET' };
+
+                fetch(`http://localhost:3000/perfil/${e.idParticipante.id}/foto`, options2)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        } else {
+                            throw new Error('Imagem não encontrada');
+                        }
+                    })
+                    .then(blob => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        info.querySelector('.imgpart').src = imageUrl
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        info.querySelector('.imgpart').src = '../../docs/imgs/perfilPadrao.jpg'
+                    })
+
+
+
                 participantes.appendChild(info)
             })
 

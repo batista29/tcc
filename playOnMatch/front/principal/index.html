@@ -13,14 +13,17 @@
 
 <body onload="carregar()">
     <header>
-        <i id="humburger" class="material-icons" data-target="menu">menu</i>
         <a href="">
             <h1>PlayOnMatch</h1>
         </a>
+        <div class="usuarioLogado">
+            <img class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
+            <img class="imgPerfil" src="" alt="">
+        </div>
     </header>
     <main>
         <button onclick="abrirModal()" class="abrirModal1">Criar Encontro</button>
-        <div data-content id="menu" class="partidasFavoritas">
+        <!-- <div data-content id="menu" class="partidasFavoritas">
             <div class="menuNotificacoes">
                 <img class="iconsImgs imgNotificacoes" src="../../docs/imgs/notificacao.png" alt="">
                 <p class="titulosMenu">Notificações</p>
@@ -53,10 +56,6 @@
                     </div>
                 </div>
             </div>
-            <div class="menuConfiguracoes">
-                <img class="iconsImgs imgConfiguracao" src="../../docs/imgs/configuracoes-cog.png" alt="">
-                <p class="titulosMenu">Configurações</p>
-            </div>
             <div class="configuracoes model">
                 <button onclick="acessarPerfil()">
                     <p>acessarPerfil</p>
@@ -65,7 +64,7 @@
                     <p>sair</p>
                 </button>
             </div>
-        </div>
+        </div> -->
 
         <div class="read">
             <div class="filtro">
@@ -98,6 +97,8 @@
             <h2>FRIENDS</h2>
             <div class="allFriends">
                 <div class="friends_info model">
+                    
+                    <img class="imguser"></img>
                     <p class="idAmigo model">id</p>
                     <p class="nomeAmigo">nome</p>
                 </div>
@@ -113,6 +114,7 @@
                 <div class="dadosUser model">
                     <div class="usuariosPesquisa model">
                         <p class="idUserAdicionar model"></p>
+                        <img class="imguser"></img>
                         <p class="nomeUserAdicionar"> </p>
                         <button class="btnAddAmigo">Adicionar</button>
                     </div>
@@ -173,6 +175,7 @@
             <div class="participantes">
                 <div class="infoParticipantes model">
                     <p class="idParticipante model">nome</p>
+                    <img class="imguser" alt="">
                     <p class="nomeParticipante">nome</p>
                     <button class="btnOptions">Adicionar</button>
                 </div>

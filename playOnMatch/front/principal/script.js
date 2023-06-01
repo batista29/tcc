@@ -240,6 +240,26 @@ function listaParticipantes() {
                 dados.querySelector('.idParticipante').innerHTML = e.idParticipante.id
                 dados.querySelector('.nomeParticipante').innerHTML = nomeParticipante
 
+                let options2 = { method: 'GET' };
+
+                fetch(`http://localhost:3000/perfil/${e.idParticipante.id}/foto`, options2)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        } else {
+                            throw new Error('Imagem não encontrada');
+                        }
+                    })
+                    .then(blob => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        dados.querySelector('.imguser').src = imageUrl
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        dados.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
+                    })
+
+
                 let { id } = user
                 let btnOptions = dados.querySelector('.btnOptions')
 
@@ -416,25 +436,6 @@ function acessarPerfil() {
 const perfil = document.querySelector('.perfil')
 const per = document.querySelector('.friends')
 
-// function usuario() {
-//     let { id } = user
-
-//     const options = { method: 'GET' };
-
-//     fetch(`http://localhost:3000/listarUsuario/${id}`, options)
-//         .then(response => response.json())
-//         .then(res => {
-
-//             perfil.cloneNode(true)
-//             perfil.classList.remove("model")
-
-//             perfil.querySelector(".idUser").innerHTML = "#" + res.usuario.id
-//             perfil.querySelector(".nomeUser").innerText = res.usuario.nome
-
-//             per.appendChild(perfil)
-//         })
-// }
-
 function listaAmigos() {
 
     setTimeout(() => {
@@ -455,17 +456,36 @@ function listaAmigos() {
 
                 amigo.forEach((e) => {
 
+
                     let info = friendsInfo.cloneNode(true)
                     info.classList.remove("model")
 
                     info.addEventListener('click', function () {
 
-                        acessarPerfilAmigo(this.children[0].innerHTML.slice(1))
-
+                        acessarPerfilAmigo(this.children[1].innerHTML)
                     })
 
-                    info.querySelector('.idAmigo').innerHTML = "#" + e.amigo.id
+                    info.querySelector('.idAmigo').innerHTML = e.amigo.id
                     info.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
+
+                    let options2 = { method: 'GET' };
+
+                    fetch(`http://localhost:3000/perfil/${e.amigo.id}/foto`, options2)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.blob();
+                            } else {
+                                throw new Error('Imagem não encontrada');
+                            }
+                        })
+                        .then(blob => {
+                            const imageUrl = URL.createObjectURL(blob);
+                            info.querySelector('.imguser').src = imageUrl
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            info.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
+                        })
 
                     allFriends.appendChild(info)
 
@@ -481,11 +501,11 @@ function listaAmigos() {
     }, 100)
 }
 
-// var btnTopo = document.getElementById("btnTopo");
+var btnTopo = document.getElementById("btnTopo");
 
-// btnTopo.addEventListener("click", function () {
-//     window.scrollTo({ top: 0, behavior: 'smooth' });
-// });
+btnTopo.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 
 const encerrarPartida = document.querySelector('.encerrarEncontro')
@@ -529,6 +549,8 @@ function acessarPerfilAmigo(idAmigo) {
             authorization: token
         }
     };
+
+    console.log(idAmigo)
 
     fetch(`http://localhost:3000/perfilUsuario/${id}/${idAmigo}`, options)
         .then(response => {
@@ -574,83 +596,83 @@ const menuNotificacoes = document.querySelector('.menuNotificacoes')
 const imgConfiguracao = document.querySelector('.imgConfiguracao')
 const imgNotificacoes = document.querySelector('.imgNotificacoes')
 const menuConfiguracoes = document.querySelector('.menuConfiguracoes')
-const tab = document.querySelector('[data-target]'),
-    tabContent = document.querySelector('[data-content]')
+// const tab = document.querySelector('[data-target]'),
+//     tabContent = document.querySelector('[data-content]')
 
-tab.addEventListener('click', () => {
+// tab.addEventListener('click', () => {
 
-    tabContent.classList.forEach((e) => {
+//     tabContent.classList.forEach((e) => {
 
-        if (e == 'active') {
-            tabContent.classList.remove('active')
+//         if (e == 'active') {
+//             tabContent.classList.remove('active')
 
-        } else {
-            tabContent.classList.add('active')
-        }
-    })
-})
+//         } else {
+//             tabContent.classList.add('active')
+//         }
+//     })
+// })
 
-menuNotificacoes.addEventListener('click', (event) => {
+// menuNotificacoes.addEventListener('click', (event) => {
 
-    let notificacoes = document.querySelector('.notificacoes')
+//     let notificacoes = document.querySelector('.notificacoes')
 
-    notificacoes.classList.toggle('model')
-})
-
-
-menuConfiguracoes.addEventListener('click', () => {
-    let configuracoes = document.querySelector('.configuracoes')
-
-    configuracoes.classList.toggle('model')
-
-})
-
-imgConfiguracao.addEventListener('click', function (event) {
-
-    tabContent.classList.forEach((e) => {
-
-        let configuracoes = document.querySelector('.configuracoes')
-
-        if (e == 'active') {
-            tabContent.classList.remove('active')
-
-            configuracoes.classList.remove('model')
-
-        } else {
-            tabContent.classList.add('active')
-            let configuracoes = document.querySelector('.configuracoes')
-
-            configuracoes.classList.add('model')
-
-            let notificacoes = document.querySelector('.notificacoes')
-
-            notificacoes.classList.add('model')
-        }
-    })
-})
+//     notificacoes.classList.toggle('model')
+// })
 
 
-imgNotificacoes.addEventListener('click', function (event) {
+// menuConfiguracoes.addEventListener('click', () => {
+//     let configuracoes = document.querySelector('.configuracoes')
+
+//     configuracoes.classList.toggle('model')
+
+// })
+
+// imgConfiguracao.addEventListener('click', function (event) {
+
+//     tabContent.classList.forEach((e) => {
+
+//         let configuracoes = document.querySelector('.configuracoes')
+
+//         if (e == 'active') {
+//             tabContent.classList.remove('active')
+
+//             configuracoes.classList.remove('model')
+
+//         } else {
+//             tabContent.classList.add('active')
+//             let configuracoes = document.querySelector('.configuracoes')
+
+//             configuracoes.classList.add('model')
+
+//             let notificacoes = document.querySelector('.notificacoes')
+
+//             notificacoes.classList.add('model')
+//         }
+//     })
+// })
 
 
-    tabContent.classList.forEach((e) => {
-        if (e == 'active') {
-            tabContent.classList.remove('active')
-            let notificacoes = document.querySelector('.notificacoes')
+// imgNotificacoes.addEventListener('click', function (event) {
 
-            notificacoes.classList.remove('model')
-        } else {
-            tabContent.classList.add('active')
 
-            let configuracoes = document.querySelector('.configuracoes')
+//     tabContent.classList.forEach((e) => {
+//         if (e == 'active') {
+//             tabContent.classList.remove('active')
+//             let notificacoes = document.querySelector('.notificacoes')
 
-            configuracoes.classList.add('model')
-            let notificacoes = document.querySelector('.notificacoes')
+//             notificacoes.classList.remove('model')
+//         } else {
+//             tabContent.classList.add('active')
 
-            notificacoes.classList.add('model')
-        }
-    })
-})
+//             let configuracoes = document.querySelector('.configuracoes')
+
+//             configuracoes.classList.add('model')
+//             let notificacoes = document.querySelector('.notificacoes')
+
+//             notificacoes.classList.add('model')
+//         }
+//     })
+// })
 
 function abrirModalConfigEncontro() {
     let modalConfigEncontro = document.querySelector('.modalConfigEncontro')
@@ -801,6 +823,26 @@ function filtrarDadosAPI(input) {
 
                 resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
                 resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
+
+                let options2 = { method: 'GET' };
+
+                fetch(`http://localhost:3000/perfil/${item.id}/foto`, options2)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        } else {
+                            throw new Error('Imagem não encontrada');
+                        }
+                    })
+                    .then(blob => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        resultado.querySelector('.imguser').src = imageUrl
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        resultado.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
+                    })
+
 
                 let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
 
@@ -1027,6 +1069,36 @@ function fecharCancelamentoDeSolicitacao() {
     modalCancelarSolicitacao.classList.add('model')
 }
 
+function usuario() {
+    let options = { method: 'GET' };
+
+    let { id } = user
+
+    fetch(`http://localhost:3000/perfil/${id}/foto`, options)
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            } else {
+                throw new Error('Imagem não encontrada');
+            }
+        })
+
+        .then(blob => {
+            let imgPerfil = document.querySelector('.imgPerfil')
+
+            const imageUrl = URL.createObjectURL(blob);
+
+            imgPerfil.src = imageUrl
+        })
+        .catch(error => {
+            let imgPerfil = document.querySelector('.imgPerfil')
+
+            console.log(error);
+            imgPerfil.src = '../../docs/imgs/perfilPadrao.jpg'
+        })
+}
+
+usuario()
 verConvite()
 listaLocais()
 notificaoAmizade()
