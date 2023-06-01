@@ -1,0 +1,33 @@
+@media (max-width:770px){
+    .formulario form input {
+        height: 35px;
+        width: 300px;
+    }
+}
+
+
+@media (max-width:710px) {
+    .carrosel {
+        display: none;
+    }
+
+    .apresentacao {
+        display: none;
+    }
+
+    .login-cadastro {
+        width: 100%;
+    }
+}
+
+@media(max-width:350px) {
+    .formulario form input {
+        height: 30px;
+        width: 250px;
+    }
+
+    .formulario form button {
+        height: 30px;
+        width: 250px;
+    }
+}

@@ -376,8 +376,6 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 
-
-
 .formularioCadastroPartida {
     height: 100%;
     width: 100%;
@@ -402,6 +400,7 @@ body::-webkit-scrollbar-thumb {
 
 .formularioCadastroPartida>label {
     color: white;
+    font-size: 1.4em;
 }
 
 .formularioCadastroPartida>input,
@@ -412,6 +411,7 @@ body::-webkit-scrollbar-thumb {
     border: none;
     border-bottom: 1px solid var(--backgroundHome);
     color: rgb(231, 231, 231);
+    font-size: 1.2em;
 }
 
 .sair {
@@ -424,6 +424,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 25px;
     background-color: var(--cor6);
     border: none;
+    color: white;
 }
 
 .sair:hover,
@@ -438,6 +439,7 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid black;
     border-radius: 30px;
     background-color: var(--cor4);
+    font-size: 1.2em;
 }
 
 .btnAtualizarEncontro {
@@ -551,8 +553,8 @@ img.iconeBusca {
 
 .buttonTop {
     position: fixed;
-    height: 50px;
-    width: 50px;
+    height: 6vh;
+    width: 3vw;
     border-radius: 25px;
     font-size: 25px;
     margin-left: 1400px;
@@ -942,8 +944,8 @@ x .menuInteresses,
 .btnAbrirModalCriaLocal {
     position: absolute;
     right: 0;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -1190,4 +1192,8 @@ x .menuInteresses,
     position: absolute;
     right: 0;
     margin-right: 4%;
+}
+
+a{
+    text-decoration:none
 }

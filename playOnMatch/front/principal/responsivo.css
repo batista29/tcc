@@ -1,0 +1,94 @@
+@media (max-width:1440px) {
+    .descricaoLocalizacao{
+        font-size: 1.6em;
+    }
+    .formLocal>input{
+        width: 40%;
+    }
+    .formLocal>button{
+        height: 5vh;
+        margin-top: 10%;
+        width: 40%;
+        font-size:1.6em ;
+    }
+    .formLocal>label{
+        font-size: 1.5em;
+    }
+
+    .buttonTop{
+        margin-left: 1050px;
+    }
+
+    .inputsCadastro{
+        height: 75vh;
+        width: 30vw;
+    }
+}
+
+@media (max-width:1090px) {
+    .descricaoLocalizacao{
+        font-size: 1.3em;
+    }
+
+    .buttonTop{
+        margin-left: 750px;
+        height: 6vh;
+        width: 4vw;
+    }
+}
+
+
+
+@media (max-width:770px){
+    .descricaoLocalizacao{
+        font-size: 1em;
+    }
+
+    .formLocal>input{
+        width: 40%;
+    }
+    .formLocal>button{
+        height: 5vh;
+        margin-top: 10%;
+        width: 40%;
+        font-size:1.2em ;
+    }
+    .formLocal>label{
+        font-size: 1.2em;
+    }
+}
+
+@media(max-width:430px){
+    .localizacao{
+        height: 110vh;
+    }
+    .descricaoLocalizacao{
+       display: none;
+    }
+    .formLocal{
+        width: 100%;
+    }
+    .infoLocalizacao{
+        height: 60%;
+        width: 70%;
+    }
+
+    .formLocal>input{
+        width: 60%;
+    }
+    .formLocal>button{
+        height: 7vh;
+        margin-top: 10%;
+        width: 40%;
+        font-size:1.4em ;
+    }
+    .formLocal>label{
+        font-size: 1.2em;
+    }
+}
+
+@media(max-width:350px){
+    .localizacao{
+        height: 120vh;
+    }
+}
