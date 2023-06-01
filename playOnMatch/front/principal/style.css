@@ -235,7 +235,8 @@ body::-webkit-scrollbar-thumb {
 .iconeBusca,
 .imgVisitarUsuario,
 .imgAdicionarUsuario,
-.btnConfigEncontro {
+.btnConfigEncontro,
+.imgSairDaConta {
     height: 4vh;
     filter: invert(100%);
 }
@@ -548,14 +549,13 @@ img.iconeBusca {
 
 .infoPartida {
     height: 70%;
-    width: 60%;
+    width: 90%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: var(--textoHome);
     border-radius: 10px;
     position: relative;
     flex-direction: column;
+    align-items: center;
 }
 
 .buttonTop {
@@ -568,7 +568,6 @@ img.iconeBusca {
     margin-bottom: 50px;
     margin-right: 40px;
     bottom: 0;
-    z-index: 1;
     color: var(--backgroundHome);
     background-color: var(--textoHome);
 }
@@ -647,11 +646,22 @@ img.iconeBusca {
     cursor: pointer;
 }
 
+.detalhesEncontro{
+    display: flex;
+    justify-content: center;
+    height: 70%;
+    width: 70%;
+    font-size: 1.3em;
+    border-radius: 30px;
+    margin-top:5%;
+    gap: 2%;
+}
+
 .descricaoModalEncontro {
     display: flex;
     text-align: center;
     justify-content: center;
-    height: 20%;
+    height: 100%;
     width: 60%;
     background-color: var(--backgroundLogin);
     font-size: 1.3em;
@@ -660,20 +670,29 @@ img.iconeBusca {
 }
 
 .participantes {
-    height: 60%;
-    width: 60%;
+    height: 100%;
+    width: 40%;
     background-color: var(--backgroundLogin);
-    font-size: 1.5em;
     border: 1px solid black;
     border-radius: 30px;
-    margin-top: 30px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.participantes > h3 {
+    margin-bottom: 5%;
+    text-align: center;
+    font-size: 1em;
 }
 
 .infoParticipantes {
+    height: 7vh;
     display: flex;
     border-bottom: 1px solid black;
     position: relative;
     align-items: center;
+    padding-left: 4%;
+    gap: 5%;
 }
 
 .idParticipante {
@@ -816,60 +835,29 @@ img.iconeBusca {
     cursor: pointer;
 }
 
-/* width: 15vw; */
-
-#humburger {
-    cursor: pointer;
-    position: absolute;
-    left: 0;
-    margin-left: 12px;
-}
-
 .iconsImgs {
     height: 2.5vh;
     width: 1.5vw;
     display: block;
     filter: invert(100%);
-    
-}
-
-x .menuInteresses,
-.menuNotificacoes,
-.menuConfiguracoes {
-    height: 5%;
-    display: flex;
-    align-items: center;
-}
-
-.menuInteresses:hover,
-.menuNotificacoes:hover,
-.menuConfiguracoes:hover {
     cursor: pointer;
-    background-color: var(--cor5);
+
 }
 
-.menuInteresses>p,
-.menuNotificacoes>p,
-.menuConfiguracoes>p {
-    visibility: hidden;
-    height: 100%;
-}
 
-.partidasFavoritas.active>.menuInteresses>p,
-.partidasFavoritas.active>.menuNotificacoes>p,
-.partidasFavoritas.active>.menuConfiguracoes>p {
-    visibility: visible;
-    margin-left: 3vw;
-    transition: all 1s ease;
-}
 
-.notificacoes,
-.configuracoes {
-    height: 100vw;
-    background-color: var(--backgroundLogin);
+.notificacoes {
+    height: 100vh;
+    width: 20vw;
+    position: absolute;
+    background-color: var(--textoHome);
     overflow-y: scroll;
     scroll-behavior: smooth;
     transition: transform 1s;
+    z-index: 1;
+    right: 0;
+    position: fixed;
+    top: 1;
 }
 
 .notificacoes::-webkit-scrollbar,
@@ -915,7 +903,7 @@ x .menuInteresses,
 }
 
 .modalConfigEncontro {
-    height: 40px;
+    height: 10vh;
     width: 10vw;
     position: absolute;
     top: 0;
@@ -923,6 +911,7 @@ x .menuInteresses,
     margin: 10vh 1vw 0px 0px;
     display: flex;
     flex-direction: column;
+    background-color: var(--backgroundLogin);
 }
 
 .sairModalPartidas,
@@ -1222,4 +1211,70 @@ a {
     border-radius: 50%;
     position: absolute;
     right: 2vw;
+    cursor: pointer;
+}
+
+.verPerfil {
+    height: 11vh;
+    width: 20vw;
+    position: absolute;
+    background-color: var(--textoHome);
+    transition: transform 1s;
+    z-index: 1;
+    right: 0;
+    position: fixed;
+    top: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.btnAcessarPerfil {
+    height: 50%;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding-left: 4%;
+    gap: 5%;
+}
+
+.btnAcessarPerfil:hover {
+    background-color: var(--cor4);
+}
+
+.btnSairDaConta {
+    height: 50%;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding-left: 4%;
+    gap: 5%;
+}
+
+.btnSairDaConta:hover {
+    background-color: var(--cor4);
+}
+
+.imgVerPerfil {
+    height: 4vh;
+    border-radius: 50%;
+}
+
+.btnConvidarAmigo,
+.btnAtualizarEncontro1 {
+    background-color: transparent;
+    color: white;
+    border: none;
+    height: 50%;
+    cursor: pointer;
+}
+
+.btnConvidarAmigo:hover,
+.btnAtualizarEncontro1:hover{
+    background-color: var(--cor4);
 }

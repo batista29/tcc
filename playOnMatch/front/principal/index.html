@@ -22,49 +22,41 @@
         </div>
     </header>
     <main>
+        <div class="notificacoes model">
+            <div class="itensNotificacao model">
+                <div class="descricaoNotificacao">
+                    <p class="idSolicitacao model"></p>
+                    <p class="nomeSolicitacao"></p>
+                </div>
+                <div class="btnsResposta">
+                    <button onclick="responderSolicitacaoAmizader(1,this)" class="btnAceitarAmizade"><img
+                            src="../../docs/imgs/verifica.png" alt=""></button>
+                    <button onclick="responderSolicitacaoAmizader(2,this)" class="btnRecusarAmizade"><img
+                            src="../../docs/imgs/excluir.png" alt=""></button>
+                    </button>
+                </div>
+            </div>
+            <div class="itensNotificacaoConvite model">
+                <div class="descricaoNotificacaoConvite">
+                    <p class="idSolicitacaoConvite model"></p>
+                    <p class="nomeSolicitacaoConvite"></p>
+                </div>
+                <div class="btnsRespostaConvite">
+                    <button onclick="responderConvite(1)" class="btnAceitarConvite"><img
+                            src="../../docs/imgs/verifica.png" alt=""></button>
+                    <button onclick="responderConvite(2)" class="btnRecusarConvite"><img
+                            src="../../docs/imgs/excluir.png" alt=""></button>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="verPerfil model">
+            <button onclick="acessarPerfil()" class="btnAcessarPerfil"><img class="imgVerPerfil" src="" alt=""> Acessar
+                Perfil</button>
+            <button onclick="sair()" class="btnSairDaConta"><img class="imgSairDaConta" src="../../docs/imgs/sair.png"
+                    alt="">Sair</button>
+        </div>
         <button onclick="abrirModal()" class="abrirModal1">Criar Encontro</button>
-        <!-- <div data-content id="menu" class="partidasFavoritas">
-            <div class="menuNotificacoes">
-                <img class="iconsImgs imgNotificacoes" src="../../docs/imgs/notificacao.png" alt="">
-                <p class="titulosMenu">Notificações</p>
-            </div>
-            <div class="notificacoes model">
-                <div class="itensNotificacao model">
-                    <div class="descricaoNotificacao">
-                        <p class="idSolicitacao model"></p>
-                        <p class="nomeSolicitacao"></p>
-                    </div>
-                    <div class="btnsResposta">
-                        <button onclick="responderSolicitacaoAmizader(1,this)" class="btnAceitarAmizade"><img
-                                src="../../docs/imgs/verifica.png" alt=""></button>
-                        <button onclick="responderSolicitacaoAmizader(2,this)" class="btnRecusarAmizade"><img
-                                src="../../docs/imgs/excluir.png" alt=""></button>
-                        </button>
-                    </div>
-                </div>
-                <div class="itensNotificacaoConvite model">
-                    <div class="descricaoNotificacaoConvite">
-                        <p class="idSolicitacaoConvite model"></p>
-                        <p class="nomeSolicitacaoConvite"></p>
-                    </div>
-                    <div class="btnsRespostaConvite">
-                        <button onclick="responderConvite(1)" class="btnAceitarConvite"><img
-                                src="../../docs/imgs/verifica.png" alt=""></button>
-                        <button onclick="responderConvite(2)" class="btnRecusarConvite"><img
-                                src="../../docs/imgs/excluir.png" alt=""></button>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="configuracoes model">
-                <button onclick="acessarPerfil()">
-                    <p>acessarPerfil</p>
-                </button>
-                <button onclick="sair()">
-                    <p>sair</p>
-                </button>
-            </div>
-        </div> -->
 
         <div class="read">
             <div class="filtro">
@@ -97,7 +89,7 @@
             <h2>FRIENDS</h2>
             <div class="allFriends">
                 <div class="friends_info model">
-                    
+
                     <img class="imguser"></img>
                     <p class="idAmigo model">id</p>
                     <p class="nomeAmigo">nome</p>
@@ -159,31 +151,36 @@
     <div class="modalPartidas model">
         <div class="infoPartida">
             <button class="btnConfigEncontro" onclick="abrirModalConfigEncontro()">...</button>
+            <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
+
             <div class="modalConfigEncontro model">
                 <button onclick="cancelarEncontro()" class="encerrarEncontro model">Finalizar Encontro?</button>
                 <button class="btnConvidarAmigo" onclick="modalAbrirConvidarAmigo()">
                     convidar amigo
                 </button>
-                <button class="btnAtualizarEncontro" onclick="modalAbrirAtualizarEncontro()">
+                <button class="btnAtualizarEncontro1" onclick="modalAbrirAtualizarEncontro()">
                     atualizar encontro
                 </button>
             </div>
-            <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
-            <div class="descricaoModalEncontro">
-                <p>teste</p>
-            </div>
-            <div class="participantes">
-                <div class="infoParticipantes model">
-                    <p class="idParticipante model">nome</p>
-                    <img class="imguser" alt="">
-                    <p class="nomeParticipante">nome</p>
-                    <button class="btnOptions">Adicionar</button>
+            <div class="detalhesEncontro">
+                <div class="descricaoModalEncontro">
+
                 </div>
-                <div class="modaAdicionar model">
-                    <button>visitar perfil</button>
-                    <button>adicionar amigo</button>
+                <div class="participantes">
+                    <h3>Participantes</h3>
+                    <div class="infoParticipantes model">
+                        <p class="idParticipante model">nome</p>
+                        <img class="imguser" alt="">
+                        <p class="nomeParticipante">nome</p>
+                        <button class="btnOptions">Adicionar</button>
+                    </div>
+                    <div class="modaAdicionar model">
+                        <button>visitar perfil</button>
+                        <button>adicionar amigo</button>
+                    </div>
                 </div>
             </div>
+
             <div class="buttonConfirmar">
                 <button onclick="adicionarParticipante()" class="btnParticiparDoEvento">Participar</button>
                 <button onclick="removerParticipante()" class="btnCancelarParticipacao">Cancelar</button>

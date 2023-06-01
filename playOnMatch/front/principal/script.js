@@ -229,9 +229,6 @@ function listaParticipantes() {
 
             encontro.forEach((e) => {
 
-                //    console.log(e)
-
-
                 let nomeParticipante = e.idParticipante.nome
 
                 let dados = infoParticipante.cloneNode(true)
@@ -259,14 +256,18 @@ function listaParticipantes() {
                         dados.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
                     })
 
-
                 let { id } = user
+               
+
                 let btnOptions = dados.querySelector('.btnOptions')
 
+                if(e.idParticipante.id == id){
+                    btnOptions.classList.add('model')
+                }
                 let amizade = e.idParticipante.criadorListaAmigo.filter(e => e.amigo.id == id)
 
-                amizade.forEach(e => {
 
+                amizade.forEach(e => {
 
                     if (e.amigo.id == id && e.status == 1) {
                         btnOptions.innerHTML = "Amigos"
@@ -281,10 +282,6 @@ function listaParticipantes() {
                     }
 
                 })
-
-                // let listaRemetente = e.idParticipante.criadorListaAmigo.filter(e => e.remetente == id)
-
-
 
                 btnOptions.addEventListener('click', function () {
                     let idParticipante = this.parentNode.children[0].innerHTML
@@ -428,7 +425,6 @@ function acessarPerfil() {
 
     let { id } = user
 
-    // id = id.children[0].innerHTML.slice(1)
     localStorage.setItem("perfil", JSON.stringify(id))
     window.location.href = "../perfil/index.html"
 }
@@ -592,87 +588,26 @@ function sair() {
     window.location.href = "../login/index.html"
 }
 
-const menuNotificacoes = document.querySelector('.menuNotificacoes')
-const imgConfiguracao = document.querySelector('.imgConfiguracao')
-const imgNotificacoes = document.querySelector('.imgNotificacoes')
-const menuConfiguracoes = document.querySelector('.menuConfiguracoes')
-// const tab = document.querySelector('[data-target]'),
-//     tabContent = document.querySelector('[data-content]')
+const iconsImgs = document.querySelector('.iconsImgs')
 
-// tab.addEventListener('click', () => {
+iconsImgs.addEventListener('click', () => {
 
-//     tabContent.classList.forEach((e) => {
+    let notificacoes = document.querySelector('.notificacoes')
 
-//         if (e == 'active') {
-//             tabContent.classList.remove('active')
-
-//         } else {
-//             tabContent.classList.add('active')
-//         }
-//     })
-// })
-
-// menuNotificacoes.addEventListener('click', (event) => {
-
-//     let notificacoes = document.querySelector('.notificacoes')
-
-//     notificacoes.classList.toggle('model')
-// })
+    notificacoes.classList.toggle('model')
+})
 
 
-// menuConfiguracoes.addEventListener('click', () => {
-//     let configuracoes = document.querySelector('.configuracoes')
+const imgPerfil = document.querySelector('.imgPerfil')
 
-//     configuracoes.classList.toggle('model')
+imgPerfil.addEventListener('click', () => {
 
-// })
+    let verPerfil = document.querySelector('.verPerfil')
 
-// imgConfiguracao.addEventListener('click', function (event) {
-
-//     tabContent.classList.forEach((e) => {
-
-//         let configuracoes = document.querySelector('.configuracoes')
-
-//         if (e == 'active') {
-//             tabContent.classList.remove('active')
-
-//             configuracoes.classList.remove('model')
-
-//         } else {
-//             tabContent.classList.add('active')
-//             let configuracoes = document.querySelector('.configuracoes')
-
-//             configuracoes.classList.add('model')
-
-//             let notificacoes = document.querySelector('.notificacoes')
-
-//             notificacoes.classList.add('model')
-//         }
-//     })
-// })
+    verPerfil.classList.toggle('model')
+})
 
 
-// imgNotificacoes.addEventListener('click', function (event) {
-
-
-//     tabContent.classList.forEach((e) => {
-//         if (e == 'active') {
-//             tabContent.classList.remove('active')
-//             let notificacoes = document.querySelector('.notificacoes')
-
-//             notificacoes.classList.remove('model')
-//         } else {
-//             tabContent.classList.add('active')
-
-//             let configuracoes = document.querySelector('.configuracoes')
-
-//             configuracoes.classList.add('model')
-//             let notificacoes = document.querySelector('.notificacoes')
-
-//             notificacoes.classList.add('model')
-//         }
-//     })
-// })
 
 function abrirModalConfigEncontro() {
     let modalConfigEncontro = document.querySelector('.modalConfigEncontro')
@@ -980,10 +915,11 @@ function verConvite() {
         .then(response => {
             let notificacoes = document.querySelector('.notificacoes')
             let itensNotificacao = document.querySelector('.itensNotificacaoConvite')
-
             let conviteEncontros = response.participante.filter((e) => e.status == 0)
 
+
             conviteEncontros.forEach((e) => {
+                
                 let info = itensNotificacao.cloneNode(true)
                 info.classList.remove('model')
 
@@ -1085,9 +1021,11 @@ function usuario() {
 
         .then(blob => {
             let imgPerfil = document.querySelector('.imgPerfil')
+            let imgVerPerfil = document.querySelector('.imgVerPerfil')
 
             const imageUrl = URL.createObjectURL(blob);
 
+            imgVerPerfil.src = imageUrl
             imgPerfil.src = imageUrl
         })
         .catch(error => {
