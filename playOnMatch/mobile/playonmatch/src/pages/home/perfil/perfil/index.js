@@ -54,6 +54,9 @@ export default function NewPartida() {
                     <Text style={styles.textoPerfil}>{perfil.nome}</Text>
                     <Text style={styles.textoPerfil}>{perfil.email}</Text>
                     <Text style={styles.textoPerfil}>{dataNascimentoFormatada}</Text>
+                    <TouchableOpacity style={styles.btnAttPerfil}>
+                        <Text style={styles.textAttPerfil}>Atualizar perfil</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.second}>
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     main: {
-        height: '100px',
+        height: '140px',
         width: '200px',
         alignItems: 'center',
         justifyContent: 'center',
@@ -130,5 +133,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         border: '2px solid #B9B4D9',
         backgroundColor: '#405173'
+    },
+    btnAttPerfil: {
+
+    },
+    textAttPerfil: {
+        fontSize: '15px',
+        color: '#ffbf00',
     }
 })

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import principal from './principal/index'
-import perfil from './perfil/index'
+import perfil from './perfil/perfil/index'
 
 const Tab = createMaterialTopTabNavigator();
 

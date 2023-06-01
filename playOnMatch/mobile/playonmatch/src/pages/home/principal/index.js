@@ -49,11 +49,11 @@ export default function Main({ navigation }) {
                 </TouchableOpacity>
             } else if (participante) {
                 return <TouchableOpacity onPress={() => { removerParticipante(encontroId) }}>
-                    <Text style={styles.textoBtnCancelar}>Cancelar</Text>
+                    <Text style={styles.textoBtnCancelar}>Cancelar participação</Text>
                 </TouchableOpacity>
             } else {
                 return <TouchableOpacity onPress={() => { addParticipante(encontroId) }}>
-                    <Text style={styles.textoBtnParticipar}>addParticipante</Text>
+                    <Text style={styles.textoBtnParticipar}>Participar</Text>
                 </TouchableOpacity>
             }
         }
