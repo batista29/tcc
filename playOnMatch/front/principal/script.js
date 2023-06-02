@@ -279,6 +279,15 @@ function listaParticipantes() {
 
                 let { id } = user
 
+                e.idCriador.id
+
+                if (e.idCriador.id == id) {
+                    let encerrarEncontro = document.querySelector('.encerrarEncontro')
+                    let btnAtualizarEncontro1 = document.querySelector('.btnAtualizarEncontro1')
+
+                    encerrarEncontro.classList.remove("model")
+                    btnAtualizarEncontro1.classList.remove("model")
+                }
 
                 let btnOptions = dados.querySelector('.btnOptions')
 
@@ -299,7 +308,7 @@ function listaParticipantes() {
                     }
 
                     if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
-                        btnOptions.innerHTML = "Aceitar solicitação"
+                        btnOptions.innerHTML = "Responder solicitação"
                     }
 
                 })
@@ -309,8 +318,10 @@ function listaParticipantes() {
 
                     if (btnOptions.innerText == 'Adicionar') {
                         enviarSolicitacao(idParticipante)
-                    } else if (btnOptions.innerText === "Solicitado") {
+                    } else if (btnOptions.innerText == "Solicitado") {
                         abrirModalCancelarSolicitacao(idParticipante)
+                    } else if (btnOptions.innerText == "Responder solicitação") {
+                        modalResponderSolicitacao(idParticipante)
                     }
                 })
                 participantes.appendChild(dados)
@@ -585,7 +596,10 @@ function acessarPerfilAmigo(idAmigo) {
 
 function responderSolicitacaoAmizader(resposta, teste) {
 
-    let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
+    // let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
+
+    console.log(resposta)
+    console.log(teste)
     let { id } = user
 
     const options = {
@@ -594,13 +608,13 @@ function responderSolicitacaoAmizader(resposta, teste) {
         body: `{"RespUsuario":${resposta}}`
     };
 
-    fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
-        .then(response => {
-            console.log(response)
-            window.location.reload()
-            return response.json()
-        })
-        .then(response => console.log(response))
+    // fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
+    //     .then(response => {
+    //         console.log(response)
+    //         window.location.reload()
+    //         return response.json()
+    //     })
+    //     .then(response => console.log(response))
 }
 
 function sair() {
@@ -609,14 +623,12 @@ function sair() {
     window.location.href = "../login/index.html"
 }
 
-const iconsImgs = document.querySelector('.iconsImgs')
 
-iconsImgs.addEventListener('click', () => {
-
+function abrirModalNotificacao(){
     let notificacoes = document.querySelector('.notificacoes')
 
     notificacoes.classList.toggle('model')
-})
+}
 
 
 const imgPerfil = document.querySelector('.imgPerfil')
@@ -627,18 +639,6 @@ imgPerfil.addEventListener('click', () => {
 
     verPerfil.classList.toggle('model')
 })
-
-
-
-function abrirModalConfigEncontro() {
-    let modalConfigEncontro = document.querySelector('.modalConfigEncontro')
-
-    if (modalConfigEncontro.classList.contains("model")) {
-        modalConfigEncontro.classList.remove("model")
-    } else {
-        modalConfigEncontro.classList.add("model")
-    }
-}
 
 function modalAbrirConvidarAmigo() {
     let modalAparecer = document.querySelector(".modalConvidarAmigo");
@@ -818,7 +818,7 @@ function filtrarDadosAPI(input) {
                     }
 
                     if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
-                        btnAddAmigo.innerHTML = "Aceitar solicitação"
+                        btnAddAmigo.innerHTML = "Responder solicitação"
                     }
 
                 })
@@ -978,13 +978,16 @@ function responderConvite(resposta) {
 function enviarSolicitacao(idAmigo) {
 
     let { id } = user
-    console.log(idAmigo)
     const options = { method: 'POST' };
 
     fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
-        .then(response => response.json())
         .then(response => {
+            console.log('oi')
+
             window.location.reload()
+            return response.json()
+        })
+        .then(response => {
             console.log(response)
         })
 }
@@ -996,18 +999,16 @@ function abrirModalCancelarSolicitacao(idParticipante) {
     modalCancelarSolicitacao.classList.remove('model')
 
     const options = { method: 'GET' };
+    let bntCancelarSolicitacao = document.querySelector(".bntCancelarSolicitacao")
 
     let { id } = user
+
     fetch(`http://localhost:3000/listarUsuario/${id}`, options)
         .then(response => response.json())
         .then(response => {
 
-            console.log(idParticipante)
-
-            let lista1 = response.usuario.criadorListaAmigo.filter(e => e.remetente == id && idParticipante == e.idAmigo)
-            let lista2 = response.usuario.amigo.filter(e => e.remetente == id && idParticipante == e.idCriador)
-
-            let bntCancelarSolicitacao = document.querySelector(".bntCancelarSolicitacao")
+            let lista1 = response.criadorListaAmigo.filter(e => e.remetente == id && idParticipante == e.idAmigo)
+            let lista2 = response.amigo.filter(e => e.remetente == id && idParticipante == e.idCriador)
 
             bntCancelarSolicitacao.addEventListener('click', () => {
                 const options = { method: 'DELETE' };
@@ -1021,7 +1022,6 @@ function abrirModalCancelarSolicitacao(idParticipante) {
                     .catch(err => console.error(err));
             })
         })
-        .catch(err => console.error(err));
 }
 
 function fecharCancelamentoDeSolicitacao() {
@@ -1070,9 +1070,29 @@ function qntdDeNotificacao() {
     let count = document.querySelector('.count')
 
     count.innerHTML = totalDeNotificacao
+}
 
+function modalResponderSolicitacao(id) {
+    let modalResponderSolicitacaoAmizade = document.querySelector('.modalResponderSolicitacaoAmizade')
 
+    modalResponderSolicitacaoAmizade.classList.remove('model')
 
+    let btnAceitarAmizade = document.getElementById('btnRespAceitarAmizade')
+    let btnRecusarAmizade = document.getElementById('btnRespRecusarAmizade')
+
+    btnAceitarAmizade.addEventListener("click", function () {
+        responderSolicitacaoAmizader(1, id)
+    })
+
+    btnRecusarAmizade.addEventListener("click", function () {
+        responderSolicitacaoAmizader(2, id)
+    })
+}
+
+function fecharModalResponderSolicitacao() {
+    let modalResponderSolicitacaoAmizade = document.querySelector('.modalResponderSolicitacaoAmizade')
+
+    modalResponderSolicitacaoAmizade.classList.add('model')
 }
 
 qntdDeNotificacao()

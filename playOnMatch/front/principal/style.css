@@ -574,15 +574,6 @@ img.iconeBusca {
 
 /* botão para encerrar partida */
 
-.encerrarEncontro {
-    border: none;
-    background-color: #ec0000;
-}
-
-.encerrarEncontro:hover {
-    cursor: pointer;
-}
-
 .btnFavoritarPartida {
     height: 30px;
     width: 30px;
@@ -630,20 +621,15 @@ img.iconeBusca {
 }
 
 .btnFechaModalPartidas {
-    height: 30px;
-    width: 30px;
     border: none;
-    background-color: #00bdec;
+    background-color: transparent;
     border-radius: 50%;
     margin: 10px;
     position: absolute;
     top: 0;
     right: 0;
-}
-
-.btnFechaModalPartidas:hover {
-    background-color: #00f63e;
     cursor: pointer;
+    color: white;
 }
 
 .detalhesEncontro {
@@ -665,7 +651,6 @@ img.iconeBusca {
     background-color: var(--backgroundLogin);
     font-size: 1.3em;
     border: 1px solid black;
-    border-radius: 30px;
 }
 
 .participantes {
@@ -673,9 +658,23 @@ img.iconeBusca {
     width: 40%;
     background-color: var(--backgroundLogin);
     border: 1px solid black;
-    border-radius: 30px;
     overflow-y: scroll;
     scroll-behavior: smooth;
+}
+
+.participantes::-webkit-scrollbar {
+    width: 12px;
+}
+
+.participantes::-webkit-scrollbar-track {
+    background-color:transparent;
+    border-radius: 10px;
+}
+
+.participantes::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 20px;
+    border: 2px solid gray;
 }
 
 .participantes>h3 {
@@ -898,13 +897,7 @@ img.iconeBusca {
     border-radius: 50%;
 }
 
-.btnConfigEncontro:hover {
-    background-color: #008F8C;
-}
-
 .modalConfigEncontro {
-    height: 10vh;
-    width: 10vw;
     position: absolute;
     top: 0;
     right: 0;
@@ -1284,16 +1277,19 @@ a {
 }
 
 .btnConvidarAmigo,
-.btnAtualizarEncontro1 {
+.btnAtualizarEncontro1,
+.encerrarEncontro {
     background-color: transparent;
     color: white;
     border: none;
-    height: 50%;
+    height: 3.5vh;
+    padding: 1vh;
     cursor: pointer;
 }
 
 .btnConvidarAmigo:hover,
-.btnAtualizarEncontro1:hover {
+.btnAtualizarEncontro1:hover,
+.encerrarEncontro:hover {
     background-color: var(--cor4);
 }
 
@@ -1328,8 +1324,13 @@ a {
 .detalhePartida {
     width: 100%;
     position: absolute;
-    margin: 5%;
+    margin: 5%; 
 }
+
+.descricaoEncontro{
+    margin-bottom: 14%;
+}
+
 
 .local {
     display: flex;
@@ -1341,4 +1342,37 @@ a {
     display: flex;
     align-items: center;
     gap: 5%;
+}
+
+.modalResponderSolicitacaoAmizade{
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 110vh;
+    width: 100%;
+    background-color: #0123405b;
+    align-items: center;
+    justify-content: center;
+}
+
+.respSolicitacao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40vh;
+    width: 50vh;
+    background-color: var(--backgroundLogin);
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.btnFecharModalRespAmizade{
+    background-color: transparent;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 0;
+    padding: 5px;
+    cursor: pointer;
 }

@@ -17,7 +17,7 @@
             <h1>PlayOnMatch</h1>
         </a>
         <div class="usuarioLogado">
-            <img class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
+            <img onclick="abrirModalNotificacao()" class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
             <div class="notification">
                 <div class="count">3</div>
             </div>
@@ -32,10 +32,8 @@
                     <p class="nomeSolicitacao"></p>
                 </div>
                 <div class="btnsResposta">
-                    <button onclick="responderSolicitacaoAmizader(1,this)" class="btnAceitarAmizade"><img
-                            src="../../docs/imgs/verifica.png" alt=""></button>
-                    <button onclick="responderSolicitacaoAmizader(2,this)" class="btnRecusarAmizade"><img
-                            src="../../docs/imgs/excluir.png" alt=""></button>
+                    <button id="btn1" class="btnAceitarAmizade"><img src="../../docs/imgs/verifica.png" alt=""></button>
+                    <button id="btn2" class="btnRecusarAmizade"><img src="../../docs/imgs/excluir.png" alt=""></button>
                     </button>
                 </div>
             </div>
@@ -153,16 +151,15 @@
     </div>
     <div class="modalPartidas model">
         <div class="infoPartida">
-            <button class="btnConfigEncontro" onclick="abrirModalConfigEncontro()">...</button>
             <button class="btnFechaModalPartidas" onclick="fecharModalPartida()">x</button>
 
-            <div class="modalConfigEncontro model">
-                <button onclick="cancelarEncontro()" class="encerrarEncontro model">Finalizar Encontro?</button>
+            <div class="modalConfigEncontro">
+                <button onclick="cancelarEncontro()" class="encerrarEncontro model">Finalizar Encontro</button>
                 <button class="btnConvidarAmigo" onclick="modalAbrirConvidarAmigo()">
-                    convidar amigo
+                    Convidar amigo
                 </button>
-                <button class="btnAtualizarEncontro1" onclick="modalAbrirAtualizarEncontro()">
-                    atualizar encontro
+                <button class="btnAtualizarEncontro1 model" onclick="modalAbrirAtualizarEncontro()">
+                    Atualizar encontro
                 </button>
             </div>
             <div class="detalhesEncontro">
@@ -202,10 +199,20 @@
                     </div>
                 </div>
             </div>
-
             <div class="buttonConfirmar">
                 <button onclick="adicionarParticipante()" class="btnParticiparDoEvento">Participar</button>
                 <button onclick="removerParticipante()" class="btnCancelarParticipacao">Cancelar</button>
+            </div>
+            <div class="modalResponderSolicitacaoAmizade model">
+                <div class="respSolicitacao">
+                    <button onclick="fecharModalResponderSolicitacao()" class="btnFecharModalRespAmizade">x</button>
+                    <p>Deseja Aceitar a Solicitação de amizade?</p>
+                    <div class="btnsRespAmizade">
+                        <button id="btnRespAceitarAmizade">Aceitar</button>
+                        <button id="btnRespRecusarAmizade">Recusar</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -294,6 +301,7 @@
             <button class="bntCancelarSolicitacao">Cancelar Solicitação</button>
         </div>
     </div>
+
 </body>
 <script src="script.js"></script>
 

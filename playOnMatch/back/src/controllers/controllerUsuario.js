@@ -144,7 +144,7 @@ const listaUsuario = async (req, res) => {
             amigo: true
         }
     })
-    res.status(200).send({ usuario }).end()
+    res.status(200).json(usuario).end()
 }
 
 const readOne = async (req, res) => {
