@@ -123,7 +123,7 @@ export default function Main({ navigation }) {
                                                 <Text style={styles.texto}>{e.titulo} </Text>
                                                 <Text style={styles.texto}>Descricao: {e.descricao} </Text>
                                                 <Text style={styles.texto}>Local: {e.local.nome} </Text>
-                                                <Text style={styles.texto}>Endereço: {e.local.endereco} </Text>
+                                                <Text style={styles.texto}>Endereço: {e.local.rua} </Text>
                                                 <Text style={styles.texto}>Data: {e.dataHora} </Text>
                                                 {verificarParticipacao(e.id)}
                                             </View>

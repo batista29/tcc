@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Picker, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const YearPicker = () => {
+const YearPicker = ({ navigation }) => {
     //pegar ano
     const startYear = 1901;
     const currentDate = new Date();
@@ -13,7 +13,7 @@ const YearPicker = () => {
         years.push(year.toString());
     }
 
-    const [selectedYear, setSelectedYear] = useState('1901');
+    const [selectedYear, setSelectedYear] = useState([]);
 
     const handleYearChange = (value) => {
         setSelectedYear(value);
@@ -27,7 +27,7 @@ const YearPicker = () => {
         days.push(day.toString());
     }
 
-    const [selectedDay, setSelectedDay] = useState('01');
+    const [selectedDay, setSelectedDay] = useState([]);
 
     const handleDayChange = (value) => {
         setSelectedDay(value);
@@ -41,7 +41,7 @@ const YearPicker = () => {
         months.push(month.toString());
     }
 
-    const [selectedMonth, setSelectedMonth] = useState('01');
+    const [selectedMonth, setSelectedMonth] = useState([]);
 
     const handleMonthChange = (value) => {
         setSelectedMonth(value);
@@ -116,7 +116,7 @@ const YearPicker = () => {
         dados.email = infosLogin.email
     }
 
-    if (dados.nascimento.length == 0) {
+    if (dados.nascimento.length < 19) {
         dados.nascimento = infosLogin.nascimento
     }
 

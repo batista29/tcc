@@ -33,8 +33,8 @@ export default function Login({ navigation }) {
             alert('Senha incorreta')
           } else if (data.mensagem == 'Seu login foi bem-sucedido') {
             let id = Number(data.usuario.id)
-            let token = data.usuario.token
             AsyncStorage.setItem('idLogin', id)
+            let token = data.usuario.token            
             AsyncStorage.setItem('token', token)
             navigation.navigate("Main")
           } else if (data.mensagem == 'Usuário não encontrado') {
