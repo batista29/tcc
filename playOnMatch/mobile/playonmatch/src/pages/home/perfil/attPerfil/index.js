@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Picker, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const YearPicker = () => {
     //pegar ano
@@ -60,6 +61,43 @@ const YearPicker = () => {
 
     var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
 
+    const [lida, setLida] = useState([]);
+    const [token, setToken] = useState([]);
+    const [infosLogin, setInfosLogin] = useState([]);
+
+    const getData = async () => {
+        try {
+            let id = await AsyncStorage.getItem("idLogin");
+            setLida(id)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (lida.length == 0) getData();
+
+    const getToken = async () => {
+        try {
+            let token = await AsyncStorage.getItem("token");
+            setToken(token)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (token.length == 0) getToken();
+
+    const getInfosLogin = async () => {
+        try {
+            let infosLogin = await AsyncStorage.getItem("infosLogin");
+            setInfosLogin(JSON.parse(infosLogin))
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (infosLogin.length == 0) getInfosLogin();
+
     const [nome, setNome] = useState([]);
     const [email, setEmail] = useState([]);
     const [senha, setSenha] = useState([]);
@@ -67,38 +105,44 @@ const YearPicker = () => {
     let dados = {
         nome: nome,
         email: email,
-        senha: senha,
         nascimento: dataEnviar,
     }
 
-    const cadastrarPessoa = () => {
-        if (dados.nome.length == 0 || dados.email.length == 0 || dados.senha.length == 0 || dados.nascimento.length < 19) {
+    if (dados.nome.length == 0) {
+        dados.nome = infosLogin.nome
+    }
+
+    if (dados.email.length == 0) {
+        dados.email = infosLogin.email
+    }
+
+    if (dados.nascimento.length == 0) {
+        dados.nascimento = infosLogin.nascimento
+    }
+
+    console.log(dados)
+
+    const editarPerfil = () => {
+        if (dados.nome.length == 0 || dados.email.length == 0 || dados.nascimento.length < 19) {
             alert('Algum campo vazio')
         } else {
-            fetch("http://10.87.207.7:3000/criarUsuario", {
-                method: 'POST',
+            const options = {
+                method: 'PUT',
                 headers: {
-                    Accept: 'application/json',
+                    authorization: token,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(dados)
-            }
-            )
-                .then(res => {
-                    return res.json()
-                })
-                .then(data => {
-                    console.log(data)
-                    if (data.erro == 'Email já existente') {
-                        alert('Esse e-mail já existente')
-                    } else if (data.mensagem == "OK") {
-                        alert("Usuario criado")
-                        window.location.reload()
-                    } else {
-                        alert("Erro ao criar")
-                        window.location.reload()
+            };
+
+            fetch(`http://localhost:3000/atualizarUsuario/${lida}?=`, options)
+                .then(response => {
+                    if (response.status == 200) {
+                        navigation.navigate("Perfil")
                     }
                 })
+                .then(response => console.log(response))
+                .catch(err => console.error(err));
         }
     }
 
@@ -157,7 +201,7 @@ const YearPicker = () => {
                     </Picker>
 
                     <TouchableOpacity style={styles.btnCriar} onPress={() => {
-                        cadastrarPessoa()
+                        editarPerfil()
                     }}>
                         <Text style={styles.textBtnCriar}>Atualizar</Text>
                     </TouchableOpacity>

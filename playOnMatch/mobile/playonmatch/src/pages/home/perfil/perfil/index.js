@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function NewPartida({ navigation }) {
+export default function Perfil({ navigation }) {
 
     const [perfil, setPerfil] = useState([]);
     const [lida, setLida] = useState([]);
@@ -24,6 +24,7 @@ export default function NewPartida({ navigation }) {
         fetch(`http://10.87.207.7:3000/perfil/${lida}`)
             .then(res => { return res.json() })
             .then(data => {
+                AsyncStorage.setItem("infosLogin", JSON.stringify(data))
                 setPerfil(data)
             })
     })
@@ -34,7 +35,6 @@ export default function NewPartida({ navigation }) {
         let ids = []
 
         data.forEach(e => {
-
             ids.push(e.encontro)
 
         });
