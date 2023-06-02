@@ -217,6 +217,26 @@ function listarAmigos() {
                 dados.querySelector('.idAmigo').innerHTML = "#" + e.amigo.id
                 dados.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
 
+                let options2 = { method: 'GET' };
+
+                fetch(`http://localhost:3000/perfil/${e.amigo.id}/foto`, options2)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        } else {
+                            throw new Error('Imagem não encontrada');
+                        }
+                    })
+                    .then(blob => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        dados.querySelector('.imgpart').src = imageUrl
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        dados.querySelector('.imgpart').src = '../../docs/imgs/perfilPadrao.jpg'
+                    })
+
+
                 amigosModal.appendChild(dados)
             })
         })
