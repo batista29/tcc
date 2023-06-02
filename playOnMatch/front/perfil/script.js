@@ -93,10 +93,6 @@ function listar() {
         })
 }
 
-function exibirImagemPerfil(nomeArquivo) {
-    const imgElement = d
-}
-
 setTimeout(() => {
     let partidas = document.querySelectorAll('.infoPartida');
     partidas.forEach((e) => {
@@ -137,12 +133,6 @@ btnFecharModal.addEventListener('click', function (e) {
 btnAtualizarPerfil.addEventListener('click', function (e) {
     e.preventDefault();
 })
-
-// btnNotificacao.addEventListener('click', function () {
-//     let notificacaoModal = document.querySelector('.modalNotificacao')
-
-//     notificacaoModal.style.display = "flex"
-// })
 
 btnFechaModalNotificacao.addEventListener('click', function (e) {
     let notificacaoModal = document.querySelector('.modalNotificacao')

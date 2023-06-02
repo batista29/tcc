@@ -225,6 +225,27 @@ function listaParticipantes() {
             const btnCancelar = document.querySelector('.btnCancelarParticipacao')
             const btnParticipar = document.querySelector('.btnParticiparDoEvento')
 
+            let detalhesEncontro = document.querySelector('.descricaoModalEncontro')
+            let infoEncontro = document.querySelector('.infoEncontro')
+
+            let dados = infoEncontro.cloneNode(true)
+            dados.classList.remove('model')
+
+            let data = new Date(res.dataHora);
+
+
+            let nwData = data.toLocaleDateString("pt-BR", {
+                timeZone: "UTC",
+            });
+
+            dados.querySelector('.tituloEncontro').innerHTML = res.titulo
+            dados.querySelector('.descricaoEncontro').innerHTML = res.descricao
+            dados.querySelector('.enderecoEncontro').innerHTML = res.local.cidade + "-" + res.local.pais
+            dados.querySelector('.nomeEncontro').innerHTML = res.local.nome
+            dados.querySelector('.dataEncontro').innerHTML = nwData
+
+            detalhesEncontro.appendChild(dados)
+
             let encontro = res.EncontroUsuario.filter((e => e.status == 1))
 
             encontro.forEach((e) => {
@@ -257,11 +278,11 @@ function listaParticipantes() {
                     })
 
                 let { id } = user
-               
+
 
                 let btnOptions = dados.querySelector('.btnOptions')
 
-                if(e.idParticipante.id == id){
+                if (e.idParticipante.id == id) {
                     btnOptions.classList.add('model')
                 }
                 let amizade = e.idParticipante.criadorListaAmigo.filter(e => e.amigo.id == id)
@@ -892,6 +913,9 @@ function notificaoAmizade() {
         .then(res => {
 
             let solicitacaoAmizade = res.criadorListaAmigo.filter(element => element.status == 0 && element.remetente != id)
+
+            localStorage.setItem("notificações2", JSON.stringify(solicitacaoAmizade.length))
+
             solicitacaoAmizade.forEach((e) => {
 
                 let notificaoAmizade = dadosNotificacao.cloneNode(true)
@@ -917,9 +941,10 @@ function verConvite() {
             let itensNotificacao = document.querySelector('.itensNotificacaoConvite')
             let conviteEncontros = response.participante.filter((e) => e.status == 0)
 
+            localStorage.setItem("notificações", JSON.stringify(conviteEncontros.length))
+
 
             conviteEncontros.forEach((e) => {
-                
                 let info = itensNotificacao.cloneNode(true)
                 info.classList.remove('model')
 
@@ -1036,6 +1061,21 @@ function usuario() {
         })
 }
 
+function qntdDeNotificacao() {
+    const notificacao1 = JSON.parse(localStorage.getItem('notificações'))
+    const notificacao2 = JSON.parse(localStorage.getItem('notificações2'))
+
+    let totalDeNotificacao = notificacao1 + notificacao2
+
+    let count = document.querySelector('.count')
+
+    count.innerHTML = totalDeNotificacao
+
+
+
+}
+
+qntdDeNotificacao()
 usuario()
 verConvite()
 listaLocais()
