@@ -50,7 +50,6 @@ const responsderSolicitacaoAmizade = async (req, res) => {
             },
         }
     })
-
     res.status(200).send(resposta).end()
 }
 
@@ -86,18 +85,23 @@ const updateListaAmigo = async (req, res) => {
     }
 
     if (RespUsuario == 2) {
-        const listaDeQuemRecebeu = await prisma.lista_amigos.update({
-            where: { id: findAmigo.id },
-            data: { status: 2 }
-        })
-
-        const listaAmigoDono = await prisma.lista_amigos.update({
-            where: { id: findDono.id },
-            data: { status: 2 }
-        })
+        rejeitarSolicitacao(findDono, findAmigo)
     }
 
     res.status(200).json('sucesso').end()
+}
+
+const rejeitarSolicitacao = async (lista1, lista2) => {
+
+    const solicitacao = await prisma.lista_amigos.deleteMany({
+        where: {
+            OR: [
+                { id: lista1.id },
+                { id: lista2.id }
+            ]
+
+        }
+    })
 }
 
 const cancelarSolicitacaoAmizade = async (req, res) => {
@@ -111,7 +115,6 @@ const cancelarSolicitacaoAmizade = async (req, res) => {
 
         }
     })
-
     res.status(200).json(solicitacao).end()
 }
 
@@ -119,5 +122,6 @@ module.exports = {
     enviarSolicitacaoAmizade,
     responsderSolicitacaoAmizade,
     updateListaAmigo,
-    cancelarSolicitacaoAmizade
+    cancelarSolicitacaoAmizade,
+    rejeitarSolicitacao
 }

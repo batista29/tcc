@@ -1,36 +1,39 @@
 @media (max-width:1440px) {
-    .descricaoLocalizacao{
+    .descricaoLocalizacao {
         font-size: 1.6em;
     }
-    .formLocal>input{
+
+    .formLocal>input {
         width: 40%;
     }
-    .formLocal>button{
+
+    .formLocal>button {
         height: 5vh;
         margin-top: 10%;
         width: 40%;
-        font-size:1.6em ;
+        font-size: 1.6em;
     }
-    .formLocal>label{
+
+    .formLocal>label {
         font-size: 1.5em;
     }
 
-    .buttonTop{
+    .buttonTop {
         margin-left: 1050px;
     }
 
-    .inputsCadastro{
+    .inputsCadastro {
         height: 75vh;
         width: 30vw;
     }
 }
 
 @media (max-width:1090px) {
-    .descricaoLocalizacao{
+    .descricaoLocalizacao {
         font-size: 1.3em;
     }
 
-    .buttonTop{
+    .buttonTop {
         margin-left: 750px;
         height: 6vh;
         width: 4vw;
@@ -39,56 +42,63 @@
 
 
 
-@media (max-width:770px){
-    .descricaoLocalizacao{
+@media (max-width:770px) {
+    .descricaoLocalizacao {
         font-size: 1em;
     }
 
-    .formLocal>input{
+    .formLocal>input {
         width: 40%;
     }
-    .formLocal>button{
+
+    .formLocal>button {
         height: 5vh;
         margin-top: 10%;
         width: 40%;
-        font-size:1.2em ;
+        font-size: 1.2em;
     }
-    .formLocal>label{
+
+    .formLocal>label {
         font-size: 1.2em;
     }
 }
 
-@media(max-width:430px){
-    .localizacao{
+@media(max-width:430px) {
+    .localizacao {
         height: 110vh;
     }
-    .descricaoLocalizacao{
-       display: none;
+
+    .descricaoLocalizacao {
+        display: none;
     }
-    .formLocal{
+
+    .formLocal {
         width: 100%;
     }
-    .infoLocalizacao{
+
+    .infoLocalizacao {
         height: 60%;
         width: 70%;
     }
 
-    .formLocal>input{
+    .formLocal>input {
         width: 60%;
     }
-    .formLocal>button{
+
+    .formLocal>button {
         height: 7vh;
         margin-top: 10%;
         width: 40%;
-        font-size:1.4em ;
+        font-size: 1.4em;
     }
-    .formLocal>label{
+
+    .formLocal>label {
         font-size: 1.2em;
     }
 }
 
-@media(max-width:350px){
-    .localizacao{
+@media(max-width:350px) {
+    .localizacao {
         height: 120vh;
     }
 }

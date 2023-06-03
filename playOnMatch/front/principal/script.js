@@ -279,9 +279,7 @@ function listaParticipantes() {
 
                 let { id } = user
 
-                e.idCriador.id
-
-                if (e.idCriador.id == id) {
+                if (e.idCriador.id === id) {
                     let encerrarEncontro = document.querySelector('.encerrarEncontro')
                     let btnAtualizarEncontro1 = document.querySelector('.btnAtualizarEncontro1')
 
@@ -291,9 +289,16 @@ function listaParticipantes() {
 
                 let btnOptions = dados.querySelector('.btnOptions')
 
+
                 if (e.idParticipante.id == id) {
                     btnOptions.classList.add('model')
                 }
+
+                if (btnOptions.classList.contains('model')) {
+                    dados.style.cursor = 'pointer'
+                }
+
+
                 let amizade = e.idParticipante.criadorListaAmigo.filter(e => e.amigo.id == id)
 
 
@@ -301,6 +306,7 @@ function listaParticipantes() {
 
                     if (e.amigo.id == id && e.status == 1) {
                         btnOptions.innerHTML = "Amigos"
+                        dados.style.cursor = 'pointer'
                     }
 
                     if (e.amigo.id == id && e.status == 0 && id == e.remetente) {
@@ -312,6 +318,14 @@ function listaParticipantes() {
                     }
 
                 })
+
+                if (btnOptions.innerText == "Amigos" || btnOptions.classList.contains('model')) {
+                    dados.addEventListener("click", function () {
+                        let id = this.children[0].innerHTML
+
+                        acessarPerfilAmigo(id)
+                    })
+                }
 
                 btnOptions.addEventListener('click', function () {
                     let idParticipante = this.parentNode.children[0].innerHTML
@@ -564,8 +578,6 @@ function cancelarEncontro() {
         .then(res => console.log(res))
 }
 
-// let friends_info = document.querySelector('.friends_info')
-
 function acessarPerfilAmigo(idAmigo) {
 
     let { token } = user
@@ -594,12 +606,8 @@ function acessarPerfilAmigo(idAmigo) {
 }
 
 
-function responderSolicitacaoAmizader(resposta, teste) {
+function responderSolicitacaoAmizader(resposta, idUsuario) {
 
-    // let idCriadorLista = Number(teste.parentNode.parentNode.children[0].children[0].innerHTML)
-
-    console.log(resposta)
-    console.log(teste)
     let { id } = user
 
     const options = {
@@ -608,13 +616,13 @@ function responderSolicitacaoAmizader(resposta, teste) {
         body: `{"RespUsuario":${resposta}}`
     };
 
-    // fetch(`http://localhost:3000/solicitacaoAmizade/${idCriadorLista}/${id}`, options)
-    //     .then(response => {
-    //         console.log(response)
-    //         window.location.reload()
-    //         return response.json()
-    //     })
-    //     .then(response => console.log(response))
+    fetch(`http://localhost:3000/solicitacaoAmizade/${idUsuario}/${id}`, options)
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+            return response.json()
+        })
+        .then(response => console.log(response))
 }
 
 function sair() {
@@ -624,7 +632,7 @@ function sair() {
 }
 
 
-function abrirModalNotificacao(){
+function abrirModalNotificacao() {
     let notificacoes = document.querySelector('.notificacoes')
 
     notificacoes.classList.toggle('model')
@@ -923,6 +931,20 @@ function notificaoAmizade() {
 
                 notificaoAmizade.querySelector('.idSolicitacao').innerHTML = e.amigo.id
                 notificaoAmizade.querySelector('.nomeSolicitacao').innerHTML = e.amigo.nome + " mandou uma solicitação de amizade"
+
+                let btn1 = notificaoAmizade.querySelector('#btn1')
+                let btn2 = notificaoAmizade.querySelector('#btn2')
+
+                btn1.addEventListener("click", function () {
+                    let idUsuario = this.parentNode.parentNode.children[0].children[0].innerHTML
+                    responderSolicitacaoAmizader(1, idUsuario)
+                })
+
+                btn2.addEventListener("click", function () {
+                    let idUsuario = this.parentNode.parentNode.children[0].children[0].innerHTML
+                    responderSolicitacaoAmizader(2, idUsuario)
+                })
+
 
                 notificacaoModal.appendChild(notificaoAmizade)
             })
