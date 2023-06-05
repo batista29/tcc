@@ -415,8 +415,6 @@ function filterCardsTitulo() {
 
         partidas.forEach((e) => {
 
-            console.log()
-
             if (!e.children[0].children[0].children[1].innerHTML == '') {
 
                 let titulo = e.children[0].children[0].children[1].innerHTML
@@ -779,6 +777,8 @@ btnFecharModalCriarLocal.addEventListener('click', function (event) {
 function fecharModalConviteAmizade() {
     let modalMandarSolicitacao = document.querySelector('.modalMandarSolicitacao')
     modalMandarSolicitacao.classList.add('model')
+
+    window.location.reload()
 }
 
 function abrirModalConviteAmizade() {
@@ -791,76 +791,86 @@ function filtrarDadosAPI(input) {
         .then(response => response.json())
         .then(data => {
 
-            const filtrados = data.filter(item => `#${item.id} ${item.nome}`.toLocaleLowerCase().includes(input.toLocaleLowerCase()));
+            const filtrados = data.filter(item => `${item.nome}`.toLowerCase().includes(input.toLowerCase()));
 
             const divResultados = document.getElementById('resultados');
+
+            if (input === '') {
+                divResultados.innerHTML = '';
+                return
+            }
+
             divResultados.innerHTML = '';
 
-            filtrados.forEach(item => {
-                let { id } = user
-                const resultado = document.querySelector('.usuariosPesquisa').cloneNode(true);
+            if (filtrados) {
+                filtrados.forEach(item => {
+                    const resultado = document.querySelector('.usuariosPesquisa').cloneNode(true);
 
-                resultado.classList.remove('model')
+                    resultado.classList.remove('model')
 
-                resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
-                resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
+                    resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
+                    resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
 
-                let options2 = { method: 'GET' };
+                    let options2 = { method: 'GET' };
 
-                fetch(`http://localhost:3000/perfil/${item.id}/foto`, options2)
-                    .then(response => {
-                        if (response.ok) {
-                            return response.blob();
-                        } else {
-                            throw new Error('Imagem não encontrada');
+                    fetch(`http://localhost:3000/perfil/${item.id}/foto`, options2)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.blob();
+                            } else {
+                                throw new Error('Imagem não encontrada');
+                            }
+                        })
+                        .then(blob => {
+                            const imageUrl = URL.createObjectURL(blob);
+                            resultado.querySelector('.imguser').src = imageUrl
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            resultado.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
+                        })
+
+
+                    let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
+
+                    let { id } = user
+
+                    if (id == item.id) {
+                        btnAddAmigo.classList.add('model')
+                    }
+
+                    let infoAmigo = item.criadorListaAmigo.filter(e => e.amigo.id == id)
+                    infoAmigo.forEach(e => {
+
+                        if (e.amigo.id == id && e.status == 1) {
+                            btnAddAmigo.innerHTML = "Amigos"
+                        }
+
+                        if (e.amigo.id == id && e.status == 0 && id == e.remetente) {
+                            btnAddAmigo.innerHTML = "Solicitado"
+                        }
+
+                        if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
+                            btnAddAmigo.innerHTML = "Responder solicitação"
+                        }
+
+                    })
+
+                    btnAddAmigo.addEventListener('click', function () {
+                        let idParticipante = this.parentNode.children[0].innerHTML.slice(1)
+                        if (btnAddAmigo.innerText === "Adicionar") {
+                            enviarSolicitacao(idParticipante)
+                        } else if (btnAddAmigo.innerText === "Solicitado") {
+                            abrirModalCancelarSolicitacao(idParticipante)
+                        } else if (btnAddAmigo.innerText === "Amigos") {
+                            acessarPerfilAmigo(idParticipante)
                         }
                     })
-                    .then(blob => {
-                        const imageUrl = URL.createObjectURL(blob);
-                        resultado.querySelector('.imguser').src = imageUrl
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        resultado.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
-                    })
+                    divResultados.appendChild(resultado);
+                });
+            }
 
 
-                let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
-
-                if (id == item.id) {
-                    btnAddAmigo.classList.add('model')
-                }
-
-                let infoAmigo = item.criadorListaAmigo.filter(e => e.amigo.id == id)
-                infoAmigo.forEach(e => {
-
-                    if (e.amigo.id == id && e.status == 1) {
-                        btnAddAmigo.innerHTML = "Amigos"
-                    }
-
-                    if (e.amigo.id == id && e.status == 0 && id == e.remetente) {
-                        btnAddAmigo.innerHTML = "Solicitado"
-                    }
-
-                    if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
-                        btnAddAmigo.innerHTML = "Responder solicitação"
-                    }
-
-                })
-
-                btnAddAmigo.addEventListener('click', function () {
-                    let idParticipante = this.parentNode.children[0].innerHTML.slice(1)
-                    if (btnAddAmigo.innerText === "Adicionar") {
-                        enviarSolicitacao(idParticipante)
-                    } else if (btnAddAmigo.innerText === "Solicitado") {
-                        abrirModalCancelarSolicitacao(idParticipante)
-                    } else if (btnAddAmigo.innerText === "Amigos") {
-                        acessarPerfilAmigo(idParticipante)
-                    }
-                })
-
-                divResultados.appendChild(resultado);
-            });
 
         })
         .catch(error => {
@@ -868,15 +878,12 @@ function filtrarDadosAPI(input) {
         });
 }
 
-// Função que é executada quando o usuário digita no campo de input
 function onChangeInput(event) {
     const input = event.target.value;
     filtrarDadosAPI(input);
 }
 
-// Obtém o campo de input
 const inputCampo = document.getElementById('input');
-// Adiciona o evento de digitação ao campo de input
 inputCampo.addEventListener('input', onChangeInput);
 
 
