@@ -120,8 +120,6 @@ const YearPicker = ({ navigation }) => {
         dados.nascimento = infosLogin.nascimento
     }
 
-    console.log(dados)
-
     const editarPerfil = () => {
         if (dados.nome.length == 0 || dados.email.length == 0 || dados.nascimento.length < 19) {
             alert('Algum campo vazio')

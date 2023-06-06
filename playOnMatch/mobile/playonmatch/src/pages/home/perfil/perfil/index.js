@@ -21,14 +21,12 @@ export default function Perfil({ navigation }) {
     if (lida.length == 0) getData();
 
     useEffect(() => {
-        
-            fetch(`http://10.87.207.7:3000/perfil/${lida}`)
-                .then(res => { return res.json() })
-                .then(data => {
-                    AsyncStorage.setItem("infosLogin", JSON.stringify(data))
-                    setPerfil(data)
-                })
-        
+        fetch(`http://10.87.207.7:3000/perfil/${lida}`)
+            .then(res => { return res.json() })
+            .then(data => {
+                AsyncStorage.setItem("infosLogin", JSON.stringify(data))
+                setPerfil(data)
+            })
     })
 
     setTimeout(() => {
@@ -42,7 +40,7 @@ export default function Perfil({ navigation }) {
         });
 
         setEncontro(ids)
-    }, 100000000)
+    }, 500)
 
     let date = new Date(perfil.nascimento);
     let dataNascimentoFormatada = date.toLocaleDateString("pt-BR", {
@@ -77,7 +75,6 @@ export default function Perfil({ navigation }) {
                                 });
                                 let horas = e.dataHora.split('T')[1].split('.')[0].split(':')
                                 let horasFormatada = horas[0] + ':' + horas[1]
-
                                 return (
                                     <View key={index} style={styles.infos}>
                                         <Text style={styles.textoInfo}>Local: {e.local.nome}</Text>

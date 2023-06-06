@@ -10,7 +10,7 @@ export default function Home() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="principal" component={principal} />
-            <Tab.Screen name="perfil" component={perfil} />
+            <Tab.Screen name="Perfil" component={perfil} />
         </Tab.Navigator>
     );
 }

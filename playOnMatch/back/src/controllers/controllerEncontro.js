@@ -171,13 +171,13 @@ const readOne = async (req, res) => {
                         select: {
                             id: true,
                             nome: true,
-                            criadorListaAmigo:{
-                                select:{
-                                    id:true,
-                                    amigo:true,
-                                    status:true,
-                                    remetente:true,
-                                    criador:true
+                            criadorListaAmigo: {
+                                select: {
+                                    id: true,
+                                    amigo: true,
+                                    status: true,
+                                    remetente: true,
+                                    criador: true
                                 }
                             }
                         }

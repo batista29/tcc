@@ -60,8 +60,6 @@ export default function Main({ navigation }) {
         return null;
     };
 
-
-
     const addParticipante = (idPartida) => {
         const options1 = { method: 'POST' };
 
