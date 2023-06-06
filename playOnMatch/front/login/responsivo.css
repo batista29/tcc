@@ -1,12 +1,19 @@
-@media (max-width:770px){
+@media (max-width:1440px) {
+    .btn {
+        font-size: 3.2em;
+    }
+
     .formulario form input {
-        height: 35px;
-        width: 300px;
+        font-size: 1.4em;
+    }
+
+    .formulario form button {
+        height: 50px;
+        font-size: 1.5em;
     }
 }
 
-
-@media (max-width:710px) {
+@media(max-width:850px) {
     .carrosel {
         display: none;
     }
@@ -14,9 +21,42 @@
     .apresentacao {
         display: none;
     }
-
     .login-cadastro {
         width: 100%;
+    }
+}
+
+@media (max-width:770px) {
+    .formulario form input {
+        height: 35px;
+        width: 300px;
+    }
+}
+
+@media (max-width:710px) {
+    .login-cadastro {
+        width: 100%;
+    }
+}
+
+@media(max-width:430px) {
+    .formulario form input {
+        height: 30px;
+        width: 250px;
+    }
+
+    .btn {
+        font-size: 2.5em;
+    }
+
+    .formulario form input {
+        font-size: 1em;
+    }
+
+    .formulario form button {
+        height: 40px;
+        width: 200px;
+        font-size: 1.2em;
     }
 }
 
@@ -26,8 +66,17 @@
         width: 250px;
     }
 
+    .btn {
+        font-size: 2.2em;
+    }
+
+    .formulario form input {
+        font-size: 0.8em;
+    }
+
     .formulario form button {
         height: 30px;
-        width: 250px;
+        width: 150px;
+        font-size: 1em;
     }
 }

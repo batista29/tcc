@@ -183,7 +183,7 @@ body::-webkit-scrollbar-thumb {
 
 .abrirModal1 {
     height: 5vh;
-    width: 10vh;
+    width: 10vw;
     border-radius: 25px;
     background-color: var(--backgroundLogin);
     color: white;
@@ -277,7 +277,7 @@ body::-webkit-scrollbar-thumb {
 .infoData {
     height: 55%;
     width: 100%;
-    padding: 2%;
+    padding: 3%;
 }
 
 /* MODAL cadastrar */
@@ -524,11 +524,6 @@ body::-webkit-scrollbar-thumb {
     font-size: 22px;
 }
 
-.iconeBusca {
-    height: 15px;
-    width: 15px;
-}
-
 img.iconeBusca {
     margin-left: -50px;
 }
@@ -564,10 +559,12 @@ img.iconeBusca {
     width: 2vw;
     border-radius: 25px;
     font-size: 25px;
-    margin-left: 1400px;
+    /* margin-left: 1400px; */
+    /* margin-left: 1000px; */
     margin-bottom: 50px;
     margin-right: 40px;
     bottom: 0;
+    right: 18%;
     color: var(--backgroundHome);
     background-color: var(--textoHome);
 }
@@ -1200,8 +1197,8 @@ a {
 
 .notification {
     position: absolute;
-    top: 10px;
-    right: 75px;
+    top: 20%;
+    right: 40%;
     width: 17px;
     height: 17px;
     background-color: red;
@@ -1213,7 +1210,7 @@ a {
 }
 
 .count {
-    font-size: 14px;
+    font-size: 1em;
 }
 
 .imgPerfil {
@@ -1298,13 +1295,6 @@ a {
 .versus {
     height: 120px;
     width: 120px;
-    filter: invert(100%)
-}
-
-.imgLocalizacaoEncontro,
-.imgData {
-    height: 40px;
-    width: 40px;
     filter: invert(100%)
 }
 
