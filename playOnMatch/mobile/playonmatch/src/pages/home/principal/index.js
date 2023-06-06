@@ -96,7 +96,7 @@ export default function Main({ navigation }) {
         fetch(`http://10.87.207.7:3000/finalizarEncontro/${lida}/${idPartida}`, options3)
             .then(response => response.json())
             .then(response => {
-                console.log(response)
+                window.location.reload()
             })
             .catch(err => console.error(err));
     }

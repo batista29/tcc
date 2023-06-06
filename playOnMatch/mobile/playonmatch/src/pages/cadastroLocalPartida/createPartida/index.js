@@ -61,10 +61,39 @@ export default function NewPartida({ navigation }) {
         setSelectedMonth(value);
     };
 
+    //pegar a hora
+    const startHour = 0;
+    const hours = [];
+
+    for (let hour = startHour; hour <= 23; hour++) {
+        hours.push(hour.toString());
+    }
+
+    const [selectedHour, setSelectedHour] = useState('00');
+
+    const handleHourChange = (value) => {
+        setSelectedHour(value);
+    };
+
+    //pegar os minutos
+    const startMinute = 0;
+    const minutes = [];
+
+    for (let minute = startMinute; minute <= 59; minute++) {
+        minutes.push(minute.toString());
+    }
+
+    const [selectedMinute, setSelectedMinute] = useState('00');
+
+    const handleMinuteChange = (value) => {
+        setSelectedMinute(value);
+    };
+
+
     if (selectedDay.length < 2) {
-        var diaFormatado = "0" + selectedDay + 'T00:00:00Z'
+        var diaFormatado = "0" + selectedDay
     } else {
-        var diaFormatado = selectedDay + 'T00:00:00Z'
+        var diaFormatado = selectedDay
     }
 
     if (selectedMonth.length < 2) {
@@ -73,10 +102,22 @@ export default function NewPartida({ navigation }) {
         var mesFormatado = selectedMonth
     }
 
-    var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}`
+    if (selectedHour.length < 2) {
+        var horaFormatada = "T0" + selectedHour
+    } else {
+        var horaFormatada = "T" + selectedHour
+    }
+
+    if (selectedMinute.length < 2) {
+        var minutoFormatada = ":0" + selectedMinute + ':00Z'
+    } else {
+        var minutoFormatada = ":" + selectedMinute + ':00Z'
+    }
+
+    var dataEnviar = `${selectedYear}-${mesFormatado}-${diaFormatado}${horaFormatada}${minutoFormatada}`
 
     const [locais, setLocais] = useState([])
-    const [selectedLocal, setSelectedLocal] = useState([])
+    const [selectedLocal, setSelectedLocal] = useState('1')
 
     const handleLocalChange = (value) => {
         setSelectedLocal(value);
@@ -99,6 +140,8 @@ export default function NewPartida({ navigation }) {
         titulo: titulo,
         id_local: Number(selectedLocal)
     }
+
+    console.log(dados)
 
     const cadastrarEncontro = () => {
         if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0 || "") {
@@ -185,6 +228,27 @@ export default function NewPartida({ navigation }) {
                     ))}
                 </Picker>
 
+                <Text style={styles.textDate}>Selecione o horário</Text>
+                <Text style={styles.textDate}>Hora:</Text>
+                <Picker style={styles.selecionar}
+                    selectedValue={selectedHour}
+                    onValueChange={handleHourChange}
+                >
+                    {hours.map((hours) => (
+                        <Picker.Item key={hours} label={hours} value={hours} />
+                    ))}
+                </Picker>
+
+                <Text style={styles.textDate}>Minuto</Text>
+                <Picker style={styles.selecionar}
+                    selectedValue={selectedMinute}
+                    onValueChange={handleMinuteChange}
+                >
+                    {minutes.map((minute) => (
+                        <Picker.Item key={minute} label={minute} value={minute} />
+                    ))}
+                </Picker>
+
 
                 <TouchableOpacity style={styles.btnCadastrar} onPress={() => {
                     cadastrarEncontro()
@@ -205,7 +269,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     main: {
-        height: '650px',
+        height: '700px',
         width: '330px',
         alignItems: 'center',
         justifyContent: 'center',
@@ -228,7 +292,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '30px',
+        marginTop: '15px',
         color: 'black'
     },
     textBtnCadastrar: {
@@ -237,13 +301,13 @@ const styles = StyleSheet.create({
     selecionar: {
         width: '220px',
         height: '35px',
-        marginBottom: '20px',
+        marginBottom: '5px',
         marginTop: '5px',
         border: '2px solid #1A1E26',
     },
     textDate: {
         color: 'white',
-        marginTop: '10px',
+        marginTop: '15px',
         fontSize: '15px'
     }
 })
