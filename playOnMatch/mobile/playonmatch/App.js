@@ -5,7 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginCadastro from './src/pages/index';
 import Main from './src/pages/home/main.js';
 import NewLocalPartida from './src/pages/cadastroLocalPartida';
-import attPerfil from './src/pages/home/perfil/attPerfil/index'
+import attPerfil from './src/pages/home/perfil/attPerfil/index';
+import attEvento from './src/pages/cadastroLocalPartida/attEncontro/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="NewLocalPartida" component={NewLocalPartida} />
         <Stack.Screen name="attPerfil" component={attPerfil} />
+        <Stack.Screen name="attEvento" component={attEvento} />
       </Stack.Navigator>
     </NavigationContainer>
   );

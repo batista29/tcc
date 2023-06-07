@@ -44,9 +44,17 @@ export default function Main({ navigation }) {
             const participante = encontro.EncontroUsuario.find((participante) => participante.idParticipante && participante.idParticipante.id == lida && participante.idCriador.id != lida);
 
             if (criador) {
-                return <TouchableOpacity onPress={() => { encerrarPartida(encontroId) }}>
-                    <Text style={styles.textoBtnCancelar}>Encerrar Partida</Text>
-                </TouchableOpacity>
+                return (
+                    <View>
+                        <TouchableOpacity onPress={() => { encerrarPartida(encontroId) }}>
+                            <Text style={styles.textoBtnCancelar}>Encerrar Partida</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { attPartida(encontro.id, encontro.descricao, encontro.dataHora, encontro.titulo, encontro.id_local) }}>
+                            <Text style={styles.textoBtnAttPartida}>Atualizar Partida</Text>
+                        </TouchableOpacity>
+                    </View>
+                )
+
             } else if (participante) {
                 return <TouchableOpacity onPress={() => { removerParticipante(encontroId) }}>
                     <Text style={styles.textoBtnCancelar}>Cancelar participação</Text>
@@ -101,6 +109,20 @@ export default function Main({ navigation }) {
             .catch(err => console.error(err));
     }
 
+    const attPartida = (id, descricao, dataHora, titulo, id_local) => {
+
+        let data = {
+            id: id,
+            descricao: descricao,
+            dataHora: dataHora,
+            titulo: titulo,
+            id_local: id_local
+        }
+
+        AsyncStorage.setItem("infosAttPartida", JSON.stringify(data))
+
+        navigation.navigate('attEvento')
+    }
 
     return (
         <View style={styles.container}>
@@ -181,9 +203,33 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     textoBtnParticipar: {
-        color: '#7CFC00'
+        color: 'white',
+        marginTop: '10px',
+        backgroundColor: '#1A1E26',
+        border: '1px solid white',
+        borderRadius: '5px',
+        width: '140px',
+        height: '25px',
+        textAlign: 'center'
     },
     textoBtnCancelar: {
-        color: '#FF4E00'
+        color: 'white',
+        marginTop: '10px',
+        backgroundColor: '#1A1E26',
+        border: '1px solid white',
+        borderRadius: '5px',
+        width: '140px',
+        height: '25px',
+        textAlign: 'center'
+    },
+    textoBtnAttPartida: {
+        color: 'white',
+        marginTop: '10px',
+        backgroundColor: '#1A1E26',
+        border: '1px solid white',
+        borderRadius: '5px',
+        width: '140px',
+        height: '25px',
+        textAlign: 'center'
     }
 })

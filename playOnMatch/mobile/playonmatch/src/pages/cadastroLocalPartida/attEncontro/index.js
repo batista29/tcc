@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, Picker } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function NewPartida({ navigation }) {
+export default function attEvento({ navigation }) {
 
     const [lida, setLida] = useState([]);
 
@@ -125,6 +125,18 @@ export default function NewPartida({ navigation }) {
 
     const [descricao, setDescricao] = useState("")
     const [titulo, setTitulo] = useState("")
+    const [infosPartida, setInfosPartida] = useState([]);
+
+    const getInfosAttPartida = async () => {
+        try {
+            let infosAttPartida = await AsyncStorage.getItem("infosAttPartida");
+            setInfosPartida(JSON.parse(infosAttPartida))
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    if (infosPartida.length == 0) getInfosAttPartida();
 
     useEffect(() => {
         fetch('http://10.87.207.7:3000/listarLocais')
@@ -141,29 +153,45 @@ export default function NewPartida({ navigation }) {
         id_local: Number(selectedLocal)
     }
 
-    const cadastrarEncontro = () => {
-        if (dados.descricao.length == 0 || dados.dataHora.length == 0 || dados.titulo.length == 0 || dados.id_local.length == 0 || "") {
-            alert("Algum campo vazio")
-        } else {
-            fetch(`http://10.87.207.7:3000/criarEncontro/${lida}`, {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dados)
-            }
-            )
-                .then(res => {
-                    if (res.status == 201) {
-                        alert("Sucesso")
-                        navigation.navigate("Main")
-                    } else {
-                        alert("Erro")
-                    }
-                })
-                .then(data => { console.log(data) })
+    if (dados.descricao.length == 0) {
+        dados.descricao = infosPartida.descricao
+    }
+    if (dados.dataHora.length == 0) {
+        dados.dataHora = infosPartida.dataHora
+    }
+    if (dados.titulo.length == 0) {
+        dados.titulo = infosPartida.titulo
+    }
+
+    const [token, setToken] = useState([]);
+
+    const getToken = async () => {
+        try {
+            let token = await AsyncStorage.getItem("token");
+            setToken(token)
+        } catch (err) {
+            console.log(err);
         }
+    }
+
+    if (token.length == 0) getToken();
+
+    console.log(infosPartida.id)
+    const attEncontro = () => {
+        fetch(`http://10.87.207.7:3000/editarEncontro/${lida}/${infosPartida.id}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                authorization: token
+            },
+            body: JSON.stringify(dados)
+        }
+        )
+            .then(res => {
+                console.log(res)
+            })
+            .then(data => { console.log(data) })
     }
 
     return (
@@ -249,9 +277,9 @@ export default function NewPartida({ navigation }) {
 
 
                 <TouchableOpacity style={styles.btnCadastrar} onPress={() => {
-                    cadastrarEncontro()
+                    attEncontro()
                 }}>
-                    <Text style={styles.textBtnCadastrar}>Cadastrar</Text>
+                    <Text style={styles.textBtnCadastrar}>Atualizar</Text>
                 </TouchableOpacity>
             </View>
         </View>
