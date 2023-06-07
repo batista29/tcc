@@ -237,7 +237,9 @@ body::-webkit-scrollbar-thumb {
 .imgVisitarUsuario,
 .imgAdicionarUsuario,
 .btnConfigEncontro,
-.imgSairDaConta {
+.imgSairDaConta,
+.imgLocalizacaoEncontro,
+.imgData {
     height: 4vh;
     filter: invert(100%);
 }
@@ -527,7 +529,7 @@ body::-webkit-scrollbar-thumb {
 
 img.iconeBusca {
     margin-left: -50px;
-    height:3vh;
+    height:2vh;
 }
 
 .modalPartidas,

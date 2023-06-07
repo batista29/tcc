@@ -56,7 +56,7 @@ function cadastrarUsuario() {
     let inpData = document.getElementById('data').value
 
     if (inpNome.length == 0 || inpEmail.length == 0 || inpSenha.length == 0 || inpData.length == 0) {
-        erroC.style.color = "black"
+        erroC.style.color = "red"
         erroC.innerHTML = "Campo Vazio"
     } else {
         let date = new Date(inpData);
@@ -77,22 +77,29 @@ function cadastrarUsuario() {
             body: JSON.stringify(dados)
         };
 
-        fetch('http://localhost:3000/criarUsuario', options)
-            .then(response => {
-                if (response.status == 201) {
-                    erroC.style.color = '#00f63e'
-                    erroC.innerHTML = "Cadastrado com sucesso"
-                }
-                console.log(response)
-                return response.json()
-            })
-            .then(res => {
-                if (res.erro === "Email já existente") {
-                    erroC.style.color = "black"
-                    erroC.innerHTML = "Email ja Cadastrado"
-                }
-                console.log(res)
-            })
+        if (inpData.split('-')[0] <= 2020 && inpData.split('-')[0] >= 1903) {
+            fetch('http://localhost:3000/criarUsuario', options)
+                .then(response => {
+                    if (response.status == 201) {
+                        erroC.style.color = '#00f63e'
+                        erroC.innerHTML = "Cadastrado com sucesso"
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 1000)
+                    }
+
+                    return response.json()
+                })
+                .then(res => {
+                    if (res.erro === "Email já existente") {
+                        erroC.style.color = "red"
+                        erroC.innerHTML = "Email ja Cadastrado"
+                    }
+                })
+        } else {
+            erroC.innerHTML = 'data inválida'
+            erroC.style.color = "red"
+        }
     }
 }
 
@@ -139,7 +146,7 @@ function loginUsuario() {
                 if (res.mensagem === 'Seu login foi bem-sucedido') {
                     erroL.style.color = "#00f63e"
                     erroL.innerHTML = 'Seja bem-vindo!'
-                    localStorage.setItem("usuario",JSON.stringify({'id': res.usuario.id, 'token': res.usuario.token}))
+                    localStorage.setItem("usuario", JSON.stringify({ 'id': res.usuario.id, 'token': res.usuario.token }))
                     setTimeout(function () {
                         window.location.href = '../principal/index.html'
                     }, 700);
