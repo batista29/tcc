@@ -229,6 +229,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .imgLocalizacao,
+.imgAmigo,
 .imgCalendario,
 .imgEstrela,
 .imgAdicionaAmigo,
@@ -526,6 +527,7 @@ body::-webkit-scrollbar-thumb {
 
 img.iconeBusca {
     margin-left: -50px;
+    height:3vh;
 }
 
 .modalPartidas,
@@ -833,13 +835,10 @@ img.iconeBusca {
 .iconsImgs {
     height: 2.5vh;
     width: 1.5vw;
-    display: block;
     filter: invert(100%);
     cursor: pointer;
     position: relative;
-    /* Adicionado */
     z-index: 1;
-    /* Adicionado */
 }
 
 .notificacoes {
@@ -1214,8 +1213,8 @@ a {
 }
 
 .imgPerfil {
-    height: 4.5vh;
-    width: 2.5vw;
+    height: 6vh;
+    width: 3vw;
     border-radius: 50%;
     position: absolute;
     right: 2vw;
@@ -1365,4 +1364,26 @@ a {
     right: 0;
     padding: 5px;
     cursor: pointer;
+}
+
+.imgAmigo{
+    display: none;
+}
+
+footer {
+    display: none;
+    height: 10vh;
+    width: 100%;
+    background-color: var(--backgroundLogin);
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+}
+
+.dadosFooter{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }

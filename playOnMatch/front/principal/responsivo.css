@@ -14,7 +14,7 @@
 
 @media (max-width:1440px) {
 
-    .notification{
+    .notification {
         width: 15px;
         height: 15px;
     }
@@ -46,7 +46,7 @@
         font-size: 1.5em;
     }
 
-   
+
 
     .inputsCadastro {
         height: 75vh;
@@ -54,15 +54,16 @@
     }
 }
 
-@media (max-width:1260px){
+@media (max-width:1260px) {
 
-    .notification{
+    .notification {
         top: 15%;
     }
 
     .infoData {
         height: 50%;
     }
+
     .readInfo {
         height: 30vh;
         width: 280px;
@@ -121,6 +122,17 @@
     .descricaoLocalizacao {
         font-size: 1.2em;
     }
+
+    .iconsImgs {
+        margin-right: 12%;
+        height: 3vh;
+        width: 2vw;
+    }
+
+    .notification {
+        width: 15px;
+        height: 15px;
+    }
 }
 
 @media (max-width:900px) {
@@ -142,12 +154,18 @@
         width: 70%;
     }
 
-    .abrirModalEncontrarAmigo{
+    .abrirModalEncontrarAmigo {
         margin-top: 0;
     }
 }
 
 @media (max-width:830px) {
+    .notification {
+        width: 12px;
+        height: 12px;
+        font-size: 0.8em;
+    }
+
     .descricaoLocalizacao {
         font-size: 1em;
     }
@@ -156,7 +174,7 @@
         right: 18%;
     }
 
-    .filtro{
+    .filtro {
         flex-direction: column;
     }
 
@@ -167,7 +185,7 @@
         align-items: center;
     }
 
-    .filtroTituloPartidas{
+    .filtroTituloPartidas {
         margin-left: 0;
     }
 
@@ -195,18 +213,58 @@
     .formLocal>label {
         font-size: 1.2em;
     }
-}   
+}
 
-@media(max-width:742px){
+@media(max-width:742px) {
     .readInfo {
         height: 35vh;
         width: 280px;
     }
 
     .infoData {
-        height:55% ;
+        height: 55%;
         margin: 0;
     }
+
+    .friends {
+        display: none;
+    }
+
+    .read {
+        width: 88%;
+    }
+
+    .buttonTop {
+        right: 0;
+        width: 4vw;
+        margin-right: 20px;
+    }
+
+    .imgPerfil {
+        height: 7vh;
+        width: 5vw;
+    }
+
+    .iconsImgs {
+        margin-right: 80%;
+        height: 3vh;
+        width: 2vw;
+    }
+
+    .notification {
+        right: 55%;
+    }
+
+    .usuarioLogado{
+        justify-content: space-around;
+    }
+
+    .imgAmigo{
+        margin-right: 15%;
+        display: block;
+    }
+
+
 }
 
 @media (max-width:650px) {
@@ -248,25 +306,69 @@
 
     .buttonTop {
         right: 15%;
-    }
-    .buttonTop {
         width: 4vw;
     }
-}
 
-@media(max-width:500px){
-    .friends{
+    .usuarioLogado{
         display: none;
     }
 
-    .read{
+    footer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .imgAmigo{
+        margin-right: 0;
+        display: flex;
+    }
+
+    .iconsImgs{
+        margin: 0;
+        height: 5vh;
+        width: 3vw;
+    }
+    
+    .notification{
+        top: 0;
+        right: 48%;
+    }
+
+    .imgPerfil{
+        position: inherit;
+        height: 8vh;
+        width: 6vw;
+    }
+
+}
+
+@media(max-width:500px) {
+    .friends {
+        display: none;
+    }
+
+    .read {
         width: 100%;
     }
 
-    .buttonTop{
+    .buttonTop {
         width: 6vw;
         right: 5%;
         margin-right: 0;
+    }
+
+    /* .iconsImgs {
+        margin-right: 90%;
+    } */
+
+    /* .notification{
+        right: 70%;
+    } */
+
+
+    header a h1 {
+        font-size: 1.5em;
     }
 }
 
@@ -304,19 +406,17 @@
         font-size: 1.2em;
     }
 
-    .buttonTop{
+    .buttonTop {
         width: 6vw;
         right: 4%;
         margin-right: 0;
     }
-    
+
     .readInfo {
         height: 30vh;
         width: 250px;
     }
 }
-
-
 
 @media(max-width:350px) {
     .localizacao {
