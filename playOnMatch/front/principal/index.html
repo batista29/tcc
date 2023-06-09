@@ -59,7 +59,7 @@
                     alt="">Sair</button>
         </div>
         <button onclick="abrirModal()" class="abrirModal1">Criar Encontro</button>
-
+        <button class="btnAlterarLocal">Alterar Local</button>
         <div class="read">
             <div class="filtro">
                 <div class="teste">
@@ -132,21 +132,24 @@
 
     <div class="localizacao model">
         <div class="infoLocalizacao">
+            <button class="fecharModalLocalizacao">x</button>
             <div class="formLocal">
-                <label for="pais">País:</label>
-                <input type="text" id="pais" list="opcoes-pais" oninput="atualizarEstados()">
+                <label for="select-pais">País:</label>
+                <select id="select-pais" onchange="buscarEstados()">
+                    <option value="">Selecione um país</option>
+                    <option value="Brasil">Brasil</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                </select>
 
-                <datalist id="opcoes-pais"></datalist>
+                <label for="select-estado">Estado:</label>
+                <select id="select-estado" onchange="buscarCidades()">
+                    <option value="">Selecione um estado</option>
+                </select>
 
-                <label for="estado">Estado:</label>
-                <input type="text" id="estado" list="opcoes-estados" oninput="atualizarCidades()">
-
-                <datalist id="opcoes-estados"></datalist>
-
-                <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" list="opcoes-cidades">
-
-                <datalist id="opcoes-cidades"></datalist>
+                <label for="select-cidade">Cidade:</label>
+                <select id="select-cidade">
+                    <option value="">Selecione uma cidade</option>
+                </select>
                 <button onclick="pegarLocalizacaoUsuario()" class="btnConfirmarLocalizacao">confirmar</button>
                 <div class="error"></div>
             </div>

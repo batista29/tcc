@@ -10,6 +10,10 @@
     .infoData {
         margin: 7px;
     }
+
+    .readInfo{
+        height: 30vh;
+    }
 }
 
 @media (max-width:1440px) {
@@ -28,7 +32,7 @@
     }
 
     .descricaoLocalizacao {
-        font-size: 1.6em;
+        font-size: 1.5em;
     }
 
     .formLocal>input {

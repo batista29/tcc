@@ -529,7 +529,11 @@ body::-webkit-scrollbar-thumb {
 
 img.iconeBusca {
     margin-left: -50px;
+<<<<<<< HEAD
+    height: 3vh;
+=======
     height:2vh;
+>>>>>>> bfc7353da29220f5bed12c876fd1c3850313be80
 }
 
 .modalPartidas,
@@ -668,7 +672,7 @@ img.iconeBusca {
 }
 
 .participantes::-webkit-scrollbar-track {
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 10px;
 }
 
@@ -763,6 +767,7 @@ img.iconeBusca {
     color: white;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .formLocal {
@@ -1315,10 +1320,10 @@ a {
 .detalhePartida {
     width: 100%;
     position: absolute;
-    margin: 5%; 
+    margin: 5%;
 }
 
-.descricaoEncontro{
+.descricaoEncontro {
     margin-bottom: 14%;
 }
 
@@ -1335,7 +1340,7 @@ a {
     gap: 5%;
 }
 
-.modalResponderSolicitacaoAmizade{
+.modalResponderSolicitacaoAmizade {
     display: flex;
     position: fixed;
     top: 0;
@@ -1346,7 +1351,7 @@ a {
     justify-content: center;
 }
 
-.respSolicitacao{
+.respSolicitacao {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1358,7 +1363,7 @@ a {
     position: relative;
 }
 
-.btnFecharModalRespAmizade{
+.btnFecharModalRespAmizade {
     background-color: transparent;
     border: none;
     color: white;
@@ -1368,7 +1373,7 @@ a {
     cursor: pointer;
 }
 
-.imgAmigo{
+.imgAmigo {
     display: none;
 }
 
@@ -1382,10 +1387,36 @@ footer {
     z-index: 1;
 }
 
-.dadosFooter{
+.dadosFooter {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.btnAlterarLocal {
+    height: 5vh;
+    width: 10vw;
+    border-radius: 25px;
+    background-color: var(--backgroundLogin);
+    color: white;
+    position: absolute;
+    top: 30px;
+    right: 25%;
+    cursor: pointer;
+    transition: transform 1s;
+    border-color: var(--textoHome);
+}
+
+.fecharModalLocalizacao{
+    height: 4vh;
+    width: 3vw;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

@@ -13,79 +13,35 @@ if (!sessionStorage.getItem('pegarLocalização')) {
     let local = document.querySelector('.localizacao')
 
     local.classList.remove('model')
-
-    sessionStorage.setItem('pegarLocalização', 'true');
 }
 
+const btnAlterarLocal = document.querySelector('.btnAlterarLocal')
 
-const paises = ['Brasil', 'Argentina', 'Alemanha', 'selulite'];
+btnAlterarLocal.addEventListener('click', () => {
+    // sessionStorage.setItem('pegarLocalização', 'false');
+    let local = document.querySelector('.localizacao')
 
-const estadosPorPais = {
-    'Brasil': ['Rio de Janeiro', 'São Paulo', 'Minas Gerais'],
-    'Argentina': ['Buenos Aires', 'Córdoba', 'Santa Fé'],
-    'Alemanha': ['Berlim', 'Munique', 'Hamburgo'],
-    'selulite': ['estado1', 'estado2', 'estado3']
-};
+    local.classList.remove('model')
+})
 
-const cidadesPorEstado = {
-    'Rio de Janeiro': ['Rio de Janeiro', 'Niterói', 'Petrópolis'],
-    'São Paulo': ['São Paulo', 'Campinas', 'Guarulhos'],
-    'Minas Gerais': ['Belo Horizonte', 'Uberlândia', 'Juiz de Fora'],
-    'Buenos Aires': ['Buenos Aires', 'La Plata', 'Mar del Plata'],
-    'Córdoba': ['Córdoba', 'Villa Carlos Paz', 'Río Cuarto'],
-    'Santa Fé': ['Santa Fé', 'Rosário', 'Venado Tuerto'],
-    'Berlim': ['Berlim', 'Hamburgo', 'Munique'],
-    'Munique': ['Munique', 'Nuremberg', 'Augsburg'],
-    'Hamburgo': ['Hamburgo', 'Bremen', 'Lübeck'],
-    'estado1': ['cidade1', 'cidade2', 'cidade3'],
-    'estado2': ['cidade4', 'cidade5', 'cidade6'],
-    'estado3': ['cidade7', 'cidade8', 'cidade9']
-};
+const fecharModalLocalizacao = document.querySelector('.fecharModalLocalizacao')
 
-const datalistPaises = document.getElementById('opcoes-pais');
-const datalistEstados = document.getElementById('opcoes-estados');
-const datalistCidades = document.getElementById('opcoes-cidades');
+fecharModalLocalizacao.addEventListener('click', () => {
+    let local = document.querySelector('.localizacao')
 
-
-
-paises.forEach(function (pais) {
-    const option = document.createElement('option');
-    option.value = pais;
-    datalistPaises.appendChild(option);
-});
-
-function atualizarEstados() {
-    const paisSelecionado = document.getElementById('pais').value;
-    const estados = estadosPorPais[paisSelecionado] || [];
-    datalistEstados.innerHTML = '';
-    datalistCidades.innerHTML = '';
-    estados.forEach(function (estado) {
-        const option = document.createElement('option');
-        option.value = estado;
-        datalistEstados.appendChild(option);
-    });
-}
-
-function atualizarCidades() {
-    const estadoSelecionado = document.getElementById('estado').value;
-    const cidades = cidadesPorEstado[estadoSelecionado] || [];
-    datalistCidades.innerHTML = '';
-    cidades.forEach(function (cidade) {
-        const option = document.createElement('option');
-        option.value = cidade;
-        datalistCidades.appendChild(option);
-    });
-}
+    local.classList.add('model')
+})
 
 function pegarLocalizacaoUsuario() {
-    let pais = document.getElementById('pais').value;
-    let estado = document.getElementById('estado').value;
-    let cidade = document.getElementById('cidade').value;
+    let pais = document.getElementById('select-pais').value;
+    let estado = document.getElementById('select-estado').value;
+    let cidade = document.getElementById('select-cidade').value;
 
     if (pais == "" || estado == "" || cidade == "") {
         let error = document.querySelector('.error')
         error.innerHTML = 'Campo Vazio'
     } else {
+
         localStorage.setItem("localização", JSON.stringify({ "pais": pais, "estado": estado, "cidade": cidade }))
 
         let modalLocalizacao = document.querySelector('.localizacao')
@@ -93,6 +49,64 @@ function pegarLocalizacaoUsuario() {
         window.location.reload()
 
         modalLocalizacao.classList.add("model")
+
+        sessionStorage.setItem('pegarLocalização', 'true');
+    }
+}
+
+function buscarEstados() {
+    var selectPais = document.getElementById('select-pais');
+    var selectEstado = document.getElementById('select-estado');
+
+    selectEstado.innerHTML = '<option value="">Selecione um estado</option>';
+
+    if (selectPais.value) {
+        var estados;
+
+        if (selectPais.value === 'Brasil') {
+            estados = ['São Paulo', 'Rio de Janeiro', 'Minas Gerais'];
+        } else if (selectPais.value === 'Estados Unidos') {
+            estados = ['California', 'New York', 'Texas'];
+        }
+
+        for (var i = 0; i < estados.length; i++) {
+            var option = document.createElement('option');
+            option.value = estados[i];
+            option.textContent = estados[i];
+            selectEstado.appendChild(option);
+        }
+    }
+}
+
+function buscarCidades() {
+    var selectEstado = document.getElementById('select-estado');
+    var selectCidade = document.getElementById('select-cidade');
+
+    selectCidade.innerHTML = '<option value="">Selecione uma cidade</option>';
+
+    if (selectEstado.value) {
+        var cidades;
+
+        if (selectEstado.value === 'São Paulo') {
+            cidades = ['São Paulo', 'Campinas', 'Guarulhos'];
+        } else if (selectEstado.value === 'Rio de Janeiro') {
+            cidades = ['Rio de Janeiro', 'Niterói', 'Nova Iguaçu'];
+        } else if (selectEstado.value === 'Minas Gerais') {
+            cidades = ['Belo Horizonte', 'Uberlândia', 'Contagem'];
+        } else if (selectEstado.value === 'California') {
+            cidades = ['Los Angeles', 'San Francisco', 'San Diego'];
+        } else if (selectEstado.value === 'New York') {
+            cidades = ['Nova York', 'Buffalo', 'Rochester'];
+        } else if (selectEstado.value === 'Texas') {
+            cidades = ['Houston', 'Austin', 'Dallas'];
+        }
+
+        for (var i = 0; i < cidades.length; i++) {
+            var option = document.createElement('option');
+            option.value = cidades[i];
+            option.textContent = cidades[i];
+            selectCidade.appendChild(option);
+        }
     }
 }
 
@@ -107,31 +121,33 @@ function carregar() {
     fetch('http://localhost:3000/listarEncontros', options)
         .then(response => response.json())
         .then(res => {
-            let nwRes = res.filter(e => e.local.pais === localizacaoUsuario.pais && e.local.cidade === localizacaoUsuario.cidade)
+            if (localizacaoUsuario) {
+                let nwRes = res.filter(e => e.local.pais === localizacaoUsuario.pais && e.local.cidade === localizacaoUsuario.cidade)
 
-            nwRes.forEach(dados => {
-                if (dados.dataFim == null) {
-                    let tabela = readInfo.cloneNode(true)
+                nwRes.forEach(dados => {
+                    if (dados.dataFim == null) {
+                        let tabela = readInfo.cloneNode(true)
 
-                    tabela.classList.remove("model")
+                        tabela.classList.remove("model")
 
-                    let date = new Date(dados.dataHora);
+                        let date = new Date(dados.dataHora);
 
-                    let horas = dados.dataHora.split('T')[1].split('.')[0]
+                        let horas = dados.dataHora.split('T')[1].split('.')[0]
 
-                    let dataFormatada = date.toLocaleDateString("pt-BR", {
-                        timeZone: "UTC",
-                    });
+                        let dataFormatada = date.toLocaleDateString("pt-BR", {
+                            timeZone: "UTC",
+                        });
 
-                    tabela.querySelector('.idLocal').innerHTML = "#" + dados.id
-                    tabela.querySelector('.titulo').innerHTML = dados.titulo
+                        tabela.querySelector('.idLocal').innerHTML = "#" + dados.id
+                        tabela.querySelector('.titulo').innerHTML = dados.titulo
 
-                    tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
-                    tabela.querySelector('.endereco').innerHTML = dados.local.nome
+                        tabela.querySelector('.data').innerHTML = dataFormatada + "-" + horas
+                        tabela.querySelector('.endereco').innerHTML = dados.local.nome
 
-                    read.appendChild(tabela)
-                }
-            });
+                        read.appendChild(tabela)
+                    }
+                });
+            }
         })
 }
 
@@ -148,14 +164,18 @@ function listaLocais() {
 
             opcao.innerHTML = "";
 
-            let nwDados = res.filter(e => e.pais == localizacaoUsuario.pais && e.cidade == localizacaoUsuario.cidade)
+            if (localizacaoUsuario) {
+                let nwDados = res.filter(e => e.pais == localizacaoUsuario.pais && e.cidade == localizacaoUsuario.cidade)
 
-            nwDados.forEach(function (valor) {
-                var optionElement = document.createElement("option");
-                optionElement.value = "#" + valor.id + " - " + valor.nome
+                nwDados.forEach(function (valor) {
+                    var optionElement = document.createElement("option");
+                    optionElement.value = "#" + valor.id + " - " + valor.nome
 
-                opcao.appendChild(optionElement);
-            })
+                    opcao.appendChild(optionElement);
+                })
+            }
+
+
         })
 }
 
