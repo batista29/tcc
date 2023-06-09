@@ -18,7 +18,6 @@ if (!sessionStorage.getItem('pegarLocalização')) {
 const btnAlterarLocal = document.querySelector('.btnAlterarLocal')
 
 btnAlterarLocal.addEventListener('click', () => {
-    // sessionStorage.setItem('pegarLocalização', 'false');
     let local = document.querySelector('.localizacao')
 
     local.classList.remove('model')
@@ -26,11 +25,21 @@ btnAlterarLocal.addEventListener('click', () => {
 
 const fecharModalLocalizacao = document.querySelector('.fecharModalLocalizacao')
 
-fecharModalLocalizacao.addEventListener('click', () => {
-    let local = document.querySelector('.localizacao')
+function local() {
+    const localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
 
-    local.classList.add('model')
-})
+    if (localizacaoUsuario == null) {
+        fecharModalLocalizacao.classList.add('model')
+    }
+    fecharModalLocalizacao.addEventListener('click', () => {
+
+
+        let local = document.querySelector('.localizacao')
+
+        local.classList.add('model')
+    })
+}
+
 
 function pegarLocalizacaoUsuario() {
     let pais = document.getElementById('select-pais').value;
@@ -1177,4 +1186,5 @@ verConvite()
 listaLocais()
 notificaoAmizade()
 listaAmigos()
+local()
 // listarUsuarios()
