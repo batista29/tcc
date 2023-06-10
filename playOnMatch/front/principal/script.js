@@ -10,9 +10,13 @@ const user = JSON.parse(localStorage.getItem('usuario'))
 
 if (!sessionStorage.getItem('pegarLocalização')) {
 
-    let local = document.querySelector('.localizacao')
+    const localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
 
-    local.classList.remove('model')
+    if (localizacaoUsuario == null) {
+        let local = document.querySelector('.localizacao')
+
+        local.classList.remove('model')
+    }
 }
 
 const btnAlterarLocal = document.querySelector('.btnAlterarLocal')

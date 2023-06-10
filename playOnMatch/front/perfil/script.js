@@ -201,6 +201,34 @@ function editarPerfil() {
         })
 }
 
+function acessarPerfilAmigo(idAmigo) {
+
+    let { token } = user
+    let { id } = user
+
+    const options = {
+        method: 'GET',
+        headers: {
+            authorization: token
+        }
+    };
+
+    console.log(idAmigo)
+
+    fetch(`http://localhost:3000/perfilUsuario/${id}/${idAmigo}`, options)
+        .then(response => {
+            if (response.status == 200) {
+                localStorage.setItem("perfil", JSON.stringify(idAmigo))
+                window.location.href = "../perfil/index.html"
+            }
+            return response.json()
+        })
+        .then(res => {
+            console.log(res)
+        })
+}
+
+
 function listarAmigos() {
     let idUsuario = JSON.parse(localStorage.getItem('perfil'))
     const options = { method: 'GET' };
@@ -217,6 +245,11 @@ function listarAmigos() {
                 dados.classList.remove('model')
                 dados.querySelector('.idAmigo').innerHTML = "#" + e.amigo.id
                 dados.querySelector('.nomeAmigo').innerHTML = e.amigo.nome
+
+                dados.addEventListener('click', function () {
+                    let idAmigo = this.children[0].innerHTML.slice(1)
+                    acessarPerfilAmigo(idAmigo)
+                })
 
                 let options2 = { method: 'GET' };
 
@@ -276,7 +309,7 @@ function detalhesPartida(idPartida) {
 
             let participantes = document.querySelector('.participantes')
             let infoParticipantes = document.querySelector('.infoParticipantes')
- 
+
             response.EncontroUsuario.forEach((e) => {
                 let info = infoParticipantes.cloneNode(true)
                 info.classList.remove('model')
@@ -295,11 +328,11 @@ function detalhesPartida(idPartida) {
                     })
                     .then(blob => {
                         const imageUrl = URL.createObjectURL(blob);
-                        info.querySelector('.imgpart').src = imageUrl
+                        info.querySelector('.imgParticipante').src = imageUrl
                     })
                     .catch(error => {
                         console.log(error);
-                        info.querySelector('.imgpart').src = '../../docs/imgs/perfilPadrao.jpg'
+                        info.querySelector('.imgParticipante').src = '../../docs/imgs/perfilPadrao.jpg'
                     })
 
 

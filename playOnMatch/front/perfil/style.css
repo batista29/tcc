@@ -8,7 +8,7 @@
 
 a {
     text-decoration: none;
-    color: var(--backgroundHome);
+    color: white;
 }
 
 * {
@@ -29,6 +29,7 @@ header {
     width: 100%;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 .infoEncontro {
@@ -204,7 +205,7 @@ header {
     width: 100%;
 }
 
-table{
+table {
     border-collapse: collapse;
 }
 
@@ -229,8 +230,8 @@ tr {
 }
 
 .imgpart {
-    height: 3.5vh;
-    width: 2vw;
+    height: 6vh;
+    width: 4vw;
     border-radius: 50%;
 }
 
@@ -271,7 +272,7 @@ tr {
     gap: 2%;
 }
 
-.detalhesEncontro{
+.detalhesEncontro {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -279,7 +280,7 @@ tr {
     width: 60%;
     background-color: var(--backgroundLogin);
     font-size: 1.3em;
-    border: 1px solid black; 
+    border: 1px solid black;
 }
 
 .participantes {
@@ -289,6 +290,7 @@ tr {
     border: 1px solid black;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    text-align: center;
 }
 
 .btnFecharModal {
@@ -325,7 +327,24 @@ tr {
     display: none;
 }
 
-.atualizarPerfil,
+.atualizarPerfil{
+    height: 220px;
+    width: 20vw;
+    padding: 20px;
+    background-color:var(--textoHome);
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.atualizarPerfil input {
+    background-color: transparent;
+    border: none;
+    border-bottom:1px solid white;
+
+}
+
 .notificacaoModal {
     height: 30%;
     width: 20%;
@@ -337,10 +356,10 @@ tr {
 }
 
 .amigosModal {
-    height: 30%;
+    height: 45%;
     width: 20%;
     padding: 20px;
-    background-color: white;
+    background-color: var(--textoHome);
     border-radius: 10px;
     position: relative;
     text-align: center;
@@ -361,6 +380,14 @@ tr {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: white;
+}
+
+.infoAmigos:hover{
+    background-color: var(--cor4);
 }
 
 .btnFechaModalAtualizarPerfil,
@@ -375,6 +402,7 @@ tr {
     top: 0;
     right: 0;
     font-size: 1em;
+    color: white;
 }
 
 .btnFechaModalAtualizarPerfil:hover {
@@ -383,12 +411,15 @@ tr {
 }
 
 .btnAtualizarPerfil {
-    height: 35px;
+    height: 30px;
     width: 60px;
     margin: 10px;
     border-radius: 30px;
     position: absolute;
     bottom: 0;
+    background-color: var(--cor4);
+    border: none;
+    cursor: pointer;
 }
 
 .btnAtualizarPerfil:hover {
@@ -396,7 +427,7 @@ tr {
 }
 
 .infoParticipantes {
-    height: 7vh;
+    height: 8vh;
     display: flex;
     border-bottom: 1px solid black;
     position: relative;
@@ -443,4 +474,10 @@ tr {
 .imgData,
 .btnAmigos {
     filter: invert(100%)
+}
+
+.imgParticipante{
+    height: 7vh;
+    width: 4vw;
+    border-radius:50% ;
 }

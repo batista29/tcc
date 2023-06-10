@@ -3,9 +3,89 @@
         height: 22vh;
         width: 12vw;
     }
+
+    .time1,
+    .versus,
+    .time2 {
+        height: 100px;
+        width: 100px;
+    }
+
+    .descricaoEncontro {
+        margin-bottom: 10%;
+    }
+
+    .detalhePartida {
+        margin: 0;
+    }
+
+
+}
+
+@media(max-width:1000px) {
+    .atualizarPerfil {
+        width: 30vw;
+    }
+
+    .detalhesEncontro {
+        width: 100%;
+    }
+
+    .time1,
+    .versus,
+    .time2 {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+@media(max-width:900px) {
+
+    .imgParticipante{
+        width: 4vw;
+    }
+
+    .participantes>h2 {
+        font-size: 1em;
+        margin-bottom: 5%
+    }
+
+    .tituloEncontro {
+        font-size: 1em;
+    }
+
+    .descricaoEncontro,
+    .enderecoEncontro,
+    .nomeEncontro,
+    .dataEncontro {
+        font-size: 0.8em;
+    }
+
+    .date {
+        margin-top: 2%;
+    }
+
 }
 
 @media (max-width:790px) {
+
+    .imgParticipante{
+        width: 5vw;
+    }
+
+    .imgpart {
+        height: 7vh;
+        width: 5vw;
+    }
+
+    .amigosModal {
+        width: 30%;
+    }
+
+    .atualizarPerfil {
+        width: 40vw;
+    }
+
     .histo {
         overflow-x: scroll;
     }
@@ -51,13 +131,54 @@
         height: 20vh;
         width: 15vw;
     }
+
     .nomeUsuario {
         font-size: 2em;
     }
 
 }
 
-@media (max-width:570px){
+@media(max-width:630px) {
+
+    .imgParticipante{
+        width: 6vw;
+    }
+
+    .atualizarPerfil {
+        width: 50vw;
+    }
+
+    .itensModal{
+        overflow-y: scroll;
+        height: 80vh;
+    }
+    
+    .dadosEncontro {
+        flex-direction: column;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .detalhesEncontro{
+        height:50vh;
+    }
+
+    .participantes{
+        height: 20vh;
+        width: 100%;
+    }
+
+}
+
+@media (max-width:570px) {
+
+    .imgpart {
+        height: 10vh;
+        width: 11vw;
+    }
+
     .attimage {
         height: 20vh;
         width: 15vw;
@@ -68,9 +189,45 @@
         height: 20vh;
         width: 18vw;
     }
+
+    .amigosModal {
+        width: 40%;
+    }
+
 }
 
 @media (max-width:500px) {
+
+    .imgParticipante{
+        width: 7vw;
+    }
+
+    .tituloEncontro{
+        font-size: 0.8em;
+    }
+
+    .detalhePartida{
+        margin-top: 10%;
+    }
+
+    .time1,
+    .versus,
+    .time2 {
+        height: 70px;
+        width: 70px;
+    }
+
+    .descricaoEncontro,
+    .enderecoEncontro,
+    .nomeEncontro,
+    .dataEncontro {
+        font-size: 0.7em;
+    }
+
+    .atualizarPerfil {
+        width: 65vw;
+    }
+
     .nomeUsuario {
         font-size: 1.5em;
     }
@@ -86,6 +243,12 @@
 }
 
 @media (max-width:470px) {
+
+    .imgpart {
+        height: 8vh;
+        width: 10vw;
+    }
+
     .attimage {
         height: 20vh;
         width: 18vw;
@@ -99,17 +262,40 @@
 }
 
 @media (max-width:410px) {
-    .infoUser{
+
+    .imgParticipante{
+        width: 9vw;
+    }
+
+    .infoUser {
         width: 60%;
     }
+
+    .atualizarPerfil {
+        width: 80vw;
+    }
+
+    .amigosModal {
+        width: 55%;
+    }
+
+    .detalhePartida{
+        margin-top: 15%;
+    }
+
 }
 
 @media (max-width:350px) {
 
-    .infoUser{
+    .imgpart {
+        height: 10vh;
+        width: 12vw;
+    }
+
+    .infoUser {
         width: 60%;
     }
-    
+
     .attimage {
         height: 20vh;
         width: 20vw;
