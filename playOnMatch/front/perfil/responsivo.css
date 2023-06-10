@@ -13,6 +13,17 @@
     td {
         padding: 10px;
     }
+
+    .attimage {
+        height: 15vh;
+        width: 12vw;
+        right: 35%;
+    }
+
+    .imguser {
+        height: 22vh;
+        width: 14vw;
+    }
 }
 
 @media (max-width:700px) {
@@ -31,20 +42,32 @@
     }
 
     .attimage {
-        height: 15vh;
-        width: 12vw;
+        height: 20vh;
+        width: 15vw;
         right: 35%;
     }
 
     .imguser {
-        height: 15vh;
-        width: 12vw;
+        height: 20vh;
+        width: 15vw;
     }
-
     .nomeUsuario {
         font-size: 2em;
     }
 
+}
+
+@media (max-width:570px){
+    .attimage {
+        height: 20vh;
+        width: 15vw;
+        right: 35%;
+    }
+
+    .imguser {
+        height: 20vh;
+        width: 18vw;
+    }
 }
 
 @media (max-width:500px) {
@@ -60,33 +83,24 @@
     .infoUser {
         width: 60%;
     }
+}
 
+@media (max-width:470px) {
     .attimage {
-        height: 18vh;
+        height: 20vh;
         width: 18vw;
         right: 35%;
     }
 
     .imguser {
-        height: 17vh;
-        width: 17vw;
+        height: 21vh;
+        width: 24vw;
     }
 }
 
 @media (max-width:410px) {
     .infoUser{
         width: 60%;
-    }
-    
-    .attimage {
-        height: 18vh;
-        width: 18vw;
-        right: 35%;
-    }
-
-    .imguser {
-        height: 17vh;
-        width: 22vw;
     }
 }
 
@@ -97,13 +111,13 @@
     }
     
     .attimage {
-        height: 18vh;
-        width: 18vw;
+        height: 20vh;
+        width: 20vw;
         right: 35%;
     }
 
     .imguser {
-        height: 17vh;
-        width: 24vw;
+        height: 20vh;
+        width: 30vw;
     }
 }
