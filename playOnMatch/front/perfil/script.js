@@ -1,10 +1,8 @@
-// const btnNotificacao = document.querySelector('.btnNotificacao')
 const btnAtualizarPerfil = document.querySelector('.btnAtualizarPerfil')
 const btnFechaModalAtualizarPerfil = document.querySelector('.btnFechaModalAtualizarPerfil')
 const btnFechaModalNotificacao = document.querySelector('.btnFechaModalNotificacao')
 const btnFechaModalAmigos = document.querySelector('.btnFechaModalAmigos')
 const user = JSON.parse(localStorage.getItem('usuario'))
-
 
 const btnFecharModal = document.querySelector('.btnFecharModal')
 
@@ -21,8 +19,11 @@ function listar() {
     let { id } = user
 
     let btnEditarPerfil = document.querySelector('.btnEditarPerfil')
+    let attimage = document.querySelector('.attimage')
     if (idUsuario != id) {
         btnEditarPerfil.classList.add('model')
+        attimage.classList.add('model')
+
     }
 
     const options = { method: 'GET' };
@@ -251,6 +252,7 @@ function detalhesPartida(idPartida) {
     fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options)
         .then(response => response.json())
         .then(response => {
+            console.log(response)
             let detalhesEncontro = document.querySelector('.detalhesEncontro')
             let infoEncontro = document.querySelector('.infoEncontro')
 
@@ -274,7 +276,7 @@ function detalhesPartida(idPartida) {
 
             let participantes = document.querySelector('.participantes')
             let infoParticipantes = document.querySelector('.infoParticipantes')
-
+ 
             response.EncontroUsuario.forEach((e) => {
                 let info = infoParticipantes.cloneNode(true)
                 info.classList.remove('model')

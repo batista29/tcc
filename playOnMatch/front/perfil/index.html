@@ -8,6 +8,7 @@
     <title>Perfil</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="../../docs/imgsLogo/huge.png" type="image/x-icon">
+    <link rel="stylesheet" href="responsivo.css">
 </head>
 
 <body>
@@ -36,52 +37,66 @@
         </div>
         <div class="historico">
             <div class="cima">Partidas</div>
-            <div class="partidas">
-                <div onclick="detalhesPartida(this)" class="infoPartida model">
-                    <p class="idPartida model"></p>
-                    <p class="tituloPartida"></p>
-                    <p class="enderecoPartida"></p>
-                    <p class="data"></p>
-                    <p class="horaInicio"></p>
-                    <p class="horaFim"></p>
-                </div>
+            <div class="histo">
+                <table class="partidas">
+                    <thead>
+                        <tr class="headTable">
+                            <th>Titulo</th>
+                            <th>Endereço</th>
+                            <th>Data</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="detalhesPartida(this)" class="infoPartida model">
+                            <td class="idPartida model"></td>
+                            <td class="tituloPartida"></td>
+                            <td class="enderecoPartida"></td>
+                            <td class="data"></td>
+                            <td class="horaInicio"></td>
+                            <td class="horaFim"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="modal">
+        <div class="modal model">
             <div class="itensModal">
                 <button class="btnFecharModal">x</button>
-                <section class="detalhesEncontro">
-                    <div class="infoEncontro model">
-                        <h3 class="tituloEncontro">titulo</h3>
-                        <div class="imgFundo">
-                            <img class="time1" src="../../docs/imgs/pessoa.png" alt="">
-                            <img class="versus" src="../../docs/imgs/versus.png" alt="">
-                            <img class="time2" src="../../docs/imgs/pessoa.png" alt="">
-                        </div>
-                        <div class="detalhePartida">
-                            <p class="descricaoEncontro">descrição</p>
-                            <div class="local">
-                                <img class="imgLocalizacaoEncontro" src="../../docs/imgs/pin-de-localizacao.png" alt="">
-                                <div class="end">
-                                    <p class="enderecoEncontro"></p>
+                <div class="dadosEncontro">
+                    <section class="detalhesEncontro">
+                        <div class="infoEncontro model">
+                            <h3 class="tituloEncontro">titulo</h3>
+                            <div class="imgFundo">
+                                <img class="time1" src="../../docs/imgs/pessoa.png" alt="">
+                                <img class="versus" src="../../docs/imgs/versus.png" alt="">
+                                <img class="time2" src="../../docs/imgs/pessoa.png" alt="">
+                            </div>
+                            <div class="detalhePartida">
+                                <p class="descricaoEncontro">descrição</p>
+                                <div class="local">
+                                    <img class="imgLocalizacaoEncontro" src="../../docs/imgs/pin-de-localizacao.png"
+                                        alt="">
                                     <p class="nomeEncontro">nome</p>
+                                    <p class="enderecoEncontro">endereço</p>
+                                </div>
+                                <div class="date">
+                                    <img class="imgData" src="../../docs/imgs/calendario.png" alt="">
+                                    <p class="dataEncontro">data</p>
                                 </div>
                             </div>
-                            <div class="date">
-                                <img class="imgData" src="../../docs/imgs/calendario.png" alt="">
-                                <p class="dataEncontro">data</p>
-                            </div>
                         </div>
-                    </div>
-                </section>
-                <section class="participantes">
-                    <h2>participantes</h2>
-                    <div class="infoParticipantes model">
-                        <p class="idParticipante model">id</p>
-                        <img class="imgpart" alt="">
-                        <p class="nomeParticipante">nome</p>
-                    </div>
-                </section>
+                    </section>
+                    <section class="participantes">
+                        <h2>participantes</h2>
+                        <div class="infoParticipantes model">
+                            <p class="idParticipante model">id</p>
+                            <img class="imgpart" alt="">
+                            <p class="nomeParticipante">nome</p>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
 

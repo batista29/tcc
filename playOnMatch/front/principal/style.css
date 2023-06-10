@@ -529,11 +529,8 @@ body::-webkit-scrollbar-thumb {
 
 img.iconeBusca {
     margin-left: -50px;
-<<<<<<< HEAD
     height: 3vh;
-=======
-    height:2vh;
->>>>>>> bfc7353da29220f5bed12c876fd1c3850313be80
+    height: 2vh;
 }
 
 .modalPartidas,
@@ -1409,7 +1406,7 @@ footer {
     border-color: var(--textoHome);
 }
 
-.fecharModalLocalizacao{
+.fecharModalLocalizacao {
     height: 4vh;
     width: 3vw;
     border: none;
