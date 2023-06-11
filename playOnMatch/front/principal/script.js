@@ -557,7 +557,6 @@ function listaAmigos() {
                             console.log(error);
                             info.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
                         })
-
                     allFriends.appendChild(info)
                 })
             })
@@ -822,105 +821,90 @@ function abrirModalConviteAmizade() {
     modalMandarSolicitacao.classList.remove('model')
 }
 
-function filtrarDadosAPI(input) {
-    fetch('http://localhost:3000/listarUsuarios')
+function listarUsuarios() {
+    const options = { method: 'GET' };
+
+    let dadosUser = document.querySelector('.dadosUser')
+    let usuariosPesquisa = document.querySelector('.usuariosPesquisa')
+
+    let {id} = user
+
+    fetch('http://localhost:3000/listarUsuarios', options)
         .then(response => response.json())
-        .then(data => {
+        .then(response => {
+            response.forEach((e) => {
+                let dados = usuariosPesquisa.cloneNode(true)
 
-            const filtrados = data.filter(item => `${item.nome}`.toLowerCase().includes(input.toLowerCase()));
+                dados.querySelector('.idUserAdicionar').innerHTML = e.id
+                dados.querySelector('.nomeUserAdicionar').innerHTML = e.nome
+                let btnAddAmigo = dados.querySelector('.btnAddAmigo')
 
-            const divResultados = document.getElementById('resultados');
+                if(id == e.id){
+                    btnAddAmigo.style.display = 'none';
+                }
 
-            if (input === '') {
-                divResultados.innerHTML = '';
-                return
-            }
+                let options2 = { method: 'GET' };
 
-            divResultados.innerHTML = '';
-
-            if (filtrados) {
-                filtrados.forEach(item => {
-                    const resultado = document.querySelector('.usuariosPesquisa').cloneNode(true);
-
-                    resultado.classList.remove('model')
-
-                    resultado.querySelector('.idUserAdicionar').innerHTML = '#' + item.id;
-                    resultado.querySelector('.nomeUserAdicionar').textContent = item.nome;
-
-                    let options2 = { method: 'GET' };
-
-                    fetch(`http://localhost:3000/perfil/${item.id}/foto`, options2)
-                        .then(response => {
-                            if (response.ok) {
-                                return response.blob();
-                            } else {
-                                throw new Error('Imagem não encontrada');
-                            }
-                        })
-                        .then(blob => {
-                            const imageUrl = URL.createObjectURL(blob);
-                            resultado.querySelector('.imguser').src = imageUrl
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            resultado.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
-                        })
-
-
-                    let btnAddAmigo = resultado.querySelector('.btnAddAmigo')
-
-                    let { id } = user
-
-                    if (id == item.id) {
-                        btnAddAmigo.classList.add('model')
-                    }
-
-                    let infoAmigo = item.criadorListaAmigo.filter(e => e.amigo.id == id)
-                    infoAmigo.forEach(e => {
-
-                        if (e.amigo.id == id && e.status == 1) {
-                            btnAddAmigo.innerHTML = "Amigos"
-                        }
-
-                        if (e.amigo.id == id && e.status == 0 && id == e.remetente) {
-                            btnAddAmigo.innerHTML = "Solicitado"
-                        }
-
-                        if (e.amigo.id == id && e.status == 0 && id != e.remetente) {
-                            btnAddAmigo.innerHTML = "Responder solicitação"
-                        }
-
-                    })
-
-                    btnAddAmigo.addEventListener('click', function () {
-                        let idParticipante = this.parentNode.children[0].innerHTML.slice(1)
-                        if (btnAddAmigo.innerText === "Adicionar") {
-                            enviarSolicitacao(idParticipante)
-                        } else if (btnAddAmigo.innerText === "Solicitado") {
-                            abrirModalCancelarSolicitacao(idParticipante)
-                        } else if (btnAddAmigo.innerText === "Amigos") {
-                            acessarPerfilAmigo(idParticipante)
+                fetch(`http://localhost:3000/perfil/${e.id}/foto`, options2)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        } else {
+                            throw new Error('Imagem não encontrada');
                         }
                     })
-                    divResultados.appendChild(resultado);
-                });
-            }
-
-
-
+                    .then(blob => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        dados.querySelector('.imgUsuario').src = imageUrl
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        dados.querySelector('.imgUsuario').src = '../../docs/imgs/perfilPadrao.jpg'
+                    })
+                dadosUser.appendChild(dados)
+            })
         })
-        .catch(error => {
-            console.log('Erro ao buscar dados da API:', error);
-        });
-}
-
-function onChangeInput(event) {
-    const input = event.target.value;
-    filtrarDadosAPI(input);
 }
 
 const inputCampo = document.getElementById('input');
-inputCampo.addEventListener('input', onChangeInput);
+inputCampo.addEventListener('input', onChangeInput)
+
+function onChangeInput() {
+
+    setTimeout(() => {
+        let usuariosPesquisa = document.querySelectorAll('.usuariosPesquisa')
+
+        if (inputCampo.value === '') {
+            usuariosPesquisa.forEach((e) => {
+                e.style.display = 'none';
+            });
+        } else {
+            usuariosPesquisa.forEach((e) => {
+
+                if (e.children[2].innerHTML != ' ') {
+
+                    e.classList.remove('model')
+
+                    let titulo = e.children[2].innerHTML
+                    titulo = titulo.toLowerCase()
+
+                    let filter = inputCampo.value
+
+                    if (!titulo.includes(filter)) {
+                        e.style.display = 'none'
+                    } else {
+                        e.style.display = "flex"
+                    }
+                } else {
+                    e.style.display = 'none'
+                }
+
+            })
+        }
+
+
+    }, 100);
+}
 
 
 function criarLocal() {
@@ -1196,4 +1180,4 @@ listaLocais()
 notificaoAmizade()
 listaAmigos()
 local()
-// listarUsuarios()
+listarUsuarios()

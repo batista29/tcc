@@ -11,12 +11,20 @@
         margin: 7px;
     }
 
-    .readInfo{
+    .readInfo {
         height: 30vh;
     }
 }
 
 @media (max-width:1440px) {
+    .inputsCadastro {
+        height: 60vh;
+        width: 50vh;
+    }
+
+    .formularioCadastroPartida {
+        height: 80%;
+    }
 
     .notification {
         width: 15px;
@@ -50,16 +58,22 @@
         font-size: 1.5em;
     }
 
+}
 
-
+@media(max-width:1280px){
     .inputsCadastro {
         height: 75vh;
-        width: 30vw;
+        width: 50vh;
     }
 }
 
 @media (max-width:1260px) {
 
+    .inputsCadastro {
+        height: 65vh;
+        width: 50vh;
+    }
+    
     .notification {
         top: 15%;
     }
@@ -120,9 +134,32 @@
         width: 3vw;
     }
 
+    .formularioCadastroPartida {
+        height: 78%;
+    }
+
+    .formularioCadastroPartida>label {
+        color: white;
+        font-size: 1em;
+    }
+
+    #timeSubmit,
+    #dataSubmit {
+        height: 7vh;
+    }
+
 }
 
 @media (max-width:1000px) {
+
+    .inputsCadastro {
+        height: 70vh;
+    }
+
+    .formularioCadastroPartida {
+        margin-bottom: 5%;
+    }
+
     .descricaoLocalizacao {
         font-size: 1.2em;
     }
@@ -140,6 +177,11 @@
 }
 
 @media (max-width:900px) {
+
+    .inputsCadastro {
+        height: 80vh;
+    }
+
     .descricaoLocalizacao {
         font-size: 1.1em;
     }
@@ -199,6 +241,20 @@
 }
 
 @media (max-width:770px) {
+
+    .enviar {
+        width: 10vw;
+    }
+
+    .btnAbrirModalCriaLocal {
+        height: 30px;
+        width: 30px;
+    }
+
+    .formularioCadastroPartida input {
+        width: 70%;
+    }
+
     .descricaoLocalizacao {
         font-size: 1em;
     }
@@ -259,11 +315,11 @@
         right: 55%;
     }
 
-    .usuarioLogado{
+    .usuarioLogado {
         justify-content: space-around;
     }
 
-    .imgAmigo{
+    .imgAmigo {
         margin-right: 15%;
         display: block;
     }
@@ -272,6 +328,29 @@
 }
 
 @media (max-width:650px) {
+
+    .formularioCadastroPartida {
+        height: 80%;
+    }
+
+    .formularioCadastroPartida>label {
+        font-size: 0.8em;
+    }
+
+    .formularioCadastroPartida>input,
+    .btnsLocais input {
+        font-size: 1em;
+    }
+
+    .enviar {
+        width: 12vw;
+    }
+
+    .inputsCadastro {
+        height: 70vh;
+        margin-bottom: 10%;
+    }
+
     .localizacao {
         height: 110vh;
     }
@@ -313,33 +392,33 @@
         width: 4vw;
     }
 
-    .usuarioLogado{
+    .usuarioLogado {
         display: none;
     }
 
-    footer{
+    footer {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .imgAmigo{
+    .imgAmigo {
         margin-right: 0;
         display: flex;
     }
 
-    .iconsImgs{
+    .iconsImgs {
         margin: 0;
         height: 5vh;
         width: 3vw;
     }
-    
-    .notification{
+
+    .notification {
         top: 0;
         right: 48%;
     }
 
-    .imgPerfil{
+    .imgPerfil {
         position: inherit;
         height: 8vh;
         width: 6vw;
@@ -362,20 +441,14 @@
         margin-right: 0;
     }
 
-    /* .iconsImgs {
-        margin-right: 90%;
-    } */
-
-    /* .notification{
-        right: 70%;
-    } */
-
-
     header a h1 {
         font-size: 1.5em;
     }
-}
 
+    .enviar {
+        width: 15vw;
+    }
+}
 
 @media(max-width:430px) {
     .localizacao {
