@@ -334,6 +334,12 @@ body::-webkit-scrollbar-thumb {
     color: white;
     border-radius: 10px;
     position: relative;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.inputsConvidarAmigo h3 {
+    margin-bottom: 5%;
 }
 
 .infoConvidarAmigos {
@@ -341,11 +347,12 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding: 5%;
 }
 
 .btnConvidar {
-    height: 3vh;
-    width: 4vw;
+    height: 4vh;
+    width: 6vw;
     background-color: var(--cor4);
     border: none;
     border-radius: 30px;
@@ -1416,4 +1423,10 @@ footer {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.imgAmigo2{
+    height: 4vh;
+    width: 3vw;
+    border-radius: 50%;
 }

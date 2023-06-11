@@ -429,6 +429,7 @@ function abrirModalPartida(id) {
 
     localStorage.setItem("idPartida", JSON.stringify(id))
     listaParticipantes()
+    amigos()
 }
 
 function fecharModalPartida() {
@@ -672,59 +673,6 @@ function modalAbrirConvidarAmigo() {
     let modalAparecer = document.querySelector(".modalConvidarAmigo");
     modalAparecer.classList.remove("model")
 
-    function participantes() {
-        let options3 = { method: 'GET' };
-
-        let idPartida = JSON.parse(localStorage.getItem("idPartida"))
-
-        return fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options3)
-            .then(response => response.json())
-            .then(response => {
-                let participante = response.EncontroUsuario.filter(e => e.status == 1)
-                return participante
-            })
-    }
-
-    function amigos() {
-        let { id } = user
-
-        let inputsConvidarAmigo = document.querySelector('.inputsConvidarAmigo')
-        let infoConvidarAmigos = document.querySelector('.infoConvidarAmigos')
-
-        const options = { method: 'GET' };
-
-        fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
-            .then(response => response.json())
-            .then(res => {
-                let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
-
-                amigo.forEach((e) => {
-
-                    let dados = infoConvidarAmigos.cloneNode(true)
-                    dados.classList.remove("model")
-
-                    dados.querySelector('.idAmigoConvite').innerHTML = e.amigo.id
-                    dados.querySelector('.nomeAmigoConvite').innerHTML = e.amigo.nome
-
-                    let participantesPromise = participantes()
-                    participantesPromise
-                        .then(participante => {
-                            participante.forEach(e => {
-                                // console.log(e.id)
-                                if (dados.querySelector('.idAmigoConvite').innerHTML == e.id) {
-                                    dados.querySelector('.btnConvidar').innerHTML = 'participante';
-                                }
-                            })
-
-                            inputsConvidarAmigo.appendChild(dados);
-                        })
-                })
-            })
-    }
-
-
-
-    amigos()
 
 }
 
@@ -734,6 +682,61 @@ function fecharModalConvidarAmigo() {
 
     localStorage.removeItem("participantes");
 }
+
+async function participantes() {
+    let options3 = { method: 'GET' };
+
+    let idPartida = JSON.parse(localStorage.getItem("idPartida"))
+    if (idPartida) {
+        const response = await fetch(`http://localhost:3000/listarEncontro/${idPartida}`, options3)
+        const data = await response.json()
+        let participante = data.EncontroUsuario.filter(e => e.status == 1 || e.status == 0)
+        return participante
+    }
+}
+
+function amigos() {
+    let { id } = user
+
+    let inputsConvidarAmigo = document.querySelector('.inputsConvidarAmigo')
+    let infoConvidarAmigos = document.querySelector('.infoConvidarAmigos')
+
+    const options = { method: 'GET' };
+
+    fetch(`http://localhost:3000/verSolicitacao/${id}`, options)
+        .then(response => response.json())
+        .then(async res => {
+            let amigo = res.criadorListaAmigo.filter(e => e.status === 1)
+
+            for (const e of amigo) {
+                let dados = infoConvidarAmigos.cloneNode(true)
+                dados.classList.remove("model")
+
+                dados.querySelector('.idAmigoConvite').innerHTML = e.amigo.id
+                dados.querySelector('.nomeAmigoConvite').innerHTML = e.amigo.nome
+
+                let participantesPromise = participantes()
+
+                const participante = await participantesPromise;
+                console.log(participante)
+                let isParticipante = participante.some(p => p.idParticipante.id === e.amigo.id && p.status == 1);
+                let convidado = participante.some(p => p.idParticipante.id === e.amigo.id && p.status == 0);
+
+                console.log(isParticipante)
+                console.log(convidado)
+
+                if (isParticipante) {
+                    dados.querySelector('.btnConvidar').innerHTML = 'participante';
+                }
+                if (convidado) {
+                    dados.querySelector('.btnConvidar').innerHTML = 'convidado';
+                }
+                inputsConvidarAmigo.appendChild(dados);
+            }
+        })
+}
+
+
 
 function modalAbrirAtualizarEncontro() {
     let modalAparecer = document.querySelector(".modalAtualizarEncontro");
@@ -965,7 +968,10 @@ function convidarAmigosParaEncontro(idAmigo) {
     if (botao.innerText == "Convidar") {
         fetch(`http://localhost:3000/convidarAmigo/${idPartida}/${idAmigo}`, options)
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => {
+                console.log(response)
+                window.location.reload()
+            })
             .catch(err => console.error(err));
     }
 }
@@ -1144,7 +1150,6 @@ function usuario() {
         })
         .catch(error => {
             let imgPerfil = document.querySelector('.imgPerfil')
-
             console.log(error);
             imgPerfil.src = '../../docs/imgs/perfilPadrao.jpg'
         })
