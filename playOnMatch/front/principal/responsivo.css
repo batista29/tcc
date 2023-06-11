@@ -60,7 +60,16 @@
 
 }
 
-@media(max-width:1280px){
+@media(max-width:1280px) {
+    .infoUserSolicitacao {
+        width: 60vh;
+    }
+
+    .usuariosPesquisa {
+        width: 30vw;
+    }
+
+
     .inputsCadastro {
         height: 75vh;
         width: 50vh;
@@ -73,7 +82,7 @@
         height: 65vh;
         width: 50vh;
     }
-    
+
     .notification {
         top: 15%;
     }
@@ -151,6 +160,14 @@
 }
 
 @media (max-width:1000px) {
+
+    .infoUserSolicitacao {
+        width: 60vh;
+    }
+
+    .usuariosPesquisa {
+        width: 30vw;
+    }
 
     .inputsCadastro {
         height: 70vh;
@@ -241,6 +258,15 @@
 }
 
 @media (max-width:770px) {
+
+    .infoUserSolicitacao {
+        height: 50vh;
+        width: 80vh;
+    }
+
+    .usuariosPesquisa {
+        width: 45vw;
+    }
 
     .enviar {
         width: 10vw;
@@ -423,6 +449,16 @@
         height: 8vh;
         width: 6vw;
     }
+}
+
+@media(max-width:540px) {
+    .infoUserSolicitacao {
+        width: 60vh;
+    }
+
+    .usuariosPesquisa {
+        width: 50vw;
+    }
 
 }
 
@@ -450,7 +486,25 @@
     }
 }
 
+@media(max-width:450px) {
+    .usuariosPesquisa {
+        font-size: 0.8em;
+    }
+
+    .btnAddAmigo {
+        padding: 2px;
+    }
+}
+
 @media(max-width:430px) {
+    .infoUserSolicitacao {
+        width: 50vh;
+    }
+
+    .usuariosPesquisa {
+        width: 60vw;
+    }
+
     .localizacao {
         height: 110vh;
     }
