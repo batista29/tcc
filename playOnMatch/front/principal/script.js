@@ -924,7 +924,7 @@ function onChangeInput() {
                     let titulo = e.children[2].innerHTML
                     titulo = titulo.toLowerCase()
 
-                    let filter = inputCampo.value
+                    let filter = inputCampo.value.toLowerCase()
 
                     if (!titulo.includes(filter)) {
                         e.style.display = 'none'

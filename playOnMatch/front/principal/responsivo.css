@@ -109,6 +109,26 @@
     }
 }
 
+@media(max-width:1170px) {
+
+    .time1,
+    .time2,
+    .versus {
+        height: 100px;
+        width: 100px;
+    }
+
+    .detalhePartida {
+        width: 90%;
+    }
+
+    .descricaoEncontro,
+    .local,
+    .date {
+        font-size: 0.8em;
+    }
+}
+
 @media (max-width:1140px) {
     .descricaoLocalizacao {
         font-size: 1.4em;
@@ -157,6 +177,15 @@
         height: 7vh;
     }
 
+    .participantes {
+        height: 70%;
+    }
+
+    .modalConfigEncontro {
+        top: 45%;
+        right: 20%;
+    }
+
 }
 
 @media (max-width:1000px) {
@@ -190,6 +219,15 @@
     .notification {
         width: 15px;
         height: 15px;
+    }
+
+    .detalhesEncontro {
+        width: 90%;
+    }
+
+    .modalConfigEncontro {
+        top: 45%;
+        right: 10%;
     }
 }
 
@@ -355,6 +393,30 @@
 
 @media (max-width:650px) {
 
+    .detalhesEncontro {
+        flex-direction: column;
+        height: 80%;
+    }
+
+    .descricaoModalEncontro {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .modalConfigEncontro {
+        top: 50%;
+        right: 15%;
+    }
+
+    .participantes {
+        width: 50%;
+    }
+
+    .detalhePartida {
+        margin: 0;
+    }
+
+
     .formularioCadastroPartida {
         height: 80%;
     }
@@ -460,6 +522,10 @@
         width: 50vw;
     }
 
+    .detalhesEncontro {
+        width: 85%;
+    }
+
 }
 
 @media(max-width:500px) {
@@ -487,6 +553,34 @@
 }
 
 @media(max-width:450px) {
+
+    .time1,
+    .time2,
+    .versus {
+        height: 90px;
+        width: 90px;
+    }
+
+    .local,
+    .date {
+        font-size: 0.7em;
+    }
+
+    .descricaoModalEncontro{
+        height: 90%;
+    }
+    
+    .modalConfigEncontro{
+        right: 5%;
+    }
+
+    .imgLocalizacaoEncontro,
+    .imgData {
+        height: 3vh;
+    }
+
+
+
     .usuariosPesquisa {
         font-size: 0.8em;
     }

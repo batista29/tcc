@@ -806,11 +806,8 @@ img.iconeBusca {
     border: none;
     border-radius: 20px;
     background-color: var(--cor4);
-}
-
-.btnConfirmarLocalizacao:hover {
     cursor: pointer;
-    background-color: var(--textoHome);
+
 }
 
 .modaAdicionar {
