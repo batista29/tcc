@@ -131,11 +131,16 @@ function carregar() {
 
     const localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
 
+
     fetch('http://localhost:3000/listarEncontros', options)
         .then(response => response.json())
         .then(res => {
             if (localizacaoUsuario) {
+                console.log()
+
+                // let nwRes = res.filter(e => console.log(localizacaoUsuario.cidade))
                 let nwRes = res.filter(e => e.local.pais === localizacaoUsuario.pais && e.local.cidade === localizacaoUsuario.cidade)
+
 
                 nwRes.forEach(dados => {
                     if (dados.dataFim == null) {
@@ -1094,12 +1099,11 @@ function enviarSolicitacao(idAmigo) {
 
     fetch(`http://localhost:3000/enviarSolicitacao/${id}/${idAmigo}`, options)
         .then(response => {
-            console.log('oi')
-
-            window.location.reload()
             return response.json()
         })
         .then(response => {
+            window.location.reload()
+
             console.log(response)
         })
 }

@@ -141,7 +141,8 @@ export default function Main({ navigation }) {
                                         {
                                             <View style={styles.infos} key={e.id}>
                                                 <Text style={styles.texto}>{e.titulo} </Text>
-                                                <Text style={styles.texto}>Descricao: {e.descricao} </Text>
+                                                <Text style={styles.texto}>Descricao:</Text>
+                                                <Text style={styles.texto}>{e.descricao} </Text>
                                                 <Text style={styles.texto}>Local: {e.local.nome} </Text>
                                                 <Text style={styles.texto}>Endereço: {e.local.rua} </Text>
                                                 <Text style={styles.texto}>Data: {e.dataHora} </Text>
