@@ -827,7 +827,7 @@ function listarUsuarios() {
     let dadosUser = document.querySelector('.dadosUser')
     let usuariosPesquisa = document.querySelector('.usuariosPesquisa')
 
-    let {id} = user
+    let { id } = user
 
     fetch('http://localhost:3000/listarUsuarios', options)
         .then(response => response.json())
@@ -839,8 +839,44 @@ function listarUsuarios() {
                 dados.querySelector('.nomeUserAdicionar').innerHTML = e.nome
                 let btnAddAmigo = dados.querySelector('.btnAddAmigo')
 
-                if(id == e.id){
+                let amigos = e.criadorListaAmigo.filter((e => e.amigo.id == id && e.status == 1))
+                let solicitado = e.criadorListaAmigo.filter((e => e.amigo.id == id && e.status == 0))
+
+                amigos.forEach((e => {
+                    btnAddAmigo.innerHTML = 'Amigos';
+                }))
+
+                solicitado.forEach((e => {
+                    btnAddAmigo.innerHTML = 'Solicitado';
+                }))
+
+                if (id == e.id) {
                     btnAddAmigo.style.display = 'none';
+                }
+
+
+
+                if (btnAddAmigo.innerHTML == 'Amigos') {
+                    btnAddAmigo.addEventListener('click', function () {
+                        let idUsuario = this.parentNode.children[0].innerHTML
+
+                        acessarPerfilAmigo(idUsuario)
+                    })
+                }
+
+                if (btnAddAmigo.innerHTML == 'Solicitado') {
+                    btnAddAmigo.addEventListener('click', function () {
+                        let idUsuario = this.parentNode.children[0].innerHTML
+
+                        abrirModalCancelarSolicitacao(idUsuario)
+                    })
+                }
+                if (btnAddAmigo.innerHTML == 'Adicionar') {
+                    btnAddAmigo.addEventListener('click', function () {
+                        let idUsuario = this.parentNode.children[0].innerHTML
+                        enviarSolicitacao(idUsuario)
+
+                    })
                 }
 
                 let options2 = { method: 'GET' };
