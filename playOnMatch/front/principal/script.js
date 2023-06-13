@@ -101,7 +101,7 @@ function buscarCidades() {
         var cidades;
 
         if (selectEstado.value === 'São Paulo') {
-            cidades = ['São Paulo', 'Campinas', 'Guarulhos'];
+            cidades = ['São Paulo', 'Campinas', 'Jaguariúna'];
         } else if (selectEstado.value === 'Rio de Janeiro') {
             cidades = ['Rio de Janeiro', 'Niterói', 'Nova Iguaçu'];
         } else if (selectEstado.value === 'Minas Gerais') {
@@ -721,15 +721,23 @@ function amigos() {
                 dados.querySelector('.idAmigoConvite').innerHTML = e.amigo.id
                 dados.querySelector('.nomeAmigoConvite').innerHTML = e.amigo.nome
 
+                let options2 = { method: 'GET' };
+
+                fetch(`http://localhost:3000/perfil/${e.amigo.id}/foto`, options2)
+                    .then(response => {
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        dados.querySelector('.imgAmigo2').src = imageUrl
+                    })
+
                 let participantesPromise = participantes()
 
                 const participante = await participantesPromise;
                 console.log(participante)
                 let isParticipante = participante.some(p => p.idParticipante.id === e.amigo.id && p.status == 1);
                 let convidado = participante.some(p => p.idParticipante.id === e.amigo.id && p.status == 0);
-
-                console.log(isParticipante)
-                console.log(convidado)
 
                 if (isParticipante) {
                     dados.querySelector('.btnConvidar').innerHTML = 'participante';

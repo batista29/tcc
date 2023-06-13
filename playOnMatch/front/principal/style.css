@@ -944,10 +944,6 @@ img.iconeBusca {
     background-color: var(--cor4);
 }
 
-.btnAbrirModalCriaLocal:hover {
-    background-color: #008F8C;
-}
-
 .modalCriarLocal {
     display: flex;
     position: fixed;
