@@ -390,6 +390,7 @@ function confirmacaoDeCancelamentoDeAmizade(resp) {
         let idUsuario = JSON.parse(localStorage.getItem('perfil'))
 
         let { id } = user
+
         const options = { method: 'GET' };
 
 
@@ -397,8 +398,8 @@ function confirmacaoDeCancelamentoDeAmizade(resp) {
             .then(response => response.json())
             .then(response => {
 
-                let lista1 = response.criadorListaAmigo.filter(e => e.remetente == id && idUsuario == e.idAmigo)
-                let lista2 = response.amigo.filter(e => e.remetente == id && idUsuario == e.idCriador)
+                let lista1 = response.criadorListaAmigo.filter(e => idUsuario == e.idAmigo)
+                let lista2 = response.amigo.filter(e => idUsuario == e.idCriador)
 
                 const options = { method: 'DELETE' };
 

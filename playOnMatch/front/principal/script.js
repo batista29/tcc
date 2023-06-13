@@ -163,6 +163,7 @@ function carregar() {
                 });
             }
         })
+    qntdDeNotificacao()
 }
 
 
@@ -398,7 +399,10 @@ function adicionarParticipante() {
     const options = { method: 'POST' };
 
     fetch(`http://localhost:3000/adicionarParticipante/${idPartida}/${id}`, options)
-        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            response.json()
+        })
         .then(response => {
             console.log(response)
             window.location.reload()
@@ -410,6 +414,8 @@ function removerParticipante() {
     let idPartida = JSON.parse(localStorage.getItem("idPartida"))
 
     let { id } = user
+
+    console.log(id)
 
     const options = { method: 'DELETE' };
 
@@ -637,7 +643,9 @@ function responderSolicitacaoAmizader(resposta, idUsuario) {
             window.location.reload()
             return response.json()
         })
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+        })
 }
 
 function sair() {
@@ -1136,6 +1144,7 @@ function abrirModalCancelarSolicitacao(idParticipante) {
             let lista1 = response.criadorListaAmigo.filter(e => e.remetente == id && idParticipante == e.idAmigo)
             let lista2 = response.amigo.filter(e => e.remetente == id && idParticipante == e.idCriador)
 
+            console.log(lista1)
             console.log(lista2)
 
             bntCancelarSolicitacao.addEventListener('click', () => {
@@ -1182,8 +1191,8 @@ function usuario() {
 }
 
 function qntdDeNotificacao() {
-    const notificacao1 = JSON.parse(localStorage.getItem('notificações'))
-    const notificacao2 = JSON.parse(localStorage.getItem('notificações2'))
+    const notificacao1 = JSON.parse(localStorage.getItem('notificações')) || 0
+    const notificacao2 = JSON.parse(localStorage.getItem('notificações2')) || 0
 
     let totalDeNotificacao = notificacao1 + notificacao2
 
@@ -1243,8 +1252,6 @@ imgFriends2.addEventListener('click', function () {
     }
 })
 
-
-qntdDeNotificacao()
 usuario()
 verConvite()
 listaLocais()
