@@ -118,12 +118,12 @@
         </div>
         <footer>
             <div class="dadosFooter">
-                <img class="imgAmigo" src="../../docs/imgs/amigos.png" alt="">
+                <img class="imgFriends2" src="../../docs/imgs/amigos.png" alt="">
                 <img onclick="abrirModalNotificacao()" class="iconsImgs" src="../../docs/imgs/notificacao.png" alt="">
                 <div class="notification">
-                    <div class="count">3</div>
+                    <div class="count2">3</div>
                 </div>
-                <img class="imgPerfil" src="" alt="">
+                <img class="imgPerfil2" src="" alt="">
             </div>
         </footer>
     </main>
@@ -152,13 +152,10 @@
                 <div class="error"></div>
             </div>
             <div class="descricaoLocalizacao">
-                <p>PlayOnMatch precisa da localização do usuário para mostrar partidas que ocorrem no local em que a
-                    pessoa
-                    se Encontra. <br> Ao obter a localização atual do usuário, o site pode exibir informações precisas
-                    sobre
-                    partidas que estão ocerrendo no local onde ele está, incluindo datas, horários e locais. Isso ajuda
-                    o usuário
-                    a economizar tempo e esforço na busca por partidas.</p>
+                <p>O PlayOnMatch precisa da localização do usuário para exibir partidas que ocorrem no local em que a
+                    pessoa se encontra. Ao obter a localização atual do usuário, o site pode mostrar informações
+                    precisas sobre as partidas que estão ocorrendo no local onde ele está, incluindo datas, horários e
+                    locais. Isso ajuda o usuário a economizar tempo e esforço na busca por partidas.</p>
             </div>
         </div>
     </div>
@@ -216,16 +213,15 @@
                 <button onclick="adicionarParticipante()" class="btnParticiparDoEvento">Participar</button>
                 <button onclick="removerParticipante()" class="btnCancelarParticipacao">Cancelar</button>
             </div>
-            <div class="modalResponderSolicitacaoAmizade model">
-                <div class="respSolicitacao">
-                    <button onclick="fecharModalResponderSolicitacao()" class="btnFecharModalRespAmizade">x</button>
-                    <p>Deseja Aceitar a Solicitação de amizade?</p>
-                    <div class="btnsRespAmizade">
-                        <button id="btnRespAceitarAmizade">Aceitar</button>
-                        <button id="btnRespRecusarAmizade">Recusar</button>
-                    </div>
-                </div>
-
+        </div>
+    </div>
+    <div class="modalResponderSolicitacaoAmizade model">
+        <div class="respSolicitacao">
+            <button onclick="fecharModalResponderSolicitacao()" class="btnFecharModalRespAmizade">x</button>
+            <p>Deseja Aceitar a Solicitação de amizade?</p>
+            <div class="btnsRespAmizade">
+                <button id="btnRespAceitarAmizade">Aceitar</button>
+                <button id="btnRespRecusarAmizade">Recusar</button>
             </div>
         </div>
     </div>
@@ -245,9 +241,9 @@
                     <input id="timeSubmit" type="time">
                     <label for="">Endereço</label>
                     <div class="btnsLocais">
-                        <input type="text" id="consulta" name="consulta" list="opcoes">
-                        <datalist id="opcoes">
-                        </datalist>
+                        <select name="" id="consulta">
+                            <option value="">Endereço</option>
+                        </select>
                         <button title="Criar Local" class="btnAbrirModalCriaLocal">+</button>
                     </div>
                 </form>
@@ -299,9 +295,9 @@
                     <label for="">Hora</label>
                     <input class="atualizarHoraEncontro" type="time">
                     <label for="">Endereço</label>
-                    <input type="text" id="consulta" name="consulta" list="opcoes">
-                    <datalist id="opcoes">
-                    </datalist>
+                    <select name="" id="consulta2">
+                        <option value="">Endereço</option>
+                    </select>
                 </form>
 
                 <button onclick="atualizarEncontro()" class="btnAtualizarEncontro">ATUALIZAR</button>
@@ -312,7 +308,7 @@
         <div class="modalParaCancelamentoDeSolicitacao">
             <button onclick="fecharCancelamentoDeSolicitacao()" class="btnFecharCancelamentoDeSolicitacao">x</button>
             <p>Deseja Cancelar Solicitação de Amizade?</p>
-            <p>Se cancelar, terá que mandar solicitação de amizade novamente para Julius</p>
+            <p>Se cancelar, terá que mandar solicitação de amizade novamente.</p>
             <button class="bntCancelarSolicitacao">Cancelar Solicitação</button>
         </div>
     </div>

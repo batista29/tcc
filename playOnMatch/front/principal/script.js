@@ -177,31 +177,39 @@ function listaLocais() {
         .then(response => response.json())
         .then(res => {
 
-            let opcao = document.getElementById("opcoes")
+            let opcao = document.getElementById("consulta")
+            let opcao2 = document.getElementById("consulta2")
             const localizacaoUsuario = JSON.parse(localStorage.getItem("localização"));
 
             opcao.innerHTML = "";
+            opcao2.innerHTML = "";
 
             if (localizacaoUsuario) {
-                let nwDados = res.filter(e => e.pais == localizacaoUsuario.pais && e.cidade == localizacaoUsuario.cidade)
+                let nwDados = res.filter(e => e.pais == localizacaoUsuario.pais && e.cidade == localizacaoUsuario.cidade && e.estado === localizacaoUsuario.estado)
 
                 nwDados.forEach(function (valor) {
                     var optionElement = document.createElement("option");
-                    optionElement.value = "#" + valor.id + " - " + valor.nome
+                    optionElement.innerHTML = valor.id + " - " + valor.nome
+                    console.log(optionElement)
 
                     opcao.appendChild(optionElement);
                 })
+
+                nwDados.forEach(function (valor) {
+                    var optionElement = document.createElement("option");
+                    optionElement.innerHTML = valor.id + " - " + valor.nome
+                    console.log(optionElement)
+
+                    opcao2.appendChild(optionElement);
+                })
             }
-
-
         })
 }
-
 
 function adicionarEncontro() {
 
     let consulta = document.getElementById('consulta')
-    let nwLocal = consulta.value.split('-')[0].slice(1)
+    let nwLocal = consulta.value.split('-')[0]
 
     let descricaoSubmit = document.querySelector("#descricaoSubmit")
 
@@ -302,19 +310,11 @@ function listaParticipantes() {
 
                 fetch(`http://localhost:3000/perfil/${e.idParticipante.id}/foto`, options2)
                     .then(response => {
-                        if (response.ok) {
-                            return response.blob();
-                        } else {
-                            throw new Error('Imagem não encontrada');
-                        }
+                        return response.blob();
                     })
                     .then(blob => {
                         const imageUrl = URL.createObjectURL(blob);
                         dados.querySelector('.imguser').src = imageUrl
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        dados.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
                     })
 
                 let { id } = user
@@ -548,20 +548,13 @@ function listaAmigos() {
 
                     fetch(`http://localhost:3000/perfil/${e.amigo.id}/foto`, options2)
                         .then(response => {
-                            if (response.ok) {
-                                return response.blob();
-                            } else {
-                                throw new Error('Imagem não encontrada');
-                            }
+                            return response.blob();
                         })
                         .then(blob => {
                             const imageUrl = URL.createObjectURL(blob);
                             info.querySelector('.imguser').src = imageUrl
                         })
-                        .catch(error => {
-                            console.log(error);
-                            info.querySelector('.imguser').src = '../../docs/imgs/perfilPadrao.jpg'
-                        })
+
                     allFriends.appendChild(info)
                 })
             })
@@ -673,6 +666,15 @@ imgPerfil.addEventListener('click', () => {
     verPerfil.classList.toggle('model')
 })
 
+const imgPerfil2 = document.querySelector('.imgPerfil2')
+
+imgPerfil2.addEventListener('click', () => {
+
+    let verPerfil = document.querySelector('.verPerfil')
+
+    verPerfil.classList.toggle('model')
+})
+
 function modalAbrirConvidarAmigo() {
     let modalAparecer = document.querySelector(".modalConvidarAmigo");
     modalAparecer.classList.remove("model")
@@ -756,9 +758,9 @@ function atualizarEncontro() {
 
     let atualizarTituloEncontro = document.querySelector('.atualizarTituloEncontro')
     let atualizarDescricaoEncontro = document.querySelector('.atualizarDescricaoEncontro')
-    // let atualizarDataEncontro = document.querySelector('.atualizarDataEncontro')
-    // let atualizarHoraEncontro = document.querySelector('.atualizarHoraEncontro')
-    let local = document.querySelector('#consulta')
+    let local = document.querySelector('#consulta2')
+
+    console.log(local)
 
     let data = {};
 
@@ -788,12 +790,12 @@ function atualizarEncontro() {
         body: JSON.stringify(data)
     };
 
-    fetch(`http://localhost:3000/editarEncontro/${id}/${idPartida}`, options)
-        .then(response => response.json())
-        .then(response => {
-            console.log(response)
-            window.location.reload()
-        })
+    // fetch(`http://localhost:3000/editarEncontro/${id}/${idPartida}`, options)
+    //     .then(response => response.json())
+    //     .then(response => {
+    //         console.log(response)
+    //         window.location.reload()
+    //     })
 }
 
 let btnAbrirModalCriaLocal = document.querySelector('.btnAbrirModalCriaLocal')
@@ -845,10 +847,15 @@ function listarUsuarios() {
                 let btnAddAmigo = dados.querySelector('.btnAddAmigo')
 
                 let amigos = e.criadorListaAmigo.filter((e => e.amigo.id == id && e.status == 1))
-                let solicitado = e.criadorListaAmigo.filter((e => e.amigo.id == id && e.status == 0))
+                let solicitado = e.criadorListaAmigo.filter((e => e.amigo.id == id && e.status == 0 && e.remetente == id))
+                let responder = e.criadorListaAmigo.filter((e => e.amigo.id == id && e.status == 0 && e.remetente != id))
 
                 amigos.forEach((e => {
                     btnAddAmigo.innerHTML = 'Amigos';
+                }))
+
+                responder.forEach((e => {
+                    btnAddAmigo.innerHTML = 'Responder';
                 }))
 
                 solicitado.forEach((e => {
@@ -858,8 +865,6 @@ function listarUsuarios() {
                 if (id == e.id) {
                     btnAddAmigo.style.display = 'none';
                 }
-
-
 
                 if (btnAddAmigo.innerHTML == 'Amigos') {
                     btnAddAmigo.addEventListener('click', function () {
@@ -876,6 +881,14 @@ function listarUsuarios() {
                         abrirModalCancelarSolicitacao(idUsuario)
                     })
                 }
+
+                if (btnAddAmigo.innerHTML == 'Responder') {
+                    btnAddAmigo.addEventListener('click', function () {
+                        let idUsuario = this.parentNode.children[0].innerHTML
+                        modalResponderSolicitacao(idUsuario)
+                    })
+                }
+
                 if (btnAddAmigo.innerHTML == 'Adicionar') {
                     btnAddAmigo.addEventListener('click', function () {
                         let idUsuario = this.parentNode.children[0].innerHTML
@@ -888,19 +901,11 @@ function listarUsuarios() {
 
                 fetch(`http://localhost:3000/perfil/${e.id}/foto`, options2)
                     .then(response => {
-                        if (response.ok) {
-                            return response.blob();
-                        } else {
-                            throw new Error('Imagem não encontrada');
-                        }
+                        return response.blob();
                     })
                     .then(blob => {
                         const imageUrl = URL.createObjectURL(blob);
                         dados.querySelector('.imgUsuario').src = imageUrl
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        dados.querySelector('.imgUsuario').src = '../../docs/imgs/perfilPadrao.jpg'
                     })
                 dadosUser.appendChild(dados)
             })
@@ -1126,8 +1131,7 @@ function abrirModalCancelarSolicitacao(idParticipante) {
             let lista1 = response.criadorListaAmigo.filter(e => e.remetente == id && idParticipante == e.idAmigo)
             let lista2 = response.amigo.filter(e => e.remetente == id && idParticipante == e.idCriador)
 
-            let btnConvidar = document.querySelector('.btnConvidar')
-            console.log(btnConvidar)
+            console.log(lista2)
 
             bntCancelarSolicitacao.addEventListener('click', () => {
                 const options = { method: 'DELETE' };
@@ -1156,26 +1160,19 @@ function usuario() {
 
     fetch(`http://localhost:3000/perfil/${id}/foto`, options)
         .then(response => {
-            if (response.ok) {
-                return response.blob();
-            } else {
-                throw new Error('Imagem não encontrada');
-            }
+            return response.blob();
         })
 
         .then(blob => {
             let imgPerfil = document.querySelector('.imgPerfil')
+            let imgPerfil2 = document.querySelector('.imgPerfil2')
             let imgVerPerfil = document.querySelector('.imgVerPerfil')
 
             const imageUrl = URL.createObjectURL(blob);
 
             imgVerPerfil.src = imageUrl
             imgPerfil.src = imageUrl
-        })
-        .catch(error => {
-            let imgPerfil = document.querySelector('.imgPerfil')
-            console.log(error);
-            imgPerfil.src = '../../docs/imgs/perfilPadrao.jpg'
+            imgPerfil2.src = imageUrl
         })
 }
 
@@ -1186,14 +1183,18 @@ function qntdDeNotificacao() {
     let totalDeNotificacao = notificacao1 + notificacao2
 
     let count = document.querySelector('.count')
+    let count2 = document.querySelector('.count2')
 
     count.innerHTML = totalDeNotificacao
+    count2.innerHTML = totalDeNotificacao
 }
 
 function modalResponderSolicitacao(id) {
     let modalResponderSolicitacaoAmizade = document.querySelector('.modalResponderSolicitacaoAmizade')
 
     modalResponderSolicitacaoAmizade.classList.remove('model')
+
+    console.log(modalResponderSolicitacaoAmizade)
 
     let btnAceitarAmizade = document.getElementById('btnRespAceitarAmizade')
     let btnRecusarAmizade = document.getElementById('btnRespRecusarAmizade')
@@ -1212,6 +1213,31 @@ function fecharModalResponderSolicitacao() {
 
     modalResponderSolicitacaoAmizade.classList.add('model')
 }
+
+let imgAmigo = document.querySelector('.imgAmigo')
+
+imgAmigo.addEventListener('click', function () {
+    let friends = document.querySelector('.friends')
+
+    if (friends.style.display === 'block') {
+        friends.style.display = 'none'
+    } else {
+        friends.style.display = 'block'
+    }
+})
+
+let imgFriends2 = document.querySelector('.imgFriends2')
+
+imgFriends2.addEventListener('click', function () {
+    let friends = document.querySelector('.friends')
+
+    if (friends.style.display === 'block') {
+        friends.style.display = 'none'
+    } else {
+        friends.style.display = 'block'
+    }
+})
+
 
 qntdDeNotificacao()
 usuario()

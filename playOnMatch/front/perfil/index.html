@@ -33,6 +33,19 @@
                 </div>
                 <button onclick="abrirModalEditarPerfil(this)" class="btnEditarPerfil"><img
                         src="../../docs/imgs/configuracoes-cog.png"></button>
+                <button class="btnDesamigar model">Desamigar</button>
+            </div>
+        </div>
+        <div class="modalAviso model">
+            <div class="avisos">
+                <button class="btnFecharModalAviso">x</button>
+                <p>Tem certeza de que deseja parar de ser amigo deste usuario?</p>
+                <div class="respostaAviso">
+                    <button onclick="confirmacaoDeCancelamentoDeAmizade(1)"
+                        class="btnConfirmarCancelamentoDeAmizade">Sim</button>
+                    <button onclick="confirmacaoDeCancelamentoDeAmizade(2)"
+                        class="btnRecusarCancelamentoDeAmizade">Não</button>
+                </div>
             </div>
         </div>
         <div class="historico">

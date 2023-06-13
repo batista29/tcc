@@ -17,8 +17,22 @@
 }
 
 @media (max-width:1440px) {
+
+    .inputsAtualizarEncontro{
+        height: 55vh;
+    }
+    
+    .btnAtualizarEncontro{
+        height: 5vh;
+        width: 10vw;
+    }
+
+    .descricaoEncontro {
+        margin-bottom: 10%;
+    }
+
     .inputsCadastro {
-        height: 60vh;
+        height: 69vh;
         width: 50vh;
     }
 
@@ -61,6 +75,11 @@
 }
 
 @media(max-width:1280px) {
+
+    .imgFundo{
+        height: 35%;
+    }
+
     .infoUserSolicitacao {
         width: 65vh;
     }
@@ -69,9 +88,8 @@
         width: 25vw;
     }
 
-
     .inputsCadastro {
-        height: 75vh;
+        height: 80vh;
         width: 50vh;
     }
 }
@@ -79,7 +97,7 @@
 @media (max-width:1260px) {
 
     .inputsCadastro {
-        height: 65vh;
+        height: 75vh;
         width: 50vh;
     }
 
@@ -130,6 +148,15 @@
 }
 
 @media (max-width:1140px) {
+
+    .inputsConvidarAmigo{
+        width: 70vh;
+    }
+
+    .btnConvidar{
+        width: 8vw;
+    }
+
     .descricaoLocalizacao {
         font-size: 1.4em;
     }
@@ -174,7 +201,7 @@
 
     #timeSubmit,
     #dataSubmit {
-        height: 7vh;
+        height: 8vh;
     }
 
     .participantes {
@@ -182,7 +209,7 @@
     }
 
     .modalConfigEncontro {
-        top: 45%;
+        top: 48%;
         right: 20%;
     }
 
@@ -190,16 +217,23 @@
 
 @media (max-width:1000px) {
 
+    .time1,
+    .time2,
+    .versus {
+        height: 80px;
+        width: 80px;
+    }
+
+    .imgFundo{
+        height: 32%;
+    }
+
     .infoUserSolicitacao {
         width: 60vh;
     }
 
     .usuariosPesquisa {
         width: 30vw;
-    }
-
-    .inputsCadastro {
-        height: 70vh;
     }
 
     .formularioCadastroPartida {
@@ -226,7 +260,6 @@
     }
 
     .modalConfigEncontro {
-        top: 45%;
         right: 10%;
     }
 }
@@ -241,7 +274,8 @@
         font-size: 1.1em;
     }
 
-    .abrirModal1 {
+    .abrirModal1,
+    .btnAlterarLocal {
         width: 12vw;
         height: 7vh;
     }
@@ -261,6 +295,35 @@
 }
 
 @media (max-width:830px) {
+
+    .inputsAtualizarEncontro{
+        height: 70vh;
+    }
+
+    .btnAtualizarEncontro{
+        margin-top: 22%;
+        width: 20vw;
+    }
+
+    .inputsConvidarAmigo{
+        width: 70vw;
+    }
+
+    .btnConvidar{
+        width: 10vw;
+    }
+
+    .nomeSolicitacaoConvite,
+    .nomeSolicitacao {
+        font-size: 1em;
+    }
+
+    .btnsRespostaConvite img,
+    .btnsResposta img {
+        height: 25px;
+        width: 25px;
+    }
+
     .notification {
         width: 12px;
         height: 12px;
@@ -290,7 +353,8 @@
         margin-left: 0;
     }
 
-    .abrirModal1 {
+    .abrirModal1,
+    .btnAlterarLocal {
         width: 15vw;
     }
 }
@@ -340,6 +404,12 @@
 }
 
 @media(max-width:742px) {
+
+    .verPerfil {
+        height: 15vh;
+        width: 25vw;
+    }
+
     .readInfo {
         height: 35vh;
         width: 280px;
@@ -387,11 +457,45 @@
         margin-right: 15%;
         display: block;
     }
-
-
 }
 
 @media (max-width:650px) {
+
+    .btnConvidar{
+        width: 12vw;
+    }
+
+    .time1,
+    .time2,
+    .versus {
+        height: 60px;
+        width: 60px;
+    }
+
+    .descricaoEncontro{
+        margin-bottom: 7%;    
+    }
+    
+    .imgPerfil2 {
+        height: 8vh;
+        width: 8vw;
+    }
+
+    .verPerfil {
+        bottom: 10%;
+        right: 2%;
+        height: 20vh;
+        width: 27vw;
+    }
+
+    .friends {
+        width: 100%;
+        background-color: var(--textoHome);
+    }
+
+    .notificacoes {
+        width: 100%;
+    }
 
     .detalhesEncontro {
         flex-direction: column;
@@ -471,7 +575,8 @@
         font-size: 1.2em;
     }
 
-    .abrirModal1 {
+    .abrirModal1,
+    .btnAlterarLocal {
         width: 25vw;
     }
 
@@ -503,7 +608,7 @@
 
     .notification {
         top: 0;
-        right: 48%;
+        right: 49%;
     }
 
     .imgPerfil {
@@ -511,9 +616,18 @@
         height: 8vh;
         width: 6vw;
     }
+
+    .buttonTop {
+        bottom: 5%;
+    }
 }
 
 @media(max-width:540px) {
+
+    .btnConvidar{
+        width: 15vw;
+    }
+
     .infoUserSolicitacao {
         width: 60vh;
     }
@@ -526,11 +640,28 @@
         width: 85%;
     }
 
+    .verPerfil {
+        width: 35vw;
+    }
+
 }
 
 @media(max-width:500px) {
-    .friends {
-        display: none;
+
+    .btnAtualizarEncontro{
+        width: 30vw;
+    }
+
+    .modalConfigEncontro{
+        right: 0;   
+    }
+
+    .participantes{
+        width: 70%;
+    }
+
+    .iconsImgs {
+        width: 4vw;
     }
 
     .read {
@@ -554,11 +685,16 @@
 
 @media(max-width:450px) {
 
-    .time1,
-    .time2,
-    .versus {
-        height: 90px;
-        width: 90px;
+    .verPerfil {
+        width: 45vw;
+    }
+
+    .descricaoEncontro{
+        margin: 1%;
+    }
+
+    .participantes{
+        width: 60%;
     }
 
     .local,
@@ -566,11 +702,11 @@
         font-size: 0.7em;
     }
 
-    .descricaoModalEncontro{
+    .descricaoModalEncontro {
         height: 90%;
     }
-    
-    .modalConfigEncontro{
+
+    .modalConfigEncontro {
         right: 5%;
     }
 
@@ -591,6 +727,48 @@
 }
 
 @media(max-width:430px) {
+
+    .inputsConvidarAmigo{
+        width: 90%;
+    }
+
+    .btnConvidar{
+        width: 20vw;
+    }
+
+    .btnOptions{
+        padding: 0;
+    }
+
+    .infoPartida{
+        height: 100%;
+    }
+
+    .participantes{
+        height: 30%;
+    }
+
+    .detalhesEncontro{
+        height: 65%;
+    }
+
+    .buttonConfirmar{
+        margin-top: 35%;
+    }
+
+    .modalConfigEncontro{
+        top: 60%;
+        right: 30%;
+    }
+
+    .nomeParticipante{
+        font-size: 0.8em;
+    }
+
+    .participantes{
+        width: 100%;
+    }
+
     .infoUserSolicitacao {
         width: 50vh;
     }
@@ -644,6 +822,15 @@
 }
 
 @media(max-width:350px) {
+
+    .iconsImgs {
+        width: 5vw;
+    }
+
+    .imgPerfil2 {
+        width: 10vw;
+    }
+
     .localizacao {
         height: 120vh;
     }

@@ -311,7 +311,6 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
 }
 
-.inputsAtualizarEncontro,
 .inputsAtualizarEncontro {
     display: flex;
     flex-direction: column;
@@ -423,7 +422,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .formularioCadastroPartida>input,
-.btnsLocais input {
+.btnsLocais select {
     width: 17vw;
     height: 4vh;
     background-color: transparent;
@@ -431,6 +430,17 @@ body::-webkit-scrollbar-thumb {
     border-bottom: 1px solid var(--backgroundHome);
     color: rgb(231, 231, 231);
     font-size: 1.2em;
+}
+
+.btnsLocais {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.btnsLocais>select {
+    width: 30vh;
+    height: 4vh;
 }
 
 .sair {
@@ -921,16 +931,7 @@ img.iconeBusca {
     color: var(--backgroundHome);
 }
 
-.btnsLocais {
-    width: 100%;
-    display: flex;
-    position: relative;
-}
 
-.btnsLocais>input {
-    width: 20vh;
-    height: 3vh;
-}
 
 .btnAbrirModalCriaLocal {
     position: absolute;
@@ -1007,6 +1008,7 @@ img.iconeBusca {
     right: 0;
     top: 0;
     cursor: pointer;
+    color: white;
 }
 
 .abrirModalEncontrarAmigo {
@@ -1241,6 +1243,12 @@ a {
     cursor: pointer;
 }
 
+.imgPerfil2{
+    height: 6vh;
+    width: 3vw;
+    border-radius: 50%;
+}
+
 .verPerfil {
     height: 11vh;
     width: 20vw;
@@ -1253,6 +1261,7 @@ a {
     top: 1;
     display: flex;
     flex-direction: column;
+    border: 2px solid black;
 }
 
 .btnAcessarPerfil {
@@ -1362,6 +1371,7 @@ a {
     background-color: #0123405b;
     align-items: center;
     justify-content: center;
+    z-index: 4;
 }
 
 .respSolicitacao {
@@ -1440,6 +1450,12 @@ footer {
     border-radius: 50%;
 }
 
+.imgFriends2{
+    height: 5vh;
+    width: 4vw;
+    filter: invert(100%);
+}
+
 .imgUsuario {
     margin-right: 20px;
     height: 6vh;
@@ -1451,4 +1467,21 @@ footer {
 .model {
     display: none;
     visibility: hidden;
+}
+
+#select-pais,
+#select-estado,
+#select-cidade{
+    height: 4vh;
+    background-color: var(--backgroundLogin);
+    border: none;
+    color: white;
+    border-radius: 20px;
+}
+
+#consulta2{
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom:1px solid var(--backgroundHome);
 }

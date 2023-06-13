@@ -13,17 +13,25 @@ const infoUser = document.querySelector('.dadoss')
 const partida = document.querySelector('.partidas')
 const infoPartida = document.querySelector('.infoPartida')
 
+let btnFecharModalAviso = document.querySelector('.btnFecharModalAviso')
+
+btnFecharModalAviso.addEventListener('click', function () {
+    let modalAviso = document.querySelector('.modalAviso')
+    modalAviso.classList.add('model')
+})
+
 function listar() {
 
     let idUsuario = JSON.parse(localStorage.getItem('perfil'))
     let { id } = user
+
+
 
     let btnEditarPerfil = document.querySelector('.btnEditarPerfil')
     let attimage = document.querySelector('.attimage')
     if (idUsuario != id) {
         btnEditarPerfil.classList.add('model')
         attimage.classList.add('model')
-
     }
 
     const options = { method: 'GET' };
@@ -36,6 +44,17 @@ function listar() {
             usuario.classList.remove("model")
 
             let amigos = res.criadorListaAmigo.filter(e => (e.status == 1))
+            let btnDesamigar = usuario.querySelector('.btnDesamigar')
+
+            if (idUsuario != id) {
+                btnDesamigar.classList.remove('model')
+            }
+
+            btnDesamigar.addEventListener('click', function () {
+                let modalAviso = document.querySelector('.modalAviso')
+                modalAviso.classList.remove('model')
+            })
+
             usuario.querySelector('.nomeUsuario').innerHTML = res.nome
             usuario.querySelector('.partidasJogadas').innerHTML = res.participante.length + " Partidas"
             usuario.querySelector('.amigos').innerHTML = amigos.length + " Amigos"
@@ -363,6 +382,40 @@ function editarFotoPerfil(input) {
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
+}
+
+function confirmacaoDeCancelamentoDeAmizade(resp) {
+
+    if (resp == 1) {
+        let idUsuario = JSON.parse(localStorage.getItem('perfil'))
+
+        let { id } = user
+        const options = { method: 'GET' };
+
+
+        fetch(`http://localhost:3000/listarUsuario/${id}`, options)
+            .then(response => response.json())
+            .then(response => {
+
+                let lista1 = response.criadorListaAmigo.filter(e => e.remetente == id && idUsuario == e.idAmigo)
+                let lista2 = response.amigo.filter(e => e.remetente == id && idUsuario == e.idCriador)
+
+                const options = { method: 'DELETE' };
+
+                fetch(`http://localhost:3000/cancelarSolicitacao/${lista1[0].id}/${lista2[0].id}`, options)
+                    .then(response => {
+                        window.location.href = '../principal/index.html'
+                        return response.json()
+                    })
+                    .then(response => console.log(response))
+                    .catch(err => console.error(err));
+            })
+    }
+
+    if (resp == 2) {
+        console.log('não quer cancelar')
+    }
+
 }
 
 
