@@ -185,7 +185,7 @@ function listaLocais() {
 
                 nwDados.forEach(function (valor) {
                     var optionElement = document.createElement("option");
-                    optionElement.innerHTML = valor.id + " - " + valor.nome
+                    optionElement.innerHTML = " " + valor.id + " - " + valor.nome
                     console.log(optionElement)
 
                     opcao.appendChild(optionElement);
@@ -193,7 +193,7 @@ function listaLocais() {
 
                 nwDados.forEach(function (valor) {
                     var optionElement = document.createElement("option");
-                    optionElement.innerHTML = valor.id + " - " + valor.nome
+                    optionElement.innerHTML = " " + valor.id + " - " + valor.nome
                     console.log(optionElement)
 
                     opcao2.appendChild(optionElement);
@@ -764,7 +764,7 @@ function atualizarEncontro() {
     let atualizarDescricaoEncontro = document.querySelector('.atualizarDescricaoEncontro')
     let local = document.querySelector('#consulta2')
 
-    console.log(local)
+    console.log()
 
     let data = {};
 
@@ -777,7 +777,7 @@ function atualizarEncontro() {
     }
 
     if (local.value) {
-        data.local = local.value;
+        data.id_local = Number(local.innerHTML.split(' ')[1]);
     }
 
     let { token } = user
@@ -794,12 +794,12 @@ function atualizarEncontro() {
         body: JSON.stringify(data)
     };
 
-    // fetch(`http://localhost:3000/editarEncontro/${id}/${idPartida}`, options)
-    //     .then(response => response.json())
-    //     .then(response => {
-    //         console.log(response)
-    //         window.location.reload()
-    //     })
+    fetch(`http://localhost:3000/editarEncontro/${id}/${idPartida}`, options)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+        })
 }
 
 let btnAbrirModalCriaLocal = document.querySelector('.btnAbrirModalCriaLocal')
