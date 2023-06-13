@@ -300,8 +300,6 @@ function listaParticipantes() {
                 dados.querySelector('.idParticipante').innerHTML = e.idParticipante.id
                 dados.querySelector('.nomeParticipante').innerHTML = nomeParticipante
 
-
-
                 let options2 = { method: 'GET' };
 
                 fetch(`http://localhost:3000/perfil/${e.idParticipante.id}/foto`, options2)
@@ -378,13 +376,16 @@ function listaParticipantes() {
 
             let { id } = user
             let nw = res.EncontroUsuario.filter(element => element.idParticipante.id == id)
-            if (nw.length == 1) {
-                btnCancelar.disabled = false
-                btnParticipar.disabled = true
-            } else {
-                btnCancelar.disabled = true
-                btnParticipar.disabled = false
-            }
+            nw.forEach((e => {
+                if (e.idParticipante.id == id) {
+                    btnCancelar.disabled = false
+                    btnParticipar.disabled = true
+                } else {
+                    btnCancelar.disabled = true
+                    btnParticipar.disabled = false
+                }
+            }))
+
         })
 }
 
