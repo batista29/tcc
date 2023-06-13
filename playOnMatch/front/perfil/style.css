@@ -374,6 +374,9 @@ tr {
     flex-direction: column;
 }
 
+.atualizarPerfil>form>input{
+    color: white;
+}
 
 .infoAmigos {
     margin-top: 4%;
