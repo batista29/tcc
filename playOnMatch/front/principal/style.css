@@ -164,6 +164,7 @@ body::-webkit-scrollbar-thumb {
 
 .imguser {
     height: 4vh;
+    width: 2.5vw;
     border-radius: 50%;
 }
 
@@ -1469,10 +1470,11 @@ footer {
 #select-estado,
 #select-cidade{
     height: 4vh;
+    width: 10vw;
     background-color: var(--backgroundLogin);
     border: none;
-    color: white;
-    border-radius: 20px;
+    color: white; 
+    margin-top: 1vh;  
 }
 
 #consulta2{

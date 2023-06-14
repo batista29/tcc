@@ -263,6 +263,8 @@ function listaParticipantes() {
         .then(response => response.json())
         .then(res => {
 
+            console.log()
+
             const participantes = document.querySelector('.participantes')
             const infoParticipante = document.querySelector('.infoParticipantes')
             const btnCancelar = document.querySelector('.btnCancelarParticipacao')
@@ -276,7 +278,6 @@ function listaParticipantes() {
 
             let data = new Date(res.dataHora);
 
-
             let nwData = data.toLocaleDateString("pt-BR", {
                 timeZone: "UTC",
             });
@@ -285,7 +286,7 @@ function listaParticipantes() {
             dados.querySelector('.descricaoEncontro').innerHTML = res.descricao
             dados.querySelector('.enderecoEncontro').innerHTML = res.local.cidade + "-" + res.local.pais
             dados.querySelector('.nomeEncontro').innerHTML = res.local.nome
-            dados.querySelector('.dataEncontro').innerHTML = nwData
+            dados.querySelector('.dataEncontro').innerHTML = nwData + " - "+ res.dataHora.split("T")[1].split('.')[0]
 
             detalhesEncontro.appendChild(dados)
 
@@ -384,6 +385,10 @@ function listaParticipantes() {
                 } else {
                     btnCancelar.disabled = true
                     btnParticipar.disabled = false
+                }
+                if(e.idCriador.id == id){
+                    btnCancelar.disabled = true
+                    btnParticipar.disabled = true
                 }
             }))
 

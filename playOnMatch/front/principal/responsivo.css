@@ -405,6 +405,10 @@
 
 @media(max-width:742px) {
 
+    .infoUserSolicitacao{
+        width: 70vh;
+    }
+
     .verPerfil {
         height: 15vh;
         width: 25vw;
@@ -460,6 +464,10 @@
 }
 
 @media (max-width:650px) {
+
+    .infoUserSolicitacao{
+        width: 55vh;
+    }
 
     .btnConvidar{
         width: 12vw;
@@ -629,7 +637,7 @@
     }
 
     .infoUserSolicitacao {
-        width: 60vh;
+        width: 50vh;
     }
 
     .usuariosPesquisa {
@@ -683,6 +691,12 @@
     }
 }
 
+@media(max-width:470px){
+    .infoUserSolicitacao {
+        width: 40vh;
+    }
+}
+
 @media(max-width:450px) {
 
     .verPerfil {
@@ -728,10 +742,10 @@
 
 @media(max-width:430px) {
 
-    .inputsConvidarAmigo{
-        width: 90%;
+    .infoUserSolicitacao {
+        width: 30vh;
     }
-
+   
     .btnConvidar{
         width: 20vw;
     }
@@ -769,9 +783,7 @@
         width: 100%;
     }
 
-    .infoUserSolicitacao {
-        width: 50vh;
-    }
+  
 
     .usuariosPesquisa {
         width: 60vw;

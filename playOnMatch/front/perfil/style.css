@@ -487,6 +487,7 @@ tr {
     border-radius: 30px;
     padding: 1%;
     cursor: pointer;
+    margin-top: 3vh ;
 }
 
 .model {
