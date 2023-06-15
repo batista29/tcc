@@ -1,2 +1,0 @@
-﻿concertar criacao evento com locais de onde eu estou, ex: se estou em BH nao regitro partida em São Paulo
-cancelar amizade 
