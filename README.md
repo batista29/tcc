@@ -5,6 +5,7 @@
 ### Primeiro você deve clonar este repositório, depois:
 
 <p aling="left">Instale o visual code studio ou qualquer outro editor de código disponivel</p>
+<p aling="left">Instale o xampp e de start em Apache e mysql</p>
 <p aling="left">Entre na pasta do repositório "TCC", abra com o visual code a pasta "PlayOnMatch"</p>
 
 ### Backend -
