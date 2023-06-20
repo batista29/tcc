@@ -2,7 +2,8 @@
 
 ## Como executar?
 
-* Primeiro você deve clonar este repositório
+### Primeiro você deve clonar este repositório
+
 <p aling="left">Instale o visual code studio ou qualquer outro editor de código disponivel</p>
 <p aling="left">Entre na pasta do repositório "TCC", abra com o visual code a pasta "PlayOnMatch"</p>
 
