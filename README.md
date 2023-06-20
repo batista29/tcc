@@ -1,8 +1,10 @@
 # PlayOnMatch
 
 ## Como executar?
+
+* Primeiro você deve clonar este repositório
 <p aling="left">Instale o visual code studio ou qualquer outro editor de código disponivel</p>
-<p aling="left">Entre na pasta do repositorio "TCC", abra com o visual code a pasta "PlayOnMatch"</p>
+<p aling="left">Entre na pasta do repositório "TCC", abra com o visual code a pasta "PlayOnMatch"</p>
 
 ### Backend -
 <p aling="left">Com o visual code aberto, abra o cmd do visual code, digite: cd back, npm install</p>
