@@ -9,7 +9,7 @@
 <p aling="left">Ainda no cmd do back, faça: npx prisma migrate dev --name init</p>
 <p aling="left">Crie um arquivo na pasta back com o nome ".env" e dentro desse arquivo digite: mysql://SEUUSER:SENHA@HOST:SUAPORTA/SEUBANCO</p>
 
-### Exemplo oficial
+#### Exemplo oficial
  - [Docs Prisma.io](https://www.prisma.io/docs/concepts/database-connectors/mysql)
  
 <p aling="left">Para executar o backend, faça: nodemon ou node index.js</p>
