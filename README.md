@@ -7,7 +7,10 @@
 <p aling="left">Ainda no cmd do back, faça: npx prisma migrate dev --name init</p>
 <p aling="left">Crie um arquivo na pasta back com o nome ".env" e dentro desse arquivo digite: mysql://SEUUSER:SENHA@HOST:SUAPORTA/SEUBANCO</p>
 <p aling="left">Exemplo oficial:</p>
- - [.env no prisma.io](https://www.prisma.io/docs/concepts/database-connectors/mysql)
+
+## Link oficial
+ - [Prisma](https://www.prisma.io/docs/concepts/database-connectors/mysql)
+ 
 <p aling="left">Para executar o backend, faça: nodemon ou node index.js</p>
 <p aling="left">Abra outro cmd no visual code e digite: cd mobile, cd playonmatch, npm install e yarn install</p>
 <p aling="left">Para executar digite: npx expo start --web, e está pronto</p>
