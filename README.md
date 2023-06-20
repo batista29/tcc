@@ -10,7 +10,7 @@
 ### Backend -
 <p aling="left">Com o visual code aberto, abra o cmd do visual code, digite: cd back, npm install</p>
 <p aling="left">Ainda no cmd do back, faça: npx prisma migrate dev --name init</p>
-<p aling="left">Crie um arquivo na pasta back com o nome ".env" e dentro desse arquivo digite: mysql://SEUUSER:SENHA@HOST:SUAPORTA/SEUBANCO</p>
+<p aling="left">Crie um arquivo na pasta back com o nome ".env" e dentro desse arquivo digite: DATABASE_URL="mysql://root:@localhost:3306/playonmatch"</p>
 
 #### Exemplo oficial:
  - [Docs Prisma.io](https://www.prisma.io/docs/concepts/database-connectors/mysql)
