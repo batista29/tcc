@@ -17,3 +17,19 @@
 ### Mobile
 <p aling="left">Abra outro cmd no visual code e digite: cd mobile, cd playonmatch, npm install e yarn install</p>
 <p aling="left">Para executar digite: npx expo start --web, e está pronto</p>
+
+## Linguagens
+* Javascript
+* HTML
+* CSS
+* Mysql
+
+## FrameWorks
+* Node.js
+* Prisma.js
+* React Native
+
+* Criadores do Projeto
+ - [Natã Batista](https://github.com/Batista29)
+ - [João Augusto](https://github.com/Joao-Augusto0)
+ - [Rodolfo Aura](https://github.com/RodolfoAura)
